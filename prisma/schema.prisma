@@ -49,30 +49,124 @@ enum ProductIllustration {
   CUSTOM
 }
 
+enum ProjectStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum ProjectDocumentType {
+  PLAN
+  OTHER
+}
+
+enum ProcessingStatus {
+  UPLOADED
+  QUEUED
+  PROCESSING
+  NEEDS_REVIEW
+  COMPLETED
+  FAILED
+}
+
+enum AnalysisStatus {
+  QUEUED
+  PROCESSING
+  NEEDS_REVIEW
+  COMPLETED
+  FAILED
+}
+
+enum RoomType {
+  LIVING
+  BEDROOM
+  KITCHEN
+  BATHROOM
+  HALL
+  DRESSING
+  OFFICE
+  TECHNICAL_ROOM
+  GARAGE
+  TERRACE
+  BALCONY
+  COMMERCIAL_SPACE
+  HOTEL_ROOM
+  OTHER
+}
+
+enum RoomDetectionStatus {
+  DETECTED
+  CONFIRMED
+  MODIFIED
+  REJECTED
+  MANUAL
+}
+
+enum RoomSource {
+  AI
+  MANUAL
+}
+
+enum GeometryType {
+  POLYGON
+  RECTANGLE
+}
+
+enum RoomFeatureCategory {
+  LIGHTING
+  SHADING
+  HEATING
+  COOLING_VENTILATION
+  SECURITY
+  ACCESS
+  MULTIMEDIA
+  ENERGY
+}
+
+enum AnalysisJobStatus {
+  QUEUED
+  PROCESSING
+  NEEDS_REVIEW
+  COMPLETED
+  FAILED
+}
+
+enum AnalysisIssueSeverity {
+  INFO
+  WARNING
+  ERROR
+}
+
 model Profile {
-  id           String        @id @db.Uuid
-  email        String        @unique
-  name         String
-  status       ProfileStatus @default(ACTIVE)
-  memberships  Membership[]
-  consents     Consent[]
-  auditLogs    AuditLog[]    @relation("AuditActor")
-  dataRequests DataRequest[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id                String            @id @db.Uuid
+  email             String            @unique
+  name              String
+  status            ProfileStatus     @default(ACTIVE)
+  memberships       Membership[]
+  consents          Consent[]
+  auditLogs         AuditLog[]        @relation("AuditActor")
+  dataRequests      DataRequest[]
+  createdProjects   Project[]         @relation("ProjectCreator")
+  uploadedDocuments ProjectDocument[] @relation("DocumentUploader")
+  createdRooms      ProjectRoom[]     @relation("RoomCreator")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 
   @@map("profiles")
 }
 
 model Organization {
-  id          String           @id @default(uuid()) @db.Uuid
+  id          String            @id @default(uuid()) @db.Uuid
   type        OrganizationType
-  legalName   String           @unique
-  cui         String?          @unique
+  legalName   String            @unique
+  cui         String?           @unique
   billingData Json?
   memberships Membership[]
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  projects    Project[]
+  documents   ProjectDocument[]
+  rooms       ProjectRoom[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 
   @@map("organizations")
 }
@@ -164,4 +258,188 @@ model Product {
 
   @@index([active, sortOrder])
   @@map("products")
+}
+
+model Project {
+  id             String            @id @default(uuid()) @db.Uuid
+  organizationId String            @db.Uuid
+  createdById    String            @db.Uuid
+  name           String
+  status         ProjectStatus     @default(DRAFT)
+  description    String?
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy      Profile           @relation("ProjectCreator", fields: [createdById], references: [id])
+  documents      ProjectDocument[]
+  rooms          ProjectRoom[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([organizationId, updatedAt])
+  @@map("projects")
+}
+
+model ProjectDocument {
+  id               String                @id @default(uuid()) @db.Uuid
+  projectId        String                @db.Uuid
+  organizationId   String                @db.Uuid
+  uploadedById     String                @db.Uuid
+  storagePath      String                @unique
+  fileName         String
+  mimeType         String
+  fileSize         Int
+  documentType     ProjectDocumentType   @default(PLAN)
+  processingStatus ProcessingStatus      @default(UPLOADED)
+  project          Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organization     Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  uploadedBy       Profile               @relation("DocumentUploader", fields: [uploadedById], references: [id])
+  pages            ProjectDocumentPage[]
+  analyses         PlanAnalysis[]
+  jobs             AnalysisJob[]
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+
+  @@index([projectId, createdAt])
+  @@index([organizationId])
+  @@map("project_documents")
+}
+
+model ProjectDocumentPage {
+  id                 String          @id @default(uuid()) @db.Uuid
+  documentId         String          @db.Uuid
+  pageNumber         Int
+  previewStoragePath String?
+  width              Int?
+  height             Int?
+  document           ProjectDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  rooms              ProjectRoom[]
+  createdAt          DateTime        @default(now())
+
+  @@unique([documentId, pageNumber])
+  @@map("project_document_pages")
+}
+
+model PlanAnalysis {
+  id           String          @id @default(uuid()) @db.Uuid
+  documentId   String          @db.Uuid
+  provider     String
+  modelVersion String
+  status       AnalysisStatus  @default(QUEUED)
+  rawResult    Json?
+  startedAt    DateTime?
+  completedAt  DateTime?
+  errorMessage String?
+  document     ProjectDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([documentId, createdAt])
+  @@map("plan_analyses")
+}
+
+model ProjectRoom {
+  id              String                @id @default(uuid()) @db.Uuid
+  projectId       String                @db.Uuid
+  documentPageId  String                @db.Uuid
+  organizationId  String                @db.Uuid
+  createdById     String                @db.Uuid
+  name            String
+  roomType        RoomType              @default(OTHER)
+  detectedName    String?
+  area            Decimal?              @db.Decimal(10, 2)
+  detectedArea    Decimal?              @db.Decimal(10, 2)
+  confidence      Float?
+  detectionStatus RoomDetectionStatus   @default(MANUAL)
+  source          RoomSource            @default(MANUAL)
+  level           String?
+  notes           String?
+  isConfirmed     Boolean               @default(false)
+  project         Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  documentPage    ProjectDocumentPage   @relation(fields: [documentPageId], references: [id], onDelete: Cascade)
+  organization    Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy       Profile               @relation("RoomCreator", fields: [createdById], references: [id])
+  geometries      ProjectRoomGeometry[]
+  features        RoomFeature[]
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+
+  @@index([projectId, documentPageId])
+  @@index([organizationId])
+  @@map("project_rooms")
+}
+
+model ProjectRoomGeometry {
+  id               String       @id @default(uuid()) @db.Uuid
+  roomId           String       @db.Uuid
+  geometryType     GeometryType @default(POLYGON)
+  normalizedPoints Json
+  version          Int          @default(1)
+  room             ProjectRoom  @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  createdAt        DateTime     @default(now())
+
+  @@index([roomId, version])
+  @@map("project_room_geometries")
+}
+
+model RoomFeature {
+  id          String              @id @default(uuid()) @db.Uuid
+  roomId      String              @db.Uuid
+  category    RoomFeatureCategory
+  featureCode String
+  enabled     Boolean             @default(true)
+  quantity    Int                 @default(1)
+  parameters  Json?
+  notes       String?
+  room        ProjectRoom         @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  values      RoomFeatureValue[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@unique([roomId, featureCode])
+  @@index([roomId, category])
+  @@map("room_features")
+}
+
+model RoomFeatureValue {
+  id        String      @id @default(uuid()) @db.Uuid
+  featureId String      @db.Uuid
+  code      String
+  value     Json
+  feature   RoomFeature @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@unique([featureId, code])
+  @@map("room_feature_values")
+}
+
+model AnalysisJob {
+  id           String            @id @default(uuid()) @db.Uuid
+  documentId   String            @db.Uuid
+  status       AnalysisJobStatus @default(QUEUED)
+  progress     Int               @default(0)
+  provider     String
+  retryCount   Int               @default(0)
+  errorCode    String?
+  errorMessage String?
+  document     ProjectDocument   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  issues       AnalysisIssue[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([documentId, status])
+  @@map("analysis_jobs")
+}
+
+model AnalysisIssue {
+  id        String                @id @default(uuid()) @db.Uuid
+  jobId     String                @db.Uuid
+  severity  AnalysisIssueSeverity @default(WARNING)
+  code      String
+  message   String
+  metadata  Json?
+  job       AnalysisJob           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  createdAt DateTime              @default(now())
+
+  @@index([jobId, severity])
+  @@map("analysis_issues")
 }

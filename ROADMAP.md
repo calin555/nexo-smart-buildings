@@ -6,7 +6,7 @@
 - [x] arhitectură modulară şi model de date
 - [x] structură iniţială repository
 - [x] fundament Vercel + Supabase: Auth SSR, RLS, Prisma, RBAC, layout, seed şi controale de calitate
-- [ ] validare infrastructură Supabase/Vercel cu URL-uri PostgreSQL reale, migrații aplicate și E2E live
+- [x] validare infrastructură Supabase/Vercel cu URL-uri PostgreSQL reale, migrații aplicate și E2E live
 
 ## MVP
 
@@ -16,6 +16,12 @@
 4. **Proiecte şi documente** — proiecte, portal client, status history, upload sigur, preview şi plan 2D simplificat.
 5. **Admin şi ofertare** — produse, reguli preţ, proiecte, oferte cu versiuni/PDF şi audit.
 6. **Calitate şi livrare** — unit/E2E, accesibilitate, securitate şi documentaţie deploy.
+
+## Configurator pe plan
+
+- [x] **Etapa 1 — MVP manual (31.07.2026):** proiecte, documente PDF/JPG/PNG private, viewer PDF.js/imagine, pagini, desenare și editare poligoane normalizate, proprietăți camere, funcții smart, confirmare, sumar live, RLS/RBAC și teste inter-organizații.
+- [ ] **Etapa 2 — analiză asistată:** implementarea unui provider de analiză, coadă asincronă, detectarea camerelor și geometriei, scoruri de încredere și fluxuri de corectare. Contractele și modelele de job sunt pregătite; nu există încă integrare AI.
+- [ ] **Etape ulterioare:** recomandări de produse, calcul financiar și ofertare, numai după validarea separată a regulilor comerciale.
 
 ## Versiunea 2
 
