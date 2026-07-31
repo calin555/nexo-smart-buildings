@@ -1,0 +1,31 @@
+import type { Product } from "@prisma/client";
+
+type IllustrationType = "kit" | "blinds" | "climate" | "lock" | "energy" | "custom";
+
+const metadata: Record<IllustrationType, { description: string; tags: string[]; compatibility: string; protocol: string }> = {
+  kit: { description: "Punct de plecare echilibrat pentru confortul zilnic al casei.", tags: ["Wi-Fi", "Matter", "Apple Home"], compatibility: "Apple Home, Google Home", protocol: "Wi‑Fi / Matter" },
+  blinds: { description: "Automatizare discretă pentru lumină naturală și intimitate.", tags: ["Zigbee", "Home Assistant", "Thread"], compatibility: "Home Assistant, Matter", protocol: "Zigbee / Thread" },
+  climate: { description: "Confort termic adaptat prezenței, programului și anotimpului.", tags: ["Wi-Fi", "Google Home", "Matter"], compatibility: "Google Home, Apple Home", protocol: "Wi‑Fi / Matter" },
+  lock: { description: "Acces controlat și notificări clare pentru intrarea în locuință.", tags: ["Matter", "Apple Home", "Thread"], compatibility: "Apple Home, Home Assistant", protocol: "Matter / Thread" },
+  energy: { description: "Vizibilitate asupra consumului pentru decizii mai eficiente.", tags: ["KNX", "Home Assistant", "Zigbee"], compatibility: "KNX, Home Assistant", protocol: "KNX / Zigbee" },
+  custom: { description: "Soluție selectată și configurată pentru proiectul tău.", tags: ["Wi-Fi", "Matter"], compatibility: "Ecosisteme selectate", protocol: "În funcție de proiect" },
+};
+
+function ProductVisual({ type, imageUrl, name }: Readonly<{ type: IllustrationType; imageUrl: string | null; name: string }>) {
+  if (imageUrl) return <div role="img" aria-label={name} className="h-44 bg-[#fafbfb] bg-contain bg-center bg-no-repeat transition duration-200 group-hover:scale-[1.03]" style={{ backgroundImage: `url(${imageUrl})` }} />;
+  if (type === "kit") return <div className="relative flex h-44 items-end justify-center gap-3 bg-[#fafbfb] pb-7 transition duration-200 group-hover:scale-[1.03]"><div className="h-20 w-9 rounded-lg border border-[#dfe4e1] bg-white shadow-sm" /><div className="h-28 w-16 rounded-xl bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]"><div className="mx-auto mt-6 size-8 rounded-full border-2 border-emerald-500" /></div><div className="h-16 w-20 rounded-xl bg-[#f2f5f3]" /></div>;
+  if (type === "blinds") return <div className="relative flex h-44 items-end justify-center gap-5 bg-[#fafbfb] pb-7 transition duration-200 group-hover:scale-[1.03]"><div className="h-28 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" /><div className="h-24 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" /><div className="h-16 w-24 rounded-xl border border-[#dfe4e1] bg-white" /></div>;
+  if (type === "climate") return <div className="grid h-44 place-items-center bg-[#fafbfb] transition duration-200 group-hover:scale-[1.03]"><div className="relative grid size-28 place-items-center rounded-[1.4rem] bg-[#202d35] text-white shadow-[0_10px_20px_rgba(19,39,31,.18)]"><span className="text-3xl font-semibold">22°</span><span className="absolute bottom-5 text-[9px] tracking-[.14em] text-emerald-300">NEXO</span></div></div>;
+  if (type === "lock") return <div className="flex h-44 items-center justify-center gap-4 bg-[#fafbfb] transition duration-200 group-hover:scale-[1.03]"><div className="h-28 w-12 rounded-full bg-[#4a5153] shadow-[0_10px_20px_rgba(19,39,31,.15)]"><div className="mx-auto mt-3 size-6 rounded-full border border-emerald-400" /><div className="mx-auto mt-9 h-6 w-1 rounded bg-emerald-400" /></div><div className="size-14 rounded-full border-4 border-[#e2e7e4] bg-white" /></div>;
+  return <div className="relative grid h-44 place-items-center bg-[#fafbfb] transition duration-200 group-hover:scale-[1.03]"><div className="w-36 rounded-2xl bg-white p-5 shadow-[0_10px_20px_rgba(19,39,31,.13)]"><div className="flex gap-2"><i className="size-3 rounded-full bg-emerald-500" /><i className="size-3 rounded-full bg-[#dfe4e1]" /><i className="size-3 rounded-full bg-[#dfe4e1]" /></div><div className="mt-5 h-1.5 rounded-full bg-[#e8efeb]"><div className="h-full w-2/3 rounded-full bg-emerald-600" /></div></div></div>;
+}
+
+function formatPrice(priceFrom: number): string {
+  return `de la ${new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 2 }).format(priceFrom / 100)} lei`;
+}
+
+export function CatalogProductCard({ product }: Readonly<{ product: Product }>) {
+  const type = product.illustration.toLowerCase() as IllustrationType;
+  const details = metadata[type];
+  return <article className="group relative min-w-0 rounded-xl p-2 transition duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_12px_24px_rgba(19,39,31,.10)]"><div className="relative overflow-hidden rounded-lg"><ProductVisual type={type} imageUrl={product.imageUrl} name={product.name} />{product.badge && <span className="absolute right-2 top-2 rounded bg-emerald-700 px-2 py-1 text-[10px] font-bold text-white shadow-sm">{product.badge}</span>}</div><div className="px-1 pb-2"><p className="mt-4 text-sm font-medium text-slate">{product.brand}</p><h2 className="mt-1 min-h-10 text-sm font-semibold leading-5 text-ink transition duration-200 group-hover:text-[#0072b8]">{product.name}</h2><p className="mt-2 min-h-10 text-xs leading-5 text-slate">{product.description ?? details.description}</p><div className="mt-3 flex flex-wrap gap-1.5">{details.tags.map((tag) => <span key={tag} className="rounded-full border border-[#d5e4dd] bg-[#f4faf7] px-2 py-1 text-[10px] font-medium text-[#087657]">{tag}</span>)}</div><dl className="mt-3 space-y-1 border-t border-[#e5ebe8] pt-3 text-[11px] leading-4 text-slate"><div><dt className="inline font-medium text-ink">Compatibil cu: </dt><dd className="inline">{details.compatibility}</dd></div><div><dt className="inline font-medium text-ink">Protocol: </dt><dd className="inline">{details.protocol}</dd></div><div><dt className="inline font-medium text-ink">Disponibilitate: </dt><dd className="inline">La comandă</dd></div></dl><p className="mt-4 text-base font-semibold text-ink">{formatPrice(product.priceFrom)}</p><a href="#discutam" className="mt-3 inline-flex rounded-lg border border-[#0d815f] px-3 py-2 text-xs font-semibold text-[#087657] transition duration-200 hover:bg-[#087657] hover:text-white">Solicită ofertă</a></div></article>;
+}

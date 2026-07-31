@@ -19,6 +19,7 @@ import {
   ThermometerSun,
 } from "lucide-react";
 
+import { CatalogProductCard } from "@/components/catalog-product-card";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -36,37 +37,23 @@ const categories = [
   { icon: Smartphone, label: "Accesorii & senzori" },
 ];
 
-const ecosystems = [
-  { label: "Smart Home Wi-Fi", icon: HousePlug, color: "text-[#108361]", mark: "Wi-Fi" },
-  { label: "Apple Home", icon: HousePlug, color: "text-[#1d1d1f]", mark: "⌂" },
-  { label: "Google Home", icon: HomeMark, color: "text-[#4585f4]", mark: "G" },
-  { label: "Matter", icon: MatterMark, color: "text-[#17202a]", mark: "✦" },
-  { label: "Home Assistant", icon: MonitorSmartphone, color: "text-[#1f9ed4]", mark: "HA" },
-  { label: "Aqara", icon: DoorOpen, color: "text-[#1b92cc]", mark: "AQ" },
-  { label: "KNX profesional", icon: Building2, color: "text-[#ec9400]", mark: "KNX" },
-  { label: "Securitate NEXO", icon: ShieldCheck, color: "text-[#008b68]", mark: "S" },
+const ecosystemCards = [
+  { label: "Smart Home Wi-Fi", slug: "smart-home-wifi", icon: HousePlug, color: "text-[#108361]", mark: "Wi-Fi" },
+  { label: "Apple Home", slug: "apple-home", icon: HousePlug, color: "text-[#1d1d1f]", mark: "⌂" },
+  { label: "Google Home", slug: "google-home", icon: HomeMark, color: "text-[#4585f4]", mark: "G" },
+  { label: "Matter", slug: "matter", icon: MatterMark, color: "text-[#17202a]", mark: "✦" },
+  { label: "Home Assistant", slug: "home-assistant", icon: MonitorSmartphone, color: "text-[#1f9ed4]", mark: "HA" },
+  { label: "Aqara", slug: "aqara", icon: DoorOpen, color: "text-[#1b92cc]", mark: "AQ" },
+  { label: "KNX profesional", slug: "knx-profesional", icon: Building2, color: "text-[#ec9400]", mark: "KNX" },
+  { label: "Securitate NEXO", slug: "securitate", icon: ShieldCheck, color: "text-[#008b68]", mark: "S" },
 ];
-
-type IllustrationType = "kit" | "blinds" | "climate" | "lock" | "energy" | "custom";
 
 function HomeMark() { return <span className="text-5xl font-bold leading-none">⌂</span>; }
 function MatterMark() { return <span className="text-6xl leading-none">✦</span>; }
 
-function ProductIllustration({ type, imageUrl, name }: Readonly<{ type: IllustrationType; imageUrl: string | null; name: string }>) {
-  if (imageUrl) return <div role="img" aria-label={name} className="h-44 bg-[#fafbfb] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url(${imageUrl})` }} />;
-  if (type === "kit") return <div className="relative flex h-44 items-end justify-center gap-3 bg-[#fafbfb] pb-7"><div className="h-20 w-9 rounded-lg border border-[#dfe4e1] bg-white shadow-sm" /><div className="h-28 w-16 rounded-xl bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]"><div className="mx-auto mt-6 size-8 rounded-full border-2 border-emerald-500" /></div><div className="h-16 w-20 rounded-xl bg-[#f2f5f3]" /></div>;
-  if (type === "blinds") return <div className="relative flex h-44 items-end justify-center gap-5 bg-[#fafbfb] pb-7"><div className="h-28 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" /><div className="h-24 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" /><div className="h-16 w-24 rounded-xl border border-[#dfe4e1] bg-white" /></div>;
-  if (type === "climate") return <div className="grid h-44 place-items-center bg-[#fafbfb]"><div className="relative grid size-28 place-items-center rounded-[1.4rem] bg-[#202d35] text-white shadow-[0_10px_20px_rgba(19,39,31,.18)]"><span className="text-3xl font-semibold">22°</span><span className="absolute bottom-5 text-[9px] tracking-[.14em] text-emerald-300">NEXO</span></div></div>;
-  if (type === "lock") return <div className="flex h-44 items-center justify-center gap-4 bg-[#fafbfb]"><div className="h-28 w-12 rounded-full bg-[#4a5153] shadow-[0_10px_20px_rgba(19,39,31,.15)]"><div className="mx-auto mt-3 size-6 rounded-full border border-emerald-400" /><div className="mx-auto mt-9 h-6 w-1 rounded bg-emerald-400" /></div><div className="size-14 rounded-full border-4 border-[#e2e7e4] bg-white" /></div>;
-  return <div className="relative grid h-44 place-items-center bg-[#fafbfb]"><div className="w-36 rounded-2xl bg-white p-5 shadow-[0_10px_20px_rgba(19,39,31,.13)]"><div className="flex gap-2"><i className="size-3 rounded-full bg-emerald-500" /><i className="size-3 rounded-full bg-[#dfe4e1]" /><i className="size-3 rounded-full bg-[#dfe4e1]" /></div><div className="mt-5 h-1.5 rounded-full bg-[#e8efeb]"><div className="h-full w-2/3 rounded-full bg-emerald-600" /></div></div></div>;
-}
 
 function Filter({ title, values }: Readonly<{ title: string; values: string[] }>) {
   return <section className="border-t border-[#dce2df] px-3 py-3"><div className="flex items-center justify-between text-sm font-medium"><span>{title}</span><span>−</span></div><div className="mt-3 max-h-28 space-y-2 overflow-hidden text-sm text-slate">{values.map((value) => <label key={value} className="flex items-center gap-2"><input type="checkbox" className="size-4 rounded border-[#cbd5d0]" />{value}</label>)}</div></section>;
-}
-
-function formatPrice(priceFrom: number): string {
-  return `de la ${new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 2 }).format(priceFrom / 100)} lei`;
 }
 
 export default async function HomePage() {
@@ -85,15 +72,15 @@ export default async function HomePage() {
           </aside>
 
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center justify-between gap-4"><h1 className="text-2xl font-medium uppercase tracking-[-.025em] text-ink sm:text-3xl">Soluții Smart Home</h1><span className="border-b-2 border-emerald-500 px-1 pb-2 text-xs font-semibold uppercase tracking-[.15em] text-slate">Pentru case inteligente</span></div>
-            <section aria-label="Ecosisteme smart home" className="mt-8 grid grid-cols-2 gap-x-5 gap-y-7 sm:grid-cols-4">
-              {ecosystems.map(({ label, icon: Icon, color, mark }) => <a key={label} href="#produse" className="group text-center"><div className={`grid h-20 place-items-center ${color}`}><Icon className="size-12 stroke-[1.35]" /><span className="sr-only">{mark}</span></div><div className="mt-2 border-b border-[#dce2df] bg-[#f5f6f5] px-2 py-3 text-sm text-ink transition group-hover:bg-[#e9f2ed]">{label}</div></a>)}
+            <section className="relative overflow-hidden rounded-xl border border-[#dce5e0] bg-[#f4f8f6] shadow-[0_10px_24px_rgba(19,39,31,.06)]"><div className="grid min-h-[19rem] lg:grid-cols-[1.15fr_.85fr]"><div className="relative z-10 flex flex-col justify-center px-6 py-9 sm:px-9"><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">Soluții Smart Home</p><span className="border-b-2 border-emerald-500 px-1 pb-1 text-[11px] font-semibold uppercase tracking-[.14em] text-slate">Pentru case inteligente</span></div><h1 className="mt-5 max-w-xl text-3xl font-medium tracking-[-.045em] text-ink sm:text-4xl">Control pentru lumină, climat, siguranță și energie.</h1><p className="mt-4 max-w-xl text-[15px] leading-7 text-slate">Alegem tehnologia potrivită proiectului tău — Wi‑Fi, Matter, KNX sau o combinație atent proiectată.</p><div className="mt-6 flex flex-wrap gap-3"><Link href="/login" className="inline-flex items-center rounded-lg bg-[#087657] px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#065c43]">Configurează proiectul <ArrowRight className="ml-2 size-4" /></Link><a href="#discutam" className="inline-flex items-center rounded-lg border border-[#bfcfc7] bg-white/80 px-4 py-2.5 text-sm font-semibold text-ink transition duration-200 hover:border-[#6c8075] hover:bg-white">Discută cu un specialist</a></div></div><div aria-hidden="true" className="relative min-h-48 overflow-hidden bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center"><div className="absolute inset-0 bg-gradient-to-r from-[#f4f8f6] via-[#f4f8f6]/25 to-transparent" /><div className="absolute bottom-6 left-6 rounded-lg border border-white/30 bg-[#16382f]/90 px-4 py-3 text-sm text-white shadow-lg"><p className="text-[10px] uppercase tracking-[.14em] text-emerald-200">Proiect demonstrativ</p><p className="mt-1 font-medium">Casă inteligentă, Cluj</p></div></div></div></section>
+            <section aria-label="Ecosisteme smart home" className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-4">
+              {ecosystemCards.map(({ label, slug, icon: Icon, color, mark }) => <Link key={label} href={`/solutii/${slug}`} className="group text-center"><div className={`grid h-20 place-items-center ${color}`}><Icon className="size-14 stroke-[1.25] transition duration-200 group-hover:scale-110" /><span className="sr-only">{mark}</span></div><div className="mt-2 rounded-lg border border-transparent bg-[#f5f6f5] px-2 py-3 text-sm font-medium text-ink transition duration-200 group-hover:border-[#cfe1d8] group-hover:bg-[#e9f2ed] group-hover:shadow-sm">{label}</div></Link>)}
             </section>
-            <section className="mt-7 border-y border-[#e1e5e3] py-5 text-[15px] leading-6 text-ink"><p>Construim case inteligente care rămân simple de folosit: lumină, climat, umbrire, securitate și energie în aceeași experiență.</p><p className="mt-3">Pentru o renovare sau un apartament putem recomanda soluții Wi‑Fi și Matter. Pentru case noi și proiecte complexe, KNX oferă o infrastructură profesională. Alegem împreună ce se potrivește proiectului tău.</p><a href="#discutam" className="mt-3 inline-flex font-medium text-[#0072b8] hover:underline">Ai un proiect nou sau o renovare? Discută cu un specialist <ArrowRight className="ml-1.5 mt-0.5 size-4" /></a></section>
-            <section className="mt-5 flex flex-wrap items-center justify-between gap-4 border border-[#b9d9ce] bg-[#eff8f3] px-5 py-4"><div><p className="font-medium text-ink">Vrei o casă smart adaptată proiectului tău?</p><p className="mt-1 text-sm text-slate">Accesează portalul pentru a începe o estimare de proiect.</p></div><Link href="/login" className="inline-flex shrink-0 items-center rounded bg-[#087657] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#065c43]">Accesează portalul client <ArrowRight className="ml-2 size-4" /></Link></section>
-            <div id="produse" className="mt-5 flex items-center justify-between border-b border-[#e1e5e3] pb-4 text-sm"><button type="button" className="inline-flex items-center gap-1">Sortează după <ChevronDown className="size-4" /></button><span className="text-slate">Afișare: <b className="text-[#0072b8]">▦</b> <span className="ml-2">☷</span></span><span className="hidden sm:inline">Pagina 1 / 2</span></div>
-            <section className="mt-6 grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 xl:grid-cols-5">
-              {products.map((product) => <article key={product.id} className="group relative min-w-0"><div className="relative overflow-hidden"><ProductIllustration type={product.illustration.toLowerCase() as IllustrationType} imageUrl={product.imageUrl} name={product.name} />{product.badge && <span className="absolute right-2 top-2 bg-emerald-700 px-2 py-1 text-[10px] font-bold text-white">{product.badge}</span>}</div><p className="mt-4 text-sm text-slate">{product.brand}</p><h2 className="mt-1 min-h-12 text-sm leading-5 text-ink group-hover:text-[#0072b8]">{product.name}</h2><p className="mt-3 text-base font-semibold text-ink">{formatPrice(product.priceFrom)}</p><a href="#discutam" className="mt-3 inline-flex rounded border border-[#0d815f] px-3 py-2 text-xs font-semibold text-[#087657] transition hover:bg-[#087657] hover:text-white">Solicită ofertă</a></article>)}
+            <section className="mt-9 border-y border-[#e1e5e3] py-6 text-[15px] leading-7 text-ink"><p>Construim case inteligente care rămân simple de folosit: lumină, climat, umbrire, securitate și energie în aceeași experiență.</p><p className="mt-3">Pentru o renovare sau un apartament putem recomanda soluții Wi‑Fi și Matter. Pentru case noi și proiecte complexe, KNX oferă o infrastructură profesională. Alegem împreună ce se potrivește proiectului tău.</p><a href="#discutam" className="mt-4 inline-flex font-medium text-[#0072b8] hover:underline">Ai un proiect nou sau o renovare? Discută cu un specialist <ArrowRight className="ml-1.5 mt-0.5 size-4" /></a></section>
+            <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#b9d9ce] bg-[#eff8f3] px-5 py-4 shadow-[0_8px_18px_rgba(19,39,31,.04)]"><div><p className="font-medium text-ink">Vrei o casă smart adaptată proiectului tău?</p><p className="mt-1 text-sm text-slate">Accesează portalul pentru a începe o estimare de proiect.</p></div><Link href="/login" className="inline-flex shrink-0 items-center rounded-lg bg-[#087657] px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#065c43]">Accesează portalul client <ArrowRight className="ml-2 size-4" /></Link></section>
+            <div id="produse" className="mt-8 flex items-center justify-between border-b border-[#e1e5e3] pb-4 text-sm"><button type="button" className="inline-flex items-center gap-1 font-medium transition hover:text-emerald-700">Sortează după <ChevronDown className="size-4" /></button><span className="text-slate">Afișare: <b className="text-[#0072b8]">▦</b> <span className="ml-2">☷</span></span><span className="hidden sm:inline">Pagina 1 / 2</span></div>
+            <section className="mt-7 grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 xl:grid-cols-5">
+              {products.map((product) => <CatalogProductCard key={product.id} product={product} />)}
               {products.length === 0 && <p className="col-span-full py-10 text-center text-sm text-slate">Catalogul este în curs de actualizare.</p>}
             </section>
           </div>

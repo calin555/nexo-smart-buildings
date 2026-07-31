@@ -6,6 +6,8 @@
   * { @apply border-slate/15; }
   html { @apply scroll-smooth; }
   body { @apply min-h-screen bg-white text-ink antialiased; }
+  h1, h2, h3 { text-wrap: balance; }
+  ::selection { @apply bg-emerald-100 text-ink; }
   a { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric focus-visible:ring-offset-2; }
 }
 
