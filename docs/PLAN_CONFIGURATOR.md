@@ -1,4 +1,4 @@
-# Configurator pe plan — arhitectură Etapele 1–2
+# Configurator pe plan — arhitectură Etapele 1–3
 
 ## Flux funcțional
 
@@ -72,4 +72,29 @@ O eroare de provider, timeout, semnătură invalidă sau rezultat invalid trece 
 
 URL-ul semnat al planului expiră după zece minute. Cheia Supabase service role nu este folosită la analiză; signed URL-ul este creat cu sesiunea utilizatorului după verificarea membership-ului și a `organizationId`. Cererile de analiză sunt limitate la patru pe oră pentru fiecare utilizator și sunt auditate.
 
-Etapa 2 nu selectează produse, nu calculează prețuri și nu generează oferte. Preseturile, cantitățile comerciale și motorul de recomandare rămân pentru Etapa 3.
+## Funcțional în Etapa 3
+
+Editorul include opt preseturi tehnice reutilizabile:
+
+- Basic Smart;
+- Comfort;
+- Premium;
+- KNX Professional;
+- Hotel Room;
+- Office;
+- Energy Saver;
+- Security Plus.
+
+Aplicarea unui preset înlocuiește selecția funcțiilor smart din camera curentă cu un punct de plecare coerent. Utilizatorul poate modifica apoi fiecare funcție și cantitate înainte de salvare. Pentru funcțiile care pot fi raportate la suprafață există o estimare prudentă bazată pe aria camerei; valoarea existentă nu este redusă automat.
+
+Motorul de recomandare este determinist și separat de UI. El:
+
+1. agregă numai funcțiile activate și cantitățile lor pentru toate camerele proiectului;
+2. păstrează numărul camerelor în care apare fiecare cerință;
+3. mapează cerințele pe categoriile controlate ale catalogului;
+4. selectează maximum trei produse active per categorie, în ordinea administrată;
+5. recalculează rezultatul imediat după orice modificare locală.
+
+Recomandările sunt candidați de catalog la nivel de categorie, nu o confirmare de compatibilitate electrică sau de protocol. Nu se calculează preț total, nu se persistă o ofertă și nu se comandă produse. Selecția finală, cantitățile comerciale, modulele de putere, sursele, cablurile și compatibilitatea trebuie validate de un specialist înainte de ofertare.
+
+Nu a fost necesară o migrare nouă: `RoomFeature.quantity` și catalogul `Product` existente acoperă această etapă. Salvarea continuă prin endpointul camerei, cu membership, `organizationId`, RBAC, Zod și audit neschimbate.

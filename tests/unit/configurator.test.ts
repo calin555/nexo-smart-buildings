@@ -2,6 +2,12 @@ import { describe, expect, it } from "vitest";
 
 import { sanitizePlanFileName } from "@/modules/configurator/files";
 import {
+  applyRoomPreset,
+  estimateRoomFeatureQuantities,
+  roomPresets,
+} from "@/modules/configurator/presets";
+import { buildProductRecommendations } from "@/modules/configurator/recommendations";
+import {
   createManualRoomSchema,
   normalizedPolygonSchema,
   projectDocumentMetadataSchema,
@@ -112,6 +118,75 @@ describe("room features and live summary", () => {
     expect(summary.dimmableCircuits).toBe(3);
     expect(summary.blinds).toBe(2);
     expect(summary.switchedSockets).toBe(4);
+  });
+});
+
+describe("presets, quantities and product recommendations", () => {
+  it("definește toate cele opt preseturi cu funcții valide și cantități pozitive", () => {
+    expect(roomPresets).toHaveLength(8);
+    for (const preset of roomPresets) {
+      const features = applyRoomPreset(preset.id);
+      expect(features.length).toBeGreaterThan(0);
+      expect(features.every((feature) => feature.enabled && feature.quantity > 0)).toBe(true);
+    }
+  });
+
+  it("aplică presetul Comfort și estimează prudent cantitățile după suprafață", () => {
+    const comfort = applyRoomPreset("COMFORT");
+    expect(comfort.find((feature) => feature.featureCode === "LIGHTING_DIMMABLE")?.quantity).toBe(
+      2,
+    );
+    const estimated = estimateRoomFeatureQuantities(comfort, 48);
+    expect(estimated.find((feature) => feature.featureCode === "LIGHTING_ON_OFF")?.quantity).toBe(
+      4,
+    );
+    expect(
+      estimated.find((feature) => feature.featureCode === "HEATING_THERMOSTAT")?.quantity,
+    ).toBe(1);
+  });
+
+  it("agregă cerințele pe camere și recomandă numai produsele din categoria relevantă", () => {
+    const recommendations = buildProductRecommendations(
+      [
+        {
+          features: [
+            { category: "LIGHTING", featureCode: "LIGHTING_DIMMABLE", enabled: true, quantity: 2 },
+            { category: "SHADING", featureCode: "SHADING_BLINDS", enabled: true, quantity: 1 },
+          ],
+        },
+        {
+          features: [
+            { category: "LIGHTING", featureCode: "LIGHTING_DIMMABLE", enabled: true, quantity: 3 },
+            { category: "ENERGY", featureCode: "ENERGY_MONITOR", enabled: false, quantity: 4 },
+          ],
+        },
+      ],
+      [
+        {
+          id: "lighting-product",
+          name: "Actuator iluminat",
+          brand: "Test",
+          category: "Iluminat inteligent",
+          badge: null,
+          imageUrl: null,
+          sortOrder: 20,
+        },
+        {
+          id: "unrelated-product",
+          name: "Cameră video",
+          brand: "Test",
+          category: "Sisteme de securitate",
+          badge: null,
+          imageUrl: null,
+          sortOrder: 10,
+        },
+      ],
+    );
+    const lighting = recommendations.find((group) => group.category === "Iluminat inteligent");
+    expect(lighting?.totalQuantity).toBe(5);
+    expect(lighting?.requirements[0]?.roomCount).toBe(2);
+    expect(lighting?.products.map((product) => product.id)).toEqual(["lighting-product"]);
+    expect(recommendations.some((group) => group.category === "Accesorii & senzori")).toBe(false);
   });
 });
 

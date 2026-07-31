@@ -8,6 +8,7 @@ import {
   Hand,
   LoaderCircle,
   MousePointer2,
+  PackageSearch,
   Pencil,
   Redo2,
   Save,
@@ -23,12 +24,22 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { featureCategories, featureDefinitions, roomTypes } from "@/modules/configurator/constants";
+import {
+  applyRoomPreset,
+  estimateRoomFeatureQuantities,
+  getRoomPreset,
+  recommendedPresetForRoom,
+  roomPresets,
+  type RoomPresetId,
+} from "@/modules/configurator/presets";
+import { buildProductRecommendations } from "@/modules/configurator/recommendations";
 import type { NormalizedPoint } from "@/modules/configurator/schema";
 import { calculateConfiguratorSummary } from "@/modules/configurator/summary";
 import type {
   EditorAnalysisState,
   EditorFeature,
   EditorPage,
+  EditorRecommendationProduct,
   EditorRoom,
 } from "@/modules/configurator/types";
 import { confidenceLabel } from "@/modules/plan-analysis/confidence";
@@ -85,6 +96,7 @@ export function ConfiguratorEditor({
   initialPages,
   initialRooms,
   initialAnalysis,
+  recommendationCatalog,
 }: Readonly<{
   projectId: string;
   document: EditorDocument;
@@ -92,6 +104,7 @@ export function ConfiguratorEditor({
   initialPages: EditorPage[];
   initialRooms: EditorRoom[];
   initialAnalysis: EditorAnalysisState;
+  recommendationCatalog: EditorRecommendationProduct[];
 }>) {
   const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -111,6 +124,7 @@ export function ConfiguratorEditor({
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [analysis, setAnalysis] = useState(initialAnalysis);
+  const [selectedPresetId, setSelectedPresetId] = useState<RoomPresetId>("BASIC_SMART");
   const analysisIsActive = analysis.status === "QUEUED" || analysis.status === "PROCESSING";
   const currentPage = pages.find((page) => page.pageNumber === pageNumber) ?? null;
   const selectedRoom = rooms.find((room) => room.id === selectedRoomId) ?? null;
@@ -122,6 +136,12 @@ export function ConfiguratorEditor({
       (filter === "CONFIRMED" && room.isConfirmed),
   );
   const summary = useMemo(() => calculateConfiguratorSummary(rooms), [rooms]);
+  const recommendationGroups = useMemo(
+    () => buildProductRecommendations(rooms, recommendationCatalog),
+    [recommendationCatalog, rooms],
+  );
+  const selectedPreset = getRoomPreset(selectedPresetId);
+  const selectedRoomType = selectedRoom?.roomType;
 
   useEffect(() => {
     setRooms(initialRooms);
@@ -132,6 +152,10 @@ export function ConfiguratorEditor({
     );
     setAnalysis(initialAnalysis);
   }, [initialAnalysis, initialRooms]);
+
+  useEffect(() => {
+    if (selectedRoomType) setSelectedPresetId(recommendedPresetForRoom(selectedRoomType));
+  }, [selectedRoomId, selectedRoomType]);
 
   useEffect(() => {
     if (!analysisIsActive) return;
@@ -420,6 +444,31 @@ export function ConfiguratorEditor({
         )
       : [...selectedRoom.features, nextFeature];
     patchSelected({ features }, false);
+  }
+
+  function applySelectedPreset(): void {
+    if (!selectedRoom) return;
+    patchSelected({ features: applyRoomPreset(selectedPresetId) }, false);
+    setMessage(
+      `Presetul ${selectedPreset.name} a fost aplicat în ${selectedRoom.name}. Verifică și salvează cantitățile.`,
+    );
+  }
+
+  function estimateSelectedQuantities(): void {
+    if (!selectedRoom) return;
+    if (!selectedRoom.area || selectedRoom.area <= 0) {
+      setMessage("Completează suprafața camerei înainte de estimarea cantităților.");
+      return;
+    }
+    patchSelected(
+      {
+        features: estimateRoomFeatureQuantities(selectedRoom.features, selectedRoom.area),
+      },
+      false,
+    );
+    setMessage(
+      "Cantitățile au fost estimate orientativ după suprafață. Verifică proiectul tehnic înainte de ofertare.",
+    );
   }
 
   const summaryItems = [
@@ -949,9 +998,45 @@ export function ConfiguratorEditor({
               </div>
 
               <div className="mt-5 border-t border-slate/10 pt-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[.14em] text-slate">
-                  Funcții smart
-                </p>
+                <div className="rounded-xl border border-emerald-700/15 bg-emerald-50/60 p-3">
+                  <label className="text-[10px] font-semibold uppercase tracking-[.14em] text-emerald-800">
+                    Preset rapid
+                    <select
+                      value={selectedPresetId}
+                      onChange={(event) => setSelectedPresetId(event.target.value as RoomPresetId)}
+                      className="mt-2 w-full rounded-lg border border-emerald-800/15 bg-white px-2.5 py-2 text-xs normal-case tracking-normal text-ink"
+                    >
+                      {roomPresets.map((preset) => (
+                        <option key={preset.id} value={preset.id}>
+                          {preset.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <p className="mt-2 text-[11px] leading-4 text-slate">
+                    {selectedPreset.description}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={applySelectedPreset}
+                    className="mt-3 w-full rounded-lg bg-ink px-3 py-2 text-xs font-semibold text-white transition hover:bg-emerald-800"
+                  >
+                    Aplică presetul
+                  </button>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-[.14em] text-slate">
+                    Funcții smart și cantități
+                  </p>
+                  <button
+                    type="button"
+                    onClick={estimateSelectedQuantities}
+                    className="text-[10px] font-semibold text-emerald-700 hover:text-emerald-900"
+                  >
+                    Estimează după suprafață
+                  </button>
+                </div>
                 <div className="mt-2 grid gap-2">
                   {featureCategories.map((category) => (
                     <details
@@ -989,6 +1074,7 @@ export function ConfiguratorEditor({
                                     <span className="sr-only">{definition.quantityLabel}</span>
                                     <input
                                       type="number"
+                                      aria-label={`${definition.label} — ${definition.quantityLabel}`}
                                       min="1"
                                       max="999"
                                       value={feature.quantity}
@@ -1063,6 +1149,98 @@ export function ConfiguratorEditor({
               <p className="mt-1 text-lg font-semibold text-ink">{value}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-6 border-t border-slate/10 pt-5">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.14em] text-emerald-700">
+                <PackageSearch className="size-4" /> Recomandări tehnice orientative
+              </p>
+              <p className="mt-1 max-w-3xl text-xs leading-5 text-slate">
+                Motorul corelează funcțiile și cantitățile configurate cu produsele active din
+                catalog. Selecția finală se validează de un specialist.
+              </p>
+            </div>
+            <span className="rounded-full border border-slate/15 px-3 py-1 text-[10px] font-medium text-slate">
+              Fără preț · fără comandă automată
+            </span>
+          </div>
+
+          {recommendationGroups.length === 0 ? (
+            <div className="mt-4 rounded-xl border border-dashed border-slate/20 bg-cloud/60 px-4 py-5 text-center text-xs text-slate">
+              Selectează funcții smart sau aplică un preset pentru a genera recomandările.
+            </div>
+          ) : (
+            <div className="mt-4 grid gap-3 lg:grid-cols-2">
+              {recommendationGroups.map((group) => (
+                <article
+                  key={group.category}
+                  className="rounded-xl border border-slate/15 bg-cloud/40 p-4"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-sm font-semibold text-ink">{group.category}</h3>
+                      <p className="mt-1 text-[11px] text-slate">
+                        {group.totalQuantity} cerințe configurate
+                      </p>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold text-emerald-800 shadow-sm">
+                      {group.products.length} produse candidate
+                    </span>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {group.requirements.map((requirement) => (
+                      <span
+                        key={requirement.featureCode}
+                        className="rounded-md border border-slate/10 bg-white px-2 py-1 text-[10px] text-slate"
+                      >
+                        {requirement.label} × {requirement.quantity} · {requirement.roomCount}{" "}
+                        {requirement.roomCount === 1 ? "cameră" : "camere"}
+                      </span>
+                    ))}
+                  </div>
+                  {group.products.length > 0 ? (
+                    <div className="mt-4 grid gap-2">
+                      {group.products.map((product) => (
+                        <div
+                          key={product.id}
+                          className="flex items-center gap-3 rounded-lg border border-slate/10 bg-white p-2.5"
+                        >
+                          <div
+                            className="size-11 shrink-0 rounded-md bg-cloud bg-contain bg-center bg-no-repeat"
+                            style={
+                              product.imageUrl
+                                ? { backgroundImage: `url(${product.imageUrl})` }
+                                : undefined
+                            }
+                          />
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-[10px] font-medium text-slate">
+                              {product.brand}
+                            </p>
+                            <p className="truncate text-xs font-semibold text-ink">
+                              {product.name}
+                            </p>
+                          </div>
+                          {product.badge && (
+                            <span className="rounded bg-emerald-50 px-2 py-1 text-[9px] font-bold text-emerald-800">
+                              {product.badge}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="mt-4 rounded-lg bg-white px-3 py-2 text-[11px] text-slate">
+                      Nu există încă un produs activ în această categorie. Administratorul îl poate
+                      adăuga din catalog.
+                    </p>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

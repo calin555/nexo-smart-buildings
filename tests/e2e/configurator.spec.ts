@@ -166,6 +166,40 @@ test("clientul A încarcă planul, desenează și confirmă o cameră", async ({
   );
 });
 
+test("clientul A aplică un preset, salvează cantitățile și primește recomandări", async ({
+  page,
+}) => {
+  await login(page, clientA);
+  await page.goto(`/portal/configurator/${projectId}`);
+  await page.getByRole("button", { name: /Living E2E/ }).click();
+
+  await page.getByLabel("Preset rapid").selectOption("COMFORT");
+  await page.getByRole("button", { name: "Aplică presetul" }).click();
+  await expect(page.getByLabel("Dimabil", { exact: true })).toBeChecked();
+  await expect(page.getByLabel("Dimabil — Circuite")).toHaveValue("2");
+  await expect(page.getByRole("heading", { name: "Confortul casei" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Întrerupătoare & umbrire" })).toBeVisible();
+
+  const savePromise = page.waitForResponse(
+    (response) =>
+      response.url().includes(`/api/portal/projects/${projectId}/rooms/`) &&
+      response.request().method() === "PATCH",
+  );
+  await page.getByRole("button", { name: "Salvează" }).click();
+  expect((await savePromise).status()).toBe(200);
+
+  const persisted = await prisma.projectRoom.findFirstOrThrow({
+    where: { projectId, organizationId: clientAOrganizationId, name: "Living E2E" },
+    include: { features: true },
+  });
+  expect(
+    persisted.features.find((feature) => feature.featureCode === "LIGHTING_DIMMABLE")?.quantity,
+  ).toBe(2);
+  expect(
+    persisted.features.find((feature) => feature.featureCode === "HEATING_THERMOSTAT")?.quantity,
+  ).toBe(1);
+});
+
 test("clientul B nu poate vedea sau modifica proiectul organizației A", async ({ page }) => {
   await login(page, clientB);
   const navigation = await page.goto(`/portal/configurator/${projectId}`);

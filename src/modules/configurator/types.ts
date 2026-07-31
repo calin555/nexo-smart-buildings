@@ -46,3 +46,13 @@ export type EditorPage = {
   id: string;
   pageNumber: number;
 };
+
+export type EditorRecommendationProduct = {
+  id: string;
+  name: string;
+  brand: string;
+  category: string;
+  badge: string | null;
+  imageUrl: string | null;
+  sortOrder: number;
+};

@@ -9,7 +9,11 @@ import { prisma } from "@/lib/prisma";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { requireProjectAccess } from "@/modules/configurator/access";
 import { normalizedPolygonSchema } from "@/modules/configurator/schema";
-import type { EditorAnalysisState, EditorRoom } from "@/modules/configurator/types";
+import type {
+  EditorAnalysisState,
+  EditorRecommendationProduct,
+  EditorRoom,
+} from "@/modules/configurator/types";
 import { isPlanAnalysisConfigured } from "@/modules/plan-analysis/registry";
 
 export default async function ConfiguratorProjectPage({
@@ -33,6 +37,7 @@ export default async function ConfiguratorProjectPage({
 
   let signedUrl: string | null = null;
   let rooms: EditorRoom[] = [];
+  let recommendationCatalog: EditorRecommendationProduct[] = [];
   let analysisState: EditorAnalysisState = {
     configured: isPlanAnalysisConfigured(),
     jobId: null,
@@ -50,7 +55,7 @@ export default async function ConfiguratorProjectPage({
       .createSignedUrl(selectedDocument.storagePath, 60 * 60);
     signedUrl = data?.signedUrl ?? null;
 
-    const [databaseRooms, latestJob] = await Promise.all([
+    const [databaseRooms, latestJob, catalogProducts] = await Promise.all([
       prisma.projectRoom.findMany({
         where: {
           projectId: project.id,
@@ -68,7 +73,21 @@ export default async function ConfiguratorProjectPage({
         include: { _count: { select: { issues: true } } },
         orderBy: { createdAt: "desc" },
       }),
+      prisma.product.findMany({
+        where: { active: true },
+        select: {
+          id: true,
+          name: true,
+          brand: true,
+          category: true,
+          badge: true,
+          imageUrl: true,
+          sortOrder: true,
+        },
+        orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      }),
     ]);
+    recommendationCatalog = catalogProducts;
     rooms = databaseRooms.flatMap((room) => {
       const polygon = normalizedPolygonSchema.safeParse(room.geometries[0]?.normalizedPoints);
       if (!polygon.success) return [];
@@ -146,6 +165,7 @@ export default async function ConfiguratorProjectPage({
               }))}
               initialRooms={rooms}
               initialAnalysis={analysisState}
+              recommendationCatalog={recommendationCatalog}
             />
           </div>
           <details className="mt-6 rounded-xl border border-slate/15 bg-white p-4">

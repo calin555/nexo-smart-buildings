@@ -21,7 +21,8 @@
 
 - [x] **Etapa 1 — MVP manual (31.07.2026):** proiecte, documente PDF/JPG/PNG private, viewer PDF.js/imagine, pagini, desenare și editare poligoane normalizate, proprietăți camere, funcții smart, confirmare, sumar live, RLS/RBAC și teste inter-organizații.
 - [x] **Etapa 2 — analiză asistată (31.07.2026):** provider modular, procesare asincronă cu job persistent, validarea fișierului înainte de procesare, detecții structurate, camere și geometrii normalizate, scoruri de încredere, progres/retry, confirmare/corectare, fallback manual și teste inter-organizații.
-- [ ] **Etape ulterioare:** recomandări de produse, calcul financiar și ofertare, numai după validarea separată a regulilor comerciale.
+- [x] **Etapa 3 — preseturi și recomandări (31.07.2026):** opt preseturi tehnice, cantități editabile/estimate după suprafață, agregare live a cerințelor și produse candidate din catalog pe categorii, fără preț final sau comandă automată.
+- [ ] **Etape ulterioare:** reguli comerciale administrabile, validare tehnică produs-protocol, calcul financiar și ofertare, numai după aprobarea separată a acestora.
 
 ## Versiunea 2
 
