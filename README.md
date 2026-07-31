@@ -14,6 +14,12 @@ Fundația MVP pentru deployment exclusiv pe Vercel + Supabase. Include Next.js A
 
 Utilizatorii și resetarea parolei sunt create exclusiv în Supabase Auth. După creare, trigger-ul SQL creează profilul; un administrator atribuie membership-ul/rolul potrivit.
 
+## Administrarea produselor
+
+Un utilizator cu rol `ADMIN` sau `SUPER_ADMIN` poate deschide `/admin/products`, unde poate adăuga produse și le poate edita. Produsele marcate „vizibil pe site” sunt afișate automat pe homepage, în ordinea configurată. Imaginea este opțională și se introduce ca URL HTTPS; uploadul de fișiere nu face parte încă din acest flux.
+
+Toate salvările sunt validate cu Zod, autorizate server-side și înregistrate în audit. Înaintea publicării unei versiuni care include modificări ale catalogului trebuie rulată migrarea versionată cu `npm run db:deploy`.
+
 Pentru conturi de test, creați utilizatori în Supabase Auth (fără parole în seed), confirmați e-mailurile într-un mediu de test, verificați apariția profilurilor, apoi creați membership-uri în cele două organizații separate. Puneți adresele/parolele testelor doar în variabile E2E locale/CI, niciodată în Git. Pașii compleți Vercel sunt în [docs/VERCEL_DEPLOYMENT.md](docs/VERCEL_DEPLOYMENT.md).
 
 ## Vercel

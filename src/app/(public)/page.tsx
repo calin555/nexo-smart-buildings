@@ -19,6 +19,10 @@ import {
   ThermometerSun,
 } from "lucide-react";
 
+import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
+
 const categories = [
   { icon: HousePlug, label: "Ecosisteme Smart Home" },
   { icon: CircleGauge, label: "Kit-uri de automatizare" },
@@ -43,18 +47,13 @@ const ecosystems = [
   { label: "Securitate NEXO", icon: ShieldCheck, color: "text-[#008b68]", mark: "S" },
 ];
 
-const products = [
-  { brand: "NEXO Home", name: "Kit confort pentru apartament cu 2 camere", price: "de la 2.490 lei", type: "kit" as const, badge: "RECOMANDAT" },
-  { brand: "NEXO Home", name: "Pachet de control pentru jaluzele și perdele", price: "de la 1.890 lei", type: "blinds" as const },
-  { brand: "NEXO Climate", name: "Termostat inteligent cu senzor de prezență", price: "de la 990 lei", type: "climate" as const },
-  { brand: "NEXO Secure", name: "Sistem de acces fără cheie pentru locuință", price: "de la 1.340 lei", type: "lock" as const, badge: "NOU" },
-  { brand: "NEXO Energy", name: "Monitorizare consum electric pe circuite", price: "de la 760 lei", type: "energy" as const },
-];
+type IllustrationType = "kit" | "blinds" | "climate" | "lock" | "energy" | "custom";
 
 function HomeMark() { return <span className="text-5xl font-bold leading-none">⌂</span>; }
 function MatterMark() { return <span className="text-6xl leading-none">✦</span>; }
 
-function ProductIllustration({ type }: Readonly<{ type: (typeof products)[number]["type"] }>) {
+function ProductIllustration({ type, imageUrl, name }: Readonly<{ type: IllustrationType; imageUrl: string | null; name: string }>) {
+  if (imageUrl) return <div role="img" aria-label={name} className="h-44 bg-[#fafbfb] bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url(${imageUrl})` }} />;
   if (type === "kit") return <div className="relative flex h-44 items-end justify-center gap-3 bg-[#fafbfb] pb-7"><div className="h-20 w-9 rounded-lg border border-[#dfe4e1] bg-white shadow-sm" /><div className="h-28 w-16 rounded-xl bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]"><div className="mx-auto mt-6 size-8 rounded-full border-2 border-emerald-500" /></div><div className="h-16 w-20 rounded-xl bg-[#f2f5f3]" /></div>;
   if (type === "blinds") return <div className="relative flex h-44 items-end justify-center gap-5 bg-[#fafbfb] pb-7"><div className="h-28 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" /><div className="h-24 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" /><div className="h-16 w-24 rounded-xl border border-[#dfe4e1] bg-white" /></div>;
   if (type === "climate") return <div className="grid h-44 place-items-center bg-[#fafbfb]"><div className="relative grid size-28 place-items-center rounded-[1.4rem] bg-[#202d35] text-white shadow-[0_10px_20px_rgba(19,39,31,.18)]"><span className="text-3xl font-semibold">22°</span><span className="absolute bottom-5 text-[9px] tracking-[.14em] text-emerald-300">NEXO</span></div></div>;
@@ -66,7 +65,12 @@ function Filter({ title, values }: Readonly<{ title: string; values: string[] }>
   return <section className="border-t border-[#dce2df] px-3 py-3"><div className="flex items-center justify-between text-sm font-medium"><span>{title}</span><span>−</span></div><div className="mt-3 max-h-28 space-y-2 overflow-hidden text-sm text-slate">{values.map((value) => <label key={value} className="flex items-center gap-2"><input type="checkbox" className="size-4 rounded border-[#cbd5d0]" />{value}</label>)}</div></section>;
 }
 
-export default function HomePage() {
+function formatPrice(priceFrom: number): string {
+  return `de la ${new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 2 }).format(priceFrom / 100)} lei`;
+}
+
+export default async function HomePage() {
+  const products = await prisma.product.findMany({ where: { active: true }, orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] });
   return (
     <main className="bg-white">
       <div className="mx-auto max-w-[1600px] px-5 pb-16 pt-7 lg:px-8">
@@ -89,7 +93,8 @@ export default function HomePage() {
             <section className="mt-5 flex flex-wrap items-center justify-between gap-4 border border-[#b9d9ce] bg-[#eff8f3] px-5 py-4"><div><p className="font-medium text-ink">Vrei o casă smart adaptată proiectului tău?</p><p className="mt-1 text-sm text-slate">Accesează portalul pentru a începe o estimare de proiect.</p></div><Link href="/login" className="inline-flex shrink-0 items-center rounded bg-[#087657] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#065c43]">Accesează portalul client <ArrowRight className="ml-2 size-4" /></Link></section>
             <div id="produse" className="mt-5 flex items-center justify-between border-b border-[#e1e5e3] pb-4 text-sm"><button type="button" className="inline-flex items-center gap-1">Sortează după <ChevronDown className="size-4" /></button><span className="text-slate">Afișare: <b className="text-[#0072b8]">▦</b> <span className="ml-2">☷</span></span><span className="hidden sm:inline">Pagina 1 / 2</span></div>
             <section className="mt-6 grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 xl:grid-cols-5">
-              {products.map((product) => <article key={product.name} className="group relative min-w-0"><div className="relative overflow-hidden"><ProductIllustration type={product.type} />{product.badge && <span className="absolute right-2 top-2 bg-emerald-700 px-2 py-1 text-[10px] font-bold text-white">{product.badge}</span>}</div><p className="mt-4 text-sm text-slate">{product.brand}</p><h2 className="mt-1 min-h-12 text-sm leading-5 text-ink group-hover:text-[#0072b8]">{product.name}</h2><p className="mt-3 text-base font-semibold text-ink">{product.price}</p><a href="#discutam" className="mt-3 inline-flex rounded border border-[#0d815f] px-3 py-2 text-xs font-semibold text-[#087657] transition hover:bg-[#087657] hover:text-white">Solicită ofertă</a></article>)}
+              {products.map((product) => <article key={product.id} className="group relative min-w-0"><div className="relative overflow-hidden"><ProductIllustration type={product.illustration.toLowerCase() as IllustrationType} imageUrl={product.imageUrl} name={product.name} />{product.badge && <span className="absolute right-2 top-2 bg-emerald-700 px-2 py-1 text-[10px] font-bold text-white">{product.badge}</span>}</div><p className="mt-4 text-sm text-slate">{product.brand}</p><h2 className="mt-1 min-h-12 text-sm leading-5 text-ink group-hover:text-[#0072b8]">{product.name}</h2><p className="mt-3 text-base font-semibold text-ink">{formatPrice(product.priceFrom)}</p><a href="#discutam" className="mt-3 inline-flex rounded border border-[#0d815f] px-3 py-2 text-xs font-semibold text-[#087657] transition hover:bg-[#087657] hover:text-white">Solicită ofertă</a></article>)}
+              {products.length === 0 && <p className="col-span-full py-10 text-center text-sm text-slate">Catalogul este în curs de actualizare.</p>}
             </section>
           </div>
         </div>
