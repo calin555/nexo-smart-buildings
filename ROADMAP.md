@@ -5,11 +5,11 @@
 - [x] analiză de scop, ipoteze şi integrare externă
 - [x] arhitectură modulară şi model de date
 - [x] structură iniţială repository
-- [ ] fundament Vercel + Supabase: Auth SSR, RLS, Prisma, RBAC, layout, seed şi controale de calitate
+- [x] fundament Vercel + Supabase: Auth SSR, RLS, Prisma, RBAC, layout, seed şi controale de calitate
 
 ## MVP
 
-1. **Platformă de bază** — Next.js, Supabase Auth/PostgreSQL/Storage/RLS, Prisma, RBAC, layout, design system, Vercel şi seed. În implementare după modificarea arhitecturii aprobată la 31.07.2026.
+1. **Platformă de bază** — Next.js, Supabase Auth/PostgreSQL/Storage/RLS, Prisma, RBAC, layout, design system, Vercel şi seed. **Finalizat la 31.07.2026.**
 2. **Public şi catalog** — pagini publice, SEO, produse, categorii, pachete şi compatibilităţi validate.
 3. **Configurare şi estimare** — wizard Casă/Bloc, salvare progres, reguli administrabile şi rezultat orientativ.
 4. **Proiecte şi documente** — proiecte, portal client, status history, upload sigur, preview şi plan 2D simplificat.
