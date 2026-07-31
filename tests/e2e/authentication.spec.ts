@@ -1,35 +1,14 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const demoPassword = "DemoPass!2026";
-test.skip(!process.env.E2E_SUPABASE_ENABLED, "Necesită un proiect Supabase de test și conturi autentificate.");
+const clientA = { email: process.env.E2E_CLIENT_A_EMAIL!, password: process.env.E2E_CLIENT_A_PASSWORD! };
+const clientB = { email: process.env.E2E_CLIENT_B_EMAIL!, password: process.env.E2E_CLIENT_B_PASSWORD! };
+const admin = { email: process.env.E2E_ADMIN_EMAIL!, password: process.env.E2E_ADMIN_PASSWORD! };
+test.skip(!process.env.E2E_SUPABASE_ENABLED, "Necesită infrastructură Supabase E2E.");
 
-async function login(page: Page, email: string): Promise<void> {
-  await page.goto("/login");
-  await page.getByLabel("E-mail").fill(email);
-  await page.getByLabel("Parolă").fill(demoPassword);
-  await page.getByRole("button", { name: "Intră în cont" }).click();
-}
-
-test("un vizitator neautentificat este redirecționat de la portal", async ({ page }) => {
-  await page.goto("/portal");
-  await expect(page).toHaveURL(/\/login$/);
-});
-
-test("un client se poate autentifica și vede numai organizația proprie", async ({ page }) => {
-  await login(page, "client@nexo.demo");
-  await expect(page).toHaveURL(/\/portal$/);
-  await expect(page.getByText("Persoană Fizică Demo")).toBeVisible();
-  await expect(page.getByText("Clienți Demo SRL")).not.toBeVisible();
-});
-
-test("un client nu poate accesa administrarea", async ({ page }) => {
-  await login(page, "client@nexo.demo");
-  await page.goto("/admin");
-  await expect(page.getByRole("heading", { name: "Nu aveți acces la această zonă." })).toBeVisible();
-});
-
-test("un super-administrator poate accesa administrarea", async ({ page }) => {
-  await login(page, "superadmin@nexo.demo");
-  await expect(page).toHaveURL(/\/admin$/);
-  await expect(page.getByRole("heading", { name: "Spațiu intern protejat" })).toBeVisible();
-});
+async function login(page: Page, credentials: { email: string; password: string }): Promise<void> { await page.goto("/login"); await page.getByLabel("E-mail").fill(credentials.email); await page.getByLabel("Parolă").fill(credentials.password); await page.getByRole("button", { name: "Intră în cont" }).click(); }
+async function expectSession(page: Page): Promise<void> { const cookies = await page.context().cookies("http://localhost:3000"); expect(cookies.some((cookie) => cookie.name.startsWith("sb-") && cookie.name.includes("auth-token"))).toBe(true); }
+test("anonimul este refuzat de portal", async ({ page }) => { await page.goto("/portal"); await expect(page).toHaveURL(/\/login$/); });
+test("client A se autentifică, păstrează sesiunea și nu accesează admin", async ({ page }) => { await login(page, clientA); await expect(page).toHaveURL(/\/portal$/); await expectSession(page); await expect(page.getByText("Persoană Fizică Demo")).toBeVisible(); await page.reload(); await expectSession(page); await expect(page.getByText("Persoană Fizică Demo")).toBeVisible(); await page.goto("/admin"); await expect(page.getByRole("heading", { name: "Nu aveți acces la această zonă." })).toBeVisible(); });
+test("client B vede numai organizația B", async ({ page }) => { await login(page, clientB); await expectSession(page); await expect(page.getByText("Clienți Demo SRL")).toBeVisible(); await expect(page.getByText("Persoană Fizică Demo")).not.toBeVisible(); });
+test("admin accesează administrarea și logout revocă sesiunea", async ({ page }) => { await login(page, admin); await expectSession(page); await page.goto("/admin"); await expect(page.getByRole("heading", { name: "Spațiu intern protejat" })).toBeVisible(); await page.goto("/portal"); await page.getByRole("button", { name: "Deconectare" }).click(); await expect(page).toHaveURL(/\/$/); const cookies = await page.context().cookies("http://localhost:3000"); expect(cookies.some((cookie) => cookie.name.startsWith("sb-") && cookie.name.includes("auth-token"))).toBe(false); await page.goto("/portal"); await expect(page).toHaveURL(/\/login$/); });
+test("resetarea parolei și callback-ul nu expun o sesiune anonimă", async ({ page }) => { const reset = await page.request.post("/api/auth/reset-password", { form: { email: clientA.email }, maxRedirects: 0 }); expect(reset.status()).toBe(303); await page.goto("/auth/callback?next=/portal"); await expect(page).toHaveURL(/\/login$/); });

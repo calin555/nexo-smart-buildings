@@ -6,6 +6,7 @@ playwright-report/
 test-results/
 .env
 .env.local
+.env.e2e.local
 *.log
 uploads/
 prisma/*.db
