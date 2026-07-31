@@ -5,21 +5,9 @@ import { notFound } from "next/navigation";
 import { CatalogProductCard } from "@/components/catalog-product-card";
 import { prisma } from "@/lib/prisma";
 import { ecosystems, getEcosystem } from "@/modules/catalog/ecosystems";
+import { productCategories } from "@/modules/products/categories";
 
 export const dynamic = "force-dynamic";
-
-const categories = [
-  "Ecosisteme Smart Home",
-  "Kit-uri de automatizare",
-  "Confortul casei",
-  "Iluminat inteligent",
-  "Întrerupătoare & umbrire",
-  "Prize / relee smart",
-  "Sisteme de securitate",
-  "Gateway-uri & telecomenzi",
-  "Sisteme multimedia",
-  "Accesorii & senzori",
-];
 
 function Filter({ title, values }: Readonly<{ title: string; values: string[] }>) {
   return (
@@ -71,7 +59,7 @@ export default async function EcosystemPage({
                 SMART HOME
               </p>
               <nav aria-label="Categorii Smart Home">
-                {categories.map((category) => (
+                {productCategories.map((category) => (
                   <Link
                     key={category}
                     href="/#produse"

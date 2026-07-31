@@ -17,25 +17,32 @@ import {
   Smartphone,
   Speaker,
   ThermometerSun,
+  type LucideIcon,
 } from "lucide-react";
 
 import { CatalogProductCard } from "@/components/catalog-product-card";
 import { prisma } from "@/lib/prisma";
+import { productCategories } from "@/modules/products/categories";
 
 export const dynamic = "force-dynamic";
 
-const categories = [
-  { icon: HousePlug, label: "Ecosisteme Smart Home" },
-  { icon: CircleGauge, label: "Kit-uri de automatizare" },
-  { icon: ThermometerSun, label: "Confortul casei" },
-  { icon: Lightbulb, label: "Iluminat inteligent" },
-  { icon: Blinds, label: "Întrerupătoare & umbrire" },
-  { icon: PlugZap, label: "Prize / relee smart" },
-  { icon: Camera, label: "Sisteme de securitate" },
-  { icon: RadioTower, label: "Gateway-uri & telecomenzi" },
-  { icon: Speaker, label: "Sisteme multimedia" },
-  { icon: Smartphone, label: "Accesorii & senzori" },
+const categoryIcons: LucideIcon[] = [
+  HousePlug,
+  CircleGauge,
+  ThermometerSun,
+  Lightbulb,
+  Blinds,
+  PlugZap,
+  Camera,
+  RadioTower,
+  Speaker,
+  Smartphone,
 ];
+
+const categories = productCategories.map((label, index) => ({
+  icon: categoryIcons[index] ?? HousePlug,
+  label,
+}));
 
 const ecosystemCards = [
   {

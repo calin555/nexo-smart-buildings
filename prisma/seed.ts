@@ -77,7 +77,7 @@ async function main(): Promise<void> {
       name: "Monitorizare consum electric pe circuite",
       brand: "N3XO Energy",
       priceFrom: 76000,
-      category: "Energie & eficiență",
+      category: "Accesorii & senzori",
       illustration: ProductIllustration.ENERGY,
       sortOrder: 50,
     },

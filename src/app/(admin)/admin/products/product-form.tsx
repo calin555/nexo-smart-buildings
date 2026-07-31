@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
 import type { ProductActionState } from "@/app/(admin)/admin/products/actions";
+import { productCategories } from "@/modules/products/categories";
 import { productIllustrations } from "@/modules/products/schema";
 
 type ProductDefaults = {
@@ -85,14 +86,21 @@ export function ProductForm({ action, defaults, submitLabel }: Readonly<ProductF
         </label>
         <label className="text-sm font-medium">
           Categorie
-          <input
+          <select
             name="category"
             required
-            maxLength={100}
-            defaultValue={defaults?.category}
+            defaultValue={defaults?.category ?? ""}
             className={fieldClass}
-            placeholder="ex. Iluminat inteligent"
-          />
+          >
+            <option value="" disabled>
+              Selectează categoria
+            </option>
+            {productCategories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
           <FieldError messages={state.errors?.category} />
         </label>
         <label className="text-sm font-medium">

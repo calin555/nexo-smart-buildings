@@ -30,4 +30,12 @@ describe("productFormSchema", () => {
     });
     expect(result.success).toBe(false);
   });
+
+  it("respinge o categorie care nu există în meniul public", () => {
+    const result = productFormSchema.safeParse({
+      ...validProduct,
+      category: "Categorie inventată",
+    });
+    expect(result.success).toBe(false);
+  });
 });
