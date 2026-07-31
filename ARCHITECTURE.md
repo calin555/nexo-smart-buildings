@@ -1,4 +1,4 @@
-# Architecture — NEXO Smart Buildings
+# Architecture — N3XO Smart Buildings
 
 ## Stil arhitectural
 

@@ -1,4 +1,4 @@
-# Roadmap — NEXO Smart Buildings
+# Roadmap — N3XO Smart Buildings
 
 ## 0. Fundaţie — curent
 

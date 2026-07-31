@@ -5,9 +5,9 @@ import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { InteractiveSmartHome } from "@/components/interactive-smart-home";
 
 export const metadata: Metadata = {
-  title: "Casă inteligentă Cluj — proiect tehnic interactiv | NEXO",
+  title: "Casă inteligentă Cluj — proiect tehnic interactiv | N3XO",
   description:
-    "Explorează circuitele, automatizările și produsele folosite într-o casă inteligentă demonstrativă NEXO.",
+    "Explorează circuitele, automatizările și produsele folosite într-o casă inteligentă demonstrativă N3XO.",
 };
 
 export default function SmartHomeClujProjectPage() {

@@ -1,8 +1,8 @@
-# NEXO Smart Buildings — Project Plan
+# N3XO Smart Buildings — Project Plan
 
 ## Scop şi obiective
 
-NEXO Smart Buildings este o platformă B2C/B2B pentru proiectarea, ofertarea, vânzarea şi livrarea soluţiilor de automatizare pentru case, ansambluri rezidenţiale, hoteluri şi clădiri comerciale. Platforma poziţionează compania ca integrator: proiectare, echipamente, instalare, programare şi mentenanţă.
+N3XO Smart Buildings este o platformă B2C/B2B pentru proiectarea, ofertarea, vânzarea şi livrarea soluţiilor de automatizare pentru case, ansambluri rezidenţiale, hoteluri şi clădiri comerciale. Platforma poziţionează compania ca integrator: proiectare, echipamente, instalare, programare şi mentenanţă.
 
 MVP-ul validează fluxul vizitator → configurare → proiect → documente → estimare/ofertă → portal client → administrare. În fundaţia curentă se implementează doar identitatea, organizaţiile, RBAC, layout-urile şi infrastructura de deploy; catalogul, configuratoarele, upload-ul final, plăţile şi 3D rămân în milestone-uri ulterioare.
 

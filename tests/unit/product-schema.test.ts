@@ -4,7 +4,7 @@ import { productFormSchema } from "../../src/modules/products/schema";
 
 const validProduct = {
   name: "Senzor smart de temperatură",
-  brand: "NEXO Home",
+  brand: "N3XO Home",
   category: "Confortul casei",
   description: "Senzor pentru automatizări de climat.",
   priceLei: "349.90",
@@ -23,7 +23,11 @@ describe("productFormSchema", () => {
   });
 
   it("respinge prețurile negative și URL-urile invalide", () => {
-    const result = productFormSchema.safeParse({ ...validProduct, priceLei: "-1", imageUrl: "imagine" });
+    const result = productFormSchema.safeParse({
+      ...validProduct,
+      priceLei: "-1",
+      imageUrl: "imagine",
+    });
     expect(result.success).toBe(false);
   });
 });

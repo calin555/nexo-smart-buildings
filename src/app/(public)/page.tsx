@@ -64,7 +64,7 @@ const ecosystemCards = [
     mark: "KNX",
   },
   {
-    label: "Securitate NEXO",
+    label: "Securitate N3XO",
     slug: "securitate",
     icon: ShieldCheck,
     color: "text-[#008b68]",
@@ -136,7 +136,7 @@ export default async function HomePage() {
               <p className="px-3 py-3 text-lg font-medium text-[#4b5250]">FILTREAZĂ DUPĂ</p>
               <Filter
                 title="Brand"
-                values={["NEXO Home (18)", "KNX (12)", "Aqara (9)", "Matter (7)"]}
+                values={["N3XO Home (18)", "KNX (12)", "Aqara (9)", "Matter (7)"]}
               />
               <Filter
                 title="Integrare / ecosistem"

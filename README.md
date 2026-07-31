@@ -1,4 +1,4 @@
-# NEXO Smart Buildings
+# N3XO Smart Buildings
 
 Fundația MVP pentru deployment exclusiv pe Vercel + Supabase. Include Next.js App Router, Tailwind, Supabase Auth SSR, profile sincronizat cu `auth.users`, organizații/membership-uri, RBAC server-side, Prisma, audit, RLS SQL pregătit și layout-uri public/portal/admin.
 

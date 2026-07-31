@@ -1,4 +1,4 @@
-# Database Schema — NEXO Smart Buildings
+# Database Schema — N3XO Smart Buildings
 
 ## Convenţii
 
