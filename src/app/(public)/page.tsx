@@ -1,33 +1,14 @@
 import Link from "next/link";
+import { ArrowUpRight, BatteryCharging, Building2, ChevronRight, Home, Hotel, Leaf, LockKeyhole, ShieldCheck, Sparkles, Zap } from "lucide-react";
 
-export default function HomePage() {
-  return (
-    <main>
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:py-28">
-        <p className="eyebrow">Integrator de sisteme complete</p>
-        <h1 className="mt-5 max-w-4xl text-5xl font-semibold tracking-tight text-ink sm:text-7xl">
-          Automatizare KNX, securitate, energie și control inteligent pentru case și clădiri.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate">
-          Proiectare, echipamente, instalare, programare și mentenanță într-o singură platformă.
-        </p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link className="rounded-lg bg-ink px-5 py-3 font-medium text-white" href="/login">Accesează portalul</Link>
-          <a className="rounded-lg border border-slate/20 bg-white px-5 py-3 font-medium text-ink" href="#fundatie">Vezi fundația</a>
-        </div>
-      </section>
-      <section id="fundatie" className="mx-auto grid max-w-7xl gap-5 px-5 pb-20 md:grid-cols-3">
-        {[
-          ["Acces controlat", "Autentificare, sesiuni persistente și permisiuni server-side."],
-          ["Organizații", "Date pregătite pentru clienți individuali, companii și echipe interne."],
-          ["Trasabilitate", "Consimțăminte și audit pentru acțiunile importante."],
-        ].map(([title, text]) => (
-          <article key={title} className="panel">
-            <h2 className="text-xl font-semibold">{title}</h2>
-            <p className="mt-3 leading-7 text-slate">{text}</p>
-          </article>
-        ))}
-      </section>
-    </main>
-  );
-}
+const solutions = [{ icon: Home, title: "Case Smart", text: "Lumină, climat, umbrire și siguranță într-o experiență firească." }, { icon: Building2, title: "Blocuri Smart", text: "Acces, zone comune și energie administrate cu vizibilitate reală." }, { icon: Hotel, title: "Hoteluri Smart", text: "Confort de cameră și eficiență operațională, fără compromis." }];
+const projects = [{ title: "Casa Pădurii", place: "Cluj-Napoca · 280 m²", tag: "KNX + energie" }, { title: "Atria Residence", place: "Brașov · 64 apartamente", tag: "Acces + BMS" }, { title: "Nordic Hotel", place: "Sibiu · 48 camere", tag: "Room management" }];
+
+export default function HomePage() { return <main>
+  <section className="section pb-14 pt-16 sm:pt-24"><div className="grid items-center gap-14 lg:grid-cols-[1.05fr_.95fr]"><div><p className="eyebrow">NEXO Smart Buildings</p><h1 className="mt-5 max-w-3xl text-5xl font-semibold tracking-[-0.055em] text-ink sm:text-7xl">Clădiri care se simt <span className="text-emerald-600">mai simple.</span></h1><p className="mt-7 max-w-xl text-lg leading-8 text-slate">Automatizare KNX, securitate, energie și control inteligent. De la primul plan până la mentenanță, într-o singură echipă.</p><div className="mt-9 flex flex-wrap gap-3"><Link className="button-primary" href="/login">Configurează proiectul <ArrowUpRight className="ml-2 size-4" /></Link><a className="button-secondary" href="#solutii">Explorează soluțiile</a></div><div className="mt-12 flex gap-8 text-sm"><div><b className="block text-2xl">14 ani</b><span className="text-slate">experiență inginerească</span></div><div><b className="block text-2xl">320+</b><span className="text-slate">proiecte integrate</span></div></div></div><div className="relative min-h-[430px] overflow-hidden rounded-[2rem] bg-ink p-8 text-white shadow-panel"><div className="absolute -right-20 -top-20 size-80 rounded-full border border-white/15" /><div className="absolute bottom-0 left-0 right-0 h-2/3 bg-[radial-gradient(circle_at_70%_70%,rgba(61,211,176,.5),transparent_43%),radial-gradient(circle_at_30%_50%,rgba(87,184,255,.35),transparent_35%)]" /><div className="relative"><div className="flex items-center justify-between"><span className="rounded-full border border-white/20 px-3 py-1 text-xs">Sistem activ</span><Sparkles className="text-mint" /></div><p className="mt-24 text-sm text-white/60">Casa Pădurii · Cluj-Napoca</p><p className="mt-2 text-3xl font-semibold">Totul, în echilibru.</p><div className="mt-10 grid grid-cols-3 gap-3"><div className="rounded-2xl bg-white/10 p-4"><Zap className="size-5 text-mint" /><p className="mt-5 text-sm">Energie</p><b>62%</b></div><div className="rounded-2xl bg-white/10 p-4"><Home className="size-5 text-electric" /><p className="mt-5 text-sm">Confort</p><b>24.0°</b></div><div className="rounded-2xl bg-white/10 p-4"><ShieldCheck className="size-5 text-mint" /><p className="mt-5 text-sm">Siguranță</p><b>Protejat</b></div></div></div></div></div></section>
+  <section id="solutii" className="section"><p className="eyebrow">Sisteme complete</p><div className="mt-4 flex flex-wrap items-end justify-between gap-5"><h2 className="max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">Tehnologia ar trebui să dispară în experiență.</h2><a className="text-sm font-semibold text-slate hover:text-ink" href="#proces">Cum lucrăm <ChevronRight className="inline size-4" /></a></div><div className="mt-12 grid gap-5 md:grid-cols-3">{solutions.map(({ icon: Icon, title, text }) => <article key={title} className="panel group min-h-64 transition hover:-translate-y-1"><Icon className="size-7 text-emerald-600" /><h3 className="mt-12 text-2xl font-semibold">{title}</h3><p className="mt-3 leading-7 text-slate">{text}</p><ArrowUpRight className="mt-6 size-5 text-slate transition group-hover:text-ink" /></article>)}</div></section>
+  <section className="bg-ink text-white"><div className="section grid gap-12 lg:grid-cols-2"><div><p className="eyebrow text-mint">KNX, fără compromisuri</p><h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">Infrastructura invizibilă a unei clădiri excepționale.</h2><p className="mt-6 max-w-xl leading-8 text-white/65">KNX conectează luminile, climatul, umbrirea, accesul și energia într-un sistem deschis, robust și pregătit pentru decenii.</p></div><div className="grid gap-4 sm:grid-cols-2">{[[LockKeyhole,"Securitate by design"],[BatteryCharging,"Energie măsurabilă"],[Leaf,"Confort eficient"],[Zap,"Control instant"]].map(([Icon,title]) => { const Glyph=Icon as typeof Zap; return <div key={title as string} className="rounded-2xl border border-white/10 p-6"><Glyph className="text-mint" /><p className="mt-10 font-semibold">{title as string}</p></div>; })}</div></div></section>
+  <section id="proces" className="section"><p className="eyebrow">De la idee la liniște</p><h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">Un proces clar. O singură responsabilitate.</h2><ol className="mt-12 grid gap-5 md:grid-cols-4">{["Descoperim", "Proiectăm", "Implementăm", "Menținem"].map((step,i)=><li key={step} className="border-t border-ink pt-5"><span className="text-sm text-slate">0{i+1}</span><p className="mt-8 text-xl font-semibold">{step}</p><p className="mt-2 text-sm leading-6 text-slate">Decizii documentate și o echipă care rămâne aproape.</p></li>)}</ol></section>
+  <section className="section pt-8"><div className="flex items-end justify-between"><div><p className="eyebrow">Proiecte demonstrative</p><h2 className="mt-4 text-4xl font-semibold tracking-tight">Construit pentru viața reală.</h2></div><a className="hidden text-sm font-semibold md:block" href="#">Vezi toate proiectele</a></div><div className="mt-10 grid gap-5 md:grid-cols-3">{projects.map((project,i)=><article key={project.title} className="overflow-hidden rounded-2xl bg-white shadow-panel"><div className={`h-52 ${i===0?"bg-emerald-950":i===1?"bg-sky-950":"bg-stone-800"} p-5 text-white`}><span className="rounded-full bg-white/15 px-3 py-1 text-xs">{project.tag}</span></div><div className="p-6"><h3 className="text-xl font-semibold">{project.title}</h3><p className="mt-2 text-sm text-slate">{project.place}</p></div></article>)}</div></section>
+  <section className="section"><div className="rounded-[2rem] bg-emerald-700 px-7 py-16 text-center text-white sm:px-16"><p className="text-sm font-semibold uppercase tracking-[.18em] text-emerald-100">Începe cu o conversație</p><h2 className="mx-auto mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">Casa sau clădirea ta poate lucra mai inteligent.</h2><Link className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-emerald-800" href="/login">Solicită o analiză <ArrowUpRight className="ml-2 size-4" /></Link></div></section>
+</main>; }

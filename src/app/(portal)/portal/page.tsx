@@ -1,11 +1,4 @@
+import { Bell, CalendarDays, FileText, Wrench } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 
-export default async function PortalPage() {
-  const user = await requireUser();
-  return (
-    <main className="space-y-6">
-      <section className="panel"><p className="eyebrow">Portal client</p><h1 className="mt-2 text-3xl font-semibold">Bun venit, {user.name}</h1><p className="mt-3 text-slate">Fundația MVP confirmă accesul tău izolat pe organizație.</p></section>
-      <section className="panel"><h2 className="text-lg font-semibold">Organizațiile mele</h2><ul className="mt-4 space-y-2">{user.memberships.map((membership) => <li key={membership.organizationId} className="rounded-lg bg-cloud px-4 py-3"><span className="font-medium">{membership.organizationName}</span><span className="ml-2 text-sm text-slate">{membership.role}</span></li>)}</ul></section>
-    </main>
-  );
-}
+export default async function PortalPage() { const user = await requireUser(); return <main className="space-y-6"><section className="rounded-2xl bg-ink p-7 text-white"><p className="text-sm text-white/60">Proiect activ</p><h1 className="mt-2 text-3xl font-semibold">Casa Pădurii</h1><p className="mt-2 text-white/70">Proiectare tehnică · Cluj-Napoca</p><div className="mt-7 h-2 overflow-hidden rounded-full bg-white/15"><div className="h-full w-[58%] rounded-full bg-mint" /></div><p className="mt-2 text-sm text-white/60">58% finalizat · următoarea etapă: instalare</p></section><section className="grid gap-4 md:grid-cols-4">{[[FileText,"Ofertă", "Revizia 03"],[CalendarDays,"Programare", "12 august"],[Wrench,"Mentenanță", "Activă"],[Bell,"Notificări", "2 noi"]].map(([Icon,label,value])=>{const Glyph=Icon as typeof Bell;return <div key={label as string} className="panel"><Glyph className="size-5 text-electric"/><p className="mt-6 text-sm text-slate">{label as string}</p><p className="mt-1 font-semibold">{value as string}</p></div>})}</section><section className="panel"><p className="eyebrow">Organizațiile mele</p><h2 className="mt-2 text-xl font-semibold">Bun venit, {user.name}</h2><div className="mt-5 grid gap-3">{user.memberships.map(m=><div key={m.organizationId} className="flex items-center justify-between rounded-xl bg-cloud px-4 py-3"><span className="font-medium">{m.organizationName}</span><span className="text-sm text-slate">{m.role}</span></div>)}</div></section></main>; }
