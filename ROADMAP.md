@@ -6,6 +6,7 @@
 - [x] arhitectură modulară şi model de date
 - [x] structură iniţială repository
 - [x] fundament Vercel + Supabase: Auth SSR, RLS, Prisma, RBAC, layout, seed şi controale de calitate
+- [ ] validare infrastructură Supabase/Vercel cu URL-uri PostgreSQL reale, migrații aplicate și E2E live
 
 ## MVP
 

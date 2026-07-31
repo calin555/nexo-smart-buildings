@@ -10,3 +10,4 @@ test-results/
 uploads/
 prisma/*.db
 playwright/.cache/
+.vercel/

@@ -14,6 +14,8 @@ Fundația MVP pentru deployment exclusiv pe Vercel + Supabase. Include Next.js A
 
 Utilizatorii și resetarea parolei sunt create exclusiv în Supabase Auth. După creare, trigger-ul SQL creează profilul; un administrator atribuie membership-ul/rolul potrivit.
 
+Pentru conturi de test, creați utilizatori în Supabase Auth (fără parole în seed), confirmați e-mailurile într-un mediu de test, verificați apariția profilurilor, apoi creați membership-uri în cele două organizații separate. Puneți adresele/parolele testelor doar în variabile E2E locale/CI, niciodată în Git. Pașii compleți Vercel sunt în [docs/VERCEL_DEPLOYMENT.md](docs/VERCEL_DEPLOYMENT.md).
+
 ## Vercel
 
 Importați repository-ul GitHub în Vercel. Configurați în mediile Development, Preview și Production: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `DIRECT_URL`. Cheia service role nu se expune în browser. Build command: `npm run build`; `postinstall` rulează `prisma generate`.
