@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ProfileStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+}
+
+enum OrganizationType {
+  INDIVIDUAL
+  COMPANY
+  DEVELOPER
+  INTERNAL
+}
+
+enum ConsentType {
+  TERMS
+  PRIVACY
+  MARKETING
+  COOKIES
+}
+
+enum DataRequestType {
+  EXPORT
+  ERASURE
+}
+
+enum DataRequestStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  REJECTED
+}
+
+model Profile {
+  id           String        @id @db.Uuid
+  email        String        @unique
+  name         String
+  status       ProfileStatus @default(ACTIVE)
+  memberships  Membership[]
+  consents     Consent[]
+  auditLogs    AuditLog[]    @relation("AuditActor")
+  dataRequests DataRequest[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@map("profiles")
+}
+
+model Organization {
+  id          String           @id @default(uuid()) @db.Uuid
+  type        OrganizationType
+  legalName   String           @unique
+  cui         String?          @unique
+  billingData Json?
+  memberships Membership[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("organizations")
+}
+
+model Role {
+  code        String       @id
+  label       String
+  scope       String
+  memberships Membership[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("roles")
+}
+
+model Membership {
+  id             String       @id @default(uuid()) @db.Uuid
+  profileId      String       @db.Uuid
+  organizationId String       @db.Uuid
+  roleCode       String
+  profile        Profile      @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           Role         @relation(fields: [roleCode], references: [code])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([profileId, organizationId])
+  @@index([profileId])
+  @@index([organizationId])
+  @@map("memberships")
+}
+
+model Consent {
+  id         String      @id @default(uuid()) @db.Uuid
+  profileId  String      @db.Uuid
+  type       ConsentType
+  granted    Boolean
+  source     String
+  capturedAt DateTime    @default(now())
+  profile    Profile     @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId, type])
+  @@map("consents")
+}
+
+model DataRequest {
+  id          String            @id @default(uuid()) @db.Uuid
+  profileId   String            @db.Uuid
+  type        DataRequestType
+  status      DataRequestStatus @default(PENDING)
+  requestedAt DateTime          @default(now())
+  completedAt DateTime?
+  profile     Profile           @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("data_requests")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorId    String?  @db.Uuid
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  actor      Profile? @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

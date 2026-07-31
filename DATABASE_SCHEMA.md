@@ -2,80 +2,44 @@
 
 ## Convenţii
 
-- PostgreSQL; toate cheile folosesc UUID, iar tabelele au `createdAt`/`updatedAt` când este relevant.
-- sumele sunt `integer` în bani; procentele sunt `decimal`; moneda este cod ISO 4217.
-- câmpurile flexibile au JSON validat la limita aplicaţiei, nu în UI.
-- documentele fizice sunt în storage; baza de date păstrează metadate, versiuni şi permisiuni.
+- Supabase PostgreSQL; UUID pentru identităţi şi `createdAt`/`updatedAt` unde este relevant.
+- Sumele viitoare se păstrează în bani (`integer`), procentele `decimal`, iar datele flexibile JSON validate la limita aplicaţiei.
+- Documentele fizice nu sunt în PostgreSQL şi nici pe disk Vercel; Storage păstrează binarul, baza de date păstrează metadatele/permisiunile.
 
 ## Identitate şi GDPR
 
 | Entitate | Câmpuri esenţiale | Relaţii |
 | --- | --- | --- |
-| `User` | id, email, passwordHash, name, status | memberships, sessions, consents |
-| `Organization` | id, type, legalName, cui, billingData | memberships, projects |
-| `Membership` | userId, organizationId, role | rol per organizaţie |
-| `Session` | userId, tokenHash, expiresAt | autentificare |
-| `Consent` | userId, type, granted, capturedAt, source | consimţăminte GDPR |
-| `DataRequest` | userId, type, status, requestedAt | export/ştergere |
-| `AuditLog` | actorId, action, entityType, entityId, metadata | jurnal de acţiuni |
+| `auth.users` | gestionat de Supabase Auth | parole şi sesiuni; neadministrat de Prisma |
+| `profiles` | id UUID FK `auth.users.id`, email, name, status | memberships, consents |
+| `organizations` | id UUID, type, legalName, cui, billingData | memberships, proiecte |
+| `memberships` | profileId, organizationId, role | rol pe organizaţie |
+| `roles` | code, label, scope | catalog extensibil roluri |
+| `consents` | profileId, type, granted, source, capturedAt | consimţământ GDPR |
+| `data_requests` | profileId, type, status, requestedAt | export/ştergere |
+| `audit_logs` | actorId, action, entityType, entityId, metadata | jurnal de acţiuni |
 
-## Catalog şi compatibilităţi
+Prisma modelează profilele şi business data. Foreign key-ul către `auth.users` şi trigger-ul de creare profil sunt SQL Supabase versionat, deoarece `auth` este un schema extern Prisma.
 
-| Entitate | Câmpuri esenţiale | Relaţii |
-| --- | --- | --- |
-| `Manufacturer` | name, slug, website | products |
-| `Category` | name, slug, parentId | products, arbore categorii |
-| `Product` | sku, name, status, priceNet, vatRate, stock, deliveryDays | manufacturer, categories, attributes |
-| `ProductAttributeDefinition` | code, label, dataType, unit, filterable | attribute values |
-| `ProductAttributeValue` | productId, definitionId, valueJson | atribute extensibile |
-| `ProductDocument` | productId, type, documentId | fişă, manual |
-| `ProductRelation` | sourceProductId, targetProductId, relationType, validationStatus, note | graf de compatibilitate |
-| `Package` / `PackageItem` | segment, name, pricing | pachete demo/comerciale |
+## Extensii business prevăzute
 
-`relationType`: `COMPATIBLE`, `INCOMPATIBLE`, `REQUIRES_GATEWAY`, `REQUIRES_POWER_SUPPLY`, `REQUIRES_LICENSE`, `REQUIRES_PROGRAMMING`, `RECOMMENDED_WITH`, `REPLACEMENT`, `ACCESSORY`. `validationStatus`: `DRAFT`, `VALIDATED`, `UNVERIFIED`, `RETIRED`.
+| Arie | Entităţi planificate |
+| --- | --- |
+| Catalog | manufacturers, categories, products, product_attributes, product_relations |
+| Configurare | configurator_sessions, answers, pricing_rules, estimates |
+| Proiecte | projects, project_participants, project_documents, status_history, plan_elements |
+| Oferte | offers, offer_versions, offer_lines |
+| Portal | messages, service_requests, orders |
 
-## Configuratoare şi preţuri
+## Indecşi şi constrângeri
 
-| Entitate | Câmpuri esenţiale | Relaţii |
-| --- | --- | --- |
-| `ConfiguratorSession` | type, status, ownerId, organizationId, currentStep, answersJson | project, estimate |
-| `ConfiguratorAnswer` | sessionId, key, valueJson, step | auditabilitate/răspunsuri |
-| `PricingRule` | code, scope, applicationType, conditionsJson, activeFrom, activeTo, status | versions |
-| `PricingRuleVersion` | ruleId, version, parametersJson, approvedBy | reguli istorice |
-| `Estimate` | sessionId, currency, lowTotal, highTotal, disclaimerVersion | lines |
-| `EstimateLine` | estimateId, category, lowAmount, highAmount, explanation | regulă sursă |
+- `profiles.id` este UUID şi FK către `auth.users(id)`; `profiles.email` este unic;
+- `memberships(profileId, organizationId)` este unic;
+- indecşi pe `memberships.profileId`, `memberships.organizationId`, `audit_logs.actorId` şi `audit_logs.createdAt`;
+- serviciile server-side filtrează organizaţia înainte de returnarea datelor.
 
-`PricingRule` suportă preţ fix, pe unitate/cameră/circuit/apartament, coeficient, interval, minim, rezervă, montaj şi programare. Rezultatele salvează versiunea regulii pentru reproductibilitate.
+## RLS şi Storage
 
-## Proiecte şi documente
+RLS este activ pentru `profiles`, `organizations`, `memberships`, `projects`, `project_participants`, `project_documents`, `configurator_sessions`, `estimates`, `offers` şi `messages`. Politicile verifică `auth.uid()` faţă de profil, membership sau participant proiect. Astfel un client nu poate citi ori modifica datele altui client prin apel direct API.
 
-| Entitate | Câmpuri esenţiale | Relaţii |
-| --- | --- | --- |
-| `Project` | code, name, type, status, organizationId, location | participants, timeline, documents |
-| `ProjectParticipant` | projectId, userId, role | acces la proiect |
-| `ProjectStatusHistory` | projectId, fromStatus, toStatus, actorId, note | timeline |
-| `Document` | storageKey, filename, mimeType, sizeBytes, checksum | versions/comments |
-| `ProjectDocument` | projectId, documentId, type, version, visibility | document asociat |
-| `DocumentComment` | projectDocumentId, authorId, body | colaborare |
-| `PlanElement` | projectId, planDocumentId, type, x, y, metadataJson | plan 2D MVP |
-
-Statusurile proiectului sunt cele furnizate în brief şi se aplică printr-o tranziţie validată, care creează mereu istoric.
-
-## Oferte, comenzi şi service
-
-| Entitate | Câmpuri esenţiale | Relaţii |
-| --- | --- | --- |
-| `Offer` | projectId, number, status, validUntil, currency | versions |
-| `OfferVersion` | offerId, version, totals, notes, pdfDocumentId | lines |
-| `OfferLine` | versionId, type, description, quantity, unitPrice, vatRate, discount | produs/serviciu |
-| `Order` | projectId, status, totals | order lines, payment records |
-| `ServiceRequest` | projectId, status, priority, description | istoric |
-| `Message` | projectId, authorId, body, visibility | comunicare portal |
-
-## Indecşi şi constrângeri critice
-
-- `User.email`, `Product.sku`, `Project.code`, `Offer.number` unice;
-- indecşi pe `Project.organizationId`, `ProjectParticipant.userId`, `Document.storageKey`, `ProductRelation.sourceProductId`, `ConfiguratorSession.ownerId`;
-- constrângere unică pentru relaţia produs-sursă/ţintă/tip;
-- toate interogările portalului filtrează organizaţia şi/sau participarea înainte de returnare;
-- ştergerea documentelor este soft-delete până la expirarea retenţiei configurate.
+Bucket-urile `project-documents`, `product-documents`, `offer-pdfs` şi `project-images` sunt private. Politicile Storage urmează participaţia proiectului/organizaţiei, iar aplicaţia emite doar signed URLs cu expirare.

@@ -2,17 +2,18 @@
 
 ## Stil arhitectural
 
-Aplicaţia este un **monolit modular** construit cu Next.js App Router şi TypeScript strict. Limitele de domeniu sunt păstrate în `src/modules`; rutele, paginile şi componentele UI nu accesează Prisma direct. Acestea apelează servicii de domeniu, care aplică autorizarea, validarea şi auditul.
+Aplicaţia este un **monolit modular** construit cu Next.js App Router şi TypeScript strict, deployat pe Vercel. Supabase furnizează Auth, Postgres, Storage şi RLS; Prisma acoperă datele de business complexe.
 
 ```mermaid
 flowchart LR
   Browser["Browser / mobil"] --> Web["Next.js App Router"]
-  Web --> Auth["Auth + RBAC"]
+  Web --> Auth["Supabase Auth SSR + RBAC"]
   Web --> Domain["Module de domeniu"]
   Domain --> Prisma["Prisma ORM"]
   Prisma --> PG["PostgreSQL"]
-  Domain --> Storage["Storage adapter"]
-  Storage --> S3["S3 / MinIO"]
+  Auth --> Supabase["Supabase Auth + RLS"]
+  Domain --> Storage["Supabase Storage"]
+  Storage --> S3["Private buckets + signed URLs"]
   Domain --> Adapters["Adaptori externi"]
   Adapters --> Future["CAD, e-mail, plăţi, ERP (V2+)"]
 ```
@@ -24,7 +25,7 @@ flowchart LR
 | `src/app` | rute App Router, metadata, layout, Route Handlers şi pagini subţiri |
 | `src/modules` | cazuri de utilizare, politici, scheme Zod, repository-uri şi tipuri de domeniu |
 | `src/components` | design system şi componente de prezentare accesibile |
-| `src/lib` | infrastructură transversală: Prisma, autentificare, RBAC, audit, i18n, rate limit |
+| `src/lib` | infrastructură transversală: Prisma, Supabase SSR, RBAC, audit, i18n, rate limit |
 | `src/adapters` | porturi pentru S3, CAD, PDF, e-mail şi alte integrări |
 | `prisma` | schema, migraţii şi seed controlat |
 
@@ -42,7 +43,9 @@ flowchart LR
 
 ## Autorizare şi izolare
 
-Rolurile sunt `VISITOR`, `INDIVIDUAL_CLIENT`, `COMPANY_CLIENT`, `DEVELOPER`, `DESIGNER`, `INSTALLER`, `SALES_AGENT`, `ADMIN`, `SUPER_ADMIN`. Politicile server-side verifică utilizatorul autentificat, organizaţia activă şi permisiunea pentru fiecare citire/mutaţie. Clientul poate accesa exclusiv proiectele în care are calitatea de participant sau care aparţin organizaţiei sale.
+Supabase Auth gestionează `auth.users`, parolele şi sesiunile; aplicaţia nu stochează parole sau token-uri. `profiles.id` referă UUID-ul `auth.users.id`, iar clienţii browser/server folosesc `@supabase/ssr`. Service role este strict server-side.
+
+RLS previne accesul direct neautorizat prin API-ul Supabase, iar politicile server-side verifică suplimentar rolul şi organizaţia pentru fiecare citire/mutaţie.
 
 Administratorul gestionează date operaţionale; super-administratorul gestionează roluri globale şi configurare de sistem. Toate mutaţiile administrative relevante creează `AuditLog`.
 
@@ -60,7 +63,8 @@ Compatibilităţile sunt muchii direcţionate între produse, cu tip şi stare d
 
 - erori structurare server-side şi corelation ID, fără date personale în loguri;
 - rate limiting pentru formulare publice şi upload;
-- parole hash-uite, cookie-uri `HttpOnly`/`Secure` şi verificare CSRF pentru mutaţii bazate pe cookie;
+- Supabase Auth SSR şi verificarea identităţii server-side;
+- RLS SQL pentru profiluri, organizaţii, proiecte şi datele portalului;
 - politici de retenţie configurabile, export şi cerere de ştergere a datelor;
 - variabile de mediu validate la pornire.
 
@@ -82,3 +86,7 @@ Compatibilităţile sunt muchii direcţionate între produse, cu tip şi stare d
 ├── docker/                  # config local (ex. MinIO)
 └── scripts/                 # seed şi operaţii de mentenanţă
 ```
+
+## Deploy şi migraţii
+
+GitHub este sursa de deploy automat Vercel. `DATABASE_URL` este pooled pentru runtime, `DIRECT_URL` este direct pentru migraţii, iar `postinstall` generează Prisma Client. Nu se foloseşte `prisma db push` în producţie şi nu se presupune un filesystem persistent.
