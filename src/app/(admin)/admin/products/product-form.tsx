@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 import type { ProductActionState } from "@/app/(admin)/admin/products/actions";
+import { ProductImageUpload } from "@/app/(admin)/admin/products/product-image-upload";
 import { productCategories } from "@/modules/products/categories";
 import { productIllustrations } from "@/modules/products/schema";
 
@@ -34,21 +35,25 @@ function FieldError({ messages }: Readonly<{ messages?: string[] }>) {
   return <p className="mt-1 text-xs text-red-700">{messages[0]}</p>;
 }
 
-function SubmitButton({ label }: Readonly<{ label: string }>) {
+function SubmitButton({
+  label,
+  imageUploading,
+}: Readonly<{ label: string; imageUploading: boolean }>) {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
-      disabled={pending}
+      disabled={pending || imageUploading}
       className="button-primary disabled:cursor-not-allowed disabled:opacity-60"
     >
-      {pending ? "Se salvează…" : label}
+      {imageUploading ? "Așteaptă încărcarea imaginii…" : pending ? "Se salvează…" : label}
     </button>
   );
 }
 
 export function ProductForm({ action, defaults, submitLabel }: Readonly<ProductFormProps>) {
   const [state, formAction] = useActionState(action, {});
+  const [imageUploading, setImageUploading] = useState(false);
 
   return (
     <form action={formAction} className="panel space-y-6">
@@ -156,18 +161,13 @@ export function ProductForm({ action, defaults, submitLabel }: Readonly<ProductF
           </select>
           <FieldError messages={state.errors?.illustration} />
         </label>
-        <label className="text-sm font-medium">
-          URL imagine (opțional)
-          <input
-            name="imageUrl"
-            type="url"
-            maxLength={500}
-            defaultValue={defaults?.imageUrl}
-            className={fieldClass}
-            placeholder="https://…"
+        <div className="md:col-span-2">
+          <ProductImageUpload
+            defaultUrl={defaults?.imageUrl}
+            onUploadingChange={setImageUploading}
           />
           <FieldError messages={state.errors?.imageUrl} />
-        </label>
+        </div>
       </div>
       <label className="block text-sm font-medium">
         Descriere scurtă
@@ -190,7 +190,7 @@ export function ProductForm({ action, defaults, submitLabel }: Readonly<ProductF
         Produs vizibil pe site
       </label>
       <div className="flex justify-end">
-        <SubmitButton label={submitLabel} />
+        <SubmitButton label={submitLabel} imageUploading={imageUploading} />
       </div>
     </form>
   );

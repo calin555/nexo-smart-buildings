@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { productFormSchema } from "../../src/modules/products/schema";
+import { validateProductImageMetadata } from "../../src/modules/products/image";
 
 const validProduct = {
   name: "Senzor smart de temperatură",
@@ -37,5 +38,17 @@ describe("productFormSchema", () => {
       category: "Categorie inventată",
     });
     expect(result.success).toBe(false);
+  });
+});
+
+describe("product image validation", () => {
+  it("acceptă JPG, PNG și WebP de maximum 4 MB", () => {
+    expect(validateProductImageMetadata({ type: "image/jpeg", size: 1_000_000 })).toBeNull();
+    expect(validateProductImageMetadata({ type: "image/webp", size: 4_000_000 })).toBeNull();
+  });
+
+  it("respinge tipurile nesigure și fișierele prea mari", () => {
+    expect(validateProductImageMetadata({ type: "image/svg+xml", size: 1000 })).toContain("JPG");
+    expect(validateProductImageMetadata({ type: "image/png", size: 4_000_001 })).toContain("4 MB");
   });
 });

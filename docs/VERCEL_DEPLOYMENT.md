@@ -29,11 +29,12 @@ Reveniți în Vercel la ultimul deployment sănătos. Migrațiile SQL/Prisma sun
 
 ## Matrice de acces
 
-| Operație | Mecanism |
-| --- | --- |
-| Login/logout/reset/callback | Supabase SSR client cu sesiunea utilizatorului |
-| Portal client | Supabase session + RLS, apoi RBAC server-side |
-| Business server-side | Prisma numai după verificare RBAC; nu se expune browserului |
-| Administrare excepțională | service role server-side, cu audit obligatoriu |
+| Operație                    | Mecanism                                                         |
+| --------------------------- | ---------------------------------------------------------------- |
+| Login/logout/reset/callback | Supabase SSR client cu sesiunea utilizatorului                   |
+| Portal client               | Supabase session + RLS, apoi RBAC server-side                    |
+| Business server-side        | Prisma numai după verificare RBAC; nu se expune browserului      |
+| Upload imagini catalog      | API admin cu RBAC, service role server-side și audit obligatoriu |
+| Administrare excepțională   | service role server-side, cu audit obligatoriu                   |
 
-În fundația curentă service role nu este apelată. Orice utilizare viitoare necesită caz de utilizare explicit, audit și test de autorizare.
+Service role este apelată numai de endpointul administrativ pentru uploadul imaginilor de catalog în bucket-ul public `product-images`. Endpointul verifică sesiunea și rolul de admin server-side, aplică rate limiting și scrie `PRODUCT_IMAGE_UPLOADED` în audit log. Cheia nu ajunge în bundle-ul client.
