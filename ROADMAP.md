@@ -20,7 +20,7 @@
 ## Configurator pe plan
 
 - [x] **Etapa 1 — MVP manual (31.07.2026):** proiecte, documente PDF/JPG/PNG private, viewer PDF.js/imagine, pagini, desenare și editare poligoane normalizate, proprietăți camere, funcții smart, confirmare, sumar live, RLS/RBAC și teste inter-organizații.
-- [ ] **Etapa 2 — analiză asistată:** implementarea unui provider de analiză, coadă asincronă, detectarea camerelor și geometriei, scoruri de încredere și fluxuri de corectare. Contractele și modelele de job sunt pregătite; nu există încă integrare AI.
+- [x] **Etapa 2 — analiză asistată (31.07.2026):** provider modular, procesare asincronă cu job persistent, validarea fișierului înainte de procesare, detecții structurate, camere și geometrii normalizate, scoruri de încredere, progres/retry, confirmare/corectare, fallback manual și teste inter-organizații.
 - [ ] **Etape ulterioare:** recomandări de produse, calcul financiar și ofertare, numai după validarea separată a regulilor comerciale.
 
 ## Versiunea 2

@@ -8,9 +8,11 @@
 
 ## Variabile de mediu
 
-Configurați aceleași nume în Development, Preview și Production: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `DIRECT_URL`.
+Configurați aceleași nume în Development, Preview și Production: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `DIRECT_URL`, `OPENAI_API_KEY`, `PLAN_ANALYSIS_MODEL`.
 
 `DATABASE_URL` este URL-ul pooled Supabase (port 6543, `pgbouncer=true`) folosit numai în runtime. `DIRECT_URL` este URL-ul direct (port 5432) folosit de Prisma migrate. Cheia service role este numai server-side, nu începe cu `NEXT_PUBLIC_` și nu este folosită de codul browser.
+
+`OPENAI_API_KEY` este secret server-side folosit exclusiv pentru analiza vizuală a planurilor. `PLAN_ANALYSIS_MODEL` are implicit valoarea `gpt-5.6`. Nu adăugați prefixul `NEXT_PUBLIC_` niciuneia dintre aceste variabile și nu activați `E2E_PLAN_ANALYSIS_ENABLED` în Production. Fără cheia OpenAI, aplicația se construiește și configuratorul manual funcționează, dar butonul de analiză automată raportează că providerul nu este configurat.
 
 Pentru Preview, `NEXT_PUBLIC_SITE_URL` este URL-ul preview Vercel; pentru Production este domeniul final HTTPS. În Supabase Auth → URL Configuration adăugați ambele valori ca Redirect URLs, inclusiv `/auth/callback`.
 
@@ -35,6 +37,7 @@ Reveniți în Vercel la ultimul deployment sănătos. Migrațiile SQL/Prisma sun
 | Portal client               | Supabase session + RLS, apoi RBAC server-side                    |
 | Business server-side        | Prisma numai după verificare RBAC; nu se expune browserului      |
 | Upload imagini catalog      | API admin cu RBAC, service role server-side și audit obligatoriu |
+| Analiză plan                | Signed URL cu sesiunea utilizatorului + provider AI server-side  |
 | Administrare excepțională   | service role server-side, cu audit obligatoriu                   |
 
 Service role este apelată numai de endpointul administrativ pentru uploadul imaginilor de catalog în bucket-ul public `product-images`. Endpointul verifică sesiunea și rolul de admin server-side, aplică rate limiting și scrie `PRODUCT_IMAGE_UPLOADED` în audit log. Cheia nu ajunge în bundle-ul client.

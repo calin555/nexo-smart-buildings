@@ -135,7 +135,13 @@ test("clientul A încarcă planul, desenează și confirmă o cameră", async ({
   await page.getByLabel("Suprafață m²").fill("24.5");
   await page.getByLabel("Nivel").fill("Parter");
   await page.getByLabel("On/Off", { exact: true }).check();
+  const confirmationPromise = page.waitForResponse(
+    (response) =>
+      response.url().includes(`/api/portal/projects/${projectId}/rooms/`) &&
+      response.request().method() === "PATCH",
+  );
   await page.getByRole("button", { name: "Confirmă camera" }).click();
+  expect((await confirmationPromise).status()).toBe(200);
 
   await expect(page.getByTestId("summary-camere")).toContainText("1");
   await expect(page.getByTestId("summary-confirmate")).toContainText("1");

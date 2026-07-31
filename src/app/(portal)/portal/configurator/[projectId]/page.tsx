@@ -9,7 +9,8 @@ import { prisma } from "@/lib/prisma";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { requireProjectAccess } from "@/modules/configurator/access";
 import { normalizedPolygonSchema } from "@/modules/configurator/schema";
-import type { EditorRoom } from "@/modules/configurator/types";
+import type { EditorAnalysisState, EditorRoom } from "@/modules/configurator/types";
+import { isPlanAnalysisConfigured } from "@/modules/plan-analysis/registry";
 
 export default async function ConfiguratorProjectPage({
   params,
@@ -32,6 +33,16 @@ export default async function ConfiguratorProjectPage({
 
   let signedUrl: string | null = null;
   let rooms: EditorRoom[] = [];
+  let analysisState: EditorAnalysisState = {
+    configured: isPlanAnalysisConfigured(),
+    jobId: null,
+    status: null,
+    progress: 0,
+    roomsDetected: 0,
+    errorCode: null,
+    errorMessage: null,
+    issueCount: 0,
+  };
   if (selectedDocument) {
     const supabase = await createServerSupabaseClient();
     const { data } = await supabase.storage
@@ -39,18 +50,25 @@ export default async function ConfiguratorProjectPage({
       .createSignedUrl(selectedDocument.storagePath, 60 * 60);
     signedUrl = data?.signedUrl ?? null;
 
-    const databaseRooms = await prisma.projectRoom.findMany({
-      where: {
-        projectId: project.id,
-        organizationId: project.organizationId,
-        documentPage: { documentId: selectedDocument.id },
-      },
-      include: {
-        geometries: { orderBy: { version: "desc" }, take: 1 },
-        features: true,
-      },
-      orderBy: { createdAt: "asc" },
-    });
+    const [databaseRooms, latestJob] = await Promise.all([
+      prisma.projectRoom.findMany({
+        where: {
+          projectId: project.id,
+          organizationId: project.organizationId,
+          documentPage: { documentId: selectedDocument.id },
+        },
+        include: {
+          geometries: { orderBy: { version: "desc" }, take: 1 },
+          features: true,
+        },
+        orderBy: { createdAt: "asc" },
+      }),
+      prisma.analysisJob.findFirst({
+        where: { documentId: selectedDocument.id },
+        include: { _count: { select: { issues: true } } },
+        orderBy: { createdAt: "desc" },
+      }),
+    ]);
     rooms = databaseRooms.flatMap((room) => {
       const polygon = normalizedPolygonSchema.safeParse(room.geometries[0]?.normalizedPoints);
       if (!polygon.success) return [];
@@ -65,6 +83,7 @@ export default async function ConfiguratorProjectPage({
           notes: room.notes,
           confidence: room.confidence,
           detectionStatus: room.detectionStatus,
+          source: room.source,
           isConfirmed: room.isConfirmed,
           polygon: polygon.data,
           features: room.features.map((feature) => ({
@@ -76,6 +95,16 @@ export default async function ConfiguratorProjectPage({
         },
       ];
     });
+    analysisState = {
+      configured: isPlanAnalysisConfigured(),
+      jobId: latestJob?.id ?? null,
+      status: latestJob?.status ?? null,
+      progress: latestJob?.progress ?? 0,
+      roomsDetected: databaseRooms.filter((room) => room.source === "AI").length,
+      errorCode: latestJob?.errorCode ?? null,
+      errorMessage: latestJob?.errorMessage ?? null,
+      issueCount: latestJob?._count.issues ?? 0,
+    };
   }
 
   return (
@@ -116,6 +145,7 @@ export default async function ConfiguratorProjectPage({
                 pageNumber: page.pageNumber,
               }))}
               initialRooms={rooms}
+              initialAnalysis={analysisState}
             />
           </div>
           <details className="mt-6 rounded-xl border border-slate/15 bg-white p-4">

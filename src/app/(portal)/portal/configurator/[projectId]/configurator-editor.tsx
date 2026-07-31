@@ -25,7 +25,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { featureCategories, featureDefinitions, roomTypes } from "@/modules/configurator/constants";
 import type { NormalizedPoint } from "@/modules/configurator/schema";
 import { calculateConfiguratorSummary } from "@/modules/configurator/summary";
-import type { EditorFeature, EditorPage, EditorRoom } from "@/modules/configurator/types";
+import type {
+  EditorAnalysisState,
+  EditorFeature,
+  EditorPage,
+  EditorRoom,
+} from "@/modules/configurator/types";
+import { confidenceLabel } from "@/modules/plan-analysis/confidence";
 
 type Tool = "SELECT" | "PAN" | "DRAW" | "EDIT";
 type DocumentRef = { id: string; name: string };
@@ -55,11 +61,17 @@ function readError(value: unknown): string {
   return "Operația nu a putut fi finalizată.";
 }
 
-function confidenceLabel(confidence: number | null): string {
-  if (confidence === null) return "Desenată manual";
-  if (confidence > 0.85) return "Încredere ridicată";
-  if (confidence >= 0.6) return "Verificare recomandată";
-  return "Necesită corectare";
+function isAnalysisState(value: unknown): value is EditorAnalysisState {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "configured" in value &&
+    typeof value.configured === "boolean" &&
+    "progress" in value &&
+    typeof value.progress === "number" &&
+    "roomsDetected" in value &&
+    typeof value.roomsDetected === "number"
+  );
 }
 
 function featureValue(features: EditorFeature[], code: string): EditorFeature | undefined {
@@ -72,12 +84,14 @@ export function ConfiguratorEditor({
   documents,
   initialPages,
   initialRooms,
+  initialAnalysis,
 }: Readonly<{
   projectId: string;
   document: EditorDocument;
   documents: DocumentRef[];
   initialPages: EditorPage[];
   initialRooms: EditorRoom[];
+  initialAnalysis: EditorAnalysisState;
 }>) {
   const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -96,6 +110,8 @@ export function ConfiguratorEditor({
   const [filter, setFilter] = useState("ALL");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  const [analysis, setAnalysis] = useState(initialAnalysis);
+  const analysisIsActive = analysis.status === "QUEUED" || analysis.status === "PROCESSING";
   const currentPage = pages.find((page) => page.pageNumber === pageNumber) ?? null;
   const selectedRoom = rooms.find((room) => room.id === selectedRoomId) ?? null;
   const pageRooms = rooms.filter((room) => room.documentPageId === currentPage?.id);
@@ -106,6 +122,51 @@ export function ConfiguratorEditor({
       (filter === "CONFIRMED" && room.isConfirmed),
   );
   const summary = useMemo(() => calculateConfiguratorSummary(rooms), [rooms]);
+
+  useEffect(() => {
+    setRooms(initialRooms);
+    setSelectedRoomId((current) =>
+      current && initialRooms.some((room) => room.id === current)
+        ? current
+        : (initialRooms[0]?.id ?? null),
+    );
+    setAnalysis(initialAnalysis);
+  }, [initialAnalysis, initialRooms]);
+
+  useEffect(() => {
+    if (!analysisIsActive) return;
+    let cancelled = false;
+    const poll = async (): Promise<void> => {
+      try {
+        const response = await fetch(
+          `/api/portal/projects/${projectId}/documents/${document.id}/analysis`,
+          { credentials: "include" },
+        );
+        const payload: unknown = await response.json();
+        if (!response.ok || !isAnalysisState(payload) || cancelled) return;
+        setAnalysis(payload);
+        if (["NEEDS_REVIEW", "COMPLETED"].includes(payload.status ?? "")) {
+          setMessage(
+            payload.roomsDetected > 0
+              ? `${payload.roomsDetected} camere detectate. Confirmă sau corectează rezultatele.`
+              : "Nu au fost detectate camere. Poți continua manual.",
+          );
+          router.refresh();
+        }
+        if (payload.status === "FAILED") {
+          setMessage(payload.errorMessage ?? "Analiza a eșuat. Poți relua jobul.");
+        }
+      } catch {
+        if (!cancelled) setMessage("Statusul analizei nu a putut fi actualizat.");
+      }
+    };
+    const timer = window.setInterval(() => void poll(), 1_500);
+    void poll();
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [analysisIsActive, document.id, projectId, router]);
 
   useEffect(() => {
     if (document.mimeType !== "application/pdf") {
@@ -186,11 +247,71 @@ export function ConfiguratorEditor({
     };
   }
 
-  function patchSelected(patch: Partial<EditorRoom>): void {
+  function patchSelected(patch: Partial<EditorRoom>, markDetectionModified = true): void {
     if (!selectedRoomId) return;
     setRooms((current) =>
-      current.map((room) => (room.id === selectedRoomId ? { ...room, ...patch } : room)),
+      current.map((room) => {
+        if (room.id !== selectedRoomId) return room;
+        const needsReview = markDetectionModified && room.source === "AI";
+        return {
+          ...room,
+          ...patch,
+          ...(needsReview ? { detectionStatus: "MODIFIED" as const, isConfirmed: false } : {}),
+        };
+      }),
     );
+  }
+
+  async function startAnalysis(): Promise<void> {
+    setBusy(true);
+    setMessage("");
+    try {
+      const response = await fetch(
+        `/api/portal/projects/${projectId}/documents/${document.id}/analysis`,
+        { method: "POST", credentials: "include" },
+      );
+      const payload: unknown = await response.json();
+      if (!response.ok) throw new Error(readError(payload));
+      if (
+        !isAnalysisState({
+          configured: true,
+          jobId:
+            typeof payload === "object" && payload !== null && "jobId" in payload
+              ? payload.jobId
+              : null,
+          status:
+            typeof payload === "object" && payload !== null && "status" in payload
+              ? payload.status
+              : null,
+          progress:
+            typeof payload === "object" && payload !== null && "progress" in payload
+              ? payload.progress
+              : 0,
+          roomsDetected: 0,
+          errorCode: null,
+          errorMessage: null,
+          issueCount: 0,
+        })
+      ) {
+        throw new Error("Jobul de analiză nu a putut fi pornit.");
+      }
+      setAnalysis((current) => ({
+        ...current,
+        jobId:
+          typeof payload === "object" && payload !== null && "jobId" in payload
+            ? String(payload.jobId)
+            : null,
+        status: "QUEUED",
+        progress: 0,
+        errorCode: null,
+        errorMessage: null,
+      }));
+      setMessage("Planul a intrat în coada de analiză.");
+    } catch (error: unknown) {
+      setMessage(error instanceof Error ? error.message : "Analiza nu a putut fi pornită.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function finishDrawing(): Promise<void> {
@@ -298,7 +419,7 @@ export function ConfiguratorEditor({
           feature.featureCode === definitionCode ? nextFeature : feature,
         )
       : [...selectedRoom.features, nextFeature];
-    patchSelected({ features });
+    patchSelected({ features }, false);
   }
 
   const summaryItems = [
@@ -388,12 +509,21 @@ export function ConfiguratorEditor({
           <span className="mx-1 h-6 w-px bg-slate/15" />
           <button
             type="button"
-            onClick={() =>
-              setMessage("Analiza automată este pregătită arhitectural pentru Etapa 2.")
+            onClick={() => void startAnalysis()}
+            disabled={
+              busy ||
+              analysisIsActive ||
+              analysis.status === "NEEDS_REVIEW" ||
+              analysis.status === "COMPLETED"
             }
-            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2 text-xs font-medium text-slate hover:bg-cloud hover:text-ink"
+            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-2 text-xs font-medium text-slate hover:bg-cloud hover:text-ink disabled:cursor-not-allowed disabled:opacity-45"
           >
-            <Sparkles className="size-4" /> Analizează planul
+            {analysisIsActive ? (
+              <LoaderCircle className="size-4 animate-spin" />
+            ) : (
+              <Sparkles className="size-4" />
+            )}
+            {analysis.status === "FAILED" ? "Reia analiza" : "Analizează planul"}
           </button>
           <button
             type="button"
@@ -419,6 +549,51 @@ export function ConfiguratorEditor({
           {busy && <LoaderCircle className="size-4 animate-spin text-emerald-700" />}
         </div>
       </div>
+
+      {(analysis.status || !analysis.configured) && (
+        <div className="border-b border-slate/15 bg-white px-4 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div>
+              <span className="font-semibold text-ink">
+                {analysisIsActive
+                  ? "Analizăm planul"
+                  : analysis.status === "NEEDS_REVIEW"
+                    ? "Necesită confirmare"
+                    : analysis.status === "COMPLETED"
+                      ? "Analiză confirmată"
+                      : analysis.status === "FAILED"
+                        ? "Analiza a eșuat"
+                        : !analysis.configured
+                          ? "Analiza automată nu este configurată"
+                          : "Pregătit pentru analiză"}
+              </span>
+              <span className="ml-2 text-slate">
+                {analysis.roomsDetected} camere detectate
+                {analysis.issueCount > 0 ? ` · ${analysis.issueCount} atenționări` : ""}
+              </span>
+            </div>
+            {analysisIsActive && (
+              <span className="font-medium text-emerald-700">{analysis.progress}%</span>
+            )}
+          </div>
+          {analysisIsActive && (
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-cloud">
+              <div
+                className="h-full rounded-full bg-emerald-600 transition-[width] duration-300"
+                style={{ width: `${analysis.progress}%` }}
+              />
+            </div>
+          )}
+          {!analysis.configured && (
+            <p className="mt-1 text-[11px] text-slate">
+              Configurează cheia server-side pentru detecție sau continuă prin desenare manuală.
+            </p>
+          )}
+          {analysis.errorMessage && (
+            <p className="mt-1 text-[11px] font-medium text-red-700">{analysis.errorMessage}</p>
+          )}
+        </div>
+      )}
 
       <div className="grid min-h-[42rem] xl:grid-cols-[14rem_minmax(0,1fr)_20rem]">
         <aside className="border-r border-slate/15 bg-white p-3">
@@ -593,6 +768,27 @@ export function ConfiguratorEditor({
                         >
                           {room.name}
                         </text>
+                        {room.confidence !== null && (
+                          <text
+                            x={
+                              (room.polygon.reduce((sum, point) => sum + point.x, 0) /
+                                room.polygon.length) *
+                              1000
+                            }
+                            y={
+                              (room.polygon.reduce((sum, point) => sum + point.y, 0) /
+                                room.polygon.length) *
+                                1000 +
+                              34
+                            }
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            className="fill-slate-700 pointer-events-none stroke-white/80 text-[18px] font-medium [paint-order:stroke] [stroke-width:5px]"
+                          >
+                            {room.area !== null ? `${room.area} m² · ` : ""}
+                            {Math.round(room.confidence * 100)}%
+                          </text>
+                        )}
                         {selected &&
                           tool === "EDIT" &&
                           room.polygon.map((point, index) => (
@@ -674,6 +870,9 @@ export function ConfiguratorEditor({
                   </p>
                   <p className="mt-1 text-xs text-slate">
                     {confidenceLabel(selectedRoom.confidence)}
+                    {selectedRoom.confidence !== null
+                      ? ` · ${Math.round(selectedRoom.confidence * 100)}%`
+                      : ""}
                   </p>
                 </div>
                 <button

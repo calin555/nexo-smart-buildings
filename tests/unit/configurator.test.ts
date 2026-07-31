@@ -8,6 +8,9 @@ import {
   updateRoomSchema,
 } from "@/modules/configurator/schema";
 import { calculateConfiguratorSummary } from "@/modules/configurator/summary";
+import { confidenceLabel } from "@/modules/plan-analysis/confidence";
+import { hasValidPlanSignature } from "@/modules/plan-analysis/file-signature";
+import { providerAnalysisResultSchema } from "@/modules/plan-analysis/result-schema";
 
 const polygon = [
   { x: 0.1, y: 0.1 },
@@ -109,5 +112,61 @@ describe("room features and live summary", () => {
     expect(summary.dimmableCircuits).toBe(3);
     expect(summary.blinds).toBe(2);
     expect(summary.switchedSockets).toBe(4);
+  });
+});
+
+describe("plan analysis", () => {
+  it("clasifică scorurile de încredere la pragurile aprobate", () => {
+    expect(confidenceLabel(0.86)).toBe("Detectat cu încredere ridicată");
+    expect(confidenceLabel(0.85)).toBe("Verificare recomandată");
+    expect(confidenceLabel(0.6)).toBe("Verificare recomandată");
+    expect(confidenceLabel(0.59)).toBe("Necesită corectare");
+  });
+
+  it("verifică semnătura reală pentru PDF, PNG și JPEG", () => {
+    expect(hasValidPlanSignature(new TextEncoder().encode("%PDF-1.7"), "application/pdf")).toBe(
+      true,
+    );
+    expect(
+      hasValidPlanSignature(
+        new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+        "image/png",
+      ),
+    ).toBe(true);
+    expect(hasValidPlanSignature(new Uint8Array([0xff, 0xd8, 0xff]), "image/jpeg")).toBe(true);
+    expect(hasValidPlanSignature(new TextEncoder().encode("not-pdf"), "application/pdf")).toBe(
+      false,
+    );
+  });
+
+  it("respinge detecții cu coordonate sau tipuri de cameră invalide", () => {
+    const invalid = providerAnalysisResultSchema.safeParse({
+      pages: [
+        {
+          page: 1,
+          imageWidth: 1000,
+          imageHeight: 700,
+          rooms: [
+            {
+              temporaryId: "room-1",
+              detectedName: "Living",
+              detectedArea: 24,
+              roomType: "UNKNOWN_ROOM",
+              confidence: 0.9,
+              polygon: [
+                { x: -0.1, y: 0.1 },
+                { x: 0.5, y: 0.1 },
+                { x: 0.5, y: 0.5 },
+              ],
+            },
+          ],
+          labels: [],
+          openings: [],
+          dimensions: [],
+          walls: [],
+        },
+      ],
+    });
+    expect(invalid.success).toBe(false);
   });
 });

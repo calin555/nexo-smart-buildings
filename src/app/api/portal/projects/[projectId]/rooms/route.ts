@@ -62,6 +62,7 @@ export async function POST(
           notes: room.notes,
           confidence: room.confidence,
           detectionStatus: room.detectionStatus,
+          source: room.source,
           isConfirmed: room.isConfirmed,
           polygon: room.geometries[0]?.normalizedPoints ?? [],
           features: [],

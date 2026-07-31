@@ -20,11 +20,15 @@ Un utilizator cu rol `ADMIN` sau `SUPER_ADMIN` poate deschide `/admin/products`,
 
 Toate salvările sunt validate cu Zod, autorizate server-side și înregistrate în audit. Înaintea publicării unei versiuni care include modificări ale catalogului trebuie rulată migrarea versionată cu `npm run db:deploy`.
 
-## Configurator pe plan — Etapa 1
+## Configurator pe plan — Etapele 1–2
 
 Membrii unei organizații pot deschide `/portal/configurator`, crea un proiect și încărca un plan PDF, JPG sau PNG de maximum 15 MB. Fișierul ajunge direct din browser în bucketul privat `project-documents`, prin clientul Supabase cu sesiunea utilizatorului; serverul rezervă și finalizează metadatele numai după verificarea membership-ului. Nu este folosit service role în fluxul normal.
 
-Viewerul folosește PDF.js pentru documentele PDF și un strat SVG cu coordonate normalizate pentru geometrie. În Etapa 1 sunt funcționale desenarea manuală, selectarea, editarea vârfurilor, proprietățile camerelor, funcțiile smart, confirmarea și sumarul în timp real. Analiza automată este doar pregătită prin contracte neutre de provider și modele de job; nu rulează AI și nu generează produse, prețuri sau ofertă.
+Viewerul folosește PDF.js pentru documentele PDF și un strat SVG cu coordonate normalizate pentru geometrie. Sunt funcționale desenarea manuală, selectarea, editarea vârfurilor, proprietățile camerelor, funcțiile smart, confirmarea și sumarul în timp real.
+
+Etapa 2 adaugă analiza asincronă printr-un `PlanAnalysisProvider` modular. Pentru activare, setați numai pe server `OPENAI_API_KEY`; modelul poate fi ales prin `PLAN_ANALYSIS_MODEL` și este implicit `gpt-5.6`. Fișierul este reverificat prin semnătura reală înainte de procesare, rezultatul providerului este constrâns la JSON structurat și validat cu Zod, iar camerele detectate apar neconfirmate cu confidence score. Fără provider configurat sau dacă analiza eșuează, editorul manual rămâne disponibil.
+
+Pentru E2E live al Etapei 2 setați local `E2E_SUPABASE_ENABLED=1` și `E2E_PLAN_ANALYSIS_ENABLED=1`. Al doilea flag activează un provider deterministic numai în afara producției; nu necesită și nu simulează o cheie AI în repository.
 
 După migrarea Prisma, aplicați politicile Supabase ale configuratorului:
 
@@ -39,7 +43,7 @@ Pentru conturi de test, creați utilizatori în Supabase Auth (fără parole în
 
 ## Vercel
 
-Importați repository-ul GitHub în Vercel. Configurați în mediile Development, Preview și Production: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `DIRECT_URL`. Cheia service role nu se expune în browser. Build command: `npm run build`; `postinstall` rulează `prisma generate`.
+Importați repository-ul GitHub în Vercel. Configurați în mediile Development, Preview și Production: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`, `DIRECT_URL`, `OPENAI_API_KEY` și `PLAN_ANALYSIS_MODEL`. Cheile service role și OpenAI nu se expun în browser. Build command: `npm run build`; `postinstall` rulează `prisma generate`.
 
 ## Securitate şi stocare
 

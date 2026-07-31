@@ -8,7 +8,10 @@ import { updateRoomSchema } from "@/modules/configurator/schema";
 async function requireRoom(projectId: string, organizationId: string, roomId: string) {
   const room = await prisma.projectRoom.findFirst({
     where: { id: roomId, projectId, organizationId },
-    include: { geometries: { orderBy: { version: "desc" }, take: 1 } },
+    include: {
+      geometries: { orderBy: { version: "desc" }, take: 1 },
+      documentPage: { select: { documentId: true } },
+    },
   });
   if (!room) throw new AppError("Camera nu există.", 404, "ROOM_NOT_FOUND");
   return room;
@@ -61,6 +64,40 @@ export async function PATCH(
       return updated;
     });
 
+    if (data.isConfirmed && room.source === "AI") {
+      const [totalDetected, remaining] = await Promise.all([
+        prisma.projectRoom.count({
+          where: {
+            source: "AI",
+            documentPage: { documentId: existing.documentPage.documentId },
+          },
+        }),
+        prisma.projectRoom.count({
+          where: {
+            source: "AI",
+            isConfirmed: false,
+            documentPage: { documentId: existing.documentPage.documentId },
+          },
+        }),
+      ]);
+      if (totalDetected > 0 && remaining === 0) {
+        await prisma.$transaction([
+          prisma.projectDocument.update({
+            where: { id: existing.documentPage.documentId },
+            data: { processingStatus: "COMPLETED" },
+          }),
+          prisma.planAnalysis.updateMany({
+            where: { documentId: existing.documentPage.documentId, status: "NEEDS_REVIEW" },
+            data: { status: "COMPLETED" },
+          }),
+          prisma.analysisJob.updateMany({
+            where: { documentId: existing.documentPage.documentId, status: "NEEDS_REVIEW" },
+            data: { status: "COMPLETED" },
+          }),
+        ]);
+      }
+    }
+
     await writeAuditLog({
       actorId: user.id,
       action: data.isConfirmed ? "PROJECT_ROOM_CONFIRMED" : "PROJECT_ROOM_UPDATED",
@@ -80,6 +117,7 @@ export async function PATCH(
         notes: room.notes,
         confidence: room.confidence,
         detectionStatus: room.detectionStatus,
+        source: room.source,
         isConfirmed: room.isConfirmed,
         polygon: room.geometries[0]?.normalizedPoints ?? [],
         features: room.features.map((feature) => ({
