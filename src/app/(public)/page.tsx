@@ -13,6 +13,7 @@ import {
   DoorOpen,
   HousePlug,
   Lightbulb,
+  LayoutList,
   MonitorSmartphone,
   PlugZap,
   RadioTower,
@@ -196,7 +197,7 @@ export default async function HomePage({
           <span className="mx-1">/</span> Soluții Smart Home
         </p>
         <div id="catalog" className="mt-8 grid gap-8 lg:grid-cols-[20.5rem_minmax(0,1fr)]">
-          <aside className="hidden lg:block">
+          <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] self-start overflow-y-auto lg:block">
             <div className="border border-[#dce2df]">
               <p className="border-b border-[#dce2df] px-3 py-3 text-sm font-medium tracking-[.08em] text-ink">
                 SMART HOME
@@ -439,14 +440,14 @@ export default async function HomePage({
               >
                 Sortează după <ChevronDown className="size-4" />
               </button>
-              <span className="text-slate">
-                Afișare: <b className="text-[#0072b8]">▦</b> <span className="ml-2">☷</span>
+              <span className="inline-flex items-center gap-2 text-slate">
+                Afișare: <LayoutList className="size-4 text-[#087657]" />
               </span>
               <span className="hidden sm:inline">
                 {totalProducts} produse · Pagina {Math.min(currentPage, totalPages)} / {totalPages}
               </span>
             </div>
-            <section className="mt-7 grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 xl:grid-cols-5">
+            <section className="mt-5 grid gap-3">
               {products.map((product) => (
                 <CatalogProductCard key={product.id} product={product} />
               ))}

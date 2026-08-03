@@ -179,7 +179,7 @@ export default async function EcosystemPage({
                 {products.length} produse
               </span>
             </div>
-            <section className="mt-7 grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
+            <section className="mt-5 grid gap-3">
               {products.map((product) => (
                 <CatalogProductCard key={product.id} product={product} />
               ))}

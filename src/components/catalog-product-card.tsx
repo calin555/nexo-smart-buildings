@@ -1,5 +1,9 @@
+"use client";
+
 import type { Product } from "@prisma/client";
+import { ChevronRight, PackageOpen, X } from "lucide-react";
 import Image from "next/image";
+import { useRef } from "react";
 
 type IllustrationType = "kit" | "blinds" | "climate" | "lock" | "energy" | "custom";
 
@@ -46,73 +50,24 @@ const metadata: Record<
 };
 
 function ProductVisual({
-  type,
   imageUrl,
   name,
-}: Readonly<{ type: IllustrationType; imageUrl: string | null; name: string }>) {
-  if (imageUrl)
+  sizes,
+}: Readonly<{ imageUrl: string | null; name: string; sizes: string }>) {
+  if (imageUrl) {
     return (
-      <div className="relative h-44 overflow-hidden bg-white">
-        <Image
-          src={imageUrl}
-          alt={name}
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1100px) 33vw, 220px"
-          className="object-contain transition duration-200 group-hover:scale-[1.04]"
-        />
-      </div>
+      <Image
+        src={imageUrl}
+        alt={name}
+        fill
+        sizes={sizes}
+        className="object-contain transition duration-200 group-hover:scale-[1.035]"
+      />
     );
-  if (type === "kit")
-    return (
-      <div className="relative flex h-44 items-end justify-center gap-3 bg-[#fafbfb] pb-7 transition duration-200 group-hover:scale-[1.03]">
-        <div className="h-20 w-9 rounded-lg border border-[#dfe4e1] bg-white shadow-sm" />
-        <div className="h-28 w-16 rounded-xl bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]">
-          <div className="mx-auto mt-6 size-8 rounded-full border-2 border-emerald-500" />
-        </div>
-        <div className="h-16 w-20 rounded-xl bg-[#f2f5f3]" />
-      </div>
-    );
-  if (type === "blinds")
-    return (
-      <div className="relative flex h-44 items-end justify-center gap-5 bg-[#fafbfb] pb-7 transition duration-200 group-hover:scale-[1.03]">
-        <div className="h-28 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" />
-        <div className="h-24 w-8 rounded-full bg-white shadow-[0_8px_16px_rgba(19,39,31,.14)]" />
-        <div className="h-16 w-24 rounded-xl border border-[#dfe4e1] bg-white" />
-      </div>
-    );
-  if (type === "climate")
-    return (
-      <div className="grid h-44 place-items-center bg-[#fafbfb] transition duration-200 group-hover:scale-[1.03]">
-        <div className="relative grid size-28 place-items-center rounded-[1.4rem] bg-[#202d35] text-white shadow-[0_10px_20px_rgba(19,39,31,.18)]">
-          <span className="text-3xl font-semibold">22°</span>
-          <span className="absolute bottom-5 text-[9px] tracking-[.14em] text-emerald-300">
-            N3XO
-          </span>
-        </div>
-      </div>
-    );
-  if (type === "lock")
-    return (
-      <div className="flex h-44 items-center justify-center gap-4 bg-[#fafbfb] transition duration-200 group-hover:scale-[1.03]">
-        <div className="h-28 w-12 rounded-full bg-[#4a5153] shadow-[0_10px_20px_rgba(19,39,31,.15)]">
-          <div className="mx-auto mt-3 size-6 rounded-full border border-emerald-400" />
-          <div className="mx-auto mt-9 h-6 w-1 rounded bg-emerald-400" />
-        </div>
-        <div className="size-14 rounded-full border-4 border-[#e2e7e4] bg-white" />
-      </div>
-    );
+  }
   return (
-    <div className="relative grid h-44 place-items-center bg-[#fafbfb] transition duration-200 group-hover:scale-[1.03]">
-      <div className="w-36 rounded-2xl bg-white p-5 shadow-[0_10px_20px_rgba(19,39,31,.13)]">
-        <div className="flex gap-2">
-          <i className="size-3 rounded-full bg-emerald-500" />
-          <i className="size-3 rounded-full bg-[#dfe4e1]" />
-          <i className="size-3 rounded-full bg-[#dfe4e1]" />
-        </div>
-        <div className="mt-5 h-1.5 rounded-full bg-[#e8efeb]">
-          <div className="h-full w-2/3 rounded-full bg-emerald-600" />
-        </div>
-      </div>
+    <div className="grid size-full place-items-center bg-[#f4f7f5] text-emerald-700">
+      <PackageOpen className="size-12 stroke-[1.4]" aria-hidden="true" />
     </div>
   );
 }
@@ -122,8 +77,20 @@ function formatPrice(priceFrom: number): string {
   return `de la ${new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 2 }).format(priceFrom / 100)} lei`;
 }
 
+function displayProductName(name: string): { title: string; reference: string | null } {
+  const separatorIndex = name.lastIndexOf(" - ");
+  if (separatorIndex < 0) return { title: name, reference: null };
+  const possibleReference = name.slice(separatorIndex + 3).trim();
+  if (!/^(?:C2E|CCT|LSS|MTN|NP|NUX|NU|R9M)[A-Z0-9_.-]+$/.test(possibleReference)) {
+    return { title: name, reference: null };
+  }
+  return { title: name.slice(0, separatorIndex), reference: possibleReference };
+}
+
 export function CatalogProductCard({ product }: Readonly<{ product: Product }>) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const type = product.illustration.toLowerCase() as IllustrationType;
+  const { title, reference } = displayProductName(product.name);
   const details =
     product.brand === "Schneider Electric"
       ? {
@@ -133,56 +100,135 @@ export function CatalogProductCard({ product }: Readonly<{ product: Product }>) 
           protocol: "KNX TP / KNX IP, conform produsului",
         }
       : metadata[type];
+
   return (
-    <article className="group relative min-w-0 rounded-xl p-2 transition duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_12px_24px_rgba(19,39,31,.10)]">
-      <div className="relative overflow-hidden rounded-lg">
-        <ProductVisual type={type} imageUrl={product.imageUrl} name={product.name} />
-        {product.badge && (
-          <span className="absolute right-2 top-2 rounded bg-emerald-700 px-2 py-1 text-[10px] font-bold text-white shadow-sm">
-            {product.badge}
-          </span>
-        )}
-      </div>
-      <div className="px-1 pb-2">
-        <p className="mt-4 text-sm font-medium text-slate">{product.brand}</p>
-        <h2 className="mt-1 min-h-10 text-sm font-semibold leading-5 text-ink transition duration-200 group-hover:text-[#0072b8]">
-          {product.name}
-        </h2>
-        <p className="mt-2 min-h-10 text-xs leading-5 text-slate">
-          {product.description ?? details.description}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {details.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-[#d5e4dd] bg-[#f4faf7] px-2 py-1 text-[10px] font-medium text-[#087657]"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <dl className="mt-3 space-y-1 border-t border-[#e5ebe8] pt-3 text-[11px] leading-4 text-slate">
-          <div>
-            <dt className="inline font-medium text-ink">Compatibil cu: </dt>
-            <dd className="inline">{details.compatibility}</dd>
-          </div>
-          <div>
-            <dt className="inline font-medium text-ink">Protocol: </dt>
-            <dd className="inline">{details.protocol}</dd>
-          </div>
-          <div>
-            <dt className="inline font-medium text-ink">Disponibilitate: </dt>
-            <dd className="inline">La comandă</dd>
-          </div>
-        </dl>
-        <p className="mt-4 text-base font-semibold text-ink">{formatPrice(product.priceFrom)}</p>
-        <a
-          href="#discutam"
-          className="mt-3 inline-flex rounded-lg border border-[#0d815f] px-3 py-2 text-xs font-semibold text-[#087657] transition duration-200 hover:bg-[#087657] hover:text-white"
+    <>
+      <article className="group relative overflow-hidden rounded-xl border border-[#e1e7e4] bg-white transition duration-200 hover:-translate-y-0.5 hover:border-[#b8d5c9] hover:shadow-[0_12px_28px_rgba(19,39,31,.08)]">
+        <button
+          type="button"
+          onClick={() => dialogRef.current?.showModal()}
+          aria-haspopup="dialog"
+          className="grid w-full grid-cols-[7.25rem_minmax(0,1fr)] items-center gap-4 p-4 text-left outline-none transition focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-emerald-600 sm:grid-cols-[9.5rem_minmax(0,1fr)_auto] sm:gap-6 sm:p-5"
         >
-          Solicită ofertă
-        </a>
-      </div>
-    </article>
+          <span className="relative block h-28 overflow-hidden rounded-lg bg-white sm:h-32">
+            <ProductVisual imageUrl={product.imageUrl} name={product.name} sizes="160px" />
+          </span>
+
+          <span className="min-w-0">
+            <span className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate">
+              {product.brand}
+              {product.badge && (
+                <span className="rounded-full border border-[#cfe3da] bg-[#f1f8f5] px-2 py-0.5 text-[10px] font-semibold text-[#087657]">
+                  {product.badge}
+                </span>
+              )}
+            </span>
+            <span className="mt-1.5 block text-base font-semibold leading-6 text-ink transition group-hover:text-[#087657] sm:text-lg">
+              {title}
+            </span>
+            {reference && (
+              <span className="mt-1 block font-mono text-xs font-semibold tracking-wide text-slate sm:text-sm">
+                {reference}
+              </span>
+            )}
+            <span className="mt-2 block text-sm text-slate">{product.category}</span>
+            <span className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-[#087657] sm:hidden">
+              Vezi detalii <ChevronRight className="size-4" />
+            </span>
+          </span>
+
+          <span className="hidden min-w-36 justify-self-end text-right sm:block">
+            <span className="block text-sm font-semibold text-ink">
+              {formatPrice(product.priceFrom)}
+            </span>
+            <span className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#b9d9ce] px-3 py-2 text-xs font-semibold text-[#087657] transition group-hover:border-[#087657] group-hover:bg-[#087657] group-hover:text-white">
+              Vezi detalii <ChevronRight className="size-4" />
+            </span>
+          </span>
+        </button>
+      </article>
+
+      <dialog
+        ref={dialogRef}
+        aria-labelledby={`product-title-${product.id}`}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) dialogRef.current?.close();
+        }}
+        className="m-auto max-h-[90vh] w-[min(92vw,56rem)] overflow-y-auto rounded-2xl bg-white p-0 text-ink shadow-[0_30px_90px_rgba(7,25,20,.28)] backdrop:bg-[#061813]/55 backdrop:backdrop-blur-sm"
+      >
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e1e7e4] bg-white/95 px-5 py-4 backdrop-blur sm:px-7">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[.14em] text-emerald-700">
+              Detalii produs
+            </p>
+            {reference && <p className="mt-1 font-mono text-xs text-slate">{reference}</p>}
+          </div>
+          <button
+            type="button"
+            onClick={() => dialogRef.current?.close()}
+            aria-label="Închide detaliile produsului"
+            className="grid size-10 place-items-center rounded-full border border-[#d9e2de] transition hover:border-emerald-700 hover:text-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+          >
+            <X className="size-5" />
+          </button>
+        </div>
+
+        <div className="grid gap-7 p-5 sm:p-7 md:grid-cols-[18rem_minmax(0,1fr)]">
+          <div className="relative h-64 overflow-hidden rounded-xl border border-[#e5ebe8] bg-white">
+            <ProductVisual imageUrl={product.imageUrl} name={product.name} sizes="288px" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-slate">{product.brand}</p>
+            <h2
+              id={`product-title-${product.id}`}
+              className="mt-2 text-2xl font-semibold leading-tight"
+            >
+              {title}
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-slate">
+              {product.description ?? details.description}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {details.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-[#d5e4dd] bg-[#f4faf7] px-3 py-1.5 text-xs font-medium text-[#087657]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <dl className="mt-6 grid gap-4 border-y border-[#e5ebe8] py-5 text-sm sm:grid-cols-2">
+              <div>
+                <dt className="font-medium text-ink">Compatibil cu</dt>
+                <dd className="mt-1 text-slate">{details.compatibility}</dd>
+              </div>
+              <div>
+                <dt className="font-medium text-ink">Protocol</dt>
+                <dd className="mt-1 text-slate">{details.protocol}</dd>
+              </div>
+              <div>
+                <dt className="font-medium text-ink">Disponibilitate</dt>
+                <dd className="mt-1 text-slate">La comandă</dd>
+              </div>
+              <div>
+                <dt className="font-medium text-ink">Categorie</dt>
+                <dd className="mt-1 text-slate">{product.category}</dd>
+              </div>
+            </dl>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-lg font-semibold">{formatPrice(product.priceFrom)}</p>
+              <a
+                href="#discutam"
+                onClick={() => dialogRef.current?.close()}
+                className="inline-flex rounded-lg bg-[#087657] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#065c43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+              >
+                Solicită ofertă
+              </a>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }

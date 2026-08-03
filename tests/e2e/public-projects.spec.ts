@@ -41,11 +41,24 @@ test("Brașov house exposes climate and energy details", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("catalogul public găsește o referință Schneider și nu inventează prețul", async ({ page }) => {
+test("catalogul public afișează produsul compact și deschide detaliile la click", async ({
+  page,
+}) => {
   await page.goto("/?q=MTN6215-0410S#produse");
 
-  await expect(page.getByRole("heading", { name: /MTN6215-0410S/ })).toBeVisible();
-  await expect(page.getByText("Schneider Electric", { exact: true })).toBeVisible();
-  await expect(page.getByText("Preț la cerere", { exact: true })).toBeVisible();
+  const productRow = page.getByRole("button", { name: /MTN6215-0410S/ });
+  const dialog = page.getByRole("dialog");
+
+  await expect(productRow).toBeVisible();
+  await expect(dialog).toBeHidden();
+  await productRow.click();
+
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText("MTN6215-0410S", { exact: true })).toBeVisible();
+  await expect(dialog.getByText("Preț la cerere", { exact: true })).toBeVisible();
+  await expect(dialog.getByText(/catalogul Schneider Electric KNX 2025/)).toBeVisible();
+
+  await dialog.getByRole("button", { name: "Închide detaliile produsului" }).click();
+  await expect(dialog).toBeHidden();
   await expect(page.getByText("342 produse")).not.toBeVisible();
 });
