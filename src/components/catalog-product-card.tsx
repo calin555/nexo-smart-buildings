@@ -81,7 +81,7 @@ function displayProductName(name: string): { title: string; reference: string | 
   const separatorIndex = name.lastIndexOf(" - ");
   if (separatorIndex < 0) return { title: name, reference: null };
   const possibleReference = name.slice(separatorIndex + 3).trim();
-  if (!/^(?:C2E|CCT|LSS|MTN|NP|NUX|NU|R9M)[A-Z0-9_.-]+$/.test(possibleReference)) {
+  if (!/^(?=.*\d)[A-Z0-9][A-Z0-9_.\/-]{4,39}$/.test(possibleReference)) {
     return { title: name, reference: null };
   }
   return { title: name.slice(0, separatorIndex), reference: possibleReference };
@@ -92,14 +92,21 @@ export function CatalogProductCard({ product }: Readonly<{ product: Product }>) 
   const type = product.illustration.toLowerCase() as IllustrationType;
   const { title, reference } = displayProductName(product.name);
   const details =
-    product.brand === "Schneider Electric"
+    product.brand === "ABB"
       ? {
-          description: "Produs profesional pentru instalații KNX.",
-          tags: ["KNX", "ETS", "SpaceLogic"],
-          compatibility: "Instalații KNX și EcoStruxure Building",
+          description: "Produs profesional pentru instalații ABB i-bus KNX.",
+          tags: ["KNX", "ETS", "ABB i-bus"],
+          compatibility: "Instalații KNX și ABB i-bus",
           protocol: "KNX TP / KNX IP, conform produsului",
         }
-      : metadata[type];
+      : product.brand === "Schneider Electric"
+        ? {
+            description: "Produs profesional pentru instalații KNX.",
+            tags: ["KNX", "ETS", "SpaceLogic"],
+            compatibility: "Instalații KNX și EcoStruxure Building",
+            protocol: "KNX TP / KNX IP, conform produsului",
+          }
+        : metadata[type];
 
   return (
     <>

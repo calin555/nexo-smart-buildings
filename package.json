@@ -21,7 +21,9 @@
     "db:validate": "prisma validate",
     "catalog:schneider:extract": "python scripts/extract-schneider-knx-catalog.py",
     "catalog:schneider:images": "python scripts/extract-schneider-knx-images.py",
-    "catalog:schneider:import": "tsx --env-file=.env scripts/import-schneider-knx.ts"
+    "catalog:schneider:import": "tsx --env-file=.env scripts/import-schneider-knx.ts",
+    "catalog:abb:extract": "tsx scripts/extract-abb-knx-catalog.ts",
+    "catalog:abb:import": "tsx --env-file=.env scripts/import-abb-knx.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

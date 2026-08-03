@@ -62,3 +62,27 @@ test("catalogul public afișează produsul compact și deschide detaliile la cli
   await expect(dialog).toBeHidden();
   await expect(page.getByText("342 produse")).not.toBeVisible();
 });
+
+test("catalogul ABB afișează fotografia oficială și detaliile tehnice la click", async ({
+  page,
+}) => {
+  await page.goto("/?q=2CDG110030R0011#produse");
+
+  const productRow = page.getByRole("button", { name: /2CDG110030R0011/ });
+  await expect(productRow).toBeVisible();
+  await expect(productRow.getByText("Intrare analogică", { exact: false })).toBeVisible();
+  await expect(productRow.locator("img")).toHaveJSProperty("complete", true);
+  expect(
+    await productRow
+      .locator("img")
+      .evaluate((image) => (image instanceof HTMLImageElement ? image.naturalWidth : 0)),
+  ).toBeGreaterThan(0);
+
+  await productRow.click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText("2CDG110030R0011", { exact: true })).toBeVisible();
+  await expect(dialog.getByText("ABB i-bus", { exact: true })).toBeVisible();
+  await expect(dialog.getByText(/Cod comercial ABB: 2CDG110030R0011/)).toBeVisible();
+  await expect(dialog.getByText("Preț la cerere", { exact: true })).toBeVisible();
+});

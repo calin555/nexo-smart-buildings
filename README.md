@@ -39,6 +39,24 @@ npm run catalog:schneider:import
 
 Importul procesează produsele în loturi, folosește slug-uri stabile bazate pe referință, nu dublează produsele la rerulare și scrie evenimentul `SCHNEIDER_KNX_CATALOG_IMPORTED` în audit. Nu folosește service role. La actualizare păstrează prețurile și imaginile introduse ulterior manual în admin. PDF-ul original nu este inclus în repository.
 
+### Catalog ABB i-bus KNX — etapa 1
+
+Prima etapă ABB include 126 de produse din familiile surse de alimentare, infrastructură și interfețe, intrări și ieșiri. Selecția este preluată din API-ul oficial ABB pentru piața din România și exclude produsele retrase, produsele cu înlocuitor declarat și înregistrările fără fotografie reală. Imaginile din `public/images/products/abb-knx` provin din CDN-ul oficial ABB, iar denumirile și descrierile sunt sintetizate tehnic în română. Prețurile sunt afișate ca „Preț la cerere”.
+
+Regenerarea catalogului și a imaginilor oficiale nu necesită credențiale persistente și nu scrie tokenul temporar ABB în fișiere sau loguri:
+
+```bash
+npm run catalog:abb:extract
+```
+
+Sincronizarea idempotentă în baza configurată prin `DATABASE_URL`:
+
+```bash
+npm run catalog:abb:import
+```
+
+Importul scrie evenimentul `ABB_KNX_CATALOG_IMPORTED` în audit, folosește Prisma server-side și nu folosește service role. Sursa oficială este [gama ABB i-bus KNX](https://new.abb.com/low-voltage/products/building-automation/product-range/abb-i-bus-knx).
+
 ## Configurator pe plan — Etapele 1–3
 
 Membrii unei organizații pot deschide `/portal/configurator`, crea un proiect și încărca un plan PDF, JPG sau PNG de maximum 15 MB. Fișierul ajunge direct din browser în bucketul privat `project-documents`, prin clientul Supabase cu sesiunea utilizatorului; serverul rezervă și finalizează metadatele numai după verificarea membership-ului. Nu este folosit service role în fluxul normal.
