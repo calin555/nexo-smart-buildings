@@ -86,3 +86,20 @@ test("catalogul ABB afișează fotografia oficială și detaliile tehnice la cli
   await expect(dialog.getByText(/Cod comercial ABB: 2CDG110030R0011/)).toBeVisible();
   await expect(dialog.getByText("Preț la cerere", { exact: true })).toBeVisible();
 });
+
+test("selectarea unei categorii păstrează utilizatorul la începutul catalogului", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const categories = page.getByRole("navigation", { name: "Categorii Smart Home" });
+  await categories.getByRole("link", { name: /Kit-uri de automatizare/ }).click();
+
+  await expect(page).toHaveURL(/category=Kit-uri(?:\+|%20)de(?:\+|%20)automatizare#catalog$/);
+  await expect(page.locator("#catalog")).toBeInViewport();
+  await expect(
+    page.getByRole("heading", {
+      name: "Control pentru lumină, climat, siguranță și energie.",
+    }),
+  ).toBeVisible();
+});

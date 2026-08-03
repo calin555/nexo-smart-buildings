@@ -59,13 +59,19 @@ function catalogHref({
   page,
   query,
   category,
-}: Readonly<{ page?: number; query?: string; category?: string }>): Route {
+  anchor = "produse",
+}: Readonly<{
+  page?: number;
+  query?: string;
+  category?: string;
+  anchor?: "catalog" | "produse";
+}>): Route {
   const params = new URLSearchParams();
   if (page && page > 1) params.set("page", String(page));
   if (query) params.set("q", query);
   if (category) params.set("category", category);
   const search = params.toString();
-  return `${search ? `/?${search}` : "/"}#produse` as Route;
+  return `${search ? `/?${search}` : "/"}#${anchor}` as Route;
 }
 
 const ecosystemCards = [
@@ -197,7 +203,10 @@ export default async function HomePage({
           </a>{" "}
           <span className="mx-1">/</span> Soluții Smart Home
         </p>
-        <div id="catalog" className="mt-8 grid gap-8 lg:grid-cols-[20.5rem_minmax(0,1fr)]">
+        <div
+          id="catalog"
+          className="mt-8 grid scroll-mt-24 gap-8 lg:grid-cols-[20.5rem_minmax(0,1fr)]"
+        >
           <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] self-start overflow-y-auto lg:block">
             <div className="border border-[#dce2df]">
               <p className="border-b border-[#dce2df] px-3 py-3 text-sm font-medium tracking-[.08em] text-ink">
@@ -207,7 +216,7 @@ export default async function HomePage({
                 {categories.map(({ icon: Icon, label }) => (
                   <Link
                     key={label}
-                    href={catalogHref({ query, category: label })}
+                    href={catalogHref({ query, category: label, anchor: "catalog" })}
                     className={`flex items-center gap-3 border-b border-[#dce2df] px-3 py-2.5 text-[15px] transition hover:bg-[#f4f7f5] hover:text-emerald-700 ${category === label ? "bg-[#edf6f1] text-emerald-700" : "text-ink"}`}
                   >
                     <Icon className="size-7 shrink-0 stroke-[1.35]" />
