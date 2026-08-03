@@ -18,7 +18,9 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
-    "db:validate": "prisma validate"
+    "db:validate": "prisma validate",
+    "catalog:schneider:extract": "python scripts/extract-schneider-knx-catalog.py",
+    "catalog:schneider:import": "tsx --env-file=.env scripts/import-schneider-knx.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

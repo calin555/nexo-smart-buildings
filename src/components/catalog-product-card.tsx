@@ -48,7 +48,8 @@ function ProductVisual({
   type,
   imageUrl,
   name,
-}: Readonly<{ type: IllustrationType; imageUrl: string | null; name: string }>) {
+  brand,
+}: Readonly<{ type: IllustrationType; imageUrl: string | null; name: string; brand: string }>) {
   if (imageUrl)
     return (
       <div
@@ -57,6 +58,24 @@ function ProductVisual({
         className="h-44 bg-[#fafbfb] bg-contain bg-center bg-no-repeat transition duration-200 group-hover:scale-[1.03]"
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
+    );
+  if (brand === "Schneider Electric")
+    return (
+      <div className="relative grid h-44 place-items-center overflow-hidden bg-[#f7faf8] transition duration-200 group-hover:scale-[1.03]">
+        <div className="absolute inset-x-0 top-0 h-1 bg-[#3dcd58]" />
+        <div className="relative h-28 w-32 rounded-sm border border-[#d7ded9] bg-white shadow-[0_10px_22px_rgba(19,39,31,.14)]">
+          <div className="flex h-7 items-center justify-between border-b border-[#e1e7e3] px-3">
+            <span className="text-[9px] font-bold tracking-tight text-[#299b42]">Schneider</span>
+            <span className="text-[8px] font-semibold text-[#26352e]">KNX</span>
+          </div>
+          <div className="grid grid-cols-4 gap-2 px-3 pt-4">
+            {[0, 1, 2, 3].map((item) => (
+              <i key={item} className="h-9 rounded-sm border border-[#dce3df] bg-[#f3f6f4]" />
+            ))}
+          </div>
+          <div className="absolute bottom-2 left-3 right-3 h-1 rounded-full bg-[#3dcd58]" />
+        </div>
+      </div>
     );
   if (type === "kit")
     return (
@@ -114,16 +133,30 @@ function ProductVisual({
 }
 
 function formatPrice(priceFrom: number): string {
+  if (priceFrom === 0) return "Preț la cerere";
   return `de la ${new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 2 }).format(priceFrom / 100)} lei`;
 }
 
 export function CatalogProductCard({ product }: Readonly<{ product: Product }>) {
   const type = product.illustration.toLowerCase() as IllustrationType;
-  const details = metadata[type];
+  const details =
+    product.brand === "Schneider Electric"
+      ? {
+          description: "Produs profesional pentru instalații KNX.",
+          tags: ["KNX", "ETS", "SpaceLogic"],
+          compatibility: "Instalații KNX și EcoStruxure Building",
+          protocol: "KNX TP / KNX IP, conform produsului",
+        }
+      : metadata[type];
   return (
     <article className="group relative min-w-0 rounded-xl p-2 transition duration-200 ease-out hover:-translate-y-1 hover:bg-white hover:shadow-[0_12px_24px_rgba(19,39,31,.10)]">
       <div className="relative overflow-hidden rounded-lg">
-        <ProductVisual type={type} imageUrl={product.imageUrl} name={product.name} />
+        <ProductVisual
+          type={type}
+          imageUrl={product.imageUrl}
+          name={product.name}
+          brand={product.brand}
+        />
         {product.badge && (
           <span className="absolute right-2 top-2 rounded bg-emerald-700 px-2 py-1 text-[10px] font-bold text-white shadow-sm">
             {product.badge}

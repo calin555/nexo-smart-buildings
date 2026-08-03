@@ -20,6 +20,24 @@ Un utilizator cu rol `ADMIN` sau `SUPER_ADMIN` poate deschide `/admin/products`,
 
 Toate salvările sunt validate cu Zod, autorizate server-side și înregistrate în audit. Înaintea publicării unei versiuni care include modificări ale catalogului trebuie rulată migrarea versionată cu `npm run db:deploy`.
 
+### Catalog Schneider Electric SpaceLogic KNX 2025-10
+
+Repository-ul include un catalog normalizat cu 342 de referințe comerciale extrase din `LSB02779_EN`. Fiecare produs păstrează codul Schneider, pagina sursă, o denumire și o descriere tehnică în română, categoria N3XO și tipul de ilustrație. Prețurile nu există în documentul sursă și sunt afișate corect ca „Preț la cerere”.
+
+Pentru regenerarea datelor din PDF-ul original:
+
+```bash
+npm run catalog:schneider:extract -- "C:\cale\LSB02779_EN_KNX_Catalogue_2025-10.pdf" "data\schneider-knx-products.json"
+```
+
+Pentru sincronizarea idempotentă în baza configurată prin `DATABASE_URL`:
+
+```bash
+npm run catalog:schneider:import
+```
+
+Importul procesează produsele în loturi, folosește slug-uri stabile bazate pe referință, nu dublează produsele la rerulare și scrie evenimentul `SCHNEIDER_KNX_CATALOG_IMPORTED` în audit. Nu folosește service role. La actualizare păstrează prețurile și imaginile introduse ulterior manual în admin. PDF-ul original nu este inclus în repository.
+
 ## Configurator pe plan — Etapele 1–3
 
 Membrii unei organizații pot deschide `/portal/configurator`, crea un proiect și încărca un plan PDF, JPG sau PNG de maximum 15 MB. Fișierul ajunge direct din browser în bucketul privat `project-documents`, prin clientul Supabase cu sesiunea utilizatorului; serverul rezervă și finalizează metadatele numai după verificarea membership-ului. Nu este folosit service role în fluxul normal.

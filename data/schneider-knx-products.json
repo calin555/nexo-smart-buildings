@@ -1,0 +1,3085 @@
+{
+  "source": "Schneider Electric SpaceLogic KNX - Home and building automation solutions 2025-10",
+  "catalogueCode": "LSB02779_EN",
+  "productCount": 342,
+  "products": [
+    {
+      "reference": "C2E616101_GY_C1",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - gri termoplastic - C2E616101_GY_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1000
+    },
+    {
+      "reference": "C2E616101_MB_C1",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - negru mat termoplastic - C2E616101_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1001
+    },
+    {
+      "reference": "C2E616101_MB_C1B",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - negru mat termoplastic - C2E616101_MB_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1002
+    },
+    {
+      "reference": "C2E616101_WE_C1",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - alb termoplastic - C2E616101_WE_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1003
+    },
+    {
+      "reference": "C2E616101_WE_C1B",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - alb termoplastic - C2E616101_WE_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1004
+    },
+    {
+      "reference": "C2E616102_MB_C1",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - negru mat metal - C2E616102_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1005
+    },
+    {
+      "reference": "C2E616102_ST_C1",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - oțel inoxidabil metal - C2E616102_ST_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1006
+    },
+    {
+      "reference": "C2E616103_MB_C1",
+      "sourcePage": 121,
+      "name": "Buton KNX Cuadro H, 2 taste - negru mat sticlă - C2E616103_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 121.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1007
+    },
+    {
+      "reference": "C2E616201_GY_C1",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - gri termoplastic - C2E616201_GY_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1008
+    },
+    {
+      "reference": "C2E616201_MB_C1",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - negru mat termoplastic - C2E616201_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1009
+    },
+    {
+      "reference": "C2E616201_MB_C1B",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - negru mat termoplastic - C2E616201_MB_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1010
+    },
+    {
+      "reference": "C2E616201_WE_C1",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - alb termoplastic - C2E616201_WE_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1011
+    },
+    {
+      "reference": "C2E616201_WE_C1B",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - alb termoplastic - C2E616201_WE_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1012
+    },
+    {
+      "reference": "C2E616202_MB_C1",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - negru mat metal - C2E616202_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1013
+    },
+    {
+      "reference": "C2E616202_ST_C1",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - oțel inoxidabil metal - C2E616202_ST_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1014
+    },
+    {
+      "reference": "C2E616203_MB_C1",
+      "sourcePage": 122,
+      "name": "Buton KNX Cuadro H, 4 taste - negru mat sticlă - C2E616203_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 122.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1015
+    },
+    {
+      "reference": "C2E616301_GY_C1",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - gri termoplastic - C2E616301_GY_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1016
+    },
+    {
+      "reference": "C2E616301_MB_C1",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - negru mat termoplastic - C2E616301_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1017
+    },
+    {
+      "reference": "C2E616301_MB_C1B",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - negru mat termoplastic - C2E616301_MB_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1018
+    },
+    {
+      "reference": "C2E616301_WE_C1",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - alb termoplastic - C2E616301_WE_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1019
+    },
+    {
+      "reference": "C2E616301_WE_C1B",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - alb termoplastic - C2E616301_WE_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1020
+    },
+    {
+      "reference": "C2E616302_MB_C1",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - negru mat metal - C2E616302_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1021
+    },
+    {
+      "reference": "C2E616302_ST_C1",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - oțel inoxidabil metal - C2E616302_ST_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1022
+    },
+    {
+      "reference": "C2E616303_MB_C1",
+      "sourcePage": 123,
+      "name": "Buton KNX Cuadro H, 6 taste - negru mat sticlă - C2E616303_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 123.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1023
+    },
+    {
+      "reference": "C2E616401_GY_C1",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - gri termoplastic - C2E616401_GY_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1024
+    },
+    {
+      "reference": "C2E616401_MB_C1",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - negru mat termoplastic - C2E616401_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1025
+    },
+    {
+      "reference": "C2E616401_MB_C1B",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - negru mat termoplastic - C2E616401_MB_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1026
+    },
+    {
+      "reference": "C2E616401_WE_C1",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - alb termoplastic - C2E616401_WE_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1027
+    },
+    {
+      "reference": "C2E616401_WE_C1B",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - alb termoplastic - C2E616401_WE_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1028
+    },
+    {
+      "reference": "C2E616402_MB_C1",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - negru mat metal - C2E616402_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1029
+    },
+    {
+      "reference": "C2E616402_ST_C1",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - oțel inoxidabil metal - C2E616402_ST_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil metal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1030
+    },
+    {
+      "reference": "C2E616403_MB_C1",
+      "sourcePage": 124,
+      "name": "Buton KNX Cuadro H, 8 taste - negru mat sticlă - C2E616403_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 124.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1031
+    },
+    {
+      "reference": "C2E621201_GY_C1",
+      "sourcePage": 125,
+      "name": "Termostat KNX Cuadro H - gri termoplastic - C2E621201_GY_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 125.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1032
+    },
+    {
+      "reference": "C2E621201_MB_C1",
+      "sourcePage": 125,
+      "name": "Termostat KNX Cuadro H - negru mat termoplastic - C2E621201_MB_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 125.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1033
+    },
+    {
+      "reference": "C2E621201_MB_C1B",
+      "sourcePage": 125,
+      "name": "Termostat KNX Cuadro H - negru mat termoplastic - C2E621201_MB_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru mat termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 125.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1034
+    },
+    {
+      "reference": "C2E621201_ST_C1",
+      "sourcePage": 125,
+      "name": "Termostat KNX Cuadro H - oțel inoxidabil termoplastic - C2E621201_ST_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 125.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1035
+    },
+    {
+      "reference": "C2E621201_WE_C1",
+      "sourcePage": 125,
+      "name": "Termostat KNX Cuadro H - alb termoplastic - C2E621201_WE_C1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 125.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1036
+    },
+    {
+      "reference": "C2E621201_WE_C1B",
+      "sourcePage": 125,
+      "name": "Termostat KNX Cuadro H - alb termoplastic - C2E621201_WE_C1B",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 125.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1037
+    },
+    {
+      "reference": "CCT15860",
+      "sourcePage": 175,
+      "name": "Acti 9 - Programming kit pentru IHP / IC / KNX Ceas programator anual - CCT15860",
+      "description": "Senzor pentru colectarea datelor de mediu și transmiterea lor către automatizarea KNX sau intrările analogice compatibile. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 175.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1038
+    },
+    {
+      "reference": "CCT15861",
+      "sourcePage": 174,
+      "name": "SpaceLogic KNX Ceas programator anual REG-K/8/800 - IHP+ and KNX an Time Switch key - CCT15861",
+      "description": "Senzor pentru colectarea datelor de mediu și transmiterea lor către automatizarea KNX sau intrările analogice compatibile. Varianta: IHP+ and KNX an Time Switch key. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 174.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1039
+    },
+    {
+      "reference": "LSS100100",
+      "sourcePage": 85,
+      "name": "Wiser pentru KNX - LSS100100",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 85.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1040
+    },
+    {
+      "reference": "LSS100200",
+      "sourcePage": 87,
+      "name": "spaceLYnk - LSS100200",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 87.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1041
+    },
+    {
+      "reference": "LSS100300",
+      "sourcePage": 88,
+      "name": "SpaceLogic KNX BMS IP Gateway - gri - LSS100300",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Varianta: gri. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 88.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1042
+    },
+    {
+      "reference": "LSS100400",
+      "sourcePage": 89,
+      "name": "SpaceLogic KNX Hybrid modul - alb - LSS100400",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 89.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1043
+    },
+    {
+      "reference": "LSS900100",
+      "sourcePage": 68,
+      "name": "eConfigure KNX Lite - LSS900100",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 68.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1044
+    },
+    {
+      "reference": "LSS9002100",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - abonament pe 1 ani pentru 1 controler - LSS9002100",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: abonament pe 1 ani pentru 1 controler. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1045
+    },
+    {
+      "reference": "LSS9002101",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - abonament pe 1 ani pentru 5 controlere - LSS9002101",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: abonament pe 1 ani pentru 5 controlere. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1046
+    },
+    {
+      "reference": "LSS9002102",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - abonament pe 1 ani pentru 25 controlere - LSS9002102",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: abonament pe 1 ani pentru 25 controlere. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1047
+    },
+    {
+      "reference": "LSS9002103",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - 1-an abonament pentru unlimited controllers - LSS9002103",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: 1-an abonament pentru unlimited controllers. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1048
+    },
+    {
+      "reference": "LSS9002200",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - abonament lunar pentru 1 controler - LSS9002200",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: abonament lunar pentru 1 controler. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1049
+    },
+    {
+      "reference": "LSS9002300",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - abonament pe 5 ani pentru 1 controler - LSS9002300",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: abonament pe 5 ani pentru 1 controler. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1050
+    },
+    {
+      "reference": "LSS9002400",
+      "sourcePage": 69,
+      "name": "SpaceLogic KNX Remote - abonament pe 10 ani pentru 1 controler - LSS9002400",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: abonament pe 10 ani pentru 1 controler. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 69.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1051
+    },
+    {
+      "reference": "MTN296019",
+      "sourcePage": 83,
+      "name": "Central plate cu square opening - alb polar lucios - MTN296019",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 83.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1052
+    },
+    {
+      "reference": "MTN550619",
+      "sourcePage": 169,
+      "name": "Detector de prezență KNX ARGUS cu control al luminii și receptor IR - Accessories: Surface-mounted housing for ARGUS Presence - MTN550619",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: Accessories: Surface-mounted housing for ARGUS Presence. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 169.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1053
+    },
+    {
+      "reference": "MTN5761-0000",
+      "sourcePage": 77,
+      "name": "IR universal telecomandă - negru/alb - MTN5761-0000",
+      "description": "Soluție Schneider Electric pentru configurarea, administrarea sau accesul la instalațiile SpaceLogic KNX. Varianta: negru/alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 77.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1054
+    },
+    {
+      "reference": "MTN5775-0003",
+      "sourcePage": 99,
+      "name": "Remote sensor pentru universal unitate de control al temperaturii ambientale cu touch display - MTN5775-0003",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 99.",
+      "category": "Confortul casei",
+      "illustration": "CLIMATE",
+      "sortOrder": 1055
+    },
+    {
+      "reference": "MTN6002-0002S",
+      "sourcePage": 146,
+      "name": "SpaceLogic KNX, Secure, Interfață pentru butoane Basic, 2 channel - 2 canal - MTN6002-0002S",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 2 canal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 146.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1056
+    },
+    {
+      "reference": "MTN6002-0004S",
+      "sourcePage": 146,
+      "name": "SpaceLogic KNX, Secure, Interfață pentru butoane Basic, 4 channel - 4 canal - MTN6002-0004S",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 4 canal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 146.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1057
+    },
+    {
+      "reference": "MTN6002-0008S",
+      "sourcePage": 147,
+      "name": "SpaceLogic KNX, Secure, Interfață pentru butoane Basic, 8 channel - 8 canal - MTN6002-0008S",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 8 canal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 147.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1058
+    },
+    {
+      "reference": "MTN6002-0108S",
+      "sourcePage": 147,
+      "name": "SpaceLogic KNX, Secure, Interfață pentru butoane Pro, 8 channel - 8 canal - MTN6002-0108S",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 8 canal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 147.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1059
+    },
+    {
+      "reference": "MTN6003-0011",
+      "sourcePage": 184,
+      "name": "SpaceLogic KNX încastrat Actuator de comutare 1g cu 3 intrare binarăs - MTN6003-0011",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 184.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1060
+    },
+    {
+      "reference": "MTN6003-0012",
+      "sourcePage": 185,
+      "name": "SpaceLogic KNX încastrat Actuator pentru jaluzele și comutare 2g cu 3 intrare binarăs - MTN6003-0012",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 185.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1061
+    },
+    {
+      "reference": "MTN6003-0013",
+      "sourcePage": 216,
+      "name": "SpaceLogic KNX încastrat universal Dimming Acutator 1g cu 3 intrare binarăs - MTN6003-0013",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 216.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1062
+    },
+    {
+      "reference": "MTN6005-0011",
+      "sourcePage": 171,
+      "name": "Air Quality Multisensor - alb polar - MTN6005-0011",
+      "description": "Senzor pentru colectarea datelor de mediu și transmiterea lor către automatizarea KNX sau intrările analogice compatibile. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 171.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1063
+    },
+    {
+      "reference": "MTN6010-6535",
+      "sourcePage": 120,
+      "name": "D-Life frame, 1 canale, pentru 3-modul box - lotus alb - MTN6010-6535",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 120.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1064
+    },
+    {
+      "reference": "MTN617119",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - alb polar lucios - MTN617119",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1065
+    },
+    {
+      "reference": "MTN617125",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - alb activ lucios active - MTN617125",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios active. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1066
+    },
+    {
+      "reference": "MTN617144",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - alb lucios - MTN617144",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1067
+    },
+    {
+      "reference": "MTN617219",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - lucios - MTN617219",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1068
+    },
+    {
+      "reference": "MTN617225",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - alb lucios - MTN617225",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1069
+    },
+    {
+      "reference": "MTN617244",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - lucios - MTN617244",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1070
+    },
+    {
+      "reference": "MTN617419",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus - alb polar lucios - MTN617419",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1071
+    },
+    {
+      "reference": "MTN617425",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus - alb activ lucios - MTN617425",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1072
+    },
+    {
+      "reference": "MTN617444",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus - alb lucios - MTN617444",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1073
+    },
+    {
+      "reference": "MTN617519",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus cu receptor IR - lucios - MTN617519",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1074
+    },
+    {
+      "reference": "MTN6185-0319",
+      "sourcePage": 103,
+      "name": "Buton KNX Pro T - alb polar lucios - MTN6185-0319",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 103.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1075
+    },
+    {
+      "reference": "MTN6185-0325",
+      "sourcePage": 103,
+      "name": "Buton KNX Pro T - alb activ lucios - MTN6185-0325",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 103.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1076
+    },
+    {
+      "reference": "MTN6185-0414",
+      "sourcePage": 103,
+      "name": "Buton KNX Pro T - antracit - MTN6185-0414",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 103.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1077
+    },
+    {
+      "reference": "MTN6185-0460",
+      "sourcePage": 103,
+      "name": "Buton KNX Pro T - aluminiu - MTN6185-0460",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 103.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1078
+    },
+    {
+      "reference": "MTN6185-6033",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - sahara - MTN6185-6033",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: sahara. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1079
+    },
+    {
+      "reference": "MTN6185-6034",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - antracit - MTN6185-6034",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1080
+    },
+    {
+      "reference": "MTN6185-6035",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - lotus alb - MTN6185-6035",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1081
+    },
+    {
+      "reference": "MTN6185-6036",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - oțel inoxidabil - MTN6185-6036",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1082
+    },
+    {
+      "reference": "MTN6185-6050",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - nickel metalic - MTN6185-6050",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: nickel metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1083
+    },
+    {
+      "reference": "MTN6185-6051",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - champagne metalic - MTN6185-6051",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: champagne metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1084
+    },
+    {
+      "reference": "MTN6185-6052",
+      "sourcePage": 116,
+      "name": "Buton KNX Pro T - moca metalic - MTN6185-6052",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: moca metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 116.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1085
+    },
+    {
+      "reference": "MTN6191-6034",
+      "sourcePage": 114,
+      "name": "Buton KNX cu etichetare dinamică, universal - 6035 - MTN6191-6034",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 6035. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 114.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1086
+    },
+    {
+      "reference": "MTN6191-6035",
+      "sourcePage": 114,
+      "name": "Clapetă cu 1 elemente pentru butonul KNX cu etichetare dinamică - lotus alb - MTN6191-6035",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 114.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1087
+    },
+    {
+      "reference": "MTN6191-6036",
+      "sourcePage": 114,
+      "name": "Buton KNX cu etichetare dinamică, universal - MTN6191-6036",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 114.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1088
+    },
+    {
+      "reference": "MTN6191-6050",
+      "sourcePage": 114,
+      "name": "Buton KNX cu etichetare dinamică, universal - MTN6191-6050",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 114.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1089
+    },
+    {
+      "reference": "MTN6191-6052",
+      "sourcePage": 114,
+      "name": "Buton KNX cu etichetare dinamică, universal - MTN6191-6052",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 114.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1090
+    },
+    {
+      "reference": "MTN619125",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul - alb activ lucios - MTN619125",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1091
+    },
+    {
+      "reference": "MTN6192-6010",
+      "sourcePage": 112,
+      "name": "Buton KNX cu etichetare dinamică, 2 canale - 2-gang - MTN6192-6010",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 2-gang. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 112.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1092
+    },
+    {
+      "reference": "MTN6192-6034",
+      "sourcePage": 115,
+      "name": "Clapetă cu 2 elemente pentru butonul KNX cu etichetare dinamică - antracit - MTN6192-6034",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1093
+    },
+    {
+      "reference": "MTN6192-6035",
+      "sourcePage": 115,
+      "name": "Clapetă cu 2 elemente pentru butonul KNX cu etichetare dinamică - lotus alb - MTN6192-6035",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1094
+    },
+    {
+      "reference": "MTN6192-6036",
+      "sourcePage": 115,
+      "name": "Clapetă cu 2 elemente pentru butonul KNX cu etichetare dinamică - oțel inoxidabil - MTN6192-6036",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1095
+    },
+    {
+      "reference": "MTN6192-6050",
+      "sourcePage": 115,
+      "name": "Clapetă cu 2 elemente pentru butonul KNX cu etichetare dinamică - nickel metalic - MTN6192-6050",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: nickel metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1096
+    },
+    {
+      "reference": "MTN6192-6052",
+      "sourcePage": 115,
+      "name": "Clapetă cu 2 elemente pentru butonul KNX cu etichetare dinamică - moca metalic - MTN6192-6052",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: moca metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1097
+    },
+    {
+      "reference": "MTN619225",
+      "sourcePage": 110,
+      "name": "Clapete pentru 2 canale buton modul - alb activ lucios active - MTN619225",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios active. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 110.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1098
+    },
+    {
+      "reference": "MTN6193-6010",
+      "sourcePage": 113,
+      "name": "Buton KNX cu etichetare dinamică, 3 canale - 3-gang - MTN6193-6010",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: 3-gang. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 113.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1099
+    },
+    {
+      "reference": "MTN6193-6034",
+      "sourcePage": 115,
+      "name": "Clapetă cu 3 elemente pentru butonul KNX cu etichetare dinamică - antracit - MTN6193-6034",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1100
+    },
+    {
+      "reference": "MTN6193-6035",
+      "sourcePage": 115,
+      "name": "Clapetă cu 3 elemente pentru butonul KNX cu etichetare dinamică - lotus alb - MTN6193-6035",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1101
+    },
+    {
+      "reference": "MTN6193-6036",
+      "sourcePage": 115,
+      "name": "Clapetă cu 3 elemente pentru butonul KNX cu etichetare dinamică - oțel inoxidabil - MTN6193-6036",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1102
+    },
+    {
+      "reference": "MTN6193-6050",
+      "sourcePage": 115,
+      "name": "Clapetă cu 3 elemente pentru butonul KNX cu etichetare dinamică - nickel metalic - MTN6193-6050",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: nickel metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1103
+    },
+    {
+      "reference": "MTN6193-6052",
+      "sourcePage": 115,
+      "name": "Clapetă cu 3 elemente pentru butonul KNX cu etichetare dinamică - moca metalic - MTN6193-6052",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: moca metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1104
+    },
+    {
+      "reference": "MTN6194-6010",
+      "sourcePage": 114,
+      "name": "Buton KNX cu etichetare dinamică, universal - MTN6194-6010",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: universal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 114.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1105
+    },
+    {
+      "reference": "MTN6194-6010S",
+      "sourcePage": 111,
+      "name": "KNX Secure Buton cu etichetare dinamică universal - MTN6194-6010S",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: universal. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 111.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1106
+    },
+    {
+      "reference": "MTN6194-6034",
+      "sourcePage": 115,
+      "name": "Clapetă cu 4 elemente pentru butonul KNX cu etichetare dinamică - antracit - MTN6194-6034",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1107
+    },
+    {
+      "reference": "MTN6194-6035",
+      "sourcePage": 115,
+      "name": "Clapetă cu 4 elemente pentru butonul KNX cu etichetare dinamică - lotus alb - MTN6194-6035",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1108
+    },
+    {
+      "reference": "MTN6194-6036",
+      "sourcePage": 115,
+      "name": "Clapetă cu 4 elemente pentru butonul KNX cu etichetare dinamică - oțel inoxidabil - MTN6194-6036",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1109
+    },
+    {
+      "reference": "MTN6194-6050",
+      "sourcePage": 115,
+      "name": "Clapetă cu 4 elemente pentru butonul KNX cu etichetare dinamică - nickel metalic - MTN6194-6050",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: nickel metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1110
+    },
+    {
+      "reference": "MTN6194-6052",
+      "sourcePage": 115,
+      "name": "Clapetă cu 4 elemente pentru butonul KNX cu etichetare dinamică - moca metalic - MTN6194-6052",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: moca metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 115.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1111
+    },
+    {
+      "reference": "MTN619419",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul cu up/down arrow imprint - alb polar lucios - MTN619419",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1112
+    },
+    {
+      "reference": "MTN619425",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul cu up/down arrow imprint - alb activ lucios - MTN619425",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1113
+    },
+    {
+      "reference": "MTN619519",
+      "sourcePage": 110,
+      "name": "Clapete pentru 2 canale buton modul cu 1/0 and up/down arrow imprint - alb polar lucios - MTN619519",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 110.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1114
+    },
+    {
+      "reference": "MTN619525",
+      "sourcePage": 110,
+      "name": "Clapete pentru 2 canale buton modul cu 1/0 and up/down arrow imprint - alb lucios - MTN619525",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 110.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1115
+    },
+    {
+      "reference": "MTN6212-0319",
+      "sourcePage": 107,
+      "name": "Buton 2 canale plus cu unitate de control al temperaturii ambientale - alb polar lucios - MTN6212-0319",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 107.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1116
+    },
+    {
+      "reference": "MTN6212-0325",
+      "sourcePage": 107,
+      "name": "Buton 2 canale plus cu unitate de control al temperaturii ambientale - alb activ lucios - MTN6212-0325",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 107.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1117
+    },
+    {
+      "reference": "MTN6212-0414",
+      "sourcePage": 107,
+      "name": "Buton 2 canale plus cu unitate de control al temperaturii ambientale - antracit - MTN6212-0414",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 107.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1118
+    },
+    {
+      "reference": "MTN6212-0460",
+      "sourcePage": 107,
+      "name": "Buton 2 canale plus cu unitate de control al temperaturii ambientale - aluminiu - MTN6212-0460",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 107.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1119
+    },
+    {
+      "reference": "MTN6214-0319",
+      "sourcePage": 108,
+      "name": "Buton 4 canale plus cu unitate de control al temperaturii ambientale - alb polar lucios - MTN6214-0319",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 108.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1120
+    },
+    {
+      "reference": "MTN6214-0414",
+      "sourcePage": 108,
+      "name": "Buton 4 canale plus cu unitate de control al temperaturii ambientale - antracit - MTN6214-0414",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 108.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1121
+    },
+    {
+      "reference": "MTN6214-0460",
+      "sourcePage": 108,
+      "name": "Buton 4 canale plus cu unitate de control al temperaturii ambientale - aluminiu - MTN6214-0460",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 108.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CLIMATE",
+      "sortOrder": 1122
+    },
+    {
+      "reference": "MTN6215-0310",
+      "sourcePage": 97,
+      "name": "KNX Multitouch Pro - MTN6215-0310",
+      "description": "KNX Multitouch Pro din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 97.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1123
+    },
+    {
+      "reference": "MTN6215-0410",
+      "sourcePage": 96,
+      "name": "SpaceLogic KNX 4ʺ Unitate tactilă - sticlă - MTN6215-0410",
+      "description": "SpaceLogic KNX 4ʺ Unitate tactilă din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Varianta: sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 96.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1124
+    },
+    {
+      "reference": "MTN6215-0410S",
+      "sourcePage": 95,
+      "name": "Unitate tactilă KNX Secure 4″ - sticlă - MTN6215-0410S",
+      "description": "Unitate tactilă KNX Secure 4″ din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Varianta: sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 95.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1125
+    },
+    {
+      "reference": "MTN6215-5910",
+      "sourcePage": 98,
+      "name": "KNX Multitouch Pro - MTN6215-5910",
+      "description": "KNX Multitouch Pro din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 98.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1126
+    },
+    {
+      "reference": "MTN6216-5910",
+      "sourcePage": 100,
+      "name": "KNX Multitouch Pro - MTN6216-5910",
+      "description": "KNX Multitouch Pro din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 100.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1127
+    },
+    {
+      "reference": "MTN6221-0319",
+      "sourcePage": 233,
+      "name": "Room temperature control unit pentru properties - alb polar lucios - MTN6221-0319",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 233.",
+      "category": "Confortul casei",
+      "illustration": "CLIMATE",
+      "sortOrder": 1128
+    },
+    {
+      "reference": "MTN6221-0325",
+      "sourcePage": 233,
+      "name": "Room temperature control unit pentru properties - alb activ lucios - MTN6221-0325",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 233.",
+      "category": "Confortul casei",
+      "illustration": "CLIMATE",
+      "sortOrder": 1129
+    },
+    {
+      "reference": "MTN6221-0414",
+      "sourcePage": 233,
+      "name": "Room temperature control unit pentru properties - antracit - MTN6221-0414",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 233.",
+      "category": "Confortul casei",
+      "illustration": "CLIMATE",
+      "sortOrder": 1130
+    },
+    {
+      "reference": "MTN625114",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul - antracit - MTN625114",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1131
+    },
+    {
+      "reference": "MTN625160",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul - aluminiu - MTN625160",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1132
+    },
+    {
+      "reference": "MTN625199",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul - In KNX, to be completed with: KNX push-button module, 1-gang System M - MTN625199",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: In KNX, to be completed with: KNX push-button module, 1-gang System M. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1133
+    },
+    {
+      "reference": "MTN625214",
+      "sourcePage": 110,
+      "name": "Clapete pentru 2 canale buton modul - antracit - MTN625214",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 110.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1134
+    },
+    {
+      "reference": "MTN625260",
+      "sourcePage": 110,
+      "name": "Clapete pentru 2 canale buton modul - aluminiu - MTN625260",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 110.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1135
+    },
+    {
+      "reference": "MTN625299",
+      "sourcePage": 110,
+      "name": "Buton KNX modul, 2 canale - MTN625299",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 110.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1136
+    },
+    {
+      "reference": "MTN625514",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul cu up/down arrow imprint - antracit - MTN625514",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1137
+    },
+    {
+      "reference": "MTN625560",
+      "sourcePage": 109,
+      "name": "Clapetă pentru 1 canale buton modul cu up/down arrow imprint - aluminiu - MTN625560",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 109.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1138
+    },
+    {
+      "reference": "MTN6260-7760",
+      "sourcePage": 94,
+      "name": "SpaceLogic KNX Ecran tactil IP 7 - negru - MTN6260-7760",
+      "description": "SpaceLogic KNX Ecran tactil IP 7 din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Varianta: negru. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 94.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1139
+    },
+    {
+      "reference": "MTN6260-7770",
+      "sourcePage": 94,
+      "name": "SpaceLogic KNX Ecran tactil IP 7 - alb - MTN6260-7770",
+      "description": "SpaceLogic KNX Ecran tactil IP 7 din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 94.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1140
+    },
+    {
+      "reference": "MTN6270-0000",
+      "sourcePage": 99,
+      "name": "Protecție anti-demontare - MTN6270-0000",
+      "description": "Protecție anti-demontare din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 99.",
+      "category": "Ecosisteme Smart Home",
+      "illustration": "CUSTOM",
+      "sortOrder": 1141
+    },
+    {
+      "reference": "MTN6270-0010",
+      "sourcePage": 103,
+      "name": "Buton KNX Pro T - Foil set for KNX Push-button Pro - MTN6270-0010",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: Foil set for KNX Push-button Pro. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 103.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1142
+    },
+    {
+      "reference": "MTN6270-0011",
+      "sourcePage": 117,
+      "name": "Buton KNX Foil set pentru, Pro - MTN6270-0011",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 117.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1143
+    },
+    {
+      "reference": "MTN6270-0015",
+      "sourcePage": 120,
+      "name": "Fixing frame pentru 3-modul box - MTN6270-0015",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 120.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1144
+    },
+    {
+      "reference": "MTN627514",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - antracit - MTN627514",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1145
+    },
+    {
+      "reference": "MTN627560",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - aluminiu - MTN627560",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1146
+    },
+    {
+      "reference": "MTN627614",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - MTN627614",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1147
+    },
+    {
+      "reference": "MTN627660",
+      "sourcePage": 105,
+      "name": "Protecție anti-demontare - MTN627660",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 105.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1148
+    },
+    {
+      "reference": "MTN627814",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus - antracit - MTN627814",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1149
+    },
+    {
+      "reference": "MTN627860",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus - aluminiu - MTN627860",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1150
+    },
+    {
+      "reference": "MTN627914",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus cu receptor IR - MTN627914",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1151
+    },
+    {
+      "reference": "MTN627960",
+      "sourcePage": 106,
+      "name": "Buton, 4 canale plus cu receptor IR - MTN627960",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 106.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1152
+    },
+    {
+      "reference": "MTN6300-0002",
+      "sourcePage": 167,
+      "name": "Telecomandă pentru KNX detector de prezență - MTN6300-0002",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 167.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1153
+    },
+    {
+      "reference": "MTN6300-0019",
+      "sourcePage": 161,
+      "name": "SpaceLogic KNX Prezență detector DI - alb - MTN6300-0019",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 161.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1154
+    },
+    {
+      "reference": "MTN6302-6033",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - sahara - MTN6302-6033",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: sahara. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1155
+    },
+    {
+      "reference": "MTN6302-6034",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - antracit - MTN6302-6034",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1156
+    },
+    {
+      "reference": "MTN6302-6035",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - lotus alb - MTN6302-6035",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: lotus alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1157
+    },
+    {
+      "reference": "MTN6302-6036",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - oțel inoxidabil - MTN6302-6036",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1158
+    },
+    {
+      "reference": "MTN6302-6050",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - nickel metalic - MTN6302-6050",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: nickel metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1159
+    },
+    {
+      "reference": "MTN6302-6051",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - champagne metalic - MTN6302-6051",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: champagne metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1160
+    },
+    {
+      "reference": "MTN6302-6052",
+      "sourcePage": 160,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - moca metalic - MTN6302-6052",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: moca metalic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 160.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1161
+    },
+    {
+      "reference": "MTN6303-0019",
+      "sourcePage": 166,
+      "name": "KNX Mini detector de prezență - alb - MTN6303-0019",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 166.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1162
+    },
+    {
+      "reference": "MTN6304-0019",
+      "sourcePage": 162,
+      "name": "KNX High Bay detector de prezență FM - alb - MTN6304-0019",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 162.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1163
+    },
+    {
+      "reference": "MTN630419",
+      "sourcePage": 170,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - alb polar lucios - MTN630419",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 170.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1164
+    },
+    {
+      "reference": "MTN630425",
+      "sourcePage": 170,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - alb activ lucios - MTN630425",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb activ lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 170.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1165
+    },
+    {
+      "reference": "MTN6305-0019",
+      "sourcePage": 163,
+      "name": "KNX Corridor detector de prezență FM - alb - MTN6305-0019",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 163.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1166
+    },
+    {
+      "reference": "MTN630614",
+      "sourcePage": 170,
+      "name": "Detector de prezență KNX ARGUS 180/2.20 m încastrat - antracit - MTN630614",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 170.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1167
+    },
+    {
+      "reference": "MTN630719",
+      "sourcePage": 168,
+      "name": "Detector de prezență KNX ARGUS Basic - alb polar alb polar - MTN630719",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb polar alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 168.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1168
+    },
+    {
+      "reference": "MTN630819",
+      "sourcePage": 168,
+      "name": "Detector de prezență KNX ARGUS - MTN630819",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 168.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1169
+    },
+    {
+      "reference": "MTN630919",
+      "sourcePage": 169,
+      "name": "Detector de prezență KNX ARGUS cu control al luminii și receptor IR - alb polar - MTN630919",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 169.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1170
+    },
+    {
+      "reference": "MTN631719",
+      "sourcePage": 159,
+      "name": "KNX ARGUS 180/2.20 m încastrat - alb polar lucios - MTN631719",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb polar lucios. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 159.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1171
+    },
+    {
+      "reference": "MTN632515",
+      "sourcePage": 158,
+      "name": "KNX ARGUS 220 - dark brazil - MTN632515",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: dark brazil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 158.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1172
+    },
+    {
+      "reference": "MTN632519",
+      "sourcePage": 158,
+      "name": "KNX ARGUS 220 - alb polar - MTN632519",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 158.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1173
+    },
+    {
+      "reference": "MTN632569",
+      "sourcePage": 158,
+      "name": "KNX ARGUS 220 - aluminiu - MTN632569",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 158.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1174
+    },
+    {
+      "reference": "MTN632714",
+      "sourcePage": 159,
+      "name": "KNX ARGUS 180/2.20 m încastrat - antracit - MTN632714",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 159.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1175
+    },
+    {
+      "reference": "MTN6354-0019",
+      "sourcePage": 164,
+      "name": "KNX High Bay detector de prezență - alb - MTN6354-0019",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 164.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1176
+    },
+    {
+      "reference": "MTN6355-0019",
+      "sourcePage": 165,
+      "name": "KNX Corridor detector de prezență - alb - MTN6355-0019",
+      "description": "Senzor KNX pentru detectarea mișcării sau prezenței și automatizarea iluminatului, climatului și scenariilor de clădire. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 165.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1177
+    },
+    {
+      "reference": "MTN639125",
+      "sourcePage": 238,
+      "name": "Thermoelectric servomotor de vană 230 V - alb polar - MTN639125",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 238.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1178
+    },
+    {
+      "reference": "MTN639126",
+      "sourcePage": 239,
+      "name": "Thermoelectric servomotor de vană 24 V - alb polar - MTN639126",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 239.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1179
+    },
+    {
+      "reference": "MTN639150",
+      "sourcePage": 240,
+      "name": "Adaptor de vană VA50 pentru thermoelectric servomotor de vană - MTN639150",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 240.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1180
+    },
+    {
+      "reference": "MTN639178",
+      "sourcePage": 240,
+      "name": "Adaptor de vană VA78 pentru thermoelectric servomotor de vană - MTN639178",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 240.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1181
+    },
+    {
+      "reference": "MTN639180",
+      "sourcePage": 240,
+      "name": "Adaptor de vană VA80 pentru thermoelectric servomotor de vană - MTN639180",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 240.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1182
+    },
+    {
+      "reference": "MTN644492",
+      "sourcePage": 152,
+      "name": "SpaceLogic KNX Intrare binară REG-K/4x10 - gri deschis - MTN644492",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 152.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1183
+    },
+    {
+      "reference": "MTN644592",
+      "sourcePage": 152,
+      "name": "SpaceLogic KNX Intrare binară REG-K/8x10 - gri deschis - MTN644592",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 152.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1184
+    },
+    {
+      "reference": "MTN644692",
+      "sourcePage": 154,
+      "name": "SpaceLogic KNX Intrare binară REG-K/8x230 - gri deschis - MTN644692",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 154.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1185
+    },
+    {
+      "reference": "MTN644792",
+      "sourcePage": 153,
+      "name": "SpaceLogic KNX Intrare binară REG-K/8x24 - gri deschis - MTN644792",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 153.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1186
+    },
+    {
+      "reference": "MTN644892",
+      "sourcePage": 153,
+      "name": "SpaceLogic KNX Intrare binară REG-K/4x24 - gri deschis - MTN644892",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 153.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1187
+    },
+    {
+      "reference": "MTN644992",
+      "sourcePage": 154,
+      "name": "SpaceLogic KNX Intrare binară REG-K/4x230 - gri deschis - MTN644992",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 154.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1188
+    },
+    {
+      "reference": "MTN645094",
+      "sourcePage": 237,
+      "name": "SpaceLogic KNX Actuator pentru ventiloconvector REG-K - gri deschis - MTN645094",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 237.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1189
+    },
+    {
+      "reference": "MTN646991",
+      "sourcePage": 224,
+      "name": "SpaceLogic KNX Unitate de control 0-10 V REG-K/3 canale cu comandă manuală - gri deschis - MTN646991",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 224.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1190
+    },
+    {
+      "reference": "MTN647091",
+      "sourcePage": 223,
+      "name": "SpaceLogic KNX Unitate de control 0-10 V REG-K/1 canale cu comandă manuală - gri deschis - MTN647091",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 223.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1191
+    },
+    {
+      "reference": "MTN647395",
+      "sourcePage": 186,
+      "name": "current detection - gri deschis - MTN647395",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 186.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1192
+    },
+    {
+      "reference": "MTN647593",
+      "sourcePage": 187,
+      "name": "SpaceLogic KNX Actuator de comutare REG-K/4x230/16 cu comandă manuală - gri deschis - MTN647593",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 187.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1193
+    },
+    {
+      "reference": "MTN647595",
+      "sourcePage": 188,
+      "name": "current detection - gri deschis - MTN647595",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 188.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1194
+    },
+    {
+      "reference": "MTN647893",
+      "sourcePage": 192,
+      "name": "SpaceLogic KNX Actuator de comutare REG-K/8x230/16 cu comandă manuală - gri deschis - MTN647893",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 192.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1195
+    },
+    {
+      "reference": "MTN647895",
+      "sourcePage": 193,
+      "name": "current detection - gri deschis - MTN647895",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 193.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1196
+    },
+    {
+      "reference": "MTN648493",
+      "sourcePage": 194,
+      "name": "SpaceLogic KNX Actuator de comutare REG-K/12x230/16 cu comandă manuală - gri deschis - MTN648493",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 194.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1197
+    },
+    {
+      "reference": "MTN648495",
+      "sourcePage": 195,
+      "name": "current detection - gri deschis - MTN648495",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 195.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1198
+    },
+    {
+      "reference": "MTN648704",
+      "sourcePage": 199,
+      "name": "SpaceLogic KNX Actuator pentru jaluzele REG-K/4x24/6 cu comandă manuală - gri deschis - MTN648704",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 199.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1199
+    },
+    {
+      "reference": "MTN649802",
+      "sourcePage": 199,
+      "name": "SpaceLogic KNX Actuator pentru jaluzele REG-K/2x/10 cu comandă manuală - gri deschis - MTN649802",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 199.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1200
+    },
+    {
+      "reference": "MTN649804",
+      "sourcePage": 200,
+      "name": "SpaceLogic KNX Actuator pentru jaluzele REG-K/4x/10 cu comandă manuală - gri deschis - MTN649804",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 200.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1201
+    },
+    {
+      "reference": "MTN649808",
+      "sourcePage": 200,
+      "name": "SpaceLogic KNX Actuator pentru jaluzele REG-K/8x/10 cu comandă manuală - gri deschis - MTN649808",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 200.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1202
+    },
+    {
+      "reference": "MTN6500-0101",
+      "sourcePage": 75,
+      "name": "SpaceLogic KNX Coupler pentru șină DIN - MTN6500-0101",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 75.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1203
+    },
+    {
+      "reference": "MTN6500-0103",
+      "sourcePage": 75,
+      "name": "SpaceLogic KNX Router IP pentru șină DIN - MTN6500-0103",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 75.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1204
+    },
+    {
+      "reference": "MTN6502-0101",
+      "sourcePage": 76,
+      "name": "SpaceLogic KNX USB Interface pentru șină DIN - MTN6502-0101",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 76.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1205
+    },
+    {
+      "reference": "MTN6502-0105",
+      "sourcePage": 76,
+      "name": "SpaceLogic KNX IP Interface pentru șină DIN - MTN6502-0105",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 76.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1206
+    },
+    {
+      "reference": "MTN6513-1201",
+      "sourcePage": 72,
+      "name": "SpaceLogic KNX Sursă de alimentare 1280 mA - MTN6513-1201",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 72.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1207
+    },
+    {
+      "reference": "MTN6513-1202",
+      "sourcePage": 71,
+      "name": "SpaceLogic KNX Sursă de alimentare 640 mA - MTN6513-1202",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 71.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1208
+    },
+    {
+      "reference": "MTN6513-1203",
+      "sourcePage": 71,
+      "name": "SpaceLogic KNX Sursă de alimentare 320 mA - MTN6513-1203",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 71.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1209
+    },
+    {
+      "reference": "MTN6600-0603",
+      "sourcePage": 79,
+      "name": "SpaceLogic KNX Contor de energie, REG-K/3x230 V/16 A - gri deschis - MTN6600-0603",
+      "description": "Componentă pentru măsurarea și monitorizarea energiei, integrabilă în sisteme KNX și de management al clădirii. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 79.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1210
+    },
+    {
+      "reference": "MTN6606-0008",
+      "sourcePage": 174,
+      "name": "SpaceLogic KNX Ceas programator anual REG-K/8/800 - MTN6606-0008",
+      "description": "Senzor pentru colectarea datelor de mediu și transmiterea lor către automatizarea KNX sau intrările analogice compatibile. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 174.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1211
+    },
+    {
+      "reference": "MTN663529",
+      "sourcePage": 241,
+      "name": "SpaceLogic KNX Power supply REG, AC 24 V/1 A - gri deschis - MTN663529",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 241.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1212
+    },
+    {
+      "reference": "MTN663591",
+      "sourcePage": 173,
+      "name": "Senzor de vânt cu 0-10 V interface - alb polar alb polar - MTN663591",
+      "description": "Componentă de sistem pentru conectarea, programarea sau integrarea instalației KNX cu rețele și servicii de automatizare. Varianta: alb polar alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 173.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1213
+    },
+    {
+      "reference": "MTN663592",
+      "sourcePage": 173,
+      "name": "Senzor de vânt cu 0-10 V interface and heating - MTN663592",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 173.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1214
+    },
+    {
+      "reference": "MTN663991",
+      "sourcePage": 171,
+      "name": "KNX brightness and temperature sensor - gri deschis - MTN663991",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 171.",
+      "category": "Confortul casei",
+      "illustration": "CLIMATE",
+      "sortOrder": 1215
+    },
+    {
+      "reference": "MTN668990",
+      "sourcePage": 74,
+      "name": "SpaceLogic KNX REG emergency sursă de alimentare - Accessories: Lead gel battery - MTN668990",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Varianta: Accessories: Lead gel battery. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 74.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1216
+    },
+    {
+      "reference": "MTN668991",
+      "sourcePage": 74,
+      "name": "SpaceLogic KNX REG emergency sursă de alimentare - MTN668991",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 74.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1217
+    },
+    {
+      "reference": "MTN6700-0104",
+      "sourcePage": 204,
+      "name": "SpaceLogic KNX Actuator hibrid de comutare REG-K/4x250/10 cu comandă manuală - 4 canale, alb - MTN6700-0104",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 4 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 204.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1218
+    },
+    {
+      "reference": "MTN6700-0108",
+      "sourcePage": 205,
+      "name": "SpaceLogic KNX Actuator hibrid de comutare REG-K/8x250/10 cu comandă manuală - 8 canale, alb - MTN6700-0108",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 8 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 205.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1219
+    },
+    {
+      "reference": "MTN6700-0116",
+      "sourcePage": 206,
+      "name": "SpaceLogic KNX Actuator hibrid de comutare REG-K/16x250/10 cu comandă manuală - 16 canale, alb - MTN6700-0116",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 16 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 206.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1220
+    },
+    {
+      "reference": "MTN6700-0124",
+      "sourcePage": 207,
+      "name": "SpaceLogic KNX Actuator hibrid de comutare REG-K/24x250/10 cu comandă manuală - 24 canale, alb - MTN6700-0124",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 24 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 207.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1221
+    },
+    {
+      "reference": "MTN6700-0304",
+      "sourcePage": 208,
+      "name": "SpaceLogic KNX Actuator de comutare REG-K/4x250/20 cu comandă manuală - 4 canale, alb - MTN6700-0304",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 4 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 208.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1222
+    },
+    {
+      "reference": "MTN6700-0308",
+      "sourcePage": 209,
+      "name": "SpaceLogic KNX Actuator de comutare REG-K/8x250/20 cu comandă manuală - 8 canale, alb - MTN6700-0308",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 8 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 209.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1223
+    },
+    {
+      "reference": "MTN6700-0312",
+      "sourcePage": 210,
+      "name": "SpaceLogic KNX Actuator de comutare REG-K/12x250/20 cu comandă manuală - 12 canale, alb - MTN6700-0312",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Varianta: 12 canale, alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 210.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1224
+    },
+    {
+      "reference": "MTN6705-0008",
+      "sourcePage": 190,
+      "name": "SpaceLogic KNX Switch/Blind Master - alb - MTN6705-0008",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 190.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1225
+    },
+    {
+      "reference": "MTN6705-0008S",
+      "sourcePage": 189,
+      "name": "SpaceLogic KNX, Secure, Switch/Blind Master - alb - MTN6705-0008S",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 189.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1226
+    },
+    {
+      "reference": "MTN670802",
+      "sourcePage": 148,
+      "name": "Interfață pentru butoane, 2 canale plus - alb polar - MTN670802",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 148.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1227
+    },
+    {
+      "reference": "MTN670804",
+      "sourcePage": 148,
+      "name": "Interfață pentru butoane, 4 canale plus - alb polar - MTN670804",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb polar. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 148.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1228
+    },
+    {
+      "reference": "MTN6710-0004",
+      "sourcePage": 222,
+      "name": "SpaceLogic KNX universal dimming actuator LL REG-K/4x230/250 W - gri deschis - MTN6710-0004",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 222.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1229
+    },
+    {
+      "reference": "MTN6710-0102",
+      "sourcePage": 218,
+      "name": "SpaceLogic KNX universal Dimming Master - alb - MTN6710-0102",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 218.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1230
+    },
+    {
+      "reference": "MTN6710-0102S",
+      "sourcePage": 217,
+      "name": "SpaceLogic KNX, Secure, Dimmer Master - alb - MTN6710-0102S",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 217.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1231
+    },
+    {
+      "reference": "MTN6710-1102",
+      "sourcePage": 221,
+      "name": "SpaceLogic KNX, 2 channel 1100 VA universal dimmer - alb - MTN6710-1102",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 221.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1232
+    },
+    {
+      "reference": "MTN6720-0004",
+      "sourcePage": 225,
+      "name": "SpaceLogic KNX, 4 channel 1-10 V dimmer cu comandă manuală - alb - MTN6720-0004",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 225.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1233
+    },
+    {
+      "reference": "MTN6720-0008",
+      "sourcePage": 226,
+      "name": "SpaceLogic KNX, 8 channel 1-10 V dimmer cu comandă manuală - alb - MTN6720-0008",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 226.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1234
+    },
+    {
+      "reference": "MTN6725-0003",
+      "sourcePage": 92,
+      "name": "SpaceLogic KNX DALI Gateway Basic REG-K/1/16/64 - MTN6725-0003",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 92.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1235
+    },
+    {
+      "reference": "MTN6725-0004",
+      "sourcePage": 93,
+      "name": "SpaceLogic KNX DALI Gateway Basic REG-K/2/16/64 - MTN6725-0004",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 93.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1236
+    },
+    {
+      "reference": "MTN6725-0005S",
+      "sourcePage": 90,
+      "name": "SpaceLogic KNX DALI Gateway Broadcast Master 4 channel/32 - alb - MTN6725-0005S",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 90.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1237
+    },
+    {
+      "reference": "MTN6725-0101",
+      "sourcePage": 91,
+      "name": "SpaceLogic KNX DALI Gateway Pro - MTN6725-0101",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 91.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1238
+    },
+    {
+      "reference": "MTN6730-0002",
+      "sourcePage": 235,
+      "name": "SpaceLogic KNX Valve Drive Controller - alb - MTN6730-0002",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 235.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1239
+    },
+    {
+      "reference": "MTN6730-0003",
+      "sourcePage": 236,
+      "name": "SpaceLogic KNX Fan Coil 0-10 V Controller - alb - MTN6730-0003",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 236.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1240
+    },
+    {
+      "reference": "MTN676090",
+      "sourcePage": 78,
+      "name": "SpaceLogic KNX Logic modul Basic REG-K - gri deschis - MTN676090",
+      "description": "SpaceLogic KNX Logic modul Basic REG-K din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 78.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1241
+    },
+    {
+      "reference": "MTN6805-0008",
+      "sourcePage": 191,
+      "name": "SpaceLogic KNX Switch/Blind Extension - alb - MTN6805-0008",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 191.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1242
+    },
+    {
+      "reference": "MTN6810-0102",
+      "sourcePage": 219,
+      "name": "SpaceLogic KNX universal Dimming Extension - alb - MTN6810-0102",
+      "description": "Echipament KNX pentru controlul și reglarea iluminatului, cu scene și parametri configurabili în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 219.",
+      "category": "Iluminat inteligent",
+      "illustration": "CUSTOM",
+      "sortOrder": 1243
+    },
+    {
+      "reference": "MTN683832",
+      "sourcePage": 72,
+      "name": "SpaceLogic KNX Sursă de alimentare 1280 mA - MTN683832",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 72.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1244
+    },
+    {
+      "reference": "MTN683890",
+      "sourcePage": 73,
+      "name": "SpaceLogic KNX sursă de alimentare REG-K/640 mA cu emergency power input - MTN683890",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 73.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1245
+    },
+    {
+      "reference": "MTN683901",
+      "sourcePage": 74,
+      "name": "SpaceLogic KNX REG emergency sursă de alimentare - gri deschis - MTN683901",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 74.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1246
+    },
+    {
+      "reference": "MTN684032",
+      "sourcePage": 72,
+      "name": "SpaceLogic KNX Sursă de alimentare 1280 mA - gri deschis gri deschis - MTN684032",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Varianta: gri deschis gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 72.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1247
+    },
+    {
+      "reference": "MTN684064",
+      "sourcePage": 73,
+      "name": "SpaceLogic KNX sursă de alimentare REG-K/640 mA - gri deschis gri deschis - MTN684064",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Varianta: gri deschis gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 73.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1248
+    },
+    {
+      "reference": "MTN689701",
+      "sourcePage": 77,
+      "name": "Bornă de conectare magistrală - red/gri închis yellow/alb - MTN689701",
+      "description": "Bornă de conectare magistrală din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Varianta: red/gri închis yellow/alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 77.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1249
+    },
+    {
+      "reference": "MTN689702",
+      "sourcePage": 77,
+      "name": "Bornă de derivație, yellow/white - MTN689702",
+      "description": "Bornă de derivație, yellow/white din gama Schneider Electric SpaceLogic KNX, pentru integrare în instalații rezidențiale și comerciale. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 77.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1250
+    },
+    {
+      "reference": "MTN6904-0001",
+      "sourcePage": 172,
+      "name": "KNX weather station Basic V2 - MTN6904-0001",
+      "description": "Senzor pentru colectarea datelor de mediu și transmiterea lor către automatizarea KNX sau intrările analogice compatibile. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 172.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1251
+    },
+    {
+      "reference": "MTN6904-0002",
+      "sourcePage": 172,
+      "name": "KNX weather station Basic V2 - Accessories: Mast and corner fastening for KNX weather station Basic V2 - MTN6904-0002",
+      "description": "Senzor pentru colectarea datelor de mediu și transmiterea lor către automatizarea KNX sau intrările analogice compatibile. Varianta: Accessories: Mast and corner fastening for KNX weather station Basic V2. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 172.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1252
+    },
+    {
+      "reference": "MTN6921-0001",
+      "sourcePage": 237,
+      "name": "KNX servomotor de vană cu status LED and 2 inputs - MTN6921-0001",
+      "description": "Componentă KNX pentru controlul temperaturii și instalațiilor HVAC, utilizabilă în automatizarea zonală a încăperilor. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 237.",
+      "category": "Confortul casei",
+      "illustration": "CUSTOM",
+      "sortOrder": 1253
+    },
+    {
+      "reference": "MTN693003",
+      "sourcePage": 241,
+      "name": "SpaceLogic KNX Power supply REG, 24 V DC / 0.4 A - gri deschis - MTN693003",
+      "description": "Sursă de alimentare pentru infrastructura KNX, destinată montajului în tabloul electric și funcționării continue a magistralei. Varianta: gri deschis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 241.",
+      "category": "Gateway-uri & telecomenzi",
+      "illustration": "CUSTOM",
+      "sortOrder": 1254
+    },
+    {
+      "reference": "MTN6940-0000",
+      "sourcePage": 191,
+      "name": "SpaceLogic KNX Modul de legătură - MTN6940-0000",
+      "description": "Echipament KNX pentru comutarea sarcinilor sau preluarea contactelor binare, destinat montajului profesional și configurării ETS. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 191.",
+      "category": "Prize / relee smart",
+      "illustration": "CUSTOM",
+      "sortOrder": 1255
+    },
+    {
+      "reference": "MTN6941-0001",
+      "sourcePage": 191,
+      "name": "SpaceLogic KNX Switch/Blind Extension - Accessories: SpaceLogic KNX Cable Link S SpaceLogic KNX Cable Link L - MTN6941-0001",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Varianta: Accessories: SpaceLogic KNX Cable Link S SpaceLogic KNX Cable Link L. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 191.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1256
+    },
+    {
+      "reference": "MTN6941-0002",
+      "sourcePage": 191,
+      "name": "SpaceLogic KNX Switch/Blind Extension - MTN6941-0002",
+      "description": "Actuator KNX pentru controlul independent al jaluzelelor, rulourilor sau copertinelor, cu poziționare și funcții de siguranță. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 191.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "BLINDS",
+      "sortOrder": 1257
+    },
+    {
+      "reference": "NP16161_01BK_E1",
+      "sourcePage": 126,
+      "name": "Buton KNX Unica, 2 taste - gri închis termoplastic - NP16161_01BK_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 126.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1258
+    },
+    {
+      "reference": "NP16161_01MS",
+      "sourcePage": 133,
+      "name": "Buton KNX Unica, 2 taste - metalic argintiu termoplastic - NP16161_01MS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: metalic argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 133.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1259
+    },
+    {
+      "reference": "NP16161_01SL",
+      "sourcePage": 133,
+      "name": "Buton KNX Unica, 2 taste - argintiu termoplastic - NP16161_01SL",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 133.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1260
+    },
+    {
+      "reference": "NP16161_01SL_E1",
+      "sourcePage": 126,
+      "name": "Buton KNX Unica, 2 taste - argintiu termoplastic - NP16161_01SL_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 126.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1261
+    },
+    {
+      "reference": "NP16161_01WG",
+      "sourcePage": 133,
+      "name": "Buton KNX Unica, 2 taste - wine gold termoplastic - NP16161_01WG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 133.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1262
+    },
+    {
+      "reference": "NP16161_01WG_E1",
+      "sourcePage": 126,
+      "name": "Buton KNX Unica, 2 taste - wine gold termoplastic - NP16161_01WG_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 126.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1263
+    },
+    {
+      "reference": "NP16162_01BK_E1",
+      "sourcePage": 127,
+      "name": "Buton KNX Unica, 4 taste - gri închis termoplastic - NP16162_01BK_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 127.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1264
+    },
+    {
+      "reference": "NP16162_01MS",
+      "sourcePage": 134,
+      "name": "Buton KNX Unica, 4 taste - metalic argintiu termoplastic - NP16162_01MS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: metalic argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 134.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1265
+    },
+    {
+      "reference": "NP16162_01SL",
+      "sourcePage": 134,
+      "name": "Buton KNX Unica, 4 taste - argintiu termoplastic - NP16162_01SL",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 134.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1266
+    },
+    {
+      "reference": "NP16162_01SL_E1",
+      "sourcePage": 127,
+      "name": "Buton KNX Unica, 4 taste - argintiu termoplastic - NP16162_01SL_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 127.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1267
+    },
+    {
+      "reference": "NP16162_01WG",
+      "sourcePage": 134,
+      "name": "Buton KNX Unica, 4 taste - wine gold termoplastic - NP16162_01WG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 134.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1268
+    },
+    {
+      "reference": "NP16162_01WG_E1",
+      "sourcePage": 127,
+      "name": "Buton KNX Unica, 4 taste - wine gold termoplastic - NP16162_01WG_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 127.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1269
+    },
+    {
+      "reference": "NP16163_01BK_E1",
+      "sourcePage": 128,
+      "name": "Buton KNX Unica, 6 taste - gri închis termoplastic - NP16163_01BK_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 128.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1270
+    },
+    {
+      "reference": "NP16163_01MS",
+      "sourcePage": 135,
+      "name": "Buton KNX Unica, 6 taste - metalic argintiu termoplastic - NP16163_01MS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: metalic argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 135.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1271
+    },
+    {
+      "reference": "NP16163_01SL",
+      "sourcePage": 135,
+      "name": "Buton KNX Unica, 6 taste - argintiu termoplastic - NP16163_01SL",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 135.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1272
+    },
+    {
+      "reference": "NP16163_01SL_E1",
+      "sourcePage": 128,
+      "name": "Buton KNX Unica, 6 taste - argintiu termoplastic - NP16163_01SL_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 128.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1273
+    },
+    {
+      "reference": "NP16163_01WG",
+      "sourcePage": 135,
+      "name": "Buton KNX Unica, 6 taste - wine gold termoplastic - NP16163_01WG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 135.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1274
+    },
+    {
+      "reference": "NP16163_01WG_E1",
+      "sourcePage": 128,
+      "name": "Buton KNX Unica, 6 taste - wine gold termoplastic - NP16163_01WG_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 128.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1275
+    },
+    {
+      "reference": "NP16164_01BK_E1",
+      "sourcePage": 129,
+      "name": "Buton KNX Unica, 8 taste - gri închis termoplastic - NP16164_01BK_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 129.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1276
+    },
+    {
+      "reference": "NP16164_01MS",
+      "sourcePage": 136,
+      "name": "Buton KNX Unica, 8 taste - metalic argintiu termoplastic - NP16164_01MS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: metalic argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 136.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1277
+    },
+    {
+      "reference": "NP16164_01SL",
+      "sourcePage": 136,
+      "name": "Buton KNX Unica, 8 taste - argintiu termoplastic - NP16164_01SL",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 136.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1278
+    },
+    {
+      "reference": "NP16164_01SL_E1",
+      "sourcePage": 129,
+      "name": "Buton KNX Unica, 8 taste - argintiu termoplastic - NP16164_01SL_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 129.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1279
+    },
+    {
+      "reference": "NP16164_01WG",
+      "sourcePage": 136,
+      "name": "Buton KNX Unica, 8 taste - wine gold termoplastic - NP16164_01WG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 136.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1280
+    },
+    {
+      "reference": "NP16164_01WG_E1",
+      "sourcePage": 129,
+      "name": "Buton KNX Unica, 8 taste - wine gold termoplastic - NP16164_01WG_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 129.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1281
+    },
+    {
+      "reference": "NP16212_01BK_E1",
+      "sourcePage": 130,
+      "name": "Buton KNX Unica, 5 taste plus termostat - gri închis termoplastic - NP16212_01BK_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 130.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1282
+    },
+    {
+      "reference": "NP16212_01MS",
+      "sourcePage": 137,
+      "name": "Buton KNX Unica, 5 taste plus termostat - metalic argintiu termoplastic - NP16212_01MS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: metalic argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 137.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1283
+    },
+    {
+      "reference": "NP16212_01SL",
+      "sourcePage": 137,
+      "name": "Buton KNX Unica, 5 taste plus termostat - argintiu termoplastic - NP16212_01SL",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 137.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1284
+    },
+    {
+      "reference": "NP16212_01SL_E1",
+      "sourcePage": 130,
+      "name": "Buton KNX Unica, 5 taste plus termostat - argintiu termoplastic - NP16212_01SL_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 130.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1285
+    },
+    {
+      "reference": "NP16212_01WG",
+      "sourcePage": 137,
+      "name": "Buton KNX Unica, 5 taste plus termostat - wine gold termoplastic - NP16212_01WG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 137.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1286
+    },
+    {
+      "reference": "NP16212_01WG_E1",
+      "sourcePage": 130,
+      "name": "Buton KNX Unica, 5 taste plus termostat - wine gold termoplastic - NP16212_01WG_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 130.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1287
+    },
+    {
+      "reference": "NP16214_01BK_E1",
+      "sourcePage": 131,
+      "name": "Buton KNX Unica, 8 taste plus termostat - gri închis termoplastic - NP16214_01BK_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 131.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1288
+    },
+    {
+      "reference": "NP16214_01MS",
+      "sourcePage": 138,
+      "name": "Buton KNX Unica, 8 taste plus termostat - metalic argintiu termoplastic - NP16214_01MS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: metalic argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 138.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1289
+    },
+    {
+      "reference": "NP16214_01SL",
+      "sourcePage": 138,
+      "name": "Buton KNX Unica, 8 taste plus termostat - argintiu termoplastic - NP16214_01SL",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 138.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1290
+    },
+    {
+      "reference": "NP16214_01SL_E1",
+      "sourcePage": 131,
+      "name": "Buton KNX Unica, 8 taste plus termostat - argintiu termoplastic - NP16214_01SL_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: argintiu termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 131.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1291
+    },
+    {
+      "reference": "NP16214_01WG",
+      "sourcePage": 138,
+      "name": "Buton KNX Unica, 8 taste plus termostat - wine gold termoplastic - NP16214_01WG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 138.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1292
+    },
+    {
+      "reference": "NP16214_01WG_E1",
+      "sourcePage": 131,
+      "name": "Buton KNX Unica, 8 taste plus termostat - wine gold termoplastic - NP16214_01WG_E1",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: wine gold termoplastic. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 131.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1293
+    },
+    {
+      "reference": "NP16260_0104",
+      "sourcePage": 132,
+      "name": "Unica KNX 4.0 inch touch screen - sticlă - NP16260_0104",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: sticlă. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 132.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1294
+    },
+    {
+      "reference": "NU553018",
+      "sourcePage": 145,
+      "name": "Buton KNX single - alb - NU553018",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 145.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1295
+    },
+    {
+      "reference": "NU553030",
+      "sourcePage": 145,
+      "name": "Buton KNX single - aluminiu - NU553030",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 145.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1296
+    },
+    {
+      "reference": "NU553054",
+      "sourcePage": 145,
+      "name": "Buton KNX single - antracit - NU553054",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 145.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1297
+    },
+    {
+      "reference": "NU553118",
+      "sourcePage": 145,
+      "name": "Buton KNX dublu - alb - NU553118",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 145.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1298
+    },
+    {
+      "reference": "NU553130",
+      "sourcePage": 145,
+      "name": "Buton KNX dublu - aluminiu - NU553130",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: aluminiu. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 145.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1299
+    },
+    {
+      "reference": "NU553154",
+      "sourcePage": 145,
+      "name": "Buton KNX dublu - antracit - NU553154",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: antracit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 145.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1300
+    },
+    {
+      "reference": "NUX6161_02_AB",
+      "sourcePage": 139,
+      "name": "Buton KNX Unica X, 2 taste - alamă antichizată - NUX6161_02_AB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alamă antichizată. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 139.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1301
+    },
+    {
+      "reference": "NUX6161_02_DB",
+      "sourcePage": 139,
+      "name": "Buton KNX Unica X, 2 taste - bronz închis - NUX6161_02_DB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: bronz închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 139.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1302
+    },
+    {
+      "reference": "NUX6161_02_DG",
+      "sourcePage": 139,
+      "name": "Buton KNX Unica X, 2 taste - gri închis - NUX6161_02_DG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 139.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1303
+    },
+    {
+      "reference": "NUX6161_02_JB",
+      "sourcePage": 139,
+      "name": "Buton KNX Unica X, 2 taste - negru intens - NUX6161_02_JB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru intens. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 139.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1304
+    },
+    {
+      "reference": "NUX6161_02_PW",
+      "sourcePage": 139,
+      "name": "Buton KNX Unica X, 2 taste - alb vopsit - NUX6161_02_PW",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb vopsit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 139.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1305
+    },
+    {
+      "reference": "NUX6161_02_SS",
+      "sourcePage": 139,
+      "name": "Buton KNX Unica X, 2 taste - oțel inoxidabil - NUX6161_02_SS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 139.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1306
+    },
+    {
+      "reference": "NUX6162_02_AB",
+      "sourcePage": 140,
+      "name": "Buton KNX Unica X, 4 taste - alamă antichizată - NUX6162_02_AB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alamă antichizată. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 140.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1307
+    },
+    {
+      "reference": "NUX6162_02_DB",
+      "sourcePage": 140,
+      "name": "Buton KNX Unica X, 4 taste - bronz închis - NUX6162_02_DB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: bronz închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 140.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1308
+    },
+    {
+      "reference": "NUX6162_02_DG",
+      "sourcePage": 140,
+      "name": "Buton KNX Unica X, 4 taste - gri închis - NUX6162_02_DG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 140.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1309
+    },
+    {
+      "reference": "NUX6162_02_JB",
+      "sourcePage": 140,
+      "name": "Buton KNX Unica X, 4 taste - negru intens - NUX6162_02_JB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru intens. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 140.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1310
+    },
+    {
+      "reference": "NUX6162_02_PW",
+      "sourcePage": 140,
+      "name": "Buton KNX Unica X, 4 taste - alb vopsit - NUX6162_02_PW",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb vopsit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 140.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1311
+    },
+    {
+      "reference": "NUX6162_02_SS",
+      "sourcePage": 140,
+      "name": "Buton KNX Unica X, 4 taste - oțel inoxidabil - NUX6162_02_SS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 140.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1312
+    },
+    {
+      "reference": "NUX6163_02_AB",
+      "sourcePage": 141,
+      "name": "Buton KNX Unica X, 6 taste - alamă antichizată - NUX6163_02_AB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alamă antichizată. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 141.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1313
+    },
+    {
+      "reference": "NUX6163_02_DB",
+      "sourcePage": 141,
+      "name": "Buton KNX Unica X, 6 taste - bronz închis - NUX6163_02_DB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: bronz închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 141.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1314
+    },
+    {
+      "reference": "NUX6163_02_DG",
+      "sourcePage": 141,
+      "name": "Buton KNX Unica X, 6 taste - gri închis - NUX6163_02_DG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 141.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1315
+    },
+    {
+      "reference": "NUX6163_02_JB",
+      "sourcePage": 141,
+      "name": "Buton KNX Unica X, 6 taste - negru intens - NUX6163_02_JB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru intens. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 141.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1316
+    },
+    {
+      "reference": "NUX6163_02_PW",
+      "sourcePage": 141,
+      "name": "Buton KNX Unica X, 6 taste - alb vopsit - NUX6163_02_PW",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb vopsit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 141.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1317
+    },
+    {
+      "reference": "NUX6163_02_SS",
+      "sourcePage": 141,
+      "name": "Buton KNX Unica X, 6 taste - oțel inoxidabil - NUX6163_02_SS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 141.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1318
+    },
+    {
+      "reference": "NUX6164_02_AB",
+      "sourcePage": 142,
+      "name": "Buton KNX Unica X, 8 taste - alamă antichizată - NUX6164_02_AB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alamă antichizată. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 142.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1319
+    },
+    {
+      "reference": "NUX6164_02_DB",
+      "sourcePage": 142,
+      "name": "Buton KNX Unica X, 8 taste - bronz închis - NUX6164_02_DB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: bronz închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 142.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1320
+    },
+    {
+      "reference": "NUX6164_02_DG",
+      "sourcePage": 142,
+      "name": "Buton KNX Unica X, 8 taste - gri închis - NUX6164_02_DG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 142.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1321
+    },
+    {
+      "reference": "NUX6164_02_JB",
+      "sourcePage": 142,
+      "name": "Buton KNX Unica X, 8 taste - negru intens - NUX6164_02_JB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru intens. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 142.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1322
+    },
+    {
+      "reference": "NUX6164_02_PW",
+      "sourcePage": 142,
+      "name": "Buton KNX Unica X, 8 taste - alb vopsit - NUX6164_02_PW",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb vopsit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 142.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1323
+    },
+    {
+      "reference": "NUX6164_02_SS",
+      "sourcePage": 142,
+      "name": "Buton KNX Unica X, 8 taste - oțel inoxidabil - NUX6164_02_SS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 142.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1324
+    },
+    {
+      "reference": "NUX6212_02_AB",
+      "sourcePage": 143,
+      "name": "Buton KNX Unica X, 5 taste termostat - alamă antichizată - NUX6212_02_AB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alamă antichizată. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 143.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1325
+    },
+    {
+      "reference": "NUX6212_02_DB",
+      "sourcePage": 143,
+      "name": "Buton KNX Unica X, 5 taste termostat - bronz închis - NUX6212_02_DB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: bronz închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 143.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1326
+    },
+    {
+      "reference": "NUX6212_02_DG",
+      "sourcePage": 143,
+      "name": "Buton KNX Unica X, 5 taste termostat - gri închis - NUX6212_02_DG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 143.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1327
+    },
+    {
+      "reference": "NUX6212_02_JB",
+      "sourcePage": 143,
+      "name": "Buton KNX Unica X, 5 taste termostat - negru intens - NUX6212_02_JB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru intens. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 143.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1328
+    },
+    {
+      "reference": "NUX6212_02_PW",
+      "sourcePage": 143,
+      "name": "Buton KNX Unica X, 5 taste termostat - alb vopsit - NUX6212_02_PW",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb vopsit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 143.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1329
+    },
+    {
+      "reference": "NUX6212_02_SS",
+      "sourcePage": 143,
+      "name": "Buton KNX Unica X, 5 taste termostat - oțel inoxidabil - NUX6212_02_SS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 143.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1330
+    },
+    {
+      "reference": "NUX6214_02_AB",
+      "sourcePage": 144,
+      "name": "Buton KNX Unica X, 8 taste termostat - alamă antichizată - NUX6214_02_AB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alamă antichizată. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 144.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1331
+    },
+    {
+      "reference": "NUX6214_02_DB",
+      "sourcePage": 144,
+      "name": "Buton KNX Unica X, 8 taste termostat - bronz închis - NUX6214_02_DB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: bronz închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 144.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1332
+    },
+    {
+      "reference": "NUX6214_02_DG",
+      "sourcePage": 144,
+      "name": "Buton KNX Unica X, 8 taste termostat - gri închis - NUX6214_02_DG",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: gri închis. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 144.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1333
+    },
+    {
+      "reference": "NUX6214_02_JB",
+      "sourcePage": 144,
+      "name": "Buton KNX Unica X, 8 taste termostat - negru intens - NUX6214_02_JB",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: negru intens. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 144.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1334
+    },
+    {
+      "reference": "NUX6214_02_PW",
+      "sourcePage": 144,
+      "name": "Buton KNX Unica X, 8 taste termostat - alb vopsit - NUX6214_02_PW",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: alb vopsit. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 144.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1335
+    },
+    {
+      "reference": "NUX6214_02_SS",
+      "sourcePage": 144,
+      "name": "Buton KNX Unica X, 8 taste termostat - oțel inoxidabil - NUX6214_02_SS",
+      "description": "Element KNX pentru comanda iluminatului, jaluzelelor, scenelor și funcțiilor de cameră, configurabil în ETS. Varianta: oțel inoxidabil. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 144.",
+      "category": "Întrerupătoare & umbrire",
+      "illustration": "CUSTOM",
+      "sortOrder": 1336
+    },
+    {
+      "reference": "R9M80X6M",
+      "sourcePage": 80,
+      "name": "Resi9 Contor de energie cablat, Single Phase, 80A, 6 canale - 80 A, 6 circuite - R9M80X6M",
+      "description": "Componentă pentru măsurarea și monitorizarea energiei, integrabilă în sisteme KNX și de management al clădirii. Varianta: 80 A, 6 circuite. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 80.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1337
+    },
+    {
+      "reference": "R9MCT160",
+      "sourcePage": 82,
+      "name": "SET of 3 Resi9 transformatoare de curent 160 A - R9MCT160",
+      "description": "Componentă pentru măsurarea și monitorizarea energiei, integrabilă în sisteme KNX și de management al clădirii. Varianta: 160 A. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 82.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1338
+    },
+    {
+      "reference": "R9MCT250",
+      "sourcePage": 82,
+      "name": "SET of 3 Resi9 transformatoare de curent 250 A - R9MCT250",
+      "description": "Componentă pentru măsurarea și monitorizarea energiei, integrabilă în sisteme KNX și de management al clădirii. Varianta: 250 A. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 82.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1339
+    },
+    {
+      "reference": "R9MCT80",
+      "sourcePage": 82,
+      "name": "Set de 6 Resi9 transformatoare de curent 80 A - R9MCT80",
+      "description": "Componentă pentru măsurarea și monitorizarea energiei, integrabilă în sisteme KNX și de management al clădirii. Varianta: 80 A. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 82.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1340
+    },
+    {
+      "reference": "R9MUX6M",
+      "sourcePage": 81,
+      "name": "Resi9 Contor de energie cablat, universal, 80A/160A/250A, 6 canale - 80 A, 160 A, 250 A, 6 circuite - R9MUX6M",
+      "description": "Componentă pentru măsurarea și monitorizarea energiei, integrabilă în sisteme KNX și de management al clădirii. Varianta: 80 A, 160 A, 250 A, 6 circuite. Traducere și sinteză tehnică după catalogul Schneider Electric KNX 2025, pagina 81.",
+      "category": "Accesorii & senzori",
+      "illustration": "CUSTOM",
+      "sortOrder": 1341
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
+import type { Prisma } from "@prisma/client";
 import {
   ArrowRight,
   Blinds,
@@ -45,6 +46,25 @@ const categories = productCategories.map((label, index) => ({
   icon: categoryIcons[index] ?? HousePlug,
   label,
 }));
+
+type CatalogSearchParams = {
+  page?: string;
+  q?: string;
+  category?: string;
+};
+
+function catalogHref({
+  page,
+  query,
+  category,
+}: Readonly<{ page?: number; query?: string; category?: string }>): Route {
+  const params = new URLSearchParams();
+  if (page && page > 1) params.set("page", String(page));
+  if (query) params.set("q", query);
+  if (category) params.set("category", category);
+  const search = params.toString();
+  return `${search ? `/?${search}` : "/"}#produse` as Route;
+}
 
 const ecosystemCards = [
   {
@@ -134,11 +154,38 @@ function Filter({ title, values }: Readonly<{ title: string; values: string[] }>
   );
 }
 
-export default async function HomePage() {
-  const products = await prisma.product.findMany({
-    where: { active: true },
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-  });
+export default async function HomePage({
+  searchParams,
+}: Readonly<{ searchParams: Promise<CatalogSearchParams> }>) {
+  const params = await searchParams;
+  const query = params.q?.trim().slice(0, 100) ?? "";
+  const category = productCategories.find((item) => item === params.category);
+  const requestedPage = Number.parseInt(params.page ?? "1", 10);
+  const currentPage = Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+  const pageSize = 30;
+  const where: Prisma.ProductWhereInput = {
+    active: true,
+    ...(category ? { category } : {}),
+    ...(query
+      ? {
+          OR: [
+            { name: { contains: query, mode: "insensitive" } },
+            { brand: { contains: query, mode: "insensitive" } },
+            { description: { contains: query, mode: "insensitive" } },
+          ],
+        }
+      : {}),
+  };
+  const [products, totalProducts] = await Promise.all([
+    prisma.product.findMany({
+      where,
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+      skip: (currentPage - 1) * pageSize,
+      take: pageSize,
+    }),
+    prisma.product.count({ where }),
+  ]);
+  const totalPages = Math.max(1, Math.ceil(totalProducts / pageSize));
   return (
     <main className="bg-white">
       <div className="mx-auto max-w-[1600px] px-5 pb-16 pt-7 lg:px-8">
@@ -156,15 +203,15 @@ export default async function HomePage() {
               </p>
               <nav aria-label="Categorii Smart Home">
                 {categories.map(({ icon: Icon, label }) => (
-                  <a
+                  <Link
                     key={label}
-                    href="#produse"
-                    className="flex items-center gap-3 border-b border-[#dce2df] px-3 py-2.5 text-[15px] text-ink transition hover:bg-[#f4f7f5] hover:text-emerald-700"
+                    href={catalogHref({ query, category: label })}
+                    className={`flex items-center gap-3 border-b border-[#dce2df] px-3 py-2.5 text-[15px] transition hover:bg-[#f4f7f5] hover:text-emerald-700 ${category === label ? "bg-[#edf6f1] text-emerald-700" : "text-ink"}`}
                   >
                     <Icon className="size-7 shrink-0 stroke-[1.35]" />
                     <span className="flex-1">{label}</span>
                     <ChevronRight className="size-4" />
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -344,9 +391,47 @@ export default async function HomePage() {
                 Accesează portalul client <ArrowRight className="ml-2 size-4" />
               </Link>
             </section>
+            <form
+              action="/"
+              className="mt-8 grid gap-3 rounded-xl border border-[#d9e3de] bg-[#f7faf8] p-4 sm:grid-cols-[minmax(0,1fr)_15rem_auto]"
+            >
+              <label className="sr-only" htmlFor="catalog-search">
+                Caută în catalog
+              </label>
+              <input
+                id="catalog-search"
+                name="q"
+                type="search"
+                defaultValue={query}
+                placeholder="Caută produs sau cod Schneider..."
+                className="min-w-0 rounded-lg border border-[#cbd8d1] bg-white px-3 py-2.5 text-sm outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+              />
+              <label className="sr-only" htmlFor="catalog-category">
+                Categorie
+              </label>
+              <select
+                id="catalog-category"
+                name="category"
+                defaultValue={category ?? ""}
+                className="rounded-lg border border-[#cbd8d1] bg-white px-3 py-2.5 text-sm outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+              >
+                <option value="">Toate categoriile</option>
+                {productCategories.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="submit"
+                className="rounded-lg bg-[#087657] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#065c43]"
+              >
+                Caută
+              </button>
+            </form>
             <div
               id="produse"
-              className="mt-8 flex items-center justify-between border-b border-[#e1e5e3] pb-4 text-sm"
+              className="mt-5 flex flex-wrap items-center justify-between gap-3 border-b border-[#e1e5e3] pb-4 text-sm"
             >
               <button
                 type="button"
@@ -357,7 +442,9 @@ export default async function HomePage() {
               <span className="text-slate">
                 Afișare: <b className="text-[#0072b8]">▦</b> <span className="ml-2">☷</span>
               </span>
-              <span className="hidden sm:inline">Pagina 1 / 2</span>
+              <span className="hidden sm:inline">
+                {totalProducts} produse · Pagina {Math.min(currentPage, totalPages)} / {totalPages}
+              </span>
             </div>
             <section className="mt-7 grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-3 xl:grid-cols-5">
               {products.map((product) => (
@@ -369,6 +456,40 @@ export default async function HomePage() {
                 </p>
               )}
             </section>
+            {totalPages > 1 && (
+              <nav
+                aria-label="Paginare catalog"
+                className="mt-10 flex items-center justify-center gap-3"
+              >
+                {currentPage > 1 ? (
+                  <Link
+                    href={catalogHref({ page: currentPage - 1, query, category })}
+                    className="rounded-lg border border-[#cbd8d1] px-4 py-2 text-sm font-medium text-ink transition hover:border-emerald-600 hover:text-emerald-700"
+                  >
+                    Pagina anterioară
+                  </Link>
+                ) : (
+                  <span className="rounded-lg border border-[#e3e9e6] px-4 py-2 text-sm text-slate/50">
+                    Pagina anterioară
+                  </span>
+                )}
+                <span className="text-sm font-medium text-slate">
+                  {Math.min(currentPage, totalPages)} / {totalPages}
+                </span>
+                {currentPage < totalPages ? (
+                  <Link
+                    href={catalogHref({ page: currentPage + 1, query, category })}
+                    className="rounded-lg border border-[#cbd8d1] px-4 py-2 text-sm font-medium text-ink transition hover:border-emerald-600 hover:text-emerald-700"
+                  >
+                    Pagina următoare
+                  </Link>
+                ) : (
+                  <span className="rounded-lg border border-[#e3e9e6] px-4 py-2 text-sm text-slate/50">
+                    Pagina următoare
+                  </span>
+                )}
+              </nav>
+            )}
           </div>
         </div>
       </div>

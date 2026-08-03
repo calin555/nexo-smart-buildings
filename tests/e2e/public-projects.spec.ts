@@ -40,3 +40,12 @@ test("Brașov house exposes climate and energy details", async ({ page }) => {
     page.getByText("Invertor hibrid, contor inteligent, pompă de căldură"),
   ).toBeVisible();
 });
+
+test("catalogul public găsește o referință Schneider și nu inventează prețul", async ({ page }) => {
+  await page.goto("/?q=MTN6215-0410S#produse");
+
+  await expect(page.getByRole("heading", { name: /MTN6215-0410S/ })).toBeVisible();
+  await expect(page.getByText("Schneider Electric", { exact: true })).toBeVisible();
+  await expect(page.getByText("Preț la cerere", { exact: true })).toBeVisible();
+  await expect(page.getByText("342 produse")).not.toBeVisible();
+});
