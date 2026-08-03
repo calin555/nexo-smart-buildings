@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -10,11 +10,13 @@ type CatalogueProduct = {
   name: string;
   description: string;
   category: string;
+  imagePath: string;
 };
 
 type Catalogue = {
   catalogueCode: string;
   productCount: number;
+  imageCount: number;
   products: CatalogueProduct[];
 };
 
@@ -37,6 +39,13 @@ describe("catalogul Schneider Electric KNX", () => {
       expect(product.sourcePage).toBeGreaterThanOrEqual(48);
       expect(product.sourcePage).toBeLessThanOrEqual(241);
       expect(productCategories).toContain(product.category);
+      expect(product.imagePath).toMatch(
+        /^\/images\/products\/schneider-knx\/catalogue-\d+-\d+\.webp$/,
+      );
+      expect(existsSync(path.resolve(process.cwd(), "public", product.imagePath.slice(1)))).toBe(
+        true,
+      );
     }
+    expect(catalogue.imageCount).toBe(169);
   });
 });

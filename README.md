@@ -22,12 +22,13 @@ Toate salvările sunt validate cu Zod, autorizate server-side și înregistrate 
 
 ### Catalog Schneider Electric SpaceLogic KNX 2025-10
 
-Repository-ul include un catalog normalizat cu 342 de referințe comerciale extrase din `LSB02779_EN`. Fiecare produs păstrează codul Schneider, pagina sursă, o denumire și o descriere tehnică în română, categoria N3XO și tipul de ilustrație. Prețurile nu există în documentul sursă și sunt afișate corect ca „Preț la cerere”.
+Repository-ul include un catalog normalizat cu 342 de referințe comerciale extrase din `LSB02779_EN`. Fiecare produs păstrează codul Schneider, pagina sursă, o denumire și o descriere tehnică în română, categoria N3XO și fotografia reală extrasă din pagina produsului. Variantele prezentate împreună de Schneider folosesc fotografia comună a familiei. Prețurile nu există în documentul sursă și sunt afișate corect ca „Preț la cerere”.
 
 Pentru regenerarea datelor din PDF-ul original:
 
 ```bash
 npm run catalog:schneider:extract -- "C:\cale\LSB02779_EN_KNX_Catalogue_2025-10.pdf" "data\schneider-knx-products.json"
+npm run catalog:schneider:images -- "C:\cale\LSB02779_EN_KNX_Catalogue_2025-10.pdf" "data\schneider-knx-products.json" "public\images\products\schneider-knx" --pdftoppm "C:\cale\pdftoppm.exe"
 ```
 
 Pentru sincronizarea idempotentă în baza configurată prin `DATABASE_URL`:
