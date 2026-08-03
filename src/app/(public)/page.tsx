@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import type { Route } from "next";
 import {
   ArrowRight,
   Blinds,
@@ -76,6 +78,33 @@ const ecosystemCards = [
     icon: ShieldCheck,
     color: "text-[#008b68]",
     mark: "S",
+  },
+];
+
+const showcaseProjects = [
+  {
+    title: "Bloc rezidențial inteligent",
+    location: "Cluj-Napoca",
+    href: "/proiecte/bloc-rezidential-cluj" as Route,
+    image: "/images/projects/bloc-rezidential-cluj-interactive.png",
+    alt: "Bloc rezidențial inteligent din Cluj cu trasee tehnice vizibile",
+    systems: "BMS · acces · HVAC · energie",
+  },
+  {
+    title: "Casă inteligentă",
+    location: "Brașov",
+    href: "/proiecte/casa-inteligenta-brasov" as Route,
+    image: "/images/projects/casa-inteligenta-brasov-interactive.png",
+    alt: "Casă inteligentă din Brașov cu circuite și instalații vizibile",
+    systems: "Climat · umbrire · PV · securitate",
+  },
+  {
+    title: "Casă inteligentă",
+    location: "Cluj-Napoca",
+    href: "/proiecte/casa-inteligenta-cluj" as Route,
+    image: "/images/projects/casa-inteligenta-cluj-technical.png",
+    alt: "Casă inteligentă din Cluj prezentată ca secțiune tehnică",
+    systems: "KNX · Matter · DALI · energie",
   },
 ];
 
@@ -188,26 +217,88 @@ export default async function HomePage() {
                   </div>
                 </div>
                 <Link
-                  href="/proiecte/casa-inteligenta-cluj"
-                  aria-label="Deschide proiectul tehnic interactiv Casă inteligentă, Cluj"
-                  className="group relative min-h-48 overflow-hidden bg-[url('/images/projects/casa-inteligenta-cluj-technical.png')] bg-cover bg-center"
+                  href={"/proiecte/bloc-rezidential-cluj" as Route}
+                  aria-label="Deschide proiectul tehnic interactiv Bloc rezidențial, Cluj"
+                  className="group relative min-h-48 overflow-hidden"
                 >
+                  <Image
+                    src="/images/projects/bloc-rezidential-cluj-interactive.png"
+                    alt="Bloc rezidențial inteligent din Cluj"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 35vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#f4f8f6] via-[#f4f8f6]/10 to-transparent transition duration-200 group-hover:bg-[#071a20]/10" />
                   <div className="absolute bottom-6 left-6 rounded-lg border border-white/30 bg-[#16382f]/90 px-4 py-3 text-sm text-white shadow-lg transition duration-200 group-hover:-translate-y-1 group-hover:bg-[#0b5548]">
                     <p className="text-[10px] uppercase tracking-[.14em] text-emerald-200">
                       Proiect demonstrativ interactiv
                     </p>
                     <p className="mt-1 flex items-center font-medium">
-                      Casă inteligentă, Cluj{" "}
+                      Bloc rezidențial, Cluj{" "}
                       <ArrowRight className="ml-2 size-4 transition group-hover:translate-x-1" />
                     </p>
                   </div>
                 </Link>
               </div>
             </section>
+            <section id="proiecte" aria-labelledby="projects-title" className="mt-12 scroll-mt-24">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+                    Proiecte tehnice interactive
+                  </p>
+                  <h2
+                    id="projects-title"
+                    className="mt-2 text-2xl font-medium tracking-[-.035em] text-ink sm:text-3xl"
+                  >
+                    Vezi ce se află în spatele automatizării.
+                  </h2>
+                </div>
+                <p className="max-w-xl text-sm leading-6 text-slate">
+                  Studii demonstrative realiste pentru casă și clădire. Apasă pe punctele tehnice
+                  pentru a explora circuitele, protocoalele și echipamentele orientative.
+                </p>
+              </div>
+              <div className="mt-6 grid gap-5 md:grid-cols-3">
+                {showcaseProjects.map((project) => (
+                  <Link
+                    key={project.href}
+                    href={project.href}
+                    aria-label={`Explorează ${project.title}, ${project.location}`}
+                    className="group overflow-hidden rounded-xl border border-[#d7e1dc] bg-white shadow-[0_8px_22px_rgba(19,39,31,.05)] transition duration-200 hover:-translate-y-1 hover:border-[#a9c9ba] hover:shadow-[0_16px_35px_rgba(19,39,31,.1)]"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden bg-[#0b2429]">
+                      <Image
+                        src={project.image}
+                        alt={project.alt}
+                        fill
+                        sizes="(min-width: 768px) 30vw, 100vw"
+                        className="object-cover transition duration-500 group-hover:scale-[1.035]"
+                      />
+                      <span className="absolute left-4 top-4 rounded-full border border-white/25 bg-[#071a20]/75 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.13em] text-cyan-100 backdrop-blur-md">
+                        Interactiv
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-[11px] font-semibold uppercase tracking-[.14em] text-emerald-700">
+                        Proiect demonstrativ realist · {project.location}
+                      </p>
+                      <h3 className="mt-2 flex items-center justify-between gap-3 text-lg font-medium text-ink">
+                        {project.title}
+                        <ArrowRight className="size-4 shrink-0 transition group-hover:translate-x-1" />
+                      </h3>
+                      <p className="mt-3 border-t border-[#e3e9e6] pt-3 text-xs text-slate">
+                        {project.systems}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
             <section
               aria-label="Ecosisteme smart home"
-              className="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-4"
+              className="mt-12 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-4"
             >
               {ecosystemCards.map(({ label, slug, icon: Icon, color, mark }) => (
                 <Link key={label} href={`/solutii/${slug}`} className="group text-center">
