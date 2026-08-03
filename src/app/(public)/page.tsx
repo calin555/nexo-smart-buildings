@@ -64,7 +64,7 @@ function catalogHref({
   page?: number;
   query?: string;
   category?: string;
-  anchor?: "catalog" | "produse";
+  anchor?: "catalog" | "pachete" | "produse";
 }>): Route {
   const params = new URLSearchParams();
   if (page && page > 1) params.set("page", String(page));
@@ -216,7 +216,11 @@ export default async function HomePage({
                 {categories.map(({ icon: Icon, label }) => (
                   <Link
                     key={label}
-                    href={catalogHref({ query, category: label, anchor: "catalog" })}
+                    href={catalogHref({
+                      query,
+                      category: label,
+                      anchor: label === "Kit-uri de automatizare" ? "pachete" : "produse",
+                    })}
                     className={`flex items-center gap-3 border-b border-[#dce2df] px-3 py-2.5 text-[15px] transition hover:bg-[#f4f7f5] hover:text-emerald-700 ${category === label ? "bg-[#edf6f1] text-emerald-700" : "text-ink"}`}
                   >
                     <Icon className="size-7 shrink-0 stroke-[1.35]" />

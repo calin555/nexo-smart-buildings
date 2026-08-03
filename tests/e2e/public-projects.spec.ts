@@ -87,7 +87,7 @@ test("catalogul ABB afișează fotografia oficială și detaliile tehnice la cli
   await expect(dialog.getByText("Preț la cerere", { exact: true })).toBeVisible();
 });
 
-test("selectarea unei categorii păstrează utilizatorul la începutul catalogului", async ({
+test("categoria de kituri deschide pachetele, iar celelalte categorii deschid produsele", async ({
   page,
 }) => {
   await page.goto("/");
@@ -95,11 +95,14 @@ test("selectarea unei categorii păstrează utilizatorul la începutul catalogul
   const categories = page.getByRole("navigation", { name: "Categorii Smart Home" });
   await categories.getByRole("link", { name: /Kit-uri de automatizare/ }).click();
 
-  await expect(page).toHaveURL(/category=Kit-uri(?:\+|%20)de(?:\+|%20)automatizare#catalog$/);
-  await expect(page.locator("#catalog")).toBeInViewport();
+  await expect(page).toHaveURL(/category=Kit-uri(?:\+|%20)de(?:\+|%20)automatizare#pachete$/);
+  await expect(page.locator("#pachete")).toBeInViewport();
   await expect(
-    page.getByRole("heading", {
-      name: "Control pentru lumină, climat, siguranță și energie.",
-    }),
+    page.getByRole("heading", { name: "Alege pachetul potrivit casei tale." }),
   ).toBeVisible();
+
+  await categories.getByRole("link", { name: /Sisteme de securitate/ }).click();
+
+  await expect(page).toHaveURL(/category=Sisteme(?:\+|%20)de(?:\+|%20)securitate#produse$/);
+  await expect(page.locator("#produse")).toBeInViewport();
 });
