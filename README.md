@@ -57,6 +57,12 @@ npm run catalog:abb:import
 
 Importul scrie evenimentul `ABB_KNX_CATALOG_IMPORTED` în audit, folosește Prisma server-side și nu folosește service role. Sursa oficială este [gama ABB i-bus KNX](https://new.abb.com/low-voltage/products/building-automation/product-range/abb-i-bus-knx).
 
+## Configurator comercial de kituri
+
+Homepage-ul prezintă pachetele Essential, Comfort și Premium, fiecare cu interval orientativ de preț și acces direct la `/configurator-kit`. Configuratorul public este un wizard pe categorii pentru camere, iluminat, jaluzele, încălzire, climatizare, securitate, exterior și integrări. Rezumatul sticky recalculează local și instant prețul estimat, numărul de produse, dispozitivele, echipamentele și diferența față de kitul superior.
+
+Calculul este determinist și nu scrie date în bază. Estimarea nu reprezintă ofertă comercială finală; aceasta necesită analiza planului, a tabloului și a instalațiilor. Configuratorul tehnic autentificat pe plan rămâne separat în `/portal/configurator`.
+
 ## Configurator pe plan — Etapele 1–3
 
 Membrii unei organizații pot deschide `/portal/configurator`, crea un proiect și încărca un plan PDF, JPG sau PNG de maximum 15 MB. Fișierul ajunge direct din browser în bucketul privat `project-documents`, prin clientul Supabase cu sesiunea utilizatorului; serverul rezervă și finalizează metadatele numai după verificarea membership-ului. Nu este folosit service role în fluxul normal.

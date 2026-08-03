@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 
 import { CatalogProductCard } from "@/components/catalog-product-card";
+import { CommercialKitCards } from "@/components/commercial-kit-cards";
 import { prisma } from "@/lib/prisma";
 import { productCategories } from "@/modules/products/categories";
 
@@ -290,6 +291,7 @@ export default async function HomePage({
                 </Link>
               </div>
             </section>
+            <CommercialKitCards />
             <section id="proiecte" aria-labelledby="projects-title" className="mt-12 scroll-mt-24">
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <div>
