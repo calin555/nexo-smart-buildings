@@ -1,0 +1,41 @@
+import type { MetadataRoute } from "next";
+
+import { publicSolutions } from "@/modules/public-solutions";
+import { legalPages, resourcePages, rootPages, servicePages } from "@/modules/public-content";
+
+const staticPaths = [
+  "",
+  "/kituri",
+  "/configurator-kit",
+  "/login",
+  "/proiecte/bloc-rezidential-cluj",
+  "/proiecte/casa-inteligenta-brasov",
+  "/proiecte/casa-inteligenta-cluj",
+  "/branduri/abb",
+  "/branduri/schneider-electric",
+  "/branduri/mdt",
+  "/branduri/gira",
+  "/branduri/jung",
+  "/branduri/basalte",
+  "/branduri/zennio",
+  "/branduri/theben",
+] as const;
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const paths = [
+    ...staticPaths,
+    ...Object.keys(rootPages).map((slug) => `/${slug}`),
+    ...Object.keys(servicePages).map((slug) => `/servicii/${slug}`),
+    ...Object.keys(resourcePages).map((slug) => `/resurse/${slug}`),
+    ...Object.keys(legalPages).map((slug) => `/legal/${slug}`),
+    ...publicSolutions.map(({ slug }) => `/solutii/${slug}`),
+  ];
+
+  return [...new Set(paths)].map((path) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: new Date("2026-08-04"),
+    changeFrequency: path.startsWith("/legal/") ? "yearly" : "monthly",
+    priority: path === "" ? 1 : 0.7,
+  }));
+}

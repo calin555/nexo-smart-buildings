@@ -317,36 +317,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      <section id="solicita-oferta" className="scroll-mt-24 bg-[#102720] text-white">
-        <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-16 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-300">
-              Solicită ofertă
-            </p>
-            <h2 className="mt-3 text-4xl font-medium tracking-[-.045em]">
-              Încarcă planul și primești o estimare orientativă.
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-white/65">
-              Cluj, România · Ing. Augustin Tunaru · +40 749 988 649
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/login"
-              className="inline-flex items-center rounded-lg bg-white px-5 py-3.5 text-sm font-semibold text-[#102720]"
-            >
-              <FileUp className="mr-2 size-4" /> Încarcă planul
-            </Link>
-            <a
-              href="tel:+40749988649"
-              className="rounded-lg border border-white/25 px-5 py-3.5 text-sm font-semibold text-white"
-            >
-              Discută cu un specialist
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

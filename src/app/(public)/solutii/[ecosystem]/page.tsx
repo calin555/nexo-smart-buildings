@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle2, FileUp } from "lucide-react";
+import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -173,7 +174,7 @@ export default async function SolutionPage({
                 Încarcă planul
               </Link>
               <Link
-                href="/#solicita-oferta"
+                href={"/solicita-oferta" as Route}
                 className="rounded-lg border border-white/25 px-5 py-3 text-sm font-semibold text-white"
               >
                 Solicită ofertă

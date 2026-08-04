@@ -1,4 +1,5 @@
 import { ArrowRight, Check, FileUp, Settings2 } from "lucide-react";
+import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -128,7 +129,7 @@ function KitCard({
             <FileUp className="mr-1.5 size-4" /> Încarcă planul
           </Link>
           <Link
-            href="/#solicita-oferta"
+            href={"/solicita-oferta" as Route}
             className="inline-flex items-center justify-center rounded-lg border border-[#b9cbc3] px-3 py-3 text-center text-xs font-semibold text-ink transition hover:border-emerald-700 hover:text-emerald-700"
           >
             Solicită ofertă <ArrowRight className="ml-1.5 size-4" />

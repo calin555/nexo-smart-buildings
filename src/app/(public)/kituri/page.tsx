@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { Route } from "next";
 import Link from "next/link";
 
 import { CommercialKitCards } from "@/components/commercial-kit-cards";
@@ -31,7 +32,7 @@ export default function KitsPage() {
               Încarcă planul
             </Link>
             <Link
-              href="/#solicita-oferta"
+              href={"/solicita-oferta" as Route}
               className="rounded-lg border border-[#b8c9c1] px-5 py-3 text-sm font-semibold text-ink"
             >
               Solicită ofertă

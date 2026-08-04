@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import type { Route } from "next";
 
 import { InteractiveSmartHome, type ProjectKey } from "@/components/interactive-smart-home";
 
@@ -24,7 +25,7 @@ export function InteractiveProjectPage({
     <main className="bg-[#f4f7f5]">
       <section className="mx-auto max-w-[1600px] px-5 pb-16 pt-8 lg:px-8 lg:pb-24">
         <Link
-          href="/#proiecte"
+          href={"/proiecte" as Route}
           className="inline-flex items-center gap-2 text-sm font-medium text-slate transition hover:text-emerald-700"
         >
           <ArrowLeft className="size-4" /> Înapoi la proiecte

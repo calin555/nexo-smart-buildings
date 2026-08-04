@@ -1,5 +1,6 @@
 "use client";
 
+import type { Route } from "next";
 import {
   ArrowLeft,
   ArrowRight,
@@ -673,7 +674,7 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
               </div>
 
               <Link
-                href="/#solicita-oferta"
+                href={"/solicita-oferta" as Route}
                 className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#102720] transition hover:bg-emerald-50"
               >
                 Solicită ofertă <ArrowRight className="ml-2 size-4" />

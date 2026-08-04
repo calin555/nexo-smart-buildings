@@ -21,12 +21,12 @@ const mobileLinks = [
   ["/", "Acasă"],
   ...solutionLinks,
   ...technologyLinks,
-  ["/login", "Configurator pe plan"],
+  ["/configurator-pe-plan", "Configurator pe plan"],
   ["/kituri", "Kituri"],
-  ["/#proiecte", "Proiecte"],
-  ["/#ghiduri", "Ghiduri"],
-  ["/#despre-noi", "Despre noi"],
-  ["/#solicita-oferta", "Solicită ofertă"],
+  ["/proiecte", "Proiecte"],
+  ["/ghiduri", "Ghiduri"],
+  ["/despre-noi", "Despre noi"],
+  ["/solicita-oferta", "Solicită ofertă"],
   ["/login", "Portal client"],
 ] as const;
 
@@ -69,17 +69,20 @@ export function SiteHeader() {
           <Link href="/kituri" className="text-xs font-semibold text-ink hover:text-emerald-700">
             KITURI
           </Link>
-          <Link href="/#proiecte" className="text-xs font-semibold text-ink hover:text-emerald-700">
+          <Link
+            href={"/proiecte" as Route}
+            className="text-xs font-semibold text-ink hover:text-emerald-700"
+          >
             PROIECTE
           </Link>
           <Link
-            href="/#ghiduri"
+            href={"/ghiduri" as Route}
             className="hidden text-xs font-semibold text-ink hover:text-emerald-700 xl:block"
           >
             GHIDURI
           </Link>
           <Link
-            href="/#despre-noi"
+            href={"/despre-noi" as Route}
             className="hidden text-xs font-semibold text-ink hover:text-emerald-700 2xl:block"
           >
             DESPRE NOI
@@ -87,13 +90,13 @@ export function SiteHeader() {
         </nav>
         <div className="ml-auto hidden items-center gap-3 lg:flex">
           <Link
-            href="/login"
+            href={"/configurator-pe-plan" as Route}
             className="inline-flex items-center rounded-lg border border-[#cbd8d2] px-4 py-2.5 text-xs font-semibold text-ink transition hover:border-emerald-700"
           >
             <FileUp className="mr-2 size-4" /> Configurator pe plan
           </Link>
           <Link
-            href="/#solicita-oferta"
+            href={"/solicita-oferta" as Route}
             className="rounded-lg bg-emerald-700 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-emerald-800"
           >
             Solicită ofertă
@@ -122,7 +125,7 @@ export function SiteHeader() {
               {mobileLinks.map(([href, label]) => (
                 <Link
                   key={`${href}-${label}`}
-                  href={href}
+                  href={href as Route}
                   className="rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                 >
                   {label}
