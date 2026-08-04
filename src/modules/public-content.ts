@@ -2,6 +2,10 @@ export type ContentSection = Readonly<{
   title: string;
   paragraphs: readonly string[];
   bullets?: readonly string[];
+  subsections?: readonly Readonly<{
+    title: string;
+    paragraphs: readonly string[];
+  }>[];
 }>;
 
 export type RelatedLink = Readonly<{
@@ -16,8 +20,18 @@ export type PublicContentPage = Readonly<{
   title: string;
   description: string;
   updated?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  keywords?: readonly string[];
+  ogImage?: string;
+  contentType?: "article" | "website";
+  publishedTime?: string;
+  modifiedTime?: string;
+  schemaType?: "Service" | "WebPage";
+  serviceType?: string;
   sections: readonly ContentSection[];
   related?: readonly RelatedLink[];
+  faq?: readonly Readonly<{ question: string; answer: string }>[];
 }>;
 
 export const rootPages: Record<string, PublicContentPage> = {
@@ -111,6 +125,26 @@ export const rootPages: Record<string, PublicContentPage> = {
     ],
     related: [
       {
+        label: "Wi-Fi, Matter sau KNX?",
+        description: "Comparație după clădire, control local și mentenanță.",
+        href: "/ghiduri/wifi-matter-sau-knx",
+      },
+      {
+        label: "Google Home, Apple Home sau Alexa?",
+        description: "Alege ecosistemul după utilizatori și infrastructură.",
+        href: "/ghiduri/google-home-apple-home-alexa",
+      },
+      {
+        label: "Home Assistant pentru casă",
+        description: "Control local, backup și responsabilități de administrare.",
+        href: "/ghiduri/home-assistant-pentru-casa",
+      },
+      {
+        label: "Costul automatizării",
+        description: "Factorii reali care formează bugetul.",
+        href: "/ghiduri/cost-automatizare-casa",
+      },
+      {
         label: "Ghid KNX",
         description: "Când merită o infrastructură profesională.",
         href: "/resurse/ghid-knx",
@@ -148,7 +182,21 @@ export const rootPages: Record<string, PublicContentPage> = {
       },
     ],
     related: [
-      { label: "Vezi ghidurile", description: "Materiale disponibile acum.", href: "/ghiduri" },
+      {
+        label: "Pregătirea casei pentru automatizare",
+        description: "Ce decizi înainte de cablare și finisaje.",
+        href: "/blog/pregatirea-casei-pentru-automatizare",
+      },
+      {
+        label: "KNX sau smart home Wi-Fi",
+        description: "Roluri diferite pentru proiecte diferite.",
+        href: "/blog/knx-sau-smart-home-wifi",
+      },
+      {
+        label: "Încălzire și energie",
+        description: "Control pe zone fără compromisuri HVAC.",
+        href: "/blog/automatizare-incalzire-energie",
+      },
     ],
   },
   cariere: {

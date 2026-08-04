@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { getCurrentUser } from "@/lib/auth";
 
 type LoginPageProps = { searchParams: Promise<{ error?: string }> };
+
+export const metadata: Metadata = {
+  title: "Autentificare portal client",
+  robots: { index: false, follow: false },
+};
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const currentUser = await getCurrentUser();

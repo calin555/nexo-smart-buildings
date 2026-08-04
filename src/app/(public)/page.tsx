@@ -10,13 +10,36 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import type { Route } from "next";
+import type { Metadata, Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { CommercialKitCards } from "@/components/commercial-kit-cards";
 import { BrandGrid } from "@/components/brand-grid";
 import { publicSolutions } from "@/modules/public-solutions";
+
+export const metadata: Metadata = {
+  title: { absolute: "Casă smart și automatizări KNX | N3XO Smart Buildings" },
+  description:
+    "Configurează o casă inteligentă cu KNX, Matter, Google Home, Apple Home sau Home Assistant. Proiectare și implementare completă.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Casă smart și automatizări KNX | N3XO Smart Buildings",
+    description:
+      "Proiectare, echipamente, instalare, programare și mentenanță într-un singur proiect smart.",
+    url: "/",
+    type: "website",
+    locale: "ro_RO",
+    images: [
+      {
+        url: "/images/projects/casa-inteligenta-cluj-technical.png",
+        width: 1672,
+        height: 941,
+        alt: "Casă inteligentă cu circuite tehnice vizibile",
+      },
+    ],
+  },
+};
 
 const icons = [Home, Layers3, Building2, Hotel, Sparkles, ShieldCheck, Zap];
 const process = [
@@ -272,13 +295,21 @@ export default function HomePage() {
       </section>
 
       <section id="ghiduri" className="border-y border-[#dfe7e3] bg-white">
-        <div className="mx-auto grid max-w-[1500px] gap-6 px-5 py-16 md:grid-cols-3 lg:px-8">
+        <div className="mx-auto grid max-w-[1500px] gap-6 px-5 py-16 md:grid-cols-2 lg:px-8 xl:grid-cols-4">
           {[
-            "Wi-Fi, Matter sau KNX?",
-            "Cum pregătești instalația electrică",
-            "Ce conține o ofertă smart completă",
-          ].map((title) => (
-            <article key={title} className="rounded-xl border border-[#d8e2dd] p-6">
+            ["Wi-Fi, Matter sau KNX?", "/ghiduri/wifi-matter-sau-knx"],
+            [
+              "Cum pregătești casa pentru automatizare",
+              "/blog/pregatirea-casei-pentru-automatizare",
+            ],
+            ["Cât costă automatizarea unei case?", "/ghiduri/cost-automatizare-casa"],
+            ["Google Home, Apple Home sau Alexa?", "/ghiduri/google-home-apple-home-alexa"],
+          ].map(([title, href]) => (
+            <Link
+              key={href}
+              href={href as Route}
+              className="group rounded-xl border border-[#d8e2dd] p-6 transition duration-200 hover:-translate-y-0.5 hover:border-[#a9c6ba]"
+            >
               <p className="text-xs font-semibold uppercase tracking-[.14em] text-emerald-700">
                 Ghid tehnic
               </p>
@@ -286,7 +317,11 @@ export default function HomePage() {
               <p className="mt-3 text-sm leading-6 text-slate">
                 Repere clare pentru decizii corecte înainte de proiectare și ofertare.
               </p>
-            </article>
+              <span className="mt-5 inline-flex items-center text-sm font-semibold text-emerald-800">
+                Citește ghidul{" "}
+                <ArrowRight className="ml-2 size-4 transition group-hover:translate-x-1" />
+              </span>
+            </Link>
           ))}
         </div>
       </section>

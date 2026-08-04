@@ -3,35 +3,35 @@ import { notFound } from "next/navigation";
 
 import { PublicContentPageView } from "@/components/public-content-page";
 import { buildSeoMetadata } from "@/lib/seo";
-import { getContentPage, legalPages } from "@/modules/public-content";
+import { blogPages } from "@/modules/seo-content";
 
 export function generateStaticParams() {
-  return Object.keys(legalPages).map((slug) => ({ slug }));
+  return Object.keys(blogPages).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: Readonly<{ params: Promise<{ slug: string }> }>): Promise<Metadata> {
   const { slug } = await params;
-  const page = getContentPage(legalPages, slug);
+  const page = blogPages[slug];
   if (!page) return {};
-  return buildSeoMetadata(page, `/legal/${slug}`);
+  return buildSeoMetadata(page, `/blog/${slug}`);
 }
 
-export default async function LegalPage({
+export default async function BlogArticlePage({
   params,
 }: Readonly<{ params: Promise<{ slug: string }> }>) {
   const { slug } = await params;
-  const page = getContentPage(legalPages, slug);
+  const page = blogPages[slug];
   if (!page) notFound();
   return (
     <PublicContentPageView
       page={page}
-      path={`/legal/${slug}`}
+      path={`/blog/${slug}`}
       breadcrumbs={[
         { label: "Acasă", href: "/" },
-        { label: "Legal", href: "/legal" },
-        { label: page.title, href: `/legal/${slug}` },
+        { label: "Blog", href: "/blog" },
+        { label: page.title, href: `/blog/${slug}` },
       ]}
     />
   );

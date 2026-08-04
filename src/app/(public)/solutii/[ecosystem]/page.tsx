@@ -1,14 +1,40 @@
 import { ArrowRight, CheckCircle2, FileUp } from "lucide-react";
-import type { Route } from "next";
+import type { Metadata, Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { buildSeoMetadata, PageSchemas } from "@/lib/seo";
 import { kitDefinitions, kitIds } from "@/modules/commercial-configurator/config";
+import type { PublicContentPage } from "@/modules/public-content";
 import { getPublicSolution, publicSolutions } from "@/modules/public-solutions";
+import { solutionSeoEnhancements } from "@/modules/seo-content";
 
 export function generateStaticParams() {
   return publicSolutions.map(({ slug }) => ({ ecosystem: slug }));
+}
+
+function getSeoPage(ecosystem: string): PublicContentPage | undefined {
+  const solution = getPublicSolution(ecosystem);
+  if (!solution) return undefined;
+  return {
+    slug: solution.slug,
+    eyebrow: solution.audience,
+    title: solution.title,
+    description: solution.summary,
+    sections: [],
+    ...(solutionSeoEnhancements[ecosystem] ?? {}),
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: Readonly<{ params: Promise<{ ecosystem: string }> }>): Promise<Metadata> {
+  const { ecosystem } = await params;
+  const page = getSeoPage(ecosystem);
+  if (!page) return {};
+  return buildSeoMetadata(page, `/solutii/${ecosystem}`);
 }
 
 export default async function SolutionPage({
@@ -17,12 +43,21 @@ export default async function SolutionPage({
   const { ecosystem } = await params;
   const solution = getPublicSolution(ecosystem);
   if (!solution) notFound();
+  const seoPage = getSeoPage(ecosystem);
+  if (!seoPage) notFound();
+  const breadcrumbs = [
+    { label: "Acasă", href: "/" },
+    { label: "Soluții", href: "/solutii" },
+    { label: solution.name, href: `/solutii/${solution.slug}` },
+  ];
   const kits = kitIds
     .map((id) => kitDefinitions[id])
     .filter(({ solutionSlug }) => solutionSlug === solution.slug);
 
   return (
     <main className="bg-white">
+      <PageSchemas page={seoPage} path={`/solutii/${solution.slug}`} breadcrumbs={breadcrumbs} />
+      <Breadcrumbs items={breadcrumbs} />
       <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-8 lg:grid-cols-[16rem_minmax(0,1fr)] lg:px-8 lg:py-12">
         <aside className="h-fit rounded-xl border border-[#d8e2dd] bg-white p-3 lg:sticky lg:top-28">
           <p className="px-3 py-2 text-xs font-semibold uppercase tracking-[.16em] text-slate">
@@ -151,6 +186,27 @@ export default async function SolutionPage({
                       Configurează kitul <ArrowRight className="ml-2 size-4" />
                     </Link>
                   </article>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {seoPage.faq && seoPage.faq.length > 0 ? (
+            <section className="mb-14 rounded-2xl border border-[#d8e2dd] bg-[#f4f8f6] p-7 sm:p-9">
+              <p className="text-xs font-semibold uppercase tracking-[.16em] text-emerald-700">
+                Întrebări frecvente
+              </p>
+              <h2 className="mt-3 text-3xl font-medium tracking-[-.04em] text-ink">
+                Clarificări înainte de proiectare
+              </h2>
+              <div className="mt-6 divide-y divide-[#d8e2dd]">
+                {seoPage.faq.map(({ question, answer }) => (
+                  <details key={question} className="py-4">
+                    <summary className="cursor-pointer list-none font-semibold text-ink">
+                      {question}
+                    </summary>
+                    <p className="mt-3 max-w-3xl text-sm leading-7 text-slate">{answer}</p>
+                  </details>
                 ))}
               </div>
             </section>

@@ -1,6 +1,7 @@
-import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import type { ReactNode } from "react";
 
 import { AccessDenied } from "@/components/access-denied";
 import { Brand } from "@/components/brand";
@@ -8,6 +9,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { adminRoles } from "@/lib/rbac";
 
 export const dynamic = "force-dynamic";
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function AdminLayout({ children }: Readonly<{ children: ReactNode }>) {
   const user = await getCurrentUser();

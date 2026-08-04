@@ -2,11 +2,30 @@ import { ArrowRight, CheckCircle2, FileUp, Mail, Phone } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { type BreadcrumbItem, PageSchemas } from "@/lib/seo";
 import type { PublicContentPage } from "@/modules/public-content";
 
-export function PublicContentPageView({ page }: Readonly<{ page: PublicContentPage }>) {
+export const publicContentCtaPaths = {
+  configurator: "/configurator-pe-plan",
+  offer: "/solicita-oferta",
+} as const;
+
+export function PublicContentPageView({
+  page,
+  path,
+  breadcrumbs,
+  areaServed,
+}: Readonly<{
+  page: PublicContentPage;
+  path: string;
+  breadcrumbs: readonly BreadcrumbItem[];
+  areaServed?: string;
+}>) {
   return (
     <main className="bg-white">
+      <PageSchemas page={page} path={path} breadcrumbs={breadcrumbs} areaServed={areaServed} />
+      <Breadcrumbs items={breadcrumbs} />
       <section className="border-b border-[#dfe7e3] bg-[#f4f8f6]">
         <div className="mx-auto max-w-[1500px] px-5 py-14 lg:px-8 lg:py-20">
           <p className="text-xs font-semibold uppercase tracking-[.18em] text-emerald-700">
@@ -56,10 +75,47 @@ export function PublicContentPageView({ page }: Readonly<{ page: PublicContentPa
                       ))}
                     </ul>
                   ) : null}
+                  {section.subsections ? (
+                    <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                      {section.subsections.map((subsection) => (
+                        <div key={subsection.title} className="rounded-xl bg-[#f4f8f6] p-5">
+                          <h3 className="font-semibold text-ink">{subsection.title}</h3>
+                          <div className="mt-3 space-y-3">
+                            {subsection.paragraphs.map((paragraph) => (
+                              <p key={paragraph} className="text-sm leading-6 text-slate">
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </section>
           ))}
+
+          {page.faq && page.faq.length > 0 ? (
+            <section className="rounded-2xl border border-[#d8e2dd] bg-[#f4f8f6] p-6 sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+                Întrebări frecvente
+              </p>
+              <h2 className="mt-3 text-3xl font-medium tracking-[-.04em] text-ink">
+                Răspunsuri înainte de proiectare.
+              </h2>
+              <div className="mt-6 divide-y divide-[#d8e2dd]">
+                {page.faq.map(({ question, answer }) => (
+                  <details key={question} className="group py-4">
+                    <summary className="cursor-pointer list-none pr-6 font-semibold text-ink marker:hidden">
+                      {question}
+                    </summary>
+                    <p className="mt-3 max-w-3xl text-sm leading-7 text-slate">{answer}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {page.related && page.related.length > 0 ? (
             <section className="pt-3">
@@ -98,10 +154,16 @@ export function PublicContentPageView({ page }: Readonly<{ page: PublicContentPa
           </p>
           <div className="mt-6 grid gap-3">
             <Link
-              href="/login"
+              href={publicContentCtaPaths.configurator as Route}
               className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-3 text-sm font-semibold text-[#102720]"
             >
-              <FileUp className="mr-2 size-4" /> Încarcă planul
+              <FileUp className="mr-2 size-4" /> Configurează pe plan
+            </Link>
+            <Link
+              href={publicContentCtaPaths.offer as Route}
+              className="inline-flex items-center justify-center rounded-lg border border-white/20 px-4 py-3 text-sm font-semibold text-white"
+            >
+              Solicită ofertă <ArrowRight className="ml-2 size-4" />
             </Link>
             <a
               href="mailto:office@nexcore.ro"
