@@ -18,8 +18,8 @@ test("meniul public mobil se deschide și oferă navigarea principală", async (
   await expect(menuButton).toBeVisible();
   await menuButton.click();
   await expect(page.getByRole("navigation", { name: "Navigare mobilă" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "PRODUSE", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Contul meu" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Case Smart", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Portal client" })).toBeVisible();
   await menuButton.click();
   await expect(page.getByRole("navigation", { name: "Navigare mobilă" })).toBeHidden();
 });
@@ -59,14 +59,14 @@ test("client B vede numai organizația B", async ({ page }) => {
   await expect(page.getByText("Clienți Demo SRL")).toBeVisible();
   await expect(page.getByText("Persoană Fizică Demo")).not.toBeVisible();
 });
-test("admin accesează administrarea, catalogul și logout revocă sesiunea", async ({ page }) => {
+test("admin accesează administrarea echipamentelor și logout revocă sesiunea", async ({ page }) => {
   await login(page, admin);
   await expectSession(page);
   await page.goto("/admin");
   await expect(page.getByRole("heading", { name: "Spațiu intern protejat" })).toBeVisible();
   await page.goto("/admin/products");
-  await expect(page.getByRole("heading", { name: "Produse" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Adaugă produs" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Echipamente" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Adaugă echipament" })).toBeVisible();
   await page.goto("/portal");
   await page.getByRole("button", { name: "Deconectare" }).click();
   await expect(page).toHaveURL(/\/$/);

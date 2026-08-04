@@ -1,4 +1,16 @@
-export type KitId = "essential" | "comfort" | "premium";
+export const kitIds = [
+  "smart-start",
+  "apartament-smart",
+  "casa-comfort",
+  "casa-premium-knx",
+  "securitate",
+  "energie",
+  "bloc-smart",
+  "pensiune-smart",
+  "hotel-smart",
+] as const;
+
+export type KitId = (typeof kitIds)[number];
 
 export type ConfiguratorCategoryId =
   | "rooms"
@@ -36,6 +48,14 @@ export type KitDefinition = {
   baseProducts: number;
   baseDevices: number;
   features: string[];
+  target: string;
+  recommendedCapacity: string;
+  optionalFunctions: string[];
+  excluded: string[];
+  installationConditions: string[];
+  recommendedTechnology: string;
+  estimatedDuration: string;
+  solutionSlug: string;
   defaultSelections: string[];
   baseEquipment: EquipmentContribution[];
 };
@@ -328,10 +348,41 @@ export const commercialOptions: CommercialOption[] = [
   },
 ];
 
+const essentialSelections = [
+  "room-living",
+  "room-master",
+  "room-kitchen",
+  "room-bath",
+  "light-on-off",
+  "heating-radiators",
+  "integration-google",
+];
+
+const comfortSelections = [
+  "room-living",
+  "room-master",
+  "room-kitchen",
+  "room-bath",
+  "room-garage",
+  "light-on-off",
+  "light-dimming",
+  "blinds-living",
+  "heating-floor",
+  "climate-ac",
+  "security-alarm",
+  "security-smoke",
+  "integration-google",
+  "integration-apple",
+];
+
+const premiumSelections = commercialOptions
+  .map(({ id }) => id)
+  .filter((id) => id !== "exterior-pool");
+
 export const kitDefinitions: Record<KitId, KitDefinition> = {
-  essential: {
-    id: "essential",
-    name: "Kit Essential",
+  "smart-start": {
+    id: "smart-start",
+    name: "Kit Smart Start",
     shortDescription: "Funcțiile esențiale pentru o casă smart simplă și ușor de controlat.",
     minPrice: 990,
     maxPrice: 2490,
@@ -339,24 +390,50 @@ export const kitDefinitions: Record<KitId, KitDefinition> = {
     baseProducts: 12,
     baseDevices: 10,
     features: ["Iluminat", "Încălzire", "Jaluzele", "Control din aplicație"],
-    defaultSelections: [
-      "room-living",
-      "room-master",
-      "room-kitchen",
-      "room-bath",
-      "light-on-off",
-      "heating-radiators",
-      "integration-google",
-    ],
+    target: "Garsoniere, apartamente mici și renovări etapizate",
+    recommendedCapacity: "Până la 70 m² · 2–4 camere",
+    optionalFunctions: ["Dimming", "Senzori de fum", "Control vocal"],
+    excluded: ["Refacerea instalației electrice", "Lucrări de finisaj"],
+    installationConditions: ["Rețea Wi-Fi stabilă", "Doze și nul disponibile unde este necesar"],
+    recommendedTechnology: "Wi-Fi, Zigbee sau Matter",
+    estimatedDuration: "1–3 zile",
+    solutionSlug: "apartamente-smart",
+    defaultSelections: essentialSelections,
     baseEquipment: [
       { label: "surse sistem smart", quantity: 1 },
       { label: "gateway-uri aplicație", quantity: 1 },
       { label: "întrerupătoare", quantity: 2 },
     ],
   },
-  comfort: {
-    id: "comfort",
-    name: "Kit Comfort",
+  "apartament-smart": {
+    id: "apartament-smart",
+    name: "Kit Apartament Smart",
+    shortDescription:
+      "Control integrat pentru iluminat, climat, umbrire și securitate într-un apartament.",
+    minPrice: 1800,
+    maxPrice: 5500,
+    basePrice: 1800,
+    baseProducts: 16,
+    baseDevices: 14,
+    features: ["Iluminat și scene", "Climat", "Jaluzele", "Securitate de bază"],
+    target: "Apartamente noi sau renovate",
+    recommendedCapacity: "45–140 m² · 2–5 camere",
+    optionalFunctions: ["Videointerfon", "Monitorizare energie", "Apple Home / Google Home"],
+    excluded: ["Aparate HVAC", "Motoare de jaluzele", "Lucrări de construcții"],
+    installationConditions: ["Plan electric disponibil", "Acces la tabloul apartamentului"],
+    recommendedTechnology: "Matter, Zigbee, Wi-Fi sau sistem hibrid",
+    estimatedDuration: "2–6 zile",
+    solutionSlug: "apartamente-smart",
+    defaultSelections: [...essentialSelections, "light-dimming", "security-alarm"],
+    baseEquipment: [
+      { label: "surse sistem smart", quantity: 1 },
+      { label: "gateway-uri aplicație", quantity: 1 },
+      { label: "întrerupătoare", quantity: 4 },
+    ],
+  },
+  "casa-comfort": {
+    id: "casa-comfort",
+    name: "Kit Casă Comfort",
     shortDescription: "Automatizare completă, senzori și control energetic pentru confort zilnic.",
     minPrice: 2500,
     maxPrice: 5500,
@@ -364,28 +441,24 @@ export const kitDefinitions: Record<KitId, KitDefinition> = {
     baseProducts: 20,
     baseDevices: 17,
     features: [
-      "Tot din Essential",
+      "Iluminat și scene",
       "Senzori",
       "Stație meteo",
       "Monitorizare energie",
       "Automatizări",
     ],
-    defaultSelections: [
-      "room-living",
-      "room-master",
-      "room-kitchen",
-      "room-bath",
-      "room-garage",
-      "light-on-off",
-      "light-dimming",
-      "blinds-living",
-      "heating-floor",
-      "climate-ac",
-      "security-alarm",
-      "security-smoke",
-      "integration-google",
-      "integration-apple",
+    target: "Case noi și renovări complete",
+    recommendedCapacity: "100–250 m² · 4–10 camere",
+    optionalFunctions: ["Camere video", "Stație EV", "Irigare", "Home Assistant"],
+    excluded: ["Cablare de forță", "Corpuri de iluminat", "Echipamente HVAC"],
+    installationConditions: [
+      "Plan electric și planuri de arhitectură",
+      "Spațiu rezervat în tabloul electric",
     ],
+    recommendedTechnology: "Sistem hibrid sau KNX pentru construcții noi",
+    estimatedDuration: "5–12 zile",
+    solutionSlug: "case-smart",
+    defaultSelections: comfortSelections,
     baseEquipment: [
       { label: "surse KNX", quantity: 1 },
       { label: "gateway-uri IP", quantity: 1 },
@@ -393,49 +466,33 @@ export const kitDefinitions: Record<KitId, KitDefinition> = {
       { label: "întrerupătoare", quantity: 2 },
     ],
   },
-  premium: {
-    id: "premium",
-    name: "Kit Premium",
+  "casa-premium-knx": {
+    id: "casa-premium-knx",
+    name: "Kit Casă Premium KNX",
     shortDescription: "Experiență completă, interfețe premium și integrare multimedia avansată.",
-    minPrice: 5500,
-    maxPrice: 12000,
-    basePrice: 5500,
+    minPrice: 6500,
+    maxPrice: 20000,
+    basePrice: 6500,
     baseProducts: 28,
     baseDevices: 24,
     features: [
-      "Tot din Comfort",
+      "Automatizare KNX",
       "Panouri tactile",
-      "Audio",
-      "Videointerfon",
-      "Apple Home, Google Home și Alexa",
+      "Audio și videointerfon",
+      "Management energetic",
     ],
-    defaultSelections: [
-      "room-living",
-      "room-master",
-      "room-bedroom-2",
-      "room-kitchen",
-      "room-bath",
-      "room-hall",
-      "room-office",
-      "room-garage",
-      "light-on-off",
-      "light-dimming",
-      "light-led",
-      "blinds-living",
-      "blinds-bedroom-1",
-      "blinds-bedroom-2",
-      "heating-floor",
-      "climate-ac",
-      "climate-ventilation",
-      "security-alarm",
-      "security-smoke",
-      "security-cameras",
-      "exterior-ev",
-      "integration-google",
-      "integration-apple",
-      "integration-alexa",
-      "integration-home-assistant",
+    target: "Vile și case premium proiectate de la zero",
+    recommendedCapacity: "180–600 m² · până la 20 zone",
+    optionalFunctions: ["Piscină", "Irigare", "Audio multiroom", "Integrare BMS"],
+    excluded: ["Tablou de forță complet", "Aparate audio/video", "Licențe terțe"],
+    installationConditions: [
+      "Proiect KNX înainte de execuția electrică",
+      "Tablou dimensionat și cablu bus",
     ],
+    recommendedTechnology: "KNX TP/IP cu integrare Matter și Home Assistant",
+    estimatedDuration: "3–8 săptămâni",
+    solutionSlug: "automatizare-knx",
+    defaultSelections: premiumSelections,
     baseEquipment: [
       { label: "surse KNX", quantity: 2 },
       { label: "gateway-uri IP", quantity: 1 },
@@ -444,6 +501,127 @@ export const kitDefinitions: Record<KitId, KitDefinition> = {
       { label: "videointerfoane", quantity: 1 },
       { label: "senzori temperatură", quantity: 4 },
       { label: "întrerupătoare", quantity: 2 },
+    ],
+  },
+  securitate: {
+    id: "securitate",
+    name: "Kit Securitate",
+    shortDescription: "Protecție integrată pentru interior, perimetru și acces.",
+    minPrice: 1500,
+    maxPrice: 6000,
+    basePrice: 1500,
+    baseProducts: 10,
+    baseDevices: 8,
+    features: ["Alarmă", "Senzori fum", "Control acces", "Notificări"],
+    target: "Apartamente, case și pensiuni",
+    recommendedCapacity: "Până la 500 m² · 4–24 zone",
+    optionalFunctions: ["Camere IP", "Videointerfon", "Detecție perimetrală"],
+    excluded: ["Abonament dispecerat", "Cablare ascunsă și reparații finisaje"],
+    installationConditions: ["Acoperire rețea verificată", "Poziții de montaj accesibile"],
+    recommendedTechnology: "Alarmă cablată/hibridă și camere IP",
+    estimatedDuration: "2–7 zile",
+    solutionSlug: "securitate",
+    defaultSelections: ["security-alarm", "security-smoke", "room-living", "room-hall"],
+    baseEquipment: [{ label: "module alarmă", quantity: 1 }],
+  },
+  energie: {
+    id: "energie",
+    name: "Kit Energie",
+    shortDescription: "Măsurare, control și optimizare pentru consumurile importante.",
+    minPrice: 900,
+    maxPrice: 4500,
+    basePrice: 900,
+    baseProducts: 8,
+    baseDevices: 6,
+    features: ["Contorizare", "Rapoarte consum", "Control sarcini", "Pregătire fotovoltaic/EV"],
+    target: "Locuințe și clădiri rezidențiale mici",
+    recommendedCapacity: "Monofazat sau trifazat · până la 12 circuite monitorizate",
+    optionalFunctions: ["Stație EV", "Fotovoltaic", "Baterie", "Control boiler/pompă"],
+    excluded: ["Panouri fotovoltaice", "Stație EV și lucrări de branșament"],
+    installationConditions: [
+      "Acces și spațiu în tabloul electric",
+      "Măsurători electrice preliminare",
+    ],
+    recommendedTechnology: "Contorizare Modbus/KNX și gateway IP",
+    estimatedDuration: "1–4 zile",
+    solutionSlug: "energie-eficienta",
+    defaultSelections: ["exterior-ev", "light-on-off"],
+    baseEquipment: [{ label: "gateway-uri IP", quantity: 1 }],
+  },
+  "bloc-smart": {
+    id: "bloc-smart",
+    name: "Kit Bloc Smart",
+    shortDescription: "Infrastructură comună pentru acces, energie, siguranță și servicii tehnice.",
+    minPrice: 12000,
+    maxPrice: 60000,
+    basePrice: 12000,
+    baseProducts: 42,
+    baseDevices: 38,
+    features: ["Acces comun", "Iluminat spații comune", "Contorizare", "Monitorizare tehnică"],
+    target: "Dezvoltatori și asociații de proprietari",
+    recommendedCapacity: "8–60 apartamente · 1–4 scări",
+    optionalFunctions: ["Videointerfon", "Parcare", "Stații EV", "Integrare apartamente"],
+    excluded: ["Automatizarea apartamentelor", "Cablarea de forță integrală"],
+    installationConditions: [
+      "Planuri instalații și spații comune",
+      "Rețea tehnică și tablou comun",
+    ],
+    recommendedTechnology: "KNX/BMS, Modbus și IP",
+    estimatedDuration: "4–12 săptămâni",
+    solutionSlug: "blocuri-smart",
+    defaultSelections: [...comfortSelections, "security-cameras", "exterior-ev"],
+    baseEquipment: [
+      { label: "surse KNX", quantity: 2 },
+      { label: "gateway-uri IP", quantity: 2 },
+    ],
+  },
+  "pensiune-smart": {
+    id: "pensiune-smart",
+    name: "Kit Pensiune Smart",
+    shortDescription: "Confort pentru oaspeți și control centralizat pentru operator.",
+    minPrice: 8000,
+    maxPrice: 40000,
+    basePrice: 8000,
+    baseProducts: 30,
+    baseDevices: 28,
+    features: ["Control camere", "Acces", "Energie", "Securitate"],
+    target: "Pensiuni și aparthoteluri",
+    recommendedCapacity: "5–20 camere",
+    optionalFunctions: ["Check-in digital", "HVAC pe cameră", "Senzori ferestre", "Integrare PMS"],
+    excluded: ["Licențe PMS", "Încuietori și aparate HVAC dacă nu sunt ofertate"],
+    installationConditions: ["Plan pe nivel și tabel de camere", "Rețea tehnică separată"],
+    recommendedTechnology: "KNX sau sistem hibrid cu gateway PMS",
+    estimatedDuration: "3–8 săptămâni",
+    solutionSlug: "pensiuni-hoteluri-smart",
+    defaultSelections: [...comfortSelections, "security-cameras", "climate-ventilation"],
+    baseEquipment: [
+      { label: "surse KNX", quantity: 2 },
+      { label: "gateway-uri IP", quantity: 1 },
+    ],
+  },
+  "hotel-smart": {
+    id: "hotel-smart",
+    name: "Kit Hotel Smart",
+    shortDescription: "Automatizare scalabilă pentru camere, zone comune și operațiuni hoteliere.",
+    minPrice: 25000,
+    maxPrice: 150000,
+    basePrice: 25000,
+    baseProducts: 80,
+    baseDevices: 72,
+    features: ["Room management", "BMS", "Control acces", "Eficiență energetică"],
+    target: "Hoteluri boutique și hoteluri mici",
+    recommendedCapacity: "15–80 camere",
+    optionalFunctions: ["PMS", "GRMS", "HVAC central", "Mentenanță predictivă"],
+    excluded: ["Licențe PMS/GRMS", "Servere și echipamente HVAC neincluse în ofertă"],
+    installationConditions: ["Proiect tehnic coordonat MEP", "Backbone IP și tablouri pe nivel"],
+    recommendedTechnology: "KNX, BACnet/Modbus și integrare PMS",
+    estimatedDuration: "2–6 luni",
+    solutionSlug: "pensiuni-hoteluri-smart",
+    defaultSelections: premiumSelections,
+    baseEquipment: [
+      { label: "surse KNX", quantity: 4 },
+      { label: "gateway-uri IP", quantity: 3 },
+      { label: "panouri tactile", quantity: 2 },
     ],
   },
 };
@@ -473,12 +651,6 @@ export function calculateCommercialSummary(
     );
   }
   const price = kit.basePrice + selected.reduce((total, option) => total + option.price, 0);
-  const nextKitMinimum =
-    kitId === "essential"
-      ? kitDefinitions.comfort.minPrice
-      : kitId === "comfort"
-        ? kitDefinitions.premium.minPrice
-        : kit.maxPrice;
   const equipmentPriority = [
     "actuatoare iluminat",
     "actuatoare jaluzele",
@@ -504,10 +676,18 @@ export function calculateCommercialSummary(
         if (rightPriority === -1) return -1;
         return leftPriority - rightPriority;
       }),
-    savings: Math.max(0, nextKitMinimum - price),
+    savings: Math.max(0, kit.maxPrice - price),
   };
 }
 
 export function isKitId(value: string | undefined): value is KitId {
-  return value === "essential" || value === "comfort" || value === "premium";
+  return kitIds.some((kitId) => kitId === value);
+}
+
+export function normalizeKitId(value: string | undefined): KitId {
+  if (isKitId(value)) return value;
+  if (value === "essential") return "smart-start";
+  if (value === "comfort") return "casa-comfort";
+  if (value === "premium") return "casa-premium-knx";
+  return "casa-comfort";
 }

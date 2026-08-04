@@ -1,25 +1,25 @@
 import { expect, test } from "@playwright/test";
 
-test("homepage afișează cele trei pachete comerciale", async ({ page }) => {
-  await page.goto("/#pachete");
+test("pagina Kituri afișează cele nouă pachete orientative", async ({ page }) => {
+  await page.goto("/kituri");
 
   await expect(
-    page.getByRole("heading", { name: "Alege pachetul potrivit casei tale." }),
+    page.getByRole("heading", { name: "Alege punctul de plecare potrivit clădirii tale." }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /Configurează Essential/ })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Configurează Comfort/ })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Configurează Premium/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Kit Smart Start" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Kit Hotel Smart" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Configurează kitul/ })).toHaveCount(9);
+  await expect(page.getByRole("link", { name: /Încarcă planul/ })).toHaveCount(10);
   await expect(page.getByText("990 € – 2.490 €", { exact: true })).toBeVisible();
-  await expect(page.getByText("2.500 € – 5.500 €", { exact: true })).toBeVisible();
-  await expect(page.getByText("5.500 € – 12.000 €", { exact: true })).toBeVisible();
+  await expect(page.getByText("25.000 € – 150.000 €", { exact: true })).toBeVisible();
 });
 
 test("Kit Comfort actualizează live prețul și lista tehnică", async ({ page }) => {
-  await page.goto("/configurator-kit?kit=comfort");
+  await page.goto("/configurator-kit?kit=casa-comfort");
   await expect(page.getByTestId("commercial-configurator")).toHaveAttribute("data-ready", "true");
 
   await expect(
-    page.getByRole("heading", { level: 1, name: "Kit Comfort", exact: true }),
+    page.getByRole("heading", { level: 1, name: "Kit Casă Comfort", exact: true }),
   ).toBeVisible();
   await expect(page.getByTestId("summary-price")).toContainText("3.420");
   await expect(page.getByTestId("product-count")).toHaveText("48");
@@ -42,18 +42,22 @@ test("Kit Comfort actualizează live prețul și lista tehnică", async ({ page 
 });
 
 test("fiecare card deschide kitul ales", async ({ page }) => {
-  await page.goto("/configurator-kit?kit=premium");
+  await page.goto("/configurator-kit?kit=casa-premium-knx");
 
   await expect(
-    page.getByRole("heading", { level: 1, name: "Kit Premium", exact: true }),
+    page.getByRole("heading", { level: 1, name: "Kit Casă Premium KNX", exact: true }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /Solicită ofertă/ })).toBeVisible();
-  await expect(page.getByText("Rezervă până la limita Premium", { exact: false })).toBeVisible();
+  await expect(
+    page.getByTestId("commercial-configurator").getByRole("link", { name: /Solicită ofertă/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Rezervă până la limita orientativă", { exact: false }),
+  ).toBeVisible();
 });
 
 test("wizardul rămâne navigabil pe mobil și păstrează rezumatul", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/configurator-kit?kit=comfort");
+  await page.goto("/configurator-kit?kit=casa-comfort");
   await expect(page.getByTestId("commercial-configurator")).toHaveAttribute("data-ready", "true");
 
   await page.getByRole("button", { name: "2. Iluminat", exact: true }).click();

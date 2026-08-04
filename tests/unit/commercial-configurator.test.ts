@@ -8,8 +8,8 @@ import {
 describe("configuratorul comercial", () => {
   it("pornește Kit Comfort cu estimarea și cantitățile aprobate", () => {
     const summary = calculateCommercialSummary(
-      "comfort",
-      new Set(kitDefinitions.comfort.defaultSelections),
+      "casa-comfort",
+      new Set(kitDefinitions["casa-comfort"].defaultSelections),
     );
 
     expect(summary.price).toBe(3420);
@@ -30,9 +30,9 @@ describe("configuratorul comercial", () => {
   });
 
   it("recalculează prețul, produsele și echipamentele când o opțiune este eliminată", () => {
-    const selections = new Set(kitDefinitions.comfort.defaultSelections);
+    const selections = new Set(kitDefinitions["casa-comfort"].defaultSelections);
     selections.delete("light-dimming");
-    const summary = calculateCommercialSummary("comfort", selections);
+    const summary = calculateCommercialSummary("casa-comfort", selections);
 
     expect(summary.price).toBe(3330);
     expect(summary.products).toBe(45);

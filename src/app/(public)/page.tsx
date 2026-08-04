@@ -1,600 +1,347 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { Route } from "next";
-import type { Prisma } from "@prisma/client";
 import {
   ArrowRight,
-  Blinds,
   Building2,
-  Camera,
-  ChevronDown,
-  ChevronRight,
-  CircleGauge,
-  DoorOpen,
-  HousePlug,
-  Lightbulb,
-  LayoutList,
-  MonitorSmartphone,
-  PlugZap,
-  RadioTower,
+  CheckCircle2,
+  FileUp,
+  Home,
+  Hotel,
+  Layers3,
   ShieldCheck,
-  Smartphone,
-  Speaker,
-  ThermometerSun,
-  type LucideIcon,
+  Sparkles,
+  Zap,
 } from "lucide-react";
+import type { Route } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
-import { CatalogProductCard } from "@/components/catalog-product-card";
 import { CommercialKitCards } from "@/components/commercial-kit-cards";
-import { prisma } from "@/lib/prisma";
-import { productCategories } from "@/modules/products/categories";
+import { publicSolutions } from "@/modules/public-solutions";
 
-export const dynamic = "force-dynamic";
-
-const categoryIcons: LucideIcon[] = [
-  HousePlug,
-  CircleGauge,
-  ThermometerSun,
-  Lightbulb,
-  Blinds,
-  PlugZap,
-  Camera,
-  RadioTower,
-  Speaker,
-  Smartphone,
+const icons = [Home, Layers3, Building2, Hotel, Sparkles, ShieldCheck, Zap];
+const process = [
+  "Alege tipul clădirii",
+  "Selectează un kit de bază",
+  "Personalizează funcțiile",
+  "Încarcă planul PDF, JPG sau PNG",
+  "Confirmă camerele detectate",
+  "Alege automatizările pe cameră",
+  "Primește estimarea",
+  "Trimite proiectul pentru ofertă",
+  "Urmărește proiectul în portal",
 ];
-
-const categories = productCategories.map((label, index) => ({
-  icon: categoryIcons[index] ?? HousePlug,
-  label,
-}));
-
-type CatalogSearchParams = {
-  page?: string;
-  q?: string;
-  category?: string;
-};
-
-function catalogHref({
-  page,
-  query,
-  category,
-  anchor = "produse",
-}: Readonly<{
-  page?: number;
-  query?: string;
-  category?: string;
-  anchor?: "catalog" | "pachete" | "produse";
-}>): Route {
-  const params = new URLSearchParams();
-  if (page && page > 1) params.set("page", String(page));
-  if (query) params.set("q", query);
-  if (category) params.set("category", category);
-  const search = params.toString();
-  return `${search ? `/?${search}` : "/"}#${anchor}` as Route;
-}
-
-const ecosystemCards = [
+const projects = [
   {
-    label: "Smart Home Wi-Fi",
-    slug: "smart-home-wifi",
-    icon: HousePlug,
-    color: "text-[#108361]",
-    mark: "Wi-Fi",
-  },
-  { label: "Apple Home", slug: "apple-home", icon: HousePlug, color: "text-[#1d1d1f]", mark: "⌂" },
-  { label: "Google Home", slug: "google-home", icon: HomeMark, color: "text-[#4585f4]", mark: "G" },
-  { label: "Matter", slug: "matter", icon: MatterMark, color: "text-[#17202a]", mark: "✦" },
-  {
-    label: "Home Assistant",
-    slug: "home-assistant",
-    icon: MonitorSmartphone,
-    color: "text-[#1f9ed4]",
-    mark: "HA",
-  },
-  { label: "Aqara", slug: "aqara", icon: DoorOpen, color: "text-[#1b92cc]", mark: "AQ" },
-  {
-    label: "KNX profesional",
-    slug: "knx-profesional",
-    icon: Building2,
-    color: "text-[#ec9400]",
-    mark: "KNX",
-  },
-  {
-    label: "Securitate N3XO",
-    slug: "securitate",
-    icon: ShieldCheck,
-    color: "text-[#008b68]",
-    mark: "S",
-  },
-];
-
-const showcaseProjects = [
-  {
-    title: "Bloc rezidențial inteligent",
-    location: "Cluj-Napoca",
-    href: "/proiecte/bloc-rezidential-cluj" as Route,
+    title: "Bloc rezidențial inteligent, Cluj-Napoca",
+    subtitle: "24 apartamente · acces, energie și spații comune",
+    href: "/proiecte/bloc-rezidential-cluj",
     image: "/images/projects/bloc-rezidential-cluj-interactive.png",
-    alt: "Bloc rezidențial inteligent din Cluj cu trasee tehnice vizibile",
-    systems: "BMS · acces · HVAC · energie",
   },
   {
-    title: "Casă inteligentă",
-    location: "Brașov",
-    href: "/proiecte/casa-inteligenta-brasov" as Route,
+    title: "Casă inteligentă, Brașov",
+    subtitle: "210 m² · sistem hibrid și eficiență energetică",
+    href: "/proiecte/casa-inteligenta-brasov",
     image: "/images/projects/casa-inteligenta-brasov-interactive.png",
-    alt: "Casă inteligentă din Brașov cu circuite și instalații vizibile",
-    systems: "Climat · umbrire · PV · securitate",
   },
   {
-    title: "Casă inteligentă",
-    location: "Cluj-Napoca",
-    href: "/proiecte/casa-inteligenta-cluj" as Route,
+    title: "Casă inteligentă, Cluj-Napoca",
+    subtitle: "320 m² · KNX, securitate și climatizare",
+    href: "/proiecte/casa-inteligenta-cluj",
     image: "/images/projects/casa-inteligenta-cluj-technical.png",
-    alt: "Casă inteligentă din Cluj prezentată ca secțiune tehnică",
-    systems: "KNX · Matter · DALI · energie",
   },
 ];
 
-function HomeMark() {
-  return <span className="text-5xl font-bold leading-none">⌂</span>;
-}
-function MatterMark() {
-  return <span className="text-6xl leading-none">✦</span>;
-}
-
-function Filter({ title, values }: Readonly<{ title: string; values: string[] }>) {
-  return (
-    <section className="border-t border-[#dce2df] px-3 py-3">
-      <div className="flex items-center justify-between text-sm font-medium">
-        <span>{title}</span>
-        <span>−</span>
-      </div>
-      <div className="mt-3 max-h-28 space-y-2 overflow-hidden text-sm text-slate">
-        {values.map((value) => (
-          <label key={value} className="flex items-center gap-2">
-            <input type="checkbox" className="size-4 rounded border-[#cbd5d0]" />
-            {value}
-          </label>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default async function HomePage({
-  searchParams,
-}: Readonly<{ searchParams: Promise<CatalogSearchParams> }>) {
-  const params = await searchParams;
-  const query = params.q?.trim().slice(0, 100) ?? "";
-  const category = productCategories.find((item) => item === params.category);
-  const requestedPage = Number.parseInt(params.page ?? "1", 10);
-  const currentPage = Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1;
-  const pageSize = 30;
-  const where: Prisma.ProductWhereInput = {
-    active: true,
-    ...(category ? { category } : {}),
-    ...(query
-      ? {
-          OR: [
-            { name: { contains: query, mode: "insensitive" } },
-            { brand: { contains: query, mode: "insensitive" } },
-            { description: { contains: query, mode: "insensitive" } },
-          ],
-        }
-      : {}),
-  };
-  const [products, totalProducts] = await Promise.all([
-    prisma.product.findMany({
-      where,
-      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-      skip: (currentPage - 1) * pageSize,
-      take: pageSize,
-    }),
-    prisma.product.count({ where }),
-  ]);
-  const totalPages = Math.max(1, Math.ceil(totalProducts / pageSize));
+export default function HomePage() {
   return (
     <main className="bg-white">
-      <div className="mx-auto max-w-[1600px] px-5 pb-16 pt-7 lg:px-8">
-        <p className="text-xs text-slate">
-          <a href="#catalog" className="hover:text-emerald-700">
-            Acasă
-          </a>{" "}
-          <span className="mx-1">/</span> Soluții Smart Home
-        </p>
-        <div
-          id="catalog"
-          className="mt-8 grid scroll-mt-24 gap-8 lg:grid-cols-[20.5rem_minmax(0,1fr)]"
-        >
-          <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] self-start overflow-y-auto lg:block">
-            <div className="border border-[#dce2df]">
-              <p className="border-b border-[#dce2df] px-3 py-3 text-sm font-medium tracking-[.08em] text-ink">
-                SMART HOME
-              </p>
-              <nav aria-label="Categorii Smart Home">
-                {categories.map(({ icon: Icon, label }) => (
-                  <Link
-                    key={label}
-                    href={catalogHref({
-                      query,
-                      category: label,
-                      anchor: label === "Kit-uri de automatizare" ? "pachete" : "produse",
-                    })}
-                    className={`flex items-center gap-3 border-b border-[#dce2df] px-3 py-2.5 text-[15px] transition hover:bg-[#f4f7f5] hover:text-emerald-700 ${category === label ? "bg-[#edf6f1] text-emerald-700" : "text-ink"}`}
-                  >
-                    <Icon className="size-7 shrink-0 stroke-[1.35]" />
-                    <span className="flex-1">{label}</span>
-                    <ChevronRight className="size-4" />
-                  </Link>
-                ))}
-              </nav>
-            </div>
-            <div className="mt-5 border border-[#dce2df]">
-              <p className="px-3 py-3 text-lg font-medium text-[#4b5250]">FILTREAZĂ DUPĂ</p>
-              <Filter
-                title="Brand"
-                values={["N3XO Home (18)", "KNX (12)", "Aqara (9)", "Matter (7)"]}
-              />
-              <Filter
-                title="Integrare / ecosistem"
-                values={["Apple Home", "Google Home", "Home Assistant", "Zigbee / Matter"]}
-              />
-              <Filter title="Conectivitate" values={["KNX", "Wi-Fi", "Thread", "Zigbee"]} />
-            </div>
-          </aside>
-
-          <div className="min-w-0">
-            <section className="relative overflow-hidden rounded-xl border border-[#dce5e0] bg-[#f4f8f6] shadow-[0_10px_24px_rgba(19,39,31,.06)]">
-              <div className="grid min-h-[19rem] lg:grid-cols-[1.15fr_.85fr]">
-                <div className="relative z-10 flex flex-col justify-center px-6 py-9 sm:px-9">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
-                      Soluții Smart Home
-                    </p>
-                    <span className="border-b-2 border-emerald-500 px-1 pb-1 text-[11px] font-semibold uppercase tracking-[.14em] text-slate">
-                      Pentru case inteligente
-                    </span>
-                  </div>
-                  <h1 className="mt-5 max-w-xl text-3xl font-medium tracking-[-.045em] text-ink sm:text-4xl">
-                    Control pentru lumină, climat, siguranță și energie.
-                  </h1>
-                  <p className="mt-4 max-w-xl text-[15px] leading-7 text-slate">
-                    Alegem tehnologia potrivită proiectului tău — Wi‑Fi, Matter, KNX sau o
-                    combinație atent proiectată.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <Link
-                      href="/login"
-                      className="inline-flex items-center rounded-lg bg-[#087657] px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#065c43]"
-                    >
-                      Configurează proiectul <ArrowRight className="ml-2 size-4" />
-                    </Link>
-                    <a
-                      href="#discutam"
-                      className="inline-flex items-center rounded-lg border border-[#bfcfc7] bg-white/80 px-4 py-2.5 text-sm font-semibold text-ink transition duration-200 hover:border-[#6c8075] hover:bg-white"
-                    >
-                      Discută cu un specialist
-                    </a>
-                  </div>
-                </div>
-                <Link
-                  href={"/proiecte/bloc-rezidential-cluj" as Route}
-                  aria-label="Deschide proiectul tehnic interactiv Bloc rezidențial, Cluj"
-                  className="group relative min-h-48 overflow-hidden"
-                >
-                  <Image
-                    src="/images/projects/bloc-rezidential-cluj-interactive.png"
-                    alt="Bloc rezidențial inteligent din Cluj"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 35vw, 100vw"
-                    className="object-cover transition duration-500 group-hover:scale-[1.025]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#f4f8f6] via-[#f4f8f6]/10 to-transparent transition duration-200 group-hover:bg-[#071a20]/10" />
-                  <div className="absolute bottom-6 left-6 rounded-lg border border-white/30 bg-[#16382f]/90 px-4 py-3 text-sm text-white shadow-lg transition duration-200 group-hover:-translate-y-1 group-hover:bg-[#0b5548]">
-                    <p className="text-[10px] uppercase tracking-[.14em] text-emerald-200">
-                      Proiect demonstrativ interactiv
-                    </p>
-                    <p className="mt-1 flex items-center font-medium">
-                      Bloc rezidențial, Cluj{" "}
-                      <ArrowRight className="ml-2 size-4 transition group-hover:translate-x-1" />
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            </section>
-            <CommercialKitCards />
-            <section id="proiecte" aria-labelledby="projects-title" className="mt-12 scroll-mt-24">
-              <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
-                    Proiecte tehnice interactive
-                  </p>
-                  <h2
-                    id="projects-title"
-                    className="mt-2 text-2xl font-medium tracking-[-.035em] text-ink sm:text-3xl"
-                  >
-                    Vezi ce se află în spatele automatizării.
-                  </h2>
-                </div>
-                <p className="max-w-xl text-sm leading-6 text-slate">
-                  Studii demonstrative realiste pentru casă și clădire. Apasă pe punctele tehnice
-                  pentru a explora circuitele, protocoalele și echipamentele orientative.
-                </p>
-              </div>
-              <div className="mt-6 grid gap-5 md:grid-cols-3">
-                {showcaseProjects.map((project) => (
-                  <Link
-                    key={project.href}
-                    href={project.href}
-                    aria-label={`Explorează ${project.title}, ${project.location}`}
-                    className="group overflow-hidden rounded-xl border border-[#d7e1dc] bg-white shadow-[0_8px_22px_rgba(19,39,31,.05)] transition duration-200 hover:-translate-y-1 hover:border-[#a9c9ba] hover:shadow-[0_16px_35px_rgba(19,39,31,.1)]"
-                  >
-                    <div className="relative aspect-[16/10] overflow-hidden bg-[#0b2429]">
-                      <Image
-                        src={project.image}
-                        alt={project.alt}
-                        fill
-                        sizes="(min-width: 768px) 30vw, 100vw"
-                        className="object-cover transition duration-500 group-hover:scale-[1.035]"
-                      />
-                      <span className="absolute left-4 top-4 rounded-full border border-white/25 bg-[#071a20]/75 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.13em] text-cyan-100 backdrop-blur-md">
-                        Interactiv
-                      </span>
-                    </div>
-                    <div className="p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-[.14em] text-emerald-700">
-                        Proiect demonstrativ realist · {project.location}
-                      </p>
-                      <h3 className="mt-2 flex items-center justify-between gap-3 text-lg font-medium text-ink">
-                        {project.title}
-                        <ArrowRight className="size-4 shrink-0 transition group-hover:translate-x-1" />
-                      </h3>
-                      <p className="mt-3 border-t border-[#e3e9e6] pt-3 text-xs text-slate">
-                        {project.systems}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-            <section
-              aria-label="Ecosisteme smart home"
-              className="mt-12 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-4"
-            >
-              {ecosystemCards.map(({ label, slug, icon: Icon, color, mark }) => (
-                <Link key={label} href={`/solutii/${slug}`} className="group text-center">
-                  <div className={`grid h-20 place-items-center ${color}`}>
-                    <Icon className="size-14 stroke-[1.25] transition duration-200 group-hover:scale-110" />
-                    <span className="sr-only">{mark}</span>
-                  </div>
-                  <div className="mt-2 rounded-lg border border-transparent bg-[#f5f6f5] px-2 py-3 text-sm font-medium text-ink transition duration-200 group-hover:border-[#cfe1d8] group-hover:bg-[#e9f2ed] group-hover:shadow-sm">
-                    {label}
-                  </div>
-                </Link>
-              ))}
-            </section>
-            <section className="mt-9 border-y border-[#e1e5e3] py-6 text-[15px] leading-7 text-ink">
-              <p>
-                Construim case inteligente care rămân simple de folosit: lumină, climat, umbrire,
-                securitate și energie în aceeași experiență.
-              </p>
-              <p className="mt-3">
-                Pentru o renovare sau un apartament putem recomanda soluții Wi‑Fi și Matter. Pentru
-                case noi și proiecte complexe, KNX oferă o infrastructură profesională. Alegem
-                împreună ce se potrivește proiectului tău.
-              </p>
-              <a
-                href="#discutam"
-                className="mt-4 inline-flex font-medium text-[#0072b8] hover:underline"
+      <section className="border-b border-[#dfe7e3] bg-[#f6f9f7]">
+        <div className="mx-auto grid min-h-[560px] max-w-[1500px] items-center gap-10 px-5 py-14 lg:grid-cols-[1.05fr_.95fr] lg:px-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[.2em] text-emerald-700">
+              Proiecte smart pentru case și clădiri
+            </p>
+            <h1 className="mt-6 max-w-4xl text-5xl font-medium tracking-[-.06em] text-ink sm:text-6xl lg:text-7xl">
+              Configurează sistemul smart potrivit clădirii tale.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate">
+              Proiectare, echipamente, instalare, programare și mentenanță într-un singur proiect.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/kituri"
+                className="inline-flex items-center rounded-lg bg-emerald-700 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-emerald-800"
               >
-                Ai un proiect nou sau o renovare? Discută cu un specialist{" "}
-                <ArrowRight className="ml-1.5 mt-0.5 size-4" />
-              </a>
-            </section>
-            <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#b9d9ce] bg-[#eff8f3] px-5 py-4 shadow-[0_8px_18px_rgba(19,39,31,.04)]">
-              <div>
-                <p className="font-medium text-ink">Vrei o casă smart adaptată proiectului tău?</p>
-                <p className="mt-1 text-sm text-slate">
-                  Accesează portalul pentru a începe o estimare de proiect.
-                </p>
-              </div>
+                Alege un kit <ArrowRight className="ml-2 size-4" />
+              </Link>
               <Link
                 href="/login"
-                className="inline-flex shrink-0 items-center rounded-lg bg-[#087657] px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:bg-[#065c43]"
+                className="inline-flex items-center rounded-lg border border-[#b8c9c1] bg-white px-5 py-3.5 text-sm font-semibold text-ink transition hover:border-emerald-700"
               >
-                Accesează portalul client <ArrowRight className="ml-2 size-4" />
+                <FileUp className="mr-2 size-4" /> Încarcă planul
               </Link>
-            </section>
-            <form
-              action="/"
-              className="mt-8 grid gap-3 rounded-xl border border-[#d9e3de] bg-[#f7faf8] p-4 sm:grid-cols-[minmax(0,1fr)_15rem_auto]"
-            >
-              <label className="sr-only" htmlFor="catalog-search">
-                Caută în catalog
-              </label>
-              <input
-                id="catalog-search"
-                name="q"
-                type="search"
-                defaultValue={query}
-                placeholder="Caută produs sau cod Schneider..."
-                className="min-w-0 rounded-lg border border-[#cbd8d1] bg-white px-3 py-2.5 text-sm outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
-              />
-              <label className="sr-only" htmlFor="catalog-category">
-                Categorie
-              </label>
-              <select
-                id="catalog-category"
-                name="category"
-                defaultValue={category ?? ""}
-                className="rounded-lg border border-[#cbd8d1] bg-white px-3 py-2.5 text-sm outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
-              >
-                <option value="">Toate categoriile</option>
-                {productCategories.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              <button
-                type="submit"
-                className="rounded-lg bg-[#087657] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#065c43]"
-              >
-                Caută
-              </button>
-            </form>
-            <div
-              id="produse"
-              className="mt-5 flex flex-wrap items-center justify-between gap-3 border-b border-[#e1e5e3] pb-4 text-sm"
-            >
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 font-medium transition hover:text-emerald-700"
-              >
-                Sortează după <ChevronDown className="size-4" />
-              </button>
-              <span className="inline-flex items-center gap-2 text-slate">
-                Afișare: <LayoutList className="size-4 text-[#087657]" />
-              </span>
-              <span className="hidden sm:inline">
-                {totalProducts} produse · Pagina {Math.min(currentPage, totalPages)} / {totalPages}
-              </span>
             </div>
-            <section className="mt-5 grid gap-3">
-              {products.map((product) => (
-                <CatalogProductCard key={product.id} product={product} />
-              ))}
-              {products.length === 0 && (
-                <p className="col-span-full py-10 text-center text-sm text-slate">
-                  Catalogul este în curs de actualizare.
-                </p>
-              )}
-            </section>
-            {totalPages > 1 && (
-              <nav
-                aria-label="Paginare catalog"
-                className="mt-10 flex items-center justify-center gap-3"
-              >
-                {currentPage > 1 ? (
-                  <Link
-                    href={catalogHref({ page: currentPage - 1, query, category })}
-                    className="rounded-lg border border-[#cbd8d1] px-4 py-2 text-sm font-medium text-ink transition hover:border-emerald-600 hover:text-emerald-700"
-                  >
-                    Pagina anterioară
-                  </Link>
-                ) : (
-                  <span className="rounded-lg border border-[#e3e9e6] px-4 py-2 text-sm text-slate/50">
-                    Pagina anterioară
-                  </span>
-                )}
-                <span className="text-sm font-medium text-slate">
-                  {Math.min(currentPage, totalPages)} / {totalPages}
-                </span>
-                {currentPage < totalPages ? (
-                  <Link
-                    href={catalogHref({ page: currentPage + 1, query, category })}
-                    className="rounded-lg border border-[#cbd8d1] px-4 py-2 text-sm font-medium text-ink transition hover:border-emerald-600 hover:text-emerald-700"
-                  >
-                    Pagina următoare
-                  </Link>
-                ) : (
-                  <span className="rounded-lg border border-[#e3e9e6] px-4 py-2 text-sm text-slate/50">
-                    Pagina următoare
-                  </span>
-                )}
-              </nav>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <section id="oferte" className="border-y border-[#dce2df] bg-[#f5f7f6]">
-        <div className="mx-auto grid max-w-[1600px] gap-8 px-5 py-12 lg:grid-cols-[1fr_2fr] lg:px-8">
-          <div>
-            <p className="text-xs font-semibold tracking-[.16em] text-emerald-700">
-              CASA SMART, PE MĂSURA PROIECTULUI
-            </p>
-            <h2 className="mt-3 text-3xl font-medium tracking-[-.035em]">
-              Wi‑Fi, KNX sau hibrid. Alegerea vine după proiect.
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-slate">
-              Nu vindem o singură tehnologie. Alegem soluția care are sens pentru casă, etapă de
-              renovare și buget.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="border-l-2 border-emerald-600 pl-4">
-              <p className="font-medium">Smart Home Wi‑Fi</p>
-              <p className="mt-2 text-sm leading-6 text-slate">
-                Flexibil pentru apartamente, renovări și automatizări începute etapizat.
-              </p>
-            </div>
-            <div className="border-l-2 border-emerald-600 pl-4">
-              <p className="font-medium">KNX profesional</p>
-              <p className="mt-2 text-sm leading-6 text-slate">
-                Robust și scalabil pentru case noi, vile și proiecte cu multe instalații.
-              </p>
-            </div>
-            <div className="border-l-2 border-emerald-600 pl-4">
-              <p className="font-medium">Sistem hibrid</p>
-              <p className="mt-2 text-sm leading-6 text-slate">
-                KNX unde contează, Wi‑Fi și Matter acolo unde aduc flexibilitate.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="branduri" className="mx-auto max-w-[1600px] px-5 py-14 lg:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold tracking-[.16em] text-emerald-700">
-              ECOSISTEME & TEHNOLOGII
-            </p>
-            <h2 className="mt-3 text-3xl font-medium tracking-[-.035em]">
-              Tehnologie aleasă pentru proiect, nu impusă.
-            </h2>
-          </div>
-          <a href="#discutam" className="text-sm font-medium text-[#0072b8]">
-            Verifică compatibilitatea <ChevronRight className="inline size-4" />
-          </a>
-        </div>
-        <div className="mt-8 grid grid-cols-2 divide-x divide-y divide-[#dce2df] border border-[#dce2df] sm:grid-cols-4 lg:grid-cols-6">
-          {["KNX", "Matter", "Apple Home", "Google Home", "Home Assistant", "Zigbee"].map(
-            (brand) => (
-              <div
-                key={brand}
-                className="flex h-24 items-center justify-center text-lg font-medium text-[#4b5250]"
-              >
-                {brand}
-              </div>
-            ),
-          )}
-        </div>
-      </section>
-
-      <section id="discutam" className="bg-[#173830] text-white">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-end justify-between gap-8 px-5 py-14 lg:px-8">
-          <div>
-            <p className="text-xs font-semibold tracking-[.16em] text-emerald-300">
-              AI UN PROIECT?
-            </p>
-            <h2 className="mt-3 text-4xl font-medium tracking-[-.045em]">
-              Îl discutăm înainte să alegi produsele.
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
-              Primești o discuție tehnică despre infrastructură, compatibilități și pașii reali de
-              implementare.
+            <p className="mt-6 text-sm font-medium text-emerald-800">
+              Încarcă planul și primești o estimare orientativă.
             </p>
           </div>
           <Link
-            href="/login"
-            className="rounded bg-white px-5 py-3 text-sm font-semibold text-[#173830] hover:bg-emerald-100"
+            href="/proiecte/casa-inteligenta-cluj"
+            aria-label="Deschide demonstrația tehnică pentru casa din Cluj-Napoca"
+            className="group relative min-h-[420px] overflow-hidden rounded-2xl border border-[#d8e2dd] shadow-[0_18px_50px_rgba(19,39,31,.12)]"
           >
-            Accesează portalul client
+            <Image
+              src="/images/projects/casa-inteligenta-cluj-technical.png"
+              alt="Casă inteligentă cu circuite tehnice vizibile"
+              fill
+              priority
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              className="object-cover transition duration-500 group-hover:scale-[1.02]"
+            />
+            <div className="absolute inset-0 bg-[#071a20]/25" />
+            <div className="absolute inset-x-6 bottom-6 rounded-xl border border-white/20 bg-[#103c31]/90 p-5 text-white backdrop-blur-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[.16em] text-emerald-200">
+                Proiect demonstrativ interactiv
+              </p>
+              <p className="mt-2 text-xl font-semibold">Casă inteligentă, Cluj-Napoca</p>
+              <p className="mt-2 text-sm text-white/70">
+                Explorează circuitele și echipamentele folosite.
+              </p>
+            </div>
           </Link>
+        </div>
+      </section>
+
+      <section
+        className="mx-auto max-w-[1500px] px-5 py-16 lg:px-8"
+        aria-labelledby="solutions-title"
+      >
+        <div className="flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+              Soluții pe tip de clădire
+            </p>
+            <h2
+              id="solutions-title"
+              className="mt-3 text-3xl font-medium tracking-[-.045em] text-ink sm:text-4xl"
+            >
+              Începem cu proiectul, nu cu produsul.
+            </h2>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-slate">
+            Alegem arhitectura tehnică după clădire, instalații, buget și nivelul de automatizare
+            dorit.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {publicSolutions.map((solution, index) => {
+            const Icon = icons[index] ?? Home;
+            return (
+              <Link
+                key={solution.slug}
+                href={`/solutii/${solution.slug}`}
+                className="group rounded-xl border border-[#d8e2dd] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-[#a9c6ba] hover:shadow-[0_14px_35px_rgba(19,39,31,.08)]"
+              >
+                <Icon className="size-7 text-emerald-700" />
+                <h3 className="mt-6 text-xl font-semibold text-ink">{solution.name}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate">{solution.summary}</p>
+                <span className="mt-6 inline-flex items-center text-sm font-semibold text-emerald-800">
+                  Vezi soluția{" "}
+                  <ArrowRight className="ml-2 size-4 transition group-hover:translate-x-1" />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="border-y border-[#dfe7e3] bg-[#f6f9f7]">
+        <div className="mx-auto max-w-[1500px] px-5 py-16 lg:px-8">
+          <CommercialKitCards limit={6} />
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1500px] px-5 py-16 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+              Flux simplu, rezultat tehnic
+            </p>
+            <h2 className="mt-3 text-4xl font-medium tracking-[-.045em] text-ink">
+              De la clădire la ofertă, în 9 pași clari.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-slate">
+              Configuratorul organizează cerințele, iar specialistul N3XO validează soluția înainte
+              de implementare.
+            </p>
+          </div>
+          <ol className="grid gap-px overflow-hidden rounded-2xl border border-[#d8e2dd] bg-[#d8e2dd] sm:grid-cols-3">
+            {process.map((step, index) => (
+              <li key={step} className="bg-white p-5">
+                <span className="text-xs font-semibold text-emerald-700">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-3 text-sm font-semibold leading-5 text-ink">{step}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="border-y border-[#dfe7e3] bg-[#f3f7f5]">
+        <div className="mx-auto max-w-[1500px] px-5 py-16 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+            Exemple de configurații
+          </p>
+          <h2 className="mt-3 text-3xl font-medium tracking-[-.04em] text-ink">
+            Ce poate include un proiect.
+          </h2>
+          <div className="mt-7 grid gap-4 lg:grid-cols-3">
+            {[
+              [
+                "Apartament urban · 78 m²",
+                "Iluminat, climat, jaluzele, scenarii și securitate de bază",
+                "Matter + Zigbee",
+              ],
+              [
+                "Casă nouă · 210 m²",
+                "KNX, încălzire pe zone, DALI, acces, energie și stație EV",
+                "KNX + IP",
+              ],
+              [
+                "Pensiune · 12 camere",
+                "Control pe cameră, acces, HVAC, economisire și alarme tehnice",
+                "KNX + PMS",
+              ],
+            ].map(([title, text, technology]) => (
+              <article key={title} className="rounded-xl border border-[#d8e2dd] bg-white p-6">
+                <p className="text-xs font-semibold uppercase tracking-[.14em] text-emerald-700">
+                  {technology}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold text-ink">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="proiecte" className="mx-auto max-w-[1500px] scroll-mt-24 px-5 py-16 lg:px-8">
+        <div className="flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+              Proiecte tehnice interactive
+            </p>
+            <h2 className="mt-3 text-3xl font-medium tracking-[-.04em] text-ink">
+              Vezi ce se află în spatele automatizării.
+            </h2>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-slate">
+            Studii demonstrative realiste. Apasă pe punctele tehnice pentru a explora circuitele și
+            echipamentele orientative.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          {projects.map((project) => (
+            <Link
+              key={project.href}
+              href={project.href as Route}
+              aria-label={`Deschide proiectul ${project.title}`}
+              className="group overflow-hidden rounded-2xl border border-[#d8e2dd] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(19,39,31,.10)]"
+            >
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src={project.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 32vw, 100vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-ink">{project.title}</h3>
+                <p className="mt-2 text-sm text-slate">{project.subtitle}</p>
+                <span className="mt-4 inline-flex items-center text-sm font-semibold text-emerald-800">
+                  Explorează proiectul <ArrowRight className="ml-2 size-4" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section id="ghiduri" className="border-y border-[#dfe7e3] bg-white">
+        <div className="mx-auto grid max-w-[1500px] gap-6 px-5 py-16 md:grid-cols-3 lg:px-8">
+          {[
+            "Wi-Fi, Matter sau KNX?",
+            "Cum pregătești instalația electrică",
+            "Ce conține o ofertă smart completă",
+          ].map((title) => (
+            <article key={title} className="rounded-xl border border-[#d8e2dd] p-6">
+              <p className="text-xs font-semibold uppercase tracking-[.14em] text-emerald-700">
+                Ghid tehnic
+              </p>
+              <h2 className="mt-3 text-xl font-semibold text-ink">{title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate">
+                Repere clare pentru decizii corecte înainte de proiectare și ofertare.
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="despre-noi"
+        className="mx-auto grid max-w-[1500px] gap-10 px-5 py-16 lg:grid-cols-2 lg:px-8"
+      >
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+            Despre N3XO
+          </p>
+          <h2 className="mt-3 text-4xl font-medium tracking-[-.045em] text-ink">
+            Un singur partener pentru întregul sistem smart.
+          </h2>
+        </div>
+        <div className="grid gap-3 text-sm leading-6 text-slate sm:grid-cols-2">
+          {[
+            "Consultanță și proiectare",
+            "Echipamente compatibile",
+            "Instalare și programare",
+            "Documentație și mentenanță",
+          ].map((item) => (
+            <div key={item} className="flex gap-3 rounded-xl border border-[#d8e2dd] p-5">
+              <CheckCircle2 className="size-5 shrink-0 text-emerald-700" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="solicita-oferta" className="scroll-mt-24 bg-[#102720] text-white">
+        <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-16 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-300">
+              Solicită ofertă
+            </p>
+            <h2 className="mt-3 text-4xl font-medium tracking-[-.045em]">
+              Încarcă planul și primești o estimare orientativă.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-white/65">
+              Cluj, România · Ing. Augustin Tunaru · +40 749 988 649
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/login"
+              className="inline-flex items-center rounded-lg bg-white px-5 py-3.5 text-sm font-semibold text-[#102720]"
+            >
+              <FileUp className="mr-2 size-4" /> Încarcă planul
+            </Link>
+            <a
+              href="tel:+40749988649"
+              className="rounded-lg border border-white/25 px-5 py-3.5 text-sm font-semibold text-white"
+            >
+              Discută cu un specialist
+            </a>
+          </div>
         </div>
       </section>
     </main>

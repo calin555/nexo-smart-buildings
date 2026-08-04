@@ -89,12 +89,12 @@ export function ProductImageUpload({
 
   return (
     <div>
-      <p className="text-sm font-medium">Imagine produs</p>
+      <p className="text-sm font-medium">Imagine echipament</p>
       <div className="mt-2 grid gap-4 rounded-xl border border-slate/20 bg-[#f7faf8] p-4 sm:grid-cols-[11rem_1fr]">
         <div
           role="img"
           aria-label={
-            previewUrl ? "Previzualizare imagine produs" : "Nu este selectată nicio imagine"
+            previewUrl ? "Previzualizare imagine echipament" : "Nu este selectată nicio imagine"
           }
           className="grid aspect-[4/3] place-items-center rounded-lg border border-dashed border-slate/25 bg-white bg-contain bg-center bg-no-repeat text-slate"
           style={previewUrl ? { backgroundImage: `url(${JSON.stringify(previewUrl)})` } : undefined}

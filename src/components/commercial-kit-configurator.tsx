@@ -42,9 +42,15 @@ const categoryIcons = {
 } satisfies Record<ConfiguratorCategoryId, typeof House>;
 
 const kitAccent: Record<KitId, { chip: string; line: string }> = {
-  essential: { chip: "bg-[#e8f6ef] text-[#087657]", line: "bg-[#20a477]" },
-  comfort: { chip: "bg-[#e7f3fa] text-[#0868a8]", line: "bg-[#2196d2]" },
-  premium: { chip: "bg-[#f1ecf8] text-[#7251a8]", line: "bg-[#8062b5]" },
+  "smart-start": { chip: "bg-[#e8f6ef] text-[#087657]", line: "bg-[#20a477]" },
+  "apartament-smart": { chip: "bg-[#e7f3fa] text-[#0868a8]", line: "bg-[#2196d2]" },
+  "casa-comfort": { chip: "bg-[#e7f3fa] text-[#0868a8]", line: "bg-[#2196d2]" },
+  "casa-premium-knx": { chip: "bg-[#f1ecf8] text-[#7251a8]", line: "bg-[#8062b5]" },
+  securitate: { chip: "bg-[#fff0ec] text-[#a4432e]", line: "bg-[#cf684e]" },
+  energie: { chip: "bg-[#fff7dc] text-[#806211]", line: "bg-[#d7ac27]" },
+  "bloc-smart": { chip: "bg-[#edf0f7] text-[#35486d]", line: "bg-[#526b98]" },
+  "pensiune-smart": { chip: "bg-[#f4eee8] text-[#765135]", line: "bg-[#a47c5a]" },
+  "hotel-smart": { chip: "bg-[#e9f0ef] text-[#164f48]", line: "bg-[#28796d]" },
 };
 
 function formatEuro(value: number): string {
@@ -118,10 +124,7 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
   }
 
   const isLastStep = activeCategoryIndex === configuratorCategories.length - 1;
-  const savingsLabel =
-    initialKit === "premium"
-      ? "Rezervă până la limita Premium"
-      : `Economie față de ${initialKit === "essential" ? "Comfort" : "Premium"}`;
+  const savingsLabel = "Rezervă până la limita orientativă a kitului";
 
   return (
     <main
@@ -133,10 +136,10 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
       <div className="mx-auto max-w-[1600px] px-4 py-6 sm:px-5 lg:px-8 lg:py-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
-            href="/#pachete"
+            href="/kituri"
             className="inline-flex items-center gap-2 text-sm font-medium text-slate transition hover:text-emerald-700"
           >
-            <ArrowLeft className="size-4" /> Înapoi la pachete
+            <ArrowLeft className="size-4" /> Înapoi la kituri
           </Link>
           <span className={`rounded-full px-3 py-1.5 text-xs font-semibold ${accent.chip}`}>
             Estimare orientativă · fără obligații
@@ -349,7 +352,7 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
 
               <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-lg bg-white/[.07] p-3">
-                  <dt className="text-xs text-white/55">Produse</dt>
+                  <dt className="text-xs text-white/55">Poziții materiale</dt>
                   <dd className="mt-1 text-lg font-semibold" data-testid="product-count">
                     {summary.products}
                   </dd>
@@ -390,10 +393,16 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
               </div>
 
               <Link
-                href="/#discutam"
+                href="/#solicita-oferta"
                 className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#102720] transition hover:bg-emerald-50"
               >
                 Solicită ofertă <ArrowRight className="ml-2 size-4" />
+              </Link>
+              <Link
+                href="/login"
+                className="mt-3 inline-flex w-full items-center justify-center rounded-lg border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Încarcă planul
               </Link>
               <p className="mt-3 text-center text-[11px] leading-4 text-white/45">
                 Estimare orientativă. Confirmarea finală necesită analiza proiectului și a

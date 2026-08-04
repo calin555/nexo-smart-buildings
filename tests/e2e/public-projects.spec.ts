@@ -7,13 +7,13 @@ test("homepage lists the three interactive project studies", async ({ page }) =>
     page.getByRole("heading", { name: "Vezi ce se află în spatele automatizării." }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Explorează Bloc rezidențial inteligent, Cluj-Napoca" }),
+    page.getByRole("link", { name: "Deschide proiectul Bloc rezidențial inteligent, Cluj-Napoca" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Explorează Casă inteligentă, Brașov" }),
+    page.getByRole("link", { name: "Deschide proiectul Casă inteligentă, Brașov" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Explorează Casă inteligentă, Cluj-Napoca" }),
+    page.getByRole("link", { name: "Deschide proiectul Casă inteligentă, Cluj-Napoca" }),
   ).toBeVisible();
 });
 
@@ -41,68 +41,26 @@ test("Brașov house exposes climate and energy details", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("catalogul public afișează produsul compact și deschide detaliile la click", async ({
-  page,
-}) => {
-  await page.goto("/?q=MTN6215-0410S#produse");
-
-  const productRow = page.getByRole("button", { name: /MTN6215-0410S/ });
-  const dialog = page.getByRole("dialog");
-
-  await expect(productRow).toBeVisible();
-  await expect(dialog).toBeHidden();
-  await productRow.click();
-
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByText("MTN6215-0410S", { exact: true })).toBeVisible();
-  await expect(dialog.getByText("Preț la cerere", { exact: true })).toBeVisible();
-  await expect(dialog.getByText(/catalogul Schneider Electric KNX 2025/)).toBeVisible();
-
-  await dialog.getByRole("button", { name: "Închide detaliile produsului" }).click();
-  await expect(dialog).toBeHidden();
-  await expect(page.getByText("342 produse")).not.toBeVisible();
-});
-
-test("catalogul ABB afișează fotografia oficială și detaliile tehnice la click", async ({
-  page,
-}) => {
-  await page.goto("/?q=2CDG110030R0011#produse");
-
-  const productRow = page.getByRole("button", { name: /2CDG110030R0011/ });
-  await expect(productRow).toBeVisible();
-  await expect(productRow.getByText("Intrare analogică", { exact: false })).toBeVisible();
-  await expect(productRow.locator("img")).toHaveJSProperty("complete", true);
-  expect(
-    await productRow
-      .locator("img")
-      .evaluate((image) => (image instanceof HTMLImageElement ? image.naturalWidth : 0)),
-  ).toBeGreaterThan(0);
-
-  await productRow.click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByText("2CDG110030R0011", { exact: true })).toBeVisible();
-  await expect(dialog.getByText("ABB i-bus", { exact: true })).toBeVisible();
-  await expect(dialog.getByText(/Cod comercial ABB: 2CDG110030R0011/)).toBeVisible();
-  await expect(dialog.getByText("Preț la cerere", { exact: true })).toBeVisible();
-});
-
-test("categoria de kituri deschide pachetele, iar celelalte categorii deschid produsele", async ({
-  page,
-}) => {
+test("homepage-ul public prezintă soluții și nu mai expune magazinul", async ({ page }) => {
   await page.goto("/");
-
-  const categories = page.getByRole("navigation", { name: "Categorii Smart Home" });
-  await categories.getByRole("link", { name: /Kit-uri de automatizare/ }).click();
-
-  await expect(page).toHaveURL(/category=Kit-uri(?:\+|%20)de(?:\+|%20)automatizare#pachete$/);
-  await expect(page.locator("#pachete")).toBeInViewport();
   await expect(
-    page.getByRole("heading", { name: "Alege pachetul potrivit casei tale." }),
+    page.getByRole("heading", { name: "Configurează sistemul smart potrivit clădirii tale." }),
   ).toBeVisible();
+  await expect(
+    page.getByText(
+      "Proiectare, echipamente, instalare, programare și mentenanță într-un singur proiect.",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Adaugă în coș|Cumpără acum|Vezi stocul/ }),
+  ).toHaveCount(0);
+  await expect(page.getByText("Filtrează după", { exact: false })).toHaveCount(0);
+});
 
-  await categories.getByRole("link", { name: /Sisteme de securitate/ }).click();
-
-  await expect(page).toHaveURL(/category=Sisteme(?:\+|%20)de(?:\+|%20)securitate#produse$/);
-  await expect(page.locator("#produse")).toBeInViewport();
+test("pagina unei soluții explică proiectul și conduce spre kit și plan", async ({ page }) => {
+  await page.goto("/solutii/case-smart");
+  await expect(page.getByRole("heading", { level: 1, name: /O casă care răspunde/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Vezi kiturile" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Încarcă planul" }).first()).toBeVisible();
+  await expect(page.getByText("Produse", { exact: true })).toHaveCount(0);
 });

@@ -67,7 +67,7 @@ export function ProductForm({ action, defaults, submitLabel }: Readonly<ProductF
       )}
       <div className="grid gap-5 md:grid-cols-2">
         <label className="text-sm font-medium">
-          Nume produs
+          Nume echipament
           <input
             name="name"
             required
@@ -187,7 +187,7 @@ export function ProductForm({ action, defaults, submitLabel }: Readonly<ProductF
           defaultChecked={defaults?.active ?? true}
           className="size-4 rounded border-slate/30 text-emerald-700 focus:ring-emerald-600"
         />
-        Produs vizibil pe site
+        Echipament activ pentru calculele interne
       </label>
       <div className="flex justify-end">
         <SubmitButton label={submitLabel} imageUploading={imageUploading} />

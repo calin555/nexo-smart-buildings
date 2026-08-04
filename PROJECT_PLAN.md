@@ -1,61 +1,45 @@
-# N3XO Smart Buildings — Project Plan
+# N3XO Smart Buildings — plan de produs
 
-## Scop şi obiective
+## Direcție aprobată
 
-N3XO Smart Buildings este o platformă B2C/B2B pentru proiectarea, ofertarea, vânzarea şi livrarea soluţiilor de automatizare pentru case, ansambluri rezidenţiale, hoteluri şi clădiri comerciale. Platforma poziţionează compania ca integrator: proiectare, echipamente, instalare, programare şi mentenanţă.
+N3XO este o platformă pentru proiectarea, estimarea, ofertarea, implementarea și mentenanța sistemelor smart pentru case, apartamente, blocuri, pensiuni, hoteluri și clădiri rezidențiale mici. Platforma nu este magazin online și nu oferă catalog public, coș, checkout, stoc sau comenzi clasice.
 
-MVP-ul validează fluxul vizitator → configurare → proiect → documente → estimare/ofertă → portal client → administrare. În fundaţia curentă se implementează doar identitatea, organizaţiile, RBAC, layout-urile şi infrastructura de deploy; catalogul, configuratoarele, upload-ul final, plăţile şi 3D rămân în milestone-uri ulterioare.
+Mesajele comerciale principale sunt:
 
-## Arhitectură aprobată
+- „Configurează sistemul smart potrivit clădirii tale.”
+- „Proiectare, echipamente, instalare, programare și mentenanță într-un singur proiect.”
+- „Încarcă planul și primești o estimare orientativă.”
 
-- Next.js App Router, React şi TypeScript strict;
-- Vercel pentru toate mediile de producţie şi preview;
-- Supabase PostgreSQL, Supabase Auth, Supabase Storage şi Row Level Security;
-- Prisma ORM pentru date de business complexe, cu migraţii versionate;
-- GitHub ca sursă a repository-ului şi trigger de deploy Vercel.
+## Suprafețe
 
-Nu se folosesc microservicii în MVP. MinIO/Docker nu sunt componente de producţie; Docker Compose poate rămâne doar un ajutor local opţional.
+### Public
 
-## Identitate, acces şi date
+Acasă, Case Smart, Apartamente Smart, Blocuri Smart, Pensiuni și Hoteluri Smart, Automatizare KNX, Securitate, Energie și Eficiență, Configurator pe plan, Kituri, Proiecte, Ghiduri, Despre noi și Solicită ofertă.
 
-- Supabase Auth deţine `auth.users`, parolele, resetarea parolelor şi sesiunile.
-- Tabelul public `profiles` are un UUID care referă `auth.users.id`; aplicaţia nu are tabele de parole sau sesiuni.
-- `organizations`, `memberships`, `roles`, `consents`, `data_requests` şi `audit_logs` aparţin schemei publice.
-- RLS protejează apelurile directe Supabase; serviciile Next.js aplică suplimentar RBAC server-side.
-- Service role este strict server-side şi nu este importat în bundle-ul browser.
+### Portal client
 
-## Servicii şi stocare
+Proiecte, planuri, camere, configurări, estimări, oferte, documente, etape, mesaje, intervenții și mentenanță, izolate pe organizație.
 
-| Capacitate | Soluţie | Stare fundaţie |
-| --- | --- | --- |
-| Auth | Supabase Auth prin `@supabase/ssr` | login, logout, resetare |
-| Date | Supabase Postgres + Prisma | schemă/migraţii versionate |
-| Documente | Supabase Storage | bucket-uri private şi politici pregătite |
-| Preview document | signed URL cu expirare | contract de infrastructură |
-| CAD, e-mail, plăţi, ERP | adaptoare externe | neimplementate |
+### Admin
 
-Bucket-urile private aprobate sunt `project-documents`, `product-documents`, `offer-pdfs` şi `project-images`.
+Echipamente, producători, compatibilități, prețuri, reguli, kituri, proiecte și oferte. Echipamentele sunt date interne folosite în calcule, liste orientative de materiale și ofertare.
 
-## Presupuneri explicite
+## Flux client
 
-1. Proiectul Supabase şi proiectul Vercel sunt administrate de organizaţie; cheile nu se introduc în Git.
-2. `DATABASE_URL` este URL pooled pentru runtime, iar `DIRECT_URL` este URL direct pentru Prisma migrate.
-3. Produsul nu depinde de filesystem persistent în Vercel; orice fişier viitor merge în Supabase Storage.
-4. Compatibilităţile, estimările şi datele demo viitoare sunt validate/administrate înainte de a fi prezentate ca certe.
-5. UI-ul este în română, cu structură pregătită pentru engleză.
+1. Alege tipul clădirii.
+2. Selectează un kit de bază.
+3. Personalizează funcțiile.
+4. Încarcă planul PDF/JPG/PNG.
+5. Confirmă camerele detectate.
+6. Selectează automatizările pe cameră.
+7. Primește estimarea.
+8. Trimite proiectul pentru ofertă.
+9. Urmărește proiectul în portal.
 
-## Etape
+## Kituri publice
 
-| Versiune | Accent | Rezultat |
-| --- | --- | --- |
-| MVP | Flux comercial şi operaţional | identitate, configurare, proiect, estimare, ofertare, documente şi portal |
-| V2 | Scalare operaţională | Hotel, comenzi, notificări, CAD 2D şi integrări administrative |
-| V3 | Integrare avansată | 3D separat, PMS/BMS/ERP, analitice şi automatizări |
+Smart Start, Apartament Smart, Casă Comfort, Casă Premium KNX, Securitate, Energie, Bloc Smart, Pensiune Smart și Hotel Smart. Fiecare kit comunică publicul țintă, capacitatea, funcțiile incluse și opționale, intervalul de preț, excluderile, condițiile, tehnologia, durata și cele trei acțiuni: configurare, încărcare plan și solicitare ofertă.
 
-## Criterii de calitate
+## În afara direcției
 
-- TypeScript strict, Zod la graniţele server-side, acces RBAC şi RLS;
-- fără secrete în repository; `.env.example` conţine numai nume de variabile;
-- audit pentru mutaţii administrative, izolare per organizaţie şi rate limiting de bază;
-- lint, typecheck, teste unitare/E2E şi build înaintea fiecărui milestone;
-- deploy Vercel repetabil din GitHub, fără `prisma db push` în producţie.
+Catalog public mare, categorii și filtre de magazin, promoții, branduri ca navigare comercială, stoc, coș, checkout, comenzi clasice și pagini publice pentru sute de produse.

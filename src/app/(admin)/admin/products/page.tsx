@@ -26,32 +26,35 @@ export default async function ProductsPage({
     <main className="min-w-0 space-y-6">
       <section className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Catalog</p>
-          <h1 className="mt-2 text-3xl font-semibold">Produse</h1>
-          <p className="mt-2 text-slate">Produsele active apar automat în secțiunea publică.</p>
+          <p className="eyebrow">Date tehnice interne</p>
+          <h1 className="mt-2 text-3xl font-semibold">Echipamente</h1>
+          <p className="mt-2 text-slate">
+            Folosite în kituri, estimări, compatibilități și oferte. Nu sunt afișate ca magazin
+            public.
+          </p>
         </div>
         <Link href="/admin/products/new" className="button-primary">
           <Plus className="mr-2 size-4" />
-          Adaugă produs
+          Adaugă echipament
         </Link>
       </section>
       {(notice.created || notice.updated) && (
         <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
           <CheckCircle2 className="size-4" />
-          {notice.created ? "Produsul a fost adăugat." : "Produsul a fost actualizat."}
+          {notice.created ? "Echipamentul a fost adăugat." : "Echipamentul a fost actualizat."}
         </div>
       )}
       <section className="overflow-hidden rounded-2xl border border-slate/10 bg-white shadow-panel">
         {products.length === 0 ? (
           <div className="p-10 text-center text-sm text-slate">
-            Nu există produse. Adaugă primul produs din butonul de mai sus.
+            Nu există echipamente. Adaugă primul echipament din butonul de mai sus.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="border-b bg-cloud text-xs uppercase tracking-wider text-slate">
                 <tr>
-                  <th className="px-5 py-4">Produs</th>
+                  <th className="px-5 py-4">Echipament</th>
                   <th className="px-5 py-4">Categorie</th>
                   <th className="px-5 py-4">Preț</th>
                   <th className="px-5 py-4">Status</th>
@@ -71,12 +74,12 @@ export default async function ProductsPage({
                       {product.active ? (
                         <span className="inline-flex items-center gap-1.5 text-emerald-700">
                           <CheckCircle2 className="size-4" />
-                          Vizibil
+                          Activ intern
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1.5 text-slate">
                           <CircleOff className="size-4" />
-                          Ascuns
+                          Inactiv
                         </span>
                       )}
                     </td>

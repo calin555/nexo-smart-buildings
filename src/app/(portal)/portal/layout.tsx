@@ -25,11 +25,30 @@ export default async function PortalLayout({ children }: Readonly<{ children: Re
         <aside className="panel h-fit p-3">
           <nav aria-label="Portal client" className="grid gap-1 text-sm">
             <Link className="rounded-md px-3 py-2 hover:bg-cloud" href="/portal">
-              Tablou de bord
+              Proiecte
             </Link>
             <Link className="rounded-md px-3 py-2 hover:bg-cloud" href="/portal/configurator">
               Configurator pe plan
             </Link>
+            {[
+              "Planuri și camere",
+              "Configurări",
+              "Estimări",
+              "Oferte",
+              "Documente",
+              "Etape",
+              "Mesaje",
+              "Intervenții",
+              "Mentenanță",
+            ].map((label) => (
+              <Link
+                key={label}
+                className="rounded-md px-3 py-2 text-slate hover:bg-cloud hover:text-ink"
+                href={`/portal#${label.toLowerCase().replaceAll(" ", "-")}`}
+              >
+                {label}
+              </Link>
+            ))}
             <form action="/api/auth/logout" method="post">
               <button
                 className="w-full rounded-md px-3 py-2 text-left hover:bg-cloud"
