@@ -5,12 +5,14 @@ import {
   ArrowRight,
   BadgeEuro,
   Blinds,
+  Building2,
   Cable,
   Check,
   CheckCircle2,
   ChevronRight,
   CloudSun,
   House,
+  Hotel,
   Lightbulb,
   PackageCheck,
   ShieldCheck,
@@ -27,8 +29,63 @@ import {
   configuratorCategories,
   kitDefinitions,
   type ConfiguratorCategoryId,
+  type BlockScale,
+  type HospitalityScale,
   type KitId,
 } from "@/modules/commercial-configurator/config";
+
+const numberFieldClass =
+  "mt-2 w-full rounded-lg border border-[#cdd9d3] bg-white px-3 py-3 text-lg font-semibold text-ink outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15";
+
+function NumberField({
+  label,
+  value,
+  min = 0,
+  max = 200,
+  onChange,
+}: Readonly<{
+  label: string;
+  value: number;
+  min?: number;
+  max?: number;
+  onChange: (value: number) => void;
+}>) {
+  return (
+    <label className="rounded-xl border border-[#dce4e0] bg-[#fafcfb] p-4 text-sm font-semibold text-ink">
+      {label}
+      <input
+        type="number"
+        min={min}
+        max={max}
+        value={value}
+        onChange={(event) =>
+          onChange(Math.min(max, Math.max(min, Number(event.target.value) || 0)))
+        }
+        className={numberFieldClass}
+      />
+    </label>
+  );
+}
+
+function ToggleField({
+  label,
+  checked,
+  onChange,
+}: Readonly<{ label: string; checked: boolean; onChange: (checked: boolean) => void }>) {
+  return (
+    <label
+      className={`flex cursor-pointer items-center gap-3 rounded-xl border p-4 text-sm font-semibold transition ${checked ? "border-emerald-600 bg-[#f0f8f4] text-emerald-900" : "border-[#dce4e0] bg-white text-ink"}`}
+    >
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(event) => onChange(event.target.checked)}
+        className="size-4 rounded border-slate/30 text-emerald-700 focus:ring-emerald-600"
+      />
+      {label}
+    </label>
+  );
+}
 
 const categoryIcons = {
   rooms: House,
@@ -95,15 +152,54 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
   const [selectedOptionIds, setSelectedOptionIds] = useState<Set<string>>(
     () => new Set(kit.defaultSelections),
   );
+  const [blockScale, setBlockScale] = useState<BlockScale>({
+    kind: "block",
+    staircases: 1,
+    studios: 4,
+    twoRoom: 8,
+    threeRoom: 8,
+    fourPlusRoom: 4,
+    parking: true,
+    basement: true,
+    exterior: true,
+  });
+  const [hospitalityScale, setHospitalityScale] = useState<HospitalityScale>({
+    kind: "hospitality",
+    standardRooms: initialKit === "hotel-smart" ? 30 : 10,
+    suites: initialKit === "hotel-smart" ? 4 : 2,
+    accessibleRooms: initialKit === "hotel-smart" ? 2 : 1,
+    reception: true,
+    restaurant: initialKit === "hotel-smart",
+    spa: false,
+  });
+  const isBlockConfigurator = initialKit === "bloc-smart";
+  const isHospitalityConfigurator = initialKit === "pensiune-smart" || initialKit === "hotel-smart";
+  const buildingScale = isBlockConfigurator
+    ? blockScale
+    : isHospitalityConfigurator
+      ? hospitalityScale
+      : undefined;
   const activeCategory = configuratorCategories[activeCategoryIndex] ?? configuratorCategories[0];
   const summary = useMemo(
-    () => calculateCommercialSummary(initialKit, selectedOptionIds),
-    [initialKit, selectedOptionIds],
+    () => calculateCommercialSummary(initialKit, selectedOptionIds, buildingScale),
+    [buildingScale, initialKit, selectedOptionIds],
   );
   const visibleOptions = commercialOptions.filter(
     ({ category }) => category === activeCategory?.id,
   );
   const accent = kitAccent[initialKit];
+  const isScaleStep = activeCategory?.id === "rooms" && Boolean(buildingScale);
+  const scaleStepTitle = isBlockConfigurator
+    ? "Clădire și apartamente"
+    : isHospitalityConfigurator
+      ? "Camere și spații comune"
+      : activeCategory?.label;
+  const scaleStepDescription = isBlockConfigurator
+    ? "Introdu numărul de scări și distribuția apartamentelor pe tipologii. Apartamentele identice sunt calculate împreună."
+    : isHospitalityConfigurator
+      ? "Dimensionează camerele de cazare pe tipuri și selectează spațiile comune incluse."
+      : activeCategory?.description;
+  const scaleSelectedCount = summary.scale?.units ?? 0;
 
   useEffect(() => {
     setIsReady(true);
@@ -188,7 +284,12 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
                   : "border-[#ccd8d2] bg-white text-slate"
               }`}
             >
-              {index + 1}. {category.shortLabel}
+              {index + 1}.{" "}
+              {category.id === "rooms" && isBlockConfigurator
+                ? "Apartamente"
+                : category.id === "rooms" && isHospitalityConfigurator
+                  ? "Camere cazare"
+                  : category.shortLabel}
             </button>
           ))}
         </div>
@@ -200,10 +301,19 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
             </p>
             <nav aria-label="Pași configurator comercial" className="p-2">
               {configuratorCategories.map((category, index) => {
-                const Icon = categoryIcons[category.id];
-                const selectedCount = commercialOptions.filter(
-                  (option) => option.category === category.id && selectedOptionIds.has(option.id),
-                ).length;
+                const Icon =
+                  category.id === "rooms" && isBlockConfigurator
+                    ? Building2
+                    : category.id === "rooms" && isHospitalityConfigurator
+                      ? Hotel
+                      : categoryIcons[category.id];
+                const selectedCount =
+                  category.id === "rooms" && buildingScale
+                    ? scaleSelectedCount
+                    : commercialOptions.filter(
+                        (option) =>
+                          option.category === category.id && selectedOptionIds.has(option.id),
+                      ).length;
                 return (
                   <button
                     key={category.id}
@@ -216,7 +326,13 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
                     }`}
                   >
                     <Icon className="size-5 shrink-0 stroke-[1.6]" />
-                    <span className="flex-1">{category.shortLabel}</span>
+                    <span className="flex-1">
+                      {category.id === "rooms" && isBlockConfigurator
+                        ? "Apartamente"
+                        : category.id === "rooms" && isHospitalityConfigurator
+                          ? "Camere cazare"
+                          : category.shortLabel}
+                    </span>
                     {selectedCount > 0 ? (
                       <span className="grid size-6 place-items-center rounded-full bg-white text-[11px] font-semibold text-emerald-700 shadow-sm">
                         {selectedCount}
@@ -234,7 +350,12 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
             <div className="flex items-start gap-4 border-b border-[#e3e9e6] pb-5">
               {activeCategory &&
                 (() => {
-                  const Icon = categoryIcons[activeCategory.id];
+                  const Icon =
+                    activeCategory.id === "rooms" && isBlockConfigurator
+                      ? Building2
+                      : activeCategory.id === "rooms" && isHospitalityConfigurator
+                        ? Hotel
+                        : categoryIcons[activeCategory.id];
                   return (
                     <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#edf6f1] text-emerald-700">
                       <Icon className="size-6 stroke-[1.6]" />
@@ -246,53 +367,193 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
                   Pasul {activeCategoryIndex + 1} din {configuratorCategories.length}
                 </p>
                 <h2 className="mt-1 text-2xl font-semibold tracking-[-.03em] text-ink">
-                  {activeCategory?.label}
+                  {scaleStepTitle}
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-slate">{activeCategory?.description}</p>
+                <p className="mt-2 text-sm leading-6 text-slate">{scaleStepDescription}</p>
               </div>
             </div>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {visibleOptions.map((option) => {
-                const checked = selectedOptionIds.has(option.id);
-                return (
-                  <label
-                    key={option.id}
-                    className={`group relative flex cursor-pointer gap-3 rounded-xl border p-4 transition duration-200 ${
-                      checked
-                        ? "border-emerald-600 bg-[#f0f8f4] shadow-[0_6px_18px_rgba(8,118,87,.08)]"
-                        : "border-[#dce4e0] bg-white hover:border-[#aac9bc] hover:bg-[#fafcfb]"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleOption(option.id)}
-                      className="peer sr-only"
+            {isBlockConfigurator && isScaleStep ? (
+              <div className="mt-5 space-y-6">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <Building2 className="size-5 text-emerald-700" />
+                    <h3 className="font-semibold text-ink">Structura blocului</h3>
+                  </div>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <NumberField
+                      label="Număr de scări"
+                      value={blockScale.staircases}
+                      min={1}
+                      max={10}
+                      onChange={(staircases) =>
+                        setBlockScale((current) => ({ ...current, staircases }))
+                      }
                     />
-                    <span
-                      aria-hidden="true"
-                      className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded border transition ${
+                    <NumberField
+                      label="Garsoniere"
+                      value={blockScale.studios}
+                      onChange={(studios) => setBlockScale((current) => ({ ...current, studios }))}
+                    />
+                    <NumberField
+                      label="Apartamente cu 2 camere"
+                      value={blockScale.twoRoom}
+                      onChange={(twoRoom) => setBlockScale((current) => ({ ...current, twoRoom }))}
+                    />
+                    <NumberField
+                      label="Apartamente cu 3 camere"
+                      value={blockScale.threeRoom}
+                      onChange={(threeRoom) =>
+                        setBlockScale((current) => ({ ...current, threeRoom }))
+                      }
+                    />
+                    <NumberField
+                      label="Apartamente cu 4+ camere"
+                      value={blockScale.fourPlusRoom}
+                      onChange={(fourPlusRoom) =>
+                        setBlockScale((current) => ({ ...current, fourPlusRoom }))
+                      }
+                    />
+                    <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[.12em] text-emerald-800">
+                        Total calculat
+                      </p>
+                      <p className="mt-2 text-2xl font-semibold text-ink">
+                        {summary.scale?.units ?? 0} apartamente
+                      </p>
+                      <p className="mt-1 text-xs text-slate">
+                        {summary.scale?.spaces ?? 0} camere locuibile
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-ink">Spații comune incluse</h3>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    <ToggleField
+                      label="Parcare"
+                      checked={blockScale.parking}
+                      onChange={(parking) => setBlockScale((current) => ({ ...current, parking }))}
+                    />
+                    <ToggleField
+                      label="Subsol și spații tehnice"
+                      checked={blockScale.basement}
+                      onChange={(basement) =>
+                        setBlockScale((current) => ({ ...current, basement }))
+                      }
+                    />
+                    <ToggleField
+                      label="Exterior și alei"
+                      checked={blockScale.exterior}
+                      onChange={(exterior) =>
+                        setBlockScale((current) => ({ ...current, exterior }))
+                      }
+                    />
+                  </div>
+                </div>
+                <p className="rounded-lg bg-[#f5f8f6] px-4 py-3 text-xs leading-5 text-slate">
+                  Nu configurăm fiecare apartament separat în această etapă. După încărcarea
+                  planului poți ajusta apartamentele care diferă de tipologia standard.
+                </p>
+              </div>
+            ) : isHospitalityConfigurator && isScaleStep ? (
+              <div className="mt-5 space-y-6">
+                <div className="flex items-center gap-3">
+                  <Hotel className="size-5 text-emerald-700" />
+                  <h3 className="font-semibold text-ink">Capacitatea de cazare</h3>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <NumberField
+                    label="Camere standard"
+                    value={hospitalityScale.standardRooms}
+                    onChange={(standardRooms) =>
+                      setHospitalityScale((current) => ({ ...current, standardRooms }))
+                    }
+                  />
+                  <NumberField
+                    label="Suite / apartamente"
+                    value={hospitalityScale.suites}
+                    onChange={(suites) =>
+                      setHospitalityScale((current) => ({ ...current, suites }))
+                    }
+                  />
+                  <NumberField
+                    label="Camere accesibile"
+                    value={hospitalityScale.accessibleRooms}
+                    onChange={(accessibleRooms) =>
+                      setHospitalityScale((current) => ({ ...current, accessibleRooms }))
+                    }
+                  />
+                </div>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <ToggleField
+                    label="Recepție"
+                    checked={hospitalityScale.reception}
+                    onChange={(reception) =>
+                      setHospitalityScale((current) => ({ ...current, reception }))
+                    }
+                  />
+                  <ToggleField
+                    label="Restaurant"
+                    checked={hospitalityScale.restaurant}
+                    onChange={(restaurant) =>
+                      setHospitalityScale((current) => ({ ...current, restaurant }))
+                    }
+                  />
+                  <ToggleField
+                    label="Spa / wellness"
+                    checked={hospitalityScale.spa}
+                    onChange={(spa) => setHospitalityScale((current) => ({ ...current, spa }))}
+                  />
+                </div>
+                <p className="rounded-lg bg-[#f5f8f6] px-4 py-3 text-xs leading-5 text-slate">
+                  Camerele identice folosesc aceeași tipologie. Diferențele se confirmă după
+                  încărcarea planurilor pe nivel.
+                </p>
+              </div>
+            ) : (
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {visibleOptions.map((option) => {
+                  const checked = selectedOptionIds.has(option.id);
+                  return (
+                    <label
+                      key={option.id}
+                      className={`group relative flex cursor-pointer gap-3 rounded-xl border p-4 transition duration-200 ${
                         checked
-                          ? "border-emerald-700 bg-emerald-700 text-white"
-                          : "border-[#aebdb6] bg-white"
+                          ? "border-emerald-600 bg-[#f0f8f4] shadow-[0_6px_18px_rgba(8,118,87,.08)]"
+                          : "border-[#dce4e0] bg-white hover:border-[#aac9bc] hover:bg-[#fafcfb]"
                       }`}
                     >
-                      {checked && <Check className="size-3.5 stroke-[2.5]" />}
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold text-ink">{option.label}</span>
-                      <span className="mt-1 block text-xs leading-5 text-slate">
-                        {option.description}
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleOption(option.id)}
+                        className="peer sr-only"
+                      />
+                      <span
+                        aria-hidden="true"
+                        className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded border transition ${
+                          checked
+                            ? "border-emerald-700 bg-emerald-700 text-white"
+                            : "border-[#aebdb6] bg-white"
+                        }`}
+                      >
+                        {checked && <Check className="size-3.5 stroke-[2.5]" />}
                       </span>
-                      <span className="mt-2 block text-xs font-semibold text-emerald-700">
-                        + {formatEuro(option.price)}
+                      <span className="min-w-0">
+                        <span className="block text-sm font-semibold text-ink">{option.label}</span>
+                        <span className="mt-1 block text-xs leading-5 text-slate">
+                          {option.description}
+                        </span>
+                        <span className="mt-2 block text-xs font-semibold text-emerald-700">
+                          + {formatEuro(option.price)}
+                        </span>
                       </span>
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
 
             <div className="mt-7 flex items-center justify-between gap-3 border-t border-[#e3e9e6] pt-5">
               <button
@@ -350,17 +611,36 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
                 ))}
               </ul>
 
+              {summary.scale ? (
+                <div className="mt-4 rounded-lg border border-white/10 bg-white/[.06] p-4 text-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-white/60">Infrastructură și funcții</span>
+                    <strong>{formatEuro(summary.price - summary.scale.price)}</strong>
+                  </div>
+                  <div className="mt-2 flex items-center justify-between gap-3">
+                    <span className="text-white/60">
+                      Dimensionare {summary.scale.label.toLowerCase()}
+                    </span>
+                    <strong>{formatEuro(summary.scale.price)}</strong>
+                  </div>
+                </div>
+              ) : null}
+
               <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-lg bg-white/[.07] p-3">
-                  <dt className="text-xs text-white/55">Poziții materiale</dt>
+                  <dt className="text-xs text-white/55">
+                    {summary.scale ? summary.scale.label : "Poziții materiale"}
+                  </dt>
                   <dd className="mt-1 text-lg font-semibold" data-testid="product-count">
-                    {summary.products}
+                    {summary.scale?.units ?? summary.products}
                   </dd>
                 </div>
                 <div className="rounded-lg bg-white/[.07] p-3">
-                  <dt className="text-xs text-white/55">Dispozitive</dt>
+                  <dt className="text-xs text-white/55">
+                    {summary.scale ? "Camere / spații" : "Dispozitive"}
+                  </dt>
                   <dd className="mt-1 text-lg font-semibold" data-testid="device-count">
-                    {summary.devices}
+                    {summary.scale?.spaces ?? summary.devices}
                   </dd>
                 </div>
                 <div className="rounded-lg bg-white/[.07] p-3">

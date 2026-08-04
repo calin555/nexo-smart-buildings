@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  calculateBuildingScale,
   calculateCommercialSummary,
   kitDefinitions,
 } from "../../src/modules/commercial-configurator/config";
@@ -46,5 +47,46 @@ describe("configuratorul comercial", () => {
       expect(summary.price).toBeGreaterThanOrEqual(kit.minPrice);
       expect(summary.price).toBeLessThanOrEqual(kit.maxPrice);
     }
+  });
+
+  it("dimensionează blocul după scări și tipologiile apartamentelor", () => {
+    const scale = calculateBuildingScale({
+      kind: "block",
+      staircases: 2,
+      studios: 4,
+      twoRoom: 8,
+      threeRoom: 8,
+      fourPlusRoom: 4,
+      parking: true,
+      basement: true,
+      exterior: true,
+    });
+
+    expect(scale.units).toBe(24);
+    expect(scale.spaces).toBe(60);
+    expect(scale.price).toBe(12_640);
+    expect(scale.equipment).toContainEqual({
+      label: "posturi videointerfon apartament",
+      quantity: 24,
+    });
+  });
+
+  it("dimensionează camerele identice pentru o pensiune", () => {
+    const scale = calculateBuildingScale({
+      kind: "hospitality",
+      standardRooms: 10,
+      suites: 2,
+      accessibleRooms: 1,
+      reception: true,
+      restaurant: false,
+      spa: false,
+    });
+
+    expect(scale.units).toBe(13);
+    expect(scale.spaces).toBe(14);
+    expect(scale.equipment).toContainEqual({
+      label: "controlere cameră hotel",
+      quantity: 13,
+    });
   });
 });

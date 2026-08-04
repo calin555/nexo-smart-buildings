@@ -67,3 +67,28 @@ test("wizardul rămâne navigabil pe mobil și păstrează rezumatul", async ({ 
   await expect(page.getByText("Dimming", { exact: true })).toBeVisible();
   await expect(page.getByTestId("summary-price")).toContainText("3.420 €");
 });
+
+test("Kit Bloc Smart dimensionează scările și tipologiile de apartamente", async ({ page }) => {
+  await page.goto("/configurator-kit?kit=bloc-smart");
+  await expect(page.getByTestId("commercial-configurator")).toHaveAttribute("data-ready", "true");
+
+  await expect(page.getByRole("heading", { name: "Clădire și apartamente" })).toBeVisible();
+  await expect(page.getByText("24 apartamente", { exact: true })).toBeVisible();
+  await expect(page.getByText("60 camere locuibile", { exact: true })).toBeVisible();
+  await expect(page.getByTestId("product-count")).toHaveText("24");
+  await expect(page.getByTestId("device-count")).toHaveText("60");
+
+  await page.getByLabel("Apartamente cu 2 camere").fill("9");
+  await expect(page.getByText("25 apartamente", { exact: true })).toBeVisible();
+  await expect(page.getByText("62 camere locuibile", { exact: true })).toBeVisible();
+  await expect(page.getByTestId("product-count")).toHaveText("25");
+  await expect(page.getByTestId("summary-price")).toContainText("24.920");
+});
+
+test("Kit Pensiune Smart dimensionează tipurile de camere și spațiile comune", async ({ page }) => {
+  await page.goto("/configurator-kit?kit=pensiune-smart");
+  await expect(page.getByRole("heading", { name: "Camere și spații comune" })).toBeVisible();
+  await expect(page.getByTestId("product-count")).toHaveText("13");
+  await page.getByLabel("Camere standard").fill("12");
+  await expect(page.getByTestId("product-count")).toHaveText("15");
+});

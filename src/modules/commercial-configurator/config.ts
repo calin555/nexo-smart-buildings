@@ -632,25 +632,112 @@ export type CommercialSummary = {
   devices: number;
   equipment: EquipmentContribution[];
   savings: number;
+  scale?: BuildingScaleSummary;
 };
+
+export type BlockScale = {
+  kind: "block";
+  staircases: number;
+  studios: number;
+  twoRoom: number;
+  threeRoom: number;
+  fourPlusRoom: number;
+  parking: boolean;
+  basement: boolean;
+  exterior: boolean;
+};
+
+export type HospitalityScale = {
+  kind: "hospitality";
+  standardRooms: number;
+  suites: number;
+  accessibleRooms: number;
+  reception: boolean;
+  restaurant: boolean;
+  spa: boolean;
+};
+
+export type BuildingScale = BlockScale | HospitalityScale;
+
+export type BuildingScaleSummary = {
+  label: string;
+  units: number;
+  spaces: number;
+  price: number;
+  products: number;
+  devices: number;
+  equipment: EquipmentContribution[];
+};
+
+export function calculateBuildingScale(scale: BuildingScale): BuildingScaleSummary {
+  if (scale.kind === "block") {
+    const units = scale.studios + scale.twoRoom + scale.threeRoom + scale.fourPlusRoom;
+    const spaces = scale.studios + scale.twoRoom * 2 + scale.threeRoom * 3 + scale.fourPlusRoom * 4;
+    const apartmentPrice =
+      scale.studios * 240 + scale.twoRoom * 320 + scale.threeRoom * 400 + scale.fourPlusRoom * 480;
+    const commonPrice =
+      Math.max(0, scale.staircases - 1) * 1500 +
+      (scale.parking ? 1200 : 0) +
+      (scale.basement ? 500 : 0) +
+      (scale.exterior ? 800 : 0);
+    return {
+      label: "Apartamente",
+      units,
+      spaces,
+      price: apartmentPrice + commonPrice,
+      products: units + scale.staircases * 4,
+      devices: units * 2 + scale.staircases * 4,
+      equipment: [
+        { label: "posturi videointerfon apartament", quantity: units },
+        { label: "controlere spații comune", quantity: scale.staircases },
+      ],
+    };
+  }
+  const units = scale.standardRooms + scale.suites + scale.accessibleRooms;
+  const commonAreas = Number(scale.reception) + Number(scale.restaurant) + Number(scale.spa);
+  return {
+    label: "Camere de cazare",
+    units,
+    spaces: units + commonAreas,
+    price:
+      scale.standardRooms * 420 +
+      scale.suites * 620 +
+      scale.accessibleRooms * 480 +
+      (scale.reception ? 900 : 0) +
+      (scale.restaurant ? 1400 : 0) +
+      (scale.spa ? 1800 : 0),
+    products: units * 2 + commonAreas * 3,
+    devices: units * 3 + commonAreas * 5,
+    equipment: [
+      { label: "controlere cameră hotel", quantity: units },
+      { label: "termostate cameră hotel", quantity: units },
+    ],
+  };
+}
 
 export function calculateCommercialSummary(
   kitId: KitId,
   selectedOptionIds: ReadonlySet<string>,
+  buildingScale?: BuildingScale,
 ): CommercialSummary {
   const kit = kitDefinitions[kitId];
   const selected = commercialOptions.filter(({ id }) => selectedOptionIds.has(id));
   const equipment = new Map<string, number>();
+  const scale = buildingScale ? calculateBuildingScale(buildingScale) : undefined;
   for (const contribution of [
     ...kit.baseEquipment,
     ...selected.flatMap(({ equipment }) => equipment),
+    ...(scale?.equipment ?? []),
   ]) {
     equipment.set(
       contribution.label,
       (equipment.get(contribution.label) ?? 0) + contribution.quantity,
     );
   }
-  const price = kit.basePrice + selected.reduce((total, option) => total + option.price, 0);
+  const price =
+    kit.basePrice +
+    selected.reduce((total, option) => total + option.price, 0) +
+    (scale?.price ?? 0);
   const equipmentPriority = [
     "actuatoare iluminat",
     "actuatoare jaluzele",
@@ -662,8 +749,14 @@ export function calculateCommercialSummary(
   ];
   return {
     price,
-    products: kit.baseProducts + selected.reduce((total, option) => total + option.products, 0),
-    devices: kit.baseDevices + selected.reduce((total, option) => total + option.devices, 0),
+    products:
+      kit.baseProducts +
+      selected.reduce((total, option) => total + option.products, 0) +
+      (scale?.products ?? 0),
+    devices:
+      kit.baseDevices +
+      selected.reduce((total, option) => total + option.devices, 0) +
+      (scale?.devices ?? 0),
     equipment: [...equipment.entries()]
       .map(([label, quantity]) => ({ label, quantity }))
       .filter(({ quantity }) => quantity > 0)
@@ -677,6 +770,7 @@ export function calculateCommercialSummary(
         return leftPriority - rightPriority;
       }),
     savings: Math.max(0, kit.maxPrice - price),
+    scale,
   };
 }
 
