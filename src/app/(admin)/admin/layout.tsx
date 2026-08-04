@@ -14,6 +14,7 @@ export const metadata: Metadata = { robots: { index: false, follow: false } };
 export default async function AdminLayout({ children }: Readonly<{ children: ReactNode }>) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (user.memberships.length === 0) redirect("/onboarding");
   if (!user.memberships.some(({ role }) => adminRoles.has(role))) return <AccessDenied />;
   return (
     <div className="min-h-screen bg-cloud">

@@ -12,6 +12,7 @@ export const metadata: Metadata = { robots: { index: false, follow: false } };
 export default async function PortalLayout({ children }: Readonly<{ children: ReactNode }>) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (user.memberships.length === 0) redirect("/onboarding");
   return (
     <div className="min-h-screen bg-cloud">
       <header className="border-b bg-white">

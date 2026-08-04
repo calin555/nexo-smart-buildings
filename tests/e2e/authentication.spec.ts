@@ -1,4 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
+import { PrismaClient } from "@prisma/client";
+import { createClient } from "@supabase/supabase-js";
+import { randomUUID } from "node:crypto";
+
+const prisma = new PrismaClient();
 
 const clientA = {
   email: process.env.E2E_CLIENT_A_EMAIL!,
@@ -10,6 +15,29 @@ const clientB = {
 };
 const admin = { email: process.env.E2E_ADMIN_EMAIL!, password: process.env.E2E_ADMIN_PASSWORD! };
 test.skip(!process.env.E2E_SUPABASE_ENABLED, "Necesită infrastructură Supabase E2E.");
+test.describe.configure({ mode: "serial" });
+
+let onboardingUserId = "";
+let onboardingOrganizationId = "";
+
+test.afterAll(async () => {
+  if (onboardingUserId) {
+    await prisma.auditLog.deleteMany({ where: { actorId: onboardingUserId } });
+    if (onboardingOrganizationId) {
+      await prisma.organization.deleteMany({ where: { id: onboardingOrganizationId } });
+    }
+
+    const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    if (serviceRole && supabaseUrl) {
+      const adminClient = createClient(supabaseUrl, serviceRole, {
+        auth: { autoRefreshToken: false, persistSession: false },
+      });
+      await adminClient.auth.admin.deleteUser(onboardingUserId);
+    }
+  }
+  await prisma.$disconnect();
+});
 
 test("meniul public mobil se deschide și oferă navigarea principală", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -40,6 +68,19 @@ test("anonimul este refuzat de portal", async ({ page }) => {
   await page.goto("/portal");
   await expect(page).toHaveURL(/\/login$/);
 });
+test("pagina de login afișează Google și inițiază redirectul OAuth", async ({ page, request }) => {
+  await page.goto("/login");
+  await expect(page.getByRole("button", { name: "Continuă cu Google" })).toBeVisible();
+
+  const oauth = await request.get("/api/auth/google", { maxRedirects: 0 });
+  expect([302, 307]).toContain(oauth.status());
+  const location = oauth.headers().location;
+  expect(location).toBeTruthy();
+  const authorizeUrl = new URL(location!);
+  expect(authorizeUrl.pathname).toBe("/auth/v1/authorize");
+  expect(authorizeUrl.searchParams.get("provider")).toBe("google");
+  expect(authorizeUrl.searchParams.get("redirect_to")).toContain("/auth/callback?next=%2Fportal");
+});
 test("client A se autentifică, păstrează sesiunea și nu accesează admin", async ({ page }) => {
   await login(page, clientA);
   await expect(page).toHaveURL(/\/portal$/);
@@ -48,10 +89,63 @@ test("client A se autentifică, păstrează sesiunea și nu accesează admin", a
   await page.reload();
   await expectSession(page);
   await expect(page.getByText("Persoană Fizică Demo")).toBeVisible();
+  await page.goto("/auth/callback?next=/portal");
+  await expect(page).toHaveURL(/\/portal$/);
   await page.goto("/admin");
   await expect(
     page.getByRole("heading", { name: "Nu aveți acces la această zonă." }),
   ).toBeVisible();
+});
+test("utilizatorul nou finalizează onboardingul, organizația și membership-ul", async ({
+  page,
+}) => {
+  test.skip(
+    !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.NEXT_PUBLIC_SUPABASE_URL,
+    "Necesită service role numai pentru pregătirea utilizatorului temporar E2E.",
+  );
+
+  const email = `oauth-onboarding-${randomUUID()}@example.com`;
+  const password = `E2E-${randomUUID()}-aA1!`;
+  const adminClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
+  const { data, error } = await adminClient.auth.admin.createUser({
+    email,
+    password,
+    email_confirm: true,
+    user_metadata: { name: "Utilizator OAuth temporar" },
+  });
+  expect(error).toBeNull();
+  expect(data.user).toBeTruthy();
+  onboardingUserId = data.user!.id;
+
+  await login(page, { email, password });
+  await expect(page).toHaveURL(/\/onboarding$/);
+  await page.getByLabel("Nume complet").fill("Client Google E2E");
+  await page.getByLabel("Telefon").fill("+40 721 000 999");
+  await page.getByLabel("Tip client").selectOption("HOSPITALITY");
+  await page.getByRole("button", { name: "Creează spațiul meu" }).click();
+  await expect(page).toHaveURL(/\/portal$/);
+
+  const membership = await prisma.membership.findFirstOrThrow({
+    where: { profileId: onboardingUserId },
+    include: { organization: true, profile: true },
+  });
+  onboardingOrganizationId = membership.organizationId;
+  expect(membership.roleCode).toBe("COMPANY_CLIENT");
+  expect(membership.profile.name).toBe("Client Google E2E");
+  expect(membership.organization.type).toBe("COMPANY");
+  expect(membership.organization.billingData).toMatchObject({
+    phone: "+40 721 000 999",
+    clientType: "HOSPITALITY",
+  });
+
+  await page.getByRole("button", { name: "Deconectare" }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await page.goto("/portal");
+  await expect(page).toHaveURL(/\/login$/);
 });
 test("client B vede numai organizația B", async ({ page }) => {
   await login(page, clientB);

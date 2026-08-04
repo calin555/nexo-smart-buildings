@@ -14,6 +14,47 @@ Fundația MVP pentru deployment exclusiv pe Vercel + Supabase. Include Next.js A
 
 Utilizatorii și resetarea parolei sunt create exclusiv în Supabase Auth. După creare, trigger-ul SQL creează profilul; un administrator atribuie membership-ul/rolul potrivit.
 
+## Autentificare cu Google
+
+Loginul cu email și parolă rămâne activ. Butonul „Continuă cu Google” pornește fluxul OAuth Google prin Supabase Auth, iar sesiunea PKCE este salvată în cookie-urile SSR ale aplicației. Nu sunt solicitate tokenuri pentru accesarea serviciilor Google și nu sunt stocate tokenuri Google în baza aplicației.
+
+### 1. Google Cloud Console
+
+1. În [Google Auth Platform](https://console.cloud.google.com/auth/overview) creați sau selectați proiectul Google Cloud.
+2. Configurați ecranul de consimțământ în secțiunea Branding și publicul aplicației în Audience.
+3. În Data Access păstrați numai scope-urile necesare autentificării: `openid`, email și profil.
+4. Creați un OAuth Client cu tipul **Web application**.
+5. La **Authorized JavaScript origins** adăugați originile aplicației, fără cale:
+   - `http://localhost:3000` pentru dezvoltare;
+   - domeniul Vercel Production;
+   - domeniul propriu, după conectare.
+6. La **Authorized redirect URIs** adăugați callbackul proiectului Supabase, nu callbackul Next.js:
+
+```text
+https://<PROJECT_REF>.supabase.co/auth/v1/callback
+```
+
+Callbackul exact este afișat în Supabase Dashboard → Authentication → Providers → Google. Client Secret-ul Google se introduce numai în Supabase și nu se salvează în repository sau în variabile `NEXT_PUBLIC_*`.
+
+### 2. Supabase Auth
+
+1. Deschideți Supabase Dashboard → Authentication → Providers → Google.
+2. Activați providerul și introduceți OAuth Client ID și Client Secret generate de Google.
+3. În Authentication → URL Configuration setați:
+   - **Site URL**: URL-ul public Production;
+   - **Redirect URLs**: `http://localhost:3000/auth/callback` și callbackurile permise pentru Preview/Production.
+4. Verificați că `NEXT_PUBLIC_SITE_URL` corespunde mediului în care rulează aplicația. Această adresă este folosită pentru `redirectTo`.
+
+Fluxul aplicației este:
+
+```text
+/login → /api/auth/google → Google/Supabase → /auth/callback
+```
+
+Un cont existent cu membership ajunge în `/portal`. Un cont nou ajunge în `/onboarding`, unde completează numele, telefonul și tipul de client. Serverul creează tranzacțional organizația personală și membership-ul cu un rol ales din maparea internă. Schema nu este extinsă: telefonul și tipul clientului sunt păstrate în `Organization.billingData`. Operația folosește Prisma după validarea sesiunii Supabase și este înregistrată în audit; service role nu este folosit în fluxul normal.
+
+Pentru verificarea automată live, OAuth Client-ul trebuie configurat în Supabase. Testul E2E nu parcurge ecranul Google și nu stochează credențiale Google: verifică URL-ul de autorizare generat, callbackul, utilizatorul existent și onboardingul unui utilizator temporar. Service role este folosit numai de test pentru crearea și ștergerea acelui utilizator temporar.
+
 ## Administrarea produselor
 
 Un utilizator cu rol `ADMIN` sau `SUPER_ADMIN` poate deschide `/admin/products`, unde poate adăuga produse și le poate edita. Produsele marcate „vizibil pe site” sunt afișate automat pe homepage, în ordinea configurată. Imaginea este opțională și poate fi încărcată din calculator sau introdusă ca URL HTTPS.
