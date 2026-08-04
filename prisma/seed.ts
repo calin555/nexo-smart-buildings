@@ -1,4 +1,4 @@
-import { OrganizationType, ProductIllustration } from "@prisma/client";
+import { BrandLevel, OrganizationType, ProductIllustration } from "@prisma/client";
 import { prisma } from "../src/lib/prisma";
 
 async function upsertOrganization(type: OrganizationType, legalName: string, cui?: string) {
@@ -87,8 +87,91 @@ async function main(): Promise<void> {
       prisma.product.upsert({ where: { slug: product.slug }, update: product, create: product }),
     ),
   );
+  const brands = [
+    [
+      "ABB",
+      "abb",
+      BrandLevel.PROFESSIONAL,
+      ["Echipamente de tablou", "Senzori", "Management energetic"],
+      ["casa-comfort", "casa-premium-knx", "bloc-smart", "hotel-smart"],
+    ],
+    [
+      "Schneider Electric",
+      "schneider-electric",
+      BrandLevel.PROFESSIONAL,
+      ["Echipamente de tablou", "Butoane și aparataj", "Gateway-uri"],
+      ["casa-comfort", "casa-premium-knx", "bloc-smart", "energie"],
+    ],
+    [
+      "MDT",
+      "mdt",
+      BrandLevel.PROFESSIONAL,
+      ["Echipamente de tablou", "Butoane și aparataj", "Senzori", "Termostate"],
+      ["apartament-smart", "casa-comfort", "casa-premium-knx", "pensiune-smart"],
+    ],
+    [
+      "Gira",
+      "gira",
+      BrandLevel.LUXURY,
+      ["Butoane și aparataj", "Senzori", "Panouri"],
+      ["casa-premium-knx", "pensiune-smart", "hotel-smart"],
+    ],
+    [
+      "JUNG",
+      "jung",
+      BrandLevel.LUXURY,
+      ["Butoane și aparataj", "Termostate", "Panouri"],
+      ["apartament-smart", "casa-premium-knx", "hotel-smart"],
+    ],
+    [
+      "Basalte",
+      "basalte",
+      BrandLevel.LUXURY,
+      ["Butoane și aparataj", "Senzori", "Panouri"],
+      ["casa-premium-knx", "hotel-smart"],
+    ],
+    [
+      "Zennio",
+      "zennio",
+      BrandLevel.PROFESSIONAL,
+      ["Echipamente de tablou", "Termostate", "Panouri", "Gateway-uri"],
+      ["apartament-smart", "casa-comfort", "pensiune-smart", "hotel-smart"],
+    ],
+    [
+      "Theben",
+      "theben",
+      BrandLevel.STANDARD,
+      ["Senzori", "Termostate", "Echipamente de tablou"],
+      ["smart-start", "apartament-smart", "casa-comfort", "energie"],
+    ],
+  ] as const;
+  await Promise.all(
+    brands.map(([name, slug, level, usageCategories, kitIds], sortOrder) =>
+      prisma.brand.upsert({
+        where: { slug },
+        update: {
+          name,
+          level,
+          usageCategories: [...usageCategories],
+          kitIds: [...kitIds],
+          sortOrder: (sortOrder + 1) * 10,
+          active: true,
+        },
+        create: {
+          name,
+          slug,
+          level,
+          usageCategories: [...usageCategories],
+          kitIds: [...kitIds],
+          sortOrder: (sortOrder + 1) * 10,
+          active: true,
+          description: `${name} poate fi selectat în proiecte KNX în funcție de rolul tehnic, design și buget. Configurația se validează pentru fiecare proiect.`,
+        },
+      }),
+    ),
+  );
   console.log(
-    "Roluri, organizații și produse demonstrative încărcate. Utilizatorii sunt creați exclusiv prin Supabase Auth.",
+    "Roluri, organizații, echipamente și branduri demonstrative încărcate. Utilizatorii sunt creați exclusiv prin Supabase Auth.",
   );
 }
 

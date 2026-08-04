@@ -2,7 +2,9 @@ import { ArrowRight, Check, FileUp, Settings2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { BrandMark } from "@/components/brand-mark";
 import { kitDefinitions, kitIds, type KitId } from "@/modules/commercial-configurator/config";
+import { getActiveBrands, getBrandPresentation, type BrandRecord } from "@/modules/brands/data";
 
 const imagery: Record<KitId, string> = {
   "smart-start": "/images/projects/casa-inteligenta-brasov-interactive.png",
@@ -20,11 +22,16 @@ function formatEuro(value: number): string {
   return new Intl.NumberFormat("ro-RO", { maximumFractionDigits: 0 }).format(value);
 }
 
-function KitCard({ kitId, detailed }: Readonly<{ kitId: KitId; detailed: boolean }>) {
+function KitCard({
+  kitId,
+  detailed,
+  brands,
+}: Readonly<{ kitId: KitId; detailed: boolean; brands: BrandRecord[] }>) {
   const kit = kitDefinitions[kitId];
+  const availableBrands = brands.filter(({ kitIds }) => kitIds.includes(kitId));
   return (
-    <article className="group overflow-hidden rounded-2xl border border-[#d8e2dd] bg-white shadow-[0_10px_30px_rgba(19,39,31,.06)] transition duration-200 hover:-translate-y-1 hover:border-[#adc8bc] hover:shadow-[0_18px_42px_rgba(19,39,31,.11)]">
-      <div className="relative aspect-[16/7.5] overflow-hidden bg-[#edf2ef]">
+    <article className="group relative rounded-2xl border border-[#d8e2dd] bg-white shadow-[0_10px_30px_rgba(19,39,31,.06)] transition duration-200 hover:-translate-y-1 hover:border-[#adc8bc] hover:shadow-[0_18px_42px_rgba(19,39,31,.11)]">
+      <div className="relative aspect-[16/7.5] overflow-hidden rounded-t-2xl bg-[#edf2ef]">
         <Image
           src={imagery[kitId]}
           alt=""
@@ -54,6 +61,35 @@ function KitCard({ kitId, detailed }: Readonly<{ kitId: KitId; detailed: boolean
             </li>
           ))}
         </ul>
+        <div className="mt-5 border-t border-slate/10 pt-5">
+          <p className="text-xs font-semibold uppercase tracking-[.13em] text-slate">
+            Tehnologii disponibile
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {availableBrands.map((brand) => (
+              <details key={brand.id} className="group/brand relative">
+                <summary
+                  aria-label={`Rolul ${brand.name} în ${kit.name}`}
+                  className="cursor-pointer list-none rounded-lg border border-[#d8e2dd] bg-white p-1.5 transition hover:border-emerald-700 [&::-webkit-details-marker]:hidden"
+                >
+                  <BrandMark name={brand.name} logoUrl={brand.logoUrl} compact />
+                </summary>
+                <div className="absolute bottom-full left-0 z-30 mb-2 w-72 rounded-xl border border-[#cfdcd6] bg-white p-4 shadow-[0_16px_40px_rgba(7,21,29,.18)]">
+                  <p className="text-sm font-semibold text-ink">{brand.name}</p>
+                  <p className="mt-2 text-xs leading-5 text-slate">
+                    {getBrandPresentation(brand.slug).role}
+                  </p>
+                  <Link
+                    href={`/branduri/${brand.slug}`}
+                    className="mt-3 inline-flex items-center text-xs font-semibold text-emerald-800"
+                  >
+                    Vezi soluția completă <ArrowRight className="ml-1.5 size-3.5" />
+                  </Link>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
         {detailed ? (
           <div className="mt-5 grid gap-4 border-t border-slate/10 pt-5 text-xs leading-5 text-slate sm:grid-cols-2">
             <div>
@@ -103,11 +139,12 @@ function KitCard({ kitId, detailed }: Readonly<{ kitId: KitId; detailed: boolean
   );
 }
 
-export function CommercialKitCards({
+export async function CommercialKitCards({
   detailed = false,
   limit,
 }: Readonly<{ detailed?: boolean; limit?: number }>) {
   const visibleKitIds = typeof limit === "number" ? kitIds.slice(0, limit) : kitIds;
+  const brands = await getActiveBrands();
   return (
     <section id="kituri" aria-labelledby="kits-title" className="scroll-mt-24">
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -129,7 +166,7 @@ export function CommercialKitCards({
       </div>
       <div className="mt-7 grid gap-5 xl:grid-cols-3">
         {visibleKitIds.map((kitId) => (
-          <KitCard key={kitId} kitId={kitId} detailed={detailed} />
+          <KitCard key={kitId} kitId={kitId} detailed={detailed} brands={brands} />
         ))}
       </div>
       {limit ? (

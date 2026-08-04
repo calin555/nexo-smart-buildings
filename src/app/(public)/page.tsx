@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CommercialKitCards } from "@/components/commercial-kit-cards";
+import { BrandGrid } from "@/components/brand-grid";
 import { publicSolutions } from "@/modules/public-solutions";
 
 const icons = [Home, Layers3, Building2, Hotel, Sparkles, ShieldCheck, Zap];
@@ -158,6 +159,8 @@ export default function HomePage() {
           <CommercialKitCards limit={6} />
         </div>
       </section>
+
+      <BrandGrid />
 
       <section className="mx-auto max-w-[1500px] px-5 py-16 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">

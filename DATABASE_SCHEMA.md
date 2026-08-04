@@ -30,6 +30,10 @@ Modelul tehnic de produs/echipament se păstrează pentru:
 
 Câmpul de activare indică disponibilitatea pentru calculele interne, nu publicarea într-un magazin. Nu există cerință publică pentru stoc, coș, checkout sau comandă clasică.
 
+## Branduri și integrări
+
+`Brand` păstrează numele, slugul, logo-ul, descrierea, categoriile de utilizare, nivelul Standard/Professional/Luxury, kiturile asociate, ordinea, starea și linkul oficial extern. Statutul de parteneriat poate fi marcat verificat numai împreună cu un document justificativ. Tabela are RLS activ și nu acordă acces direct rolurilor `anon` sau `authenticated`; administrarea se face server-side, cu RBAC și audit.
+
 ## Evoluții planificate
 
 Modelele dedicate pentru kituri, reguli, compatibilități, estimări, oferte, mesaje, intervenții și mentenanță vor fi introduse numai în milestone-urile aprobate, cu migrații, RLS și audit adecvate.

@@ -67,6 +67,9 @@ test("admin accesează administrarea echipamentelor și logout revocă sesiunea"
   await page.goto("/admin/products");
   await expect(page.getByRole("heading", { name: "Echipamente" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Adaugă echipament" })).toBeVisible();
+  await page.goto("/admin/brands");
+  await expect(page.getByRole("heading", { name: "Branduri" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Adaugă brand" })).toBeVisible();
   await page.goto("/portal");
   await page.getByRole("button", { name: "Deconectare" }).click();
   await expect(page).toHaveURL(/\/$/);
