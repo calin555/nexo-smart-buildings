@@ -199,7 +199,7 @@ export default async function BrandPage({
         <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-14 lg:grid-cols-[.75fr_1.25fr] lg:px-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-300">
-              Proiect demonstrativ
+              Studiu conceptual
             </p>
             <h2 className="mt-3 text-3xl font-medium tracking-[-.04em]">
               {presentation.projectType}
@@ -220,7 +220,7 @@ export default async function BrandPage({
               {presentation.projectConfiguration}
             </p>
             <p className="mt-3 text-xs text-white/45">
-              Exemplu demonstrativ; nu reprezintă o afirmație despre un proiect real executat.
+              Configurație orientativă; nu reprezintă un proiect executat.
             </p>
           </div>
         </div>

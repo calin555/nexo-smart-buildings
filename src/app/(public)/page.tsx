@@ -109,7 +109,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/proiecte/casa-inteligenta-cluj"
-            aria-label="Deschide demonstrația tehnică pentru casa din Cluj-Napoca"
+            aria-label="Deschide studiul tehnic pentru casa din Cluj-Napoca"
             className="group relative min-h-[420px] overflow-hidden rounded-2xl border border-[#d8e2dd] shadow-[0_18px_50px_rgba(19,39,31,.12)]"
           >
             <Image
@@ -123,7 +123,7 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[#071a20]/25" />
             <div className="absolute inset-x-6 bottom-6 rounded-xl border border-white/20 bg-[#103c31]/90 p-5 text-white backdrop-blur-sm">
               <p className="text-[11px] font-semibold uppercase tracking-[.16em] text-emerald-200">
-                Proiect demonstrativ interactiv
+                Studiu tehnic interactiv
               </p>
               <p className="mt-2 text-xl font-semibold">Casă inteligentă, Cluj-Napoca</p>
               <p className="mt-2 text-sm text-white/70">
@@ -261,7 +261,7 @@ export default function HomePage() {
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-slate">
-            Studii demonstrative realiste. Apasă pe punctele tehnice pentru a explora circuitele și
+            Studii tehnice interactive. Apasă pe punctele tehnice pentru a explora circuitele și
             echipamentele orientative.
           </p>
         </div>

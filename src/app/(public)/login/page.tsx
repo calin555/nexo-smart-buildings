@@ -28,7 +28,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <p className="eyebrow">Portal N3XO</p>
         <h1 className="mt-3 text-3xl font-semibold">Autentificare</h1>
         <p className="mt-2 text-sm text-slate">
-          Folosiți un cont demonstrativ din README pentru testare locală.
+          Accesează proiectele, planurile și ofertele tale într-un spațiu securizat.
         </p>
         {error ? (
           <p role="alert" className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">

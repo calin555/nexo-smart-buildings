@@ -6,7 +6,7 @@ import { requireUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminPage() {
-  const user = await requireUser();
+  await requireUser();
   const [organizations, profiles, projects, recentPlans] = await Promise.all([
     prisma.organization.count(),
     prisma.profile.count(),
@@ -24,7 +24,7 @@ export default async function AdminPage() {
         <p className="eyebrow">Administrare</p>
         <h1 className="mt-2 text-3xl font-semibold">Spațiu intern protejat</h1>
         <p className="mt-2 text-slate">
-          Bun venit, {user.name}. Planurile încărcate de clienți și ofertele se gestionează de aici.
+          Planurile încărcate de clienți și ofertele se gestionează de aici.
         </p>
       </section>
       <section className="grid gap-4 md:grid-cols-4">

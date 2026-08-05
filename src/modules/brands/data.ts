@@ -156,7 +156,7 @@ const presentations: Record<string, BrandPresentation> = {
   abb: {
     role: "Automatizare de tablou, senzori și măsurare într-o arhitectură KNX documentată.",
     recommendedFor: ["Case", "Blocuri", "Hoteluri", "Iluminat", "HVAC", "Jaluzele", "Energie"],
-    projectType: "Bloc rezidențial demonstrativ",
+    projectType: "Studiu conceptual · bloc rezidențial",
     projectSurface: "3.800 m² · 24 apartamente",
     projectFunctions: ["Iluminat comun", "Contorizare", "Control pompe", "Alarme tehnice"],
     projectConfiguration:
@@ -165,7 +165,7 @@ const presentations: Record<string, BrandPresentation> = {
   "schneider-electric": {
     role: "Integrarea distribuției electrice cu automatizarea KNX și monitorizarea energiei.",
     recommendedFor: ["Case", "Blocuri", "Pensiuni", "Iluminat", "Jaluzele", "Energie"],
-    projectType: "Casă demonstrativă",
+    projectType: "Studiu conceptual · casă inteligentă",
     projectSurface: "240 m² · 8 zone",
     projectFunctions: ["Iluminat", "Jaluzele", "Încălzire", "Măsurare energie"],
     projectConfiguration:
@@ -174,7 +174,7 @@ const presentations: Record<string, BrandPresentation> = {
   mdt: {
     role: "Actuatoare, senzori și comenzi KNX cu raport funcțional potrivit proiectelor rezidențiale.",
     recommendedFor: ["Case", "Apartamente", "Pensiuni", "Iluminat", "HVAC", "Jaluzele"],
-    projectType: "Casă demonstrativă",
+    projectType: "Studiu conceptual · casă inteligentă",
     projectSurface: "185 m² · 7 camere",
     projectFunctions: ["Scene lumină", "Încălzire pe zone", "Umbrire", "Prezență"],
     projectConfiguration:
@@ -183,7 +183,7 @@ const presentations: Record<string, BrandPresentation> = {
   gira: {
     role: "Interfața vizibilă a sistemului: aparataj, senzori și control potrivite conceptului de interior.",
     recommendedFor: ["Case", "Pensiuni", "Hoteluri", "Iluminat", "HVAC", "Jaluzele"],
-    projectType: "Vilă demonstrativă",
+    projectType: "Studiu conceptual · vilă inteligentă",
     projectSurface: "320 m² · 12 zone",
     projectFunctions: ["Scene", "Climat", "Jaluzele", "Interfețe centrale"],
     projectConfiguration:
@@ -192,7 +192,7 @@ const presentations: Record<string, BrandPresentation> = {
   jung: {
     role: "Comenzi, termostate și panouri pentru zonele în care ergonomia și finisajul sunt esențiale.",
     recommendedFor: ["Case", "Apartamente", "Hoteluri", "Iluminat", "HVAC", "Jaluzele"],
-    projectType: "Apartament demonstrativ premium",
+    projectType: "Studiu conceptual · apartament premium",
     projectSurface: "135 m² · 5 camere",
     projectFunctions: ["Iluminat", "Climat", "Scene", "Control central"],
     projectConfiguration:
@@ -201,7 +201,7 @@ const presentations: Record<string, BrandPresentation> = {
   basalte: {
     role: "Interfețe tactile și comenzi premium pentru proiecte cu cerințe ridicate de design.",
     recommendedFor: ["Case", "Hoteluri", "Iluminat", "HVAC", "Jaluzele"],
-    projectType: "Casă demonstrativă premium",
+    projectType: "Studiu conceptual · casă premium",
     projectSurface: "410 m² · 14 zone",
     projectFunctions: ["Scene", "Climat", "Audio", "Control central"],
     projectConfiguration:
@@ -210,7 +210,7 @@ const presentations: Record<string, BrandPresentation> = {
   zennio: {
     role: "Control pe cameră, termostate, panouri și gateway-uri pentru rezidențial și ospitalitate.",
     recommendedFor: ["Case", "Apartamente", "Pensiuni", "Hoteluri", "HVAC", "Iluminat", "Jaluzele"],
-    projectType: "Pensiune demonstrativă",
+    projectType: "Studiu conceptual · pensiune inteligentă",
     projectSurface: "12 camere · 620 m²",
     projectFunctions: ["Control cameră", "HVAC", "Acces", "Economisire la neocupare"],
     projectConfiguration:
@@ -219,7 +219,7 @@ const presentations: Record<string, BrandPresentation> = {
   theben: {
     role: "Detecție de prezență, control termic și funcții energetice bazate pe utilizarea reală a spațiului.",
     recommendedFor: ["Case", "Apartamente", "Blocuri", "Iluminat", "HVAC", "Energie"],
-    projectType: "Casă demonstrativă eficientă",
+    projectType: "Studiu conceptual · casă eficientă",
     projectSurface: "160 m² · 6 zone",
     projectFunctions: ["Prezență", "Iluminat", "Încălzire", "Reducere consum"],
     projectConfiguration:
@@ -232,7 +232,7 @@ export function getBrandPresentation(slug: string): BrandPresentation {
     presentations[slug] ?? {
       role: "Echipamente selectate în funcție de rolul tehnic, design, buget și documentația producătorului.",
       recommendedFor: ["Case", "Apartamente", "Clădiri rezidențiale mici"],
-      projectType: "Proiect demonstrativ",
+      projectType: "Studiu conceptual",
       projectSurface: "Configurație adaptată planului",
       projectFunctions: ["Iluminat", "Climat", "Umbrire", "Energie"],
       projectConfiguration:

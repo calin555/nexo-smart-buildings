@@ -766,7 +766,7 @@ export const localPages: Record<string, PublicContentPage> = {
     ],
     related: [
       {
-        label: "Proiect demonstrativ Cluj",
+        label: "Studiu tehnic Cluj",
         description: "Casă inteligentă cu circuite vizibile.",
         href: "/proiecte/casa-inteligenta-cluj",
       },
@@ -848,7 +848,7 @@ export const localPages: Record<string, PublicContentPage> = {
     ],
     related: [
       {
-        label: "Proiect demonstrativ Brașov",
+        label: "Studiu tehnic Brașov",
         description: "Climat, energie solară și baterie.",
         href: "/proiecte/casa-inteligenta-brasov",
       },

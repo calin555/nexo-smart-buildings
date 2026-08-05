@@ -5,7 +5,7 @@ import { InteractiveProjectPage } from "@/components/interactive-project-page";
 export const metadata: Metadata = {
   title: "Bloc rezidențial inteligent Cluj — proiect interactiv | N3XO",
   description:
-    "Explorează interactiv automatizarea BMS, accesul, energia, HVAC și încărcarea electrică într-un bloc rezidențial demonstrativ din Cluj.",
+    "Explorează interactiv automatizarea BMS, accesul, energia, HVAC și încărcarea electrică într-un studiu tehnic pentru un bloc rezidențial din Cluj.",
 };
 
 export default function ClujResidentialProjectPage() {

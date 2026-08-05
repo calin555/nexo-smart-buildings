@@ -66,7 +66,7 @@ export const rootPages: Record<string, PublicContentPage> = {
     related: [
       {
         label: "Vezi proiectele",
-        description: "Studii demonstrative și configurații tehnice.",
+        description: "Studii tehnice și configurații orientative.",
         href: "/proiecte",
       },
       {
@@ -78,10 +78,10 @@ export const rootPages: Record<string, PublicContentPage> = {
   },
   proiecte: {
     slug: "proiecte",
-    eyebrow: "Proiecte demonstrative",
+    eyebrow: "Studii tehnice",
     title: "Vezi logica din spatele unei clădiri inteligente.",
     description:
-      "Exemple tehnice interactive care arată circuite, funcții și echipamente orientative. Sunt demonstrații, nu afirmații despre lucrări executate.",
+      "Studii conceptuale interactive care prezintă circuite, funcții și echipamente orientative, fără a fi prezentate drept lucrări executate.",
     sections: [
       {
         title: "Ce poți explora",
@@ -1100,7 +1100,7 @@ export const legalPages: Record<string, PublicContentPage> = {
       {
         title: "Folosire limitată",
         paragraphs: [
-          "Documentele nu sunt publicate, folosite ca proiect demonstrativ sau transmise altui client fără un acord separat. Furnizorii tehnici pot prelucra date numai pentru operarea serviciului și în condițiile aplicabile.",
+          "Documentele nu sunt publicate, folosite ca studiu de prezentare sau transmise altui client fără un acord separat. Furnizorii tehnici pot prelucra date numai pentru operarea serviciului și în condițiile aplicabile.",
         ],
       },
       {

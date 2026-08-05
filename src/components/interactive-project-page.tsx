@@ -34,7 +34,7 @@ export function InteractiveProjectPage({
         <div className="mt-9 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[.18em] text-emerald-700">
-              Proiect demonstrativ realist · {location}
+              Studiu tehnic interactiv · {location}
             </p>
             <h1 className="mt-4 max-w-4xl text-4xl font-medium tracking-[-.045em] text-ink sm:text-5xl lg:text-6xl">
               {title}
@@ -64,7 +64,7 @@ export function InteractiveProjectPage({
             </p>
             <h2 className="mt-2 text-2xl font-medium tracking-[-.03em] text-ink">{ctaTitle}</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate">
-              Imaginea, echipamentele și valorile sunt demonstrative. Soluția reală se dimensionează
+              Imaginea, echipamentele și valorile sunt orientative. Soluția finală se dimensionează
               după releveu, instalații, puterea disponibilă și cerințele beneficiarului.
             </p>
           </div>

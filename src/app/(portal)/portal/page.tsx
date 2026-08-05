@@ -1,8 +1,10 @@
 import { FileCheck2, FileClock, UploadCloud } from "lucide-react";
+import { redirect } from "next/navigation";
 
 import { PortalPlanUpload } from "@/app/(portal)/portal/portal-plan-upload";
-import { requireUser } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { adminRoles } from "@/lib/rbac";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { userOrganizationIds } from "@/modules/configurator/access";
 
@@ -15,7 +17,9 @@ function formatDate(value: Date): string {
 }
 
 export default async function PortalPage() {
-  const user = await requireUser();
+  const user = await getCurrentUser();
+  if (!user) redirect("/login");
+  if (user.memberships.some(({ role }) => adminRoles.has(role))) redirect("/admin");
   const projects = await prisma.project.findMany({
     where: { organizationId: { in: userOrganizationIds(user) } },
     include: {

@@ -5,7 +5,7 @@ import { InteractiveProjectPage } from "@/components/interactive-project-page";
 export const metadata: Metadata = {
   title: "Casă inteligentă Brașov — proiect interactiv | N3XO",
   description:
-    "Explorează interactiv climatizarea, umbrirea, energia, securitatea și ventilația unei case inteligente demonstrative din Brașov.",
+    "Explorează interactiv climatizarea, umbrirea, energia, securitatea și ventilația într-un studiu tehnic pentru o casă inteligentă din Brașov.",
 };
 
 export default function BrasovSmartHomeProjectPage() {

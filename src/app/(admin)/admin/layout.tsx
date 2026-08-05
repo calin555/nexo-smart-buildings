@@ -22,7 +22,7 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
       <header className="border-b bg-ink text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
           <Brand />
-          <span className="text-sm">Administrare · {user.name}</span>
+          <span className="text-sm">Administrare N3XO</span>
         </div>
       </header>
       <div className="mx-auto grid max-w-7xl gap-6 px-5 py-8 md:grid-cols-[13rem_1fr]">
