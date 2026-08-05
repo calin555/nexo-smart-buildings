@@ -69,8 +69,8 @@ describe("conținutul SEO public", () => {
 
   it("păstrează CTA-urile globale către configurator și cererea de ofertă", () => {
     expect(publicContentCtaPaths).toEqual({
-      configurator: "/configurator-pe-plan",
-      offer: "/solicita-oferta",
+      configurator: "/login?next=%2Fportal%23incarca-planul",
+      offer: "/login?next=%2Fportal",
     });
   });
 });

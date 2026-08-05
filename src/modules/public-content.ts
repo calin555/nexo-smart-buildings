@@ -256,7 +256,7 @@ export const rootPages: Record<string, PublicContentPage> = {
       {
         label: "Deschide configuratorul",
         description: "Autentifică-te în portalul securizat.",
-        href: "/login",
+        href: "/login?next=%2Fportal%23incarca-planul",
       },
       {
         label: "Cum protejăm planurile",
@@ -292,7 +292,11 @@ export const rootPages: Record<string, PublicContentPage> = {
       },
     ],
     related: [
-      { label: "Încarcă planul", description: "Folosește portalul securizat.", href: "/login" },
+      {
+        label: "Încarcă planul",
+        description: "Folosește portalul securizat.",
+        href: "/login?next=%2Fportal%23incarca-planul",
+      },
     ],
   },
   sitemap: {

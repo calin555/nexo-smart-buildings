@@ -93,9 +93,11 @@ export function resolvePostAuthDestination(
     membershipCount: number;
   }>,
 ): string {
-  if (input.requestedNext !== "/portal") return input.requestedNext;
   if (input.profileStatus === "SUSPENDED") return "/login?error=access";
-  return input.membershipCount > 0 ? "/portal" : "/onboarding";
+  if (input.membershipCount > 0) return input.requestedNext;
+  return input.requestedNext === "/portal"
+    ? "/onboarding"
+    : `/onboarding?next=${encodeURIComponent(input.requestedNext)}`;
 }
 
 export function personalOrganizationName(

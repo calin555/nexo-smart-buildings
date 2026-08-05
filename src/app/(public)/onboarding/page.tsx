@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import type { Route } from "next";
 import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { onboardingClientTypeOptions } from "@/modules/auth/onboarding";
+import { onboardingClientTypeOptions, safeAuthNext } from "@/modules/auth/onboarding";
 
 type OnboardingPageProps = {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 };
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default async function OnboardingPage({ searchParams }: OnboardingPageProps) {
+  const { error, next } = await searchParams;
+  const requestedNext = safeAuthNext(next ?? null);
   const supabase = await createServerSupabaseClient();
   const {
     data: { user },
@@ -26,7 +29,7 @@ export default async function OnboardingPage({ searchParams }: OnboardingPagePro
     where: { id: user.id },
     select: { name: true, _count: { select: { memberships: true } } },
   });
-  if ((profile?._count.memberships ?? 0) > 0) redirect("/portal");
+  if ((profile?._count.memberships ?? 0) > 0) redirect(requestedNext as Route);
 
   const metadata = user.user_metadata as Record<string, unknown>;
   const metadataName =
@@ -36,7 +39,6 @@ export default async function OnboardingPage({ searchParams }: OnboardingPagePro
         ? metadata.name
         : "";
   const suggestedName = profile?.name || metadataName;
-  const { error } = await searchParams;
 
   return (
     <main className="mx-auto min-h-[calc(100vh-8rem)] max-w-2xl px-5 py-12 lg:py-20">
@@ -57,6 +59,7 @@ export default async function OnboardingPage({ searchParams }: OnboardingPagePro
         ) : null}
 
         <form action="/api/auth/onboarding" method="post" className="mt-8 grid gap-5">
+          <input type="hidden" name="next" value={requestedNext} />
           <label className="block text-sm font-medium">
             Nume complet
             <input

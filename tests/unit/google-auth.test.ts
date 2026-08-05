@@ -67,4 +67,22 @@ describe("Google OAuth și onboarding", () => {
       "Ana Popescu · companie · 12345678",
     );
   });
+
+  it("păstrează continuarea configuratorului și o trece prin onboarding pentru un cont nou", () => {
+    const next = "/configurator-kit?kit=securitate&submit=1";
+    expect(
+      resolvePostAuthDestination({
+        requestedNext: next,
+        profileStatus: "ACTIVE",
+        membershipCount: 1,
+      }),
+    ).toBe(next);
+    expect(
+      resolvePostAuthDestination({
+        requestedNext: next,
+        profileStatus: "ACTIVE",
+        membershipCount: 0,
+      }),
+    ).toBe(`/onboarding?next=${encodeURIComponent(next)}`);
+  });
 });

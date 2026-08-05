@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 import { randomUUID } from "node:crypto";
 
+import { parseKitQuoteRequest } from "@/modules/commercial-configurator/quote-request";
+
 const prisma = new PrismaClient();
 
 const clientA = {
@@ -19,8 +21,13 @@ test.describe.configure({ mode: "serial" });
 
 let onboardingUserId = "";
 let onboardingOrganizationId = "";
+let quoteProjectId = "";
 
 test.afterAll(async () => {
+  if (quoteProjectId) {
+    await prisma.auditLog.deleteMany({ where: { entityId: quoteProjectId } });
+    await prisma.project.deleteMany({ where: { id: quoteProjectId } });
+  }
   if (onboardingUserId) {
     await prisma.auditLog.deleteMany({ where: { actorId: onboardingUserId } });
     if (onboardingOrganizationId) {
@@ -120,6 +127,35 @@ test("client A se autentifică, păstrează sesiunea și nu accesează admin", a
     page.getByRole("heading", { name: "Nu aveți acces la această zonă." }),
   ).toBeVisible();
 });
+test("configurația kitului este trimisă automat după login și ajunge la admin", async ({
+  page,
+}) => {
+  await page.goto("/configurator-kit?kit=securitate");
+  const steps = page.getByRole("navigation", { name: "Pași configurator comercial" });
+  await steps.getByRole("button", { name: /Securitate/ }).click();
+  await page.getByText("Camere video", { exact: true }).click();
+  await page.getByRole("button", { name: /Solicită ofertă/ }).click();
+  await expect(page).toHaveURL(/\/login\?next=/);
+
+  await page.getByLabel("E-mail").fill(clientA.email);
+  await page.getByLabel("Parolă").fill(clientA.password);
+  await page.getByRole("button", { name: "Intră în cont" }).click();
+  await expect(page).toHaveURL(/\/portal\?request=sent$/, { timeout: 20_000 });
+  await expect(page.getByRole("paragraph").filter({ hasText: /^Kit Securitate$/ })).toBeVisible();
+  expect(
+    await page.evaluate(() => window.localStorage.getItem("n3xo-pending-kit-quote")),
+  ).toBeNull();
+
+  const profile = await prisma.profile.findUniqueOrThrow({ where: { email: clientA.email } });
+  const project = await prisma.project.findFirstOrThrow({
+    where: { createdById: profile.id, name: "Cerere ofertă · Kit Securitate" },
+    orderBy: { createdAt: "desc" },
+  });
+  quoteProjectId = project.id;
+  const request = parseKitQuoteRequest(project.description);
+  expect(request?.selectedOptionIds).toContain("security-cameras");
+  expect(request?.estimatedPrice).toBeGreaterThan(0);
+});
 test("utilizatorul nou finalizează onboardingul, organizația și membership-ul", async ({
   page,
 }) => {
@@ -185,6 +221,11 @@ test("admin accesează administrarea echipamentelor și logout revocă sesiunea"
   await page.goto("/portal");
   await expect(page).toHaveURL(/\/admin$/);
   await expect(page.getByRole("link", { name: "Clienți" })).toBeVisible();
+  if (quoteProjectId) {
+    await page.goto("/admin/projects");
+    await expect(page.getByText("Cerere ofertă · Kit Securitate", { exact: true })).toBeVisible();
+    await expect(page.getByText("Camere video", { exact: false })).toBeVisible();
+  }
   await page.getByRole("link", { name: "Clienți" }).click();
   await expect(page.getByRole("heading", { name: "Clienți" })).toBeVisible();
   await page.goto("/admin/products");

@@ -7,6 +7,8 @@ import { prisma } from "@/lib/prisma";
 import { adminRoles } from "@/lib/rbac";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { userOrganizationIds } from "@/modules/configurator/access";
+import { kitDefinitions } from "@/modules/commercial-configurator/config";
+import { parseKitQuoteRequest } from "@/modules/commercial-configurator/quote-request";
 
 function formatDate(value: Date): string {
   return new Intl.DateTimeFormat("ro-RO", {
@@ -51,6 +53,10 @@ export default async function PortalPage() {
       .filter((document) => document.documentType === "PLAN")
       .map((document) => ({ document, project })),
   );
+  const kitRequests = projects.flatMap((project) => {
+    const request = parseKitQuoteRequest(project.description);
+    return request ? [{ project, request }] : [];
+  });
 
   return (
     <main className="min-w-0 space-y-7">
@@ -90,6 +96,31 @@ export default async function PortalPage() {
         </div>
       </section>
 
+      {kitRequests.length > 0 ? (
+        <section className="panel">
+          <p className="eyebrow">Cereri de ofertă</p>
+          <h2 className="mt-2 text-xl font-semibold">Configurații trimise echipei N3XO</h2>
+          <div className="mt-5 grid gap-3">
+            {kitRequests.map(({ project, request }) => (
+              <div
+                key={project.id}
+                className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate/15 px-4 py-4"
+              >
+                <div>
+                  <p className="font-semibold">{kitDefinitions[request.kitId].name}</p>
+                  <p className="mt-1 text-sm text-slate">
+                    Trimisă {formatDate(project.createdAt)} · în analiză
+                  </p>
+                </div>
+                <p className="font-semibold text-emerald-800">
+                  Estimare {new Intl.NumberFormat("ro-RO").format(request.estimatedPrice)} €
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="panel">
         <div className="flex items-center gap-3">
           <span className="grid size-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700">
@@ -124,7 +155,7 @@ export default async function PortalPage() {
               <UploadCloud className="mx-auto size-6 text-slate" />
               <p className="mt-3 font-medium">Nu ai primit încă o ofertă.</p>
               <p className="mt-1 text-sm text-slate">
-                După analiza planului, oferta va apărea automat aici.
+                După analiza planului sau a configurației, oferta va apărea automat aici.
               </p>
             </div>
           )}

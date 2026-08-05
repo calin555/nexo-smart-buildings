@@ -1,6 +1,5 @@
 "use client";
 
-import type { Route } from "next";
 import {
   ArrowLeft,
   ArrowRight,
@@ -22,7 +21,7 @@ import {
   TreePine,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   calculateCommercialSummary,
@@ -34,6 +33,12 @@ import {
   type HospitalityScale,
   type KitId,
 } from "@/modules/commercial-configurator/config";
+import {
+  kitQuoteInputSchema,
+  type KitQuoteInput,
+} from "@/modules/commercial-configurator/quote-request";
+
+const pendingQuoteStorageKey = "n3xo-pending-kit-quote";
 
 const numberFieldClass =
   "mt-2 w-full rounded-lg border border-[#cdd9d3] bg-white px-3 py-3 text-lg font-semibold text-ink outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15";
@@ -149,6 +154,9 @@ function equipmentLabel(label: string, quantity: number): string {
 export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit: KitId }>) {
   const kit = kitDefinitions[initialKit];
   const [isReady, setIsReady] = useState(false);
+  const [isSubmittingQuote, setIsSubmittingQuote] = useState(false);
+  const [quoteError, setQuoteError] = useState<string | null>(null);
+  const autoSubmitStarted = useRef(false);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [selectedOptionIds, setSelectedOptionIds] = useState<Set<string>>(
     () => new Set(kit.defaultSelections),
@@ -202,9 +210,64 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
       : activeCategory?.description;
   const scaleSelectedCount = summary.scale?.units ?? 0;
 
+  const submitQuote = useCallback(async (input: KitQuoteInput): Promise<void> => {
+    setIsSubmittingQuote(true);
+    setQuoteError(null);
+    try {
+      const response = await fetch("/api/portal/kit-quote-requests", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(input),
+      });
+      if (response.status === 401) {
+        const continuation = `/configurator-kit?kit=${input.kitId}&submit=1`;
+        window.location.assign(`/login?next=${encodeURIComponent(continuation)}`);
+        return;
+      }
+      if (!response.ok) {
+        setQuoteError(
+          response.status === 403
+            ? "Cererea poate fi trimisă numai dintr-un cont de client."
+            : "Cererea nu a putut fi trimisă. Încearcă din nou.",
+        );
+        return;
+      }
+      const result = (await response.json()) as { redirectTo?: string };
+      window.localStorage.removeItem(pendingQuoteStorageKey);
+      window.location.assign(result.redirectTo ?? "/portal?request=sent");
+    } catch {
+      setQuoteError("Conexiunea a fost întreruptă. Selecția ta a rămas salvată.");
+    } finally {
+      setIsSubmittingQuote(false);
+    }
+  }, []);
+
   useEffect(() => {
     setIsReady(true);
-  }, []);
+    const shouldResume = new URLSearchParams(window.location.search).get("submit") === "1";
+    if (!shouldResume || autoSubmitStarted.current) return;
+    autoSubmitStarted.current = true;
+    const stored = window.localStorage.getItem(pendingQuoteStorageKey);
+    if (!stored) return;
+    try {
+      const parsed: unknown = JSON.parse(stored);
+      const result = kitQuoteInputSchema.safeParse(parsed);
+      if (result.success) void submitQuote(result.data);
+    } catch {
+      window.localStorage.removeItem(pendingQuoteStorageKey);
+    }
+  }, [submitQuote]);
+
+  function requestQuote(): void {
+    const input: KitQuoteInput = {
+      kitId: initialKit,
+      selectedOptionIds: [...selectedOptionIds],
+      ...(buildingScale ? { buildingScale } : {}),
+    };
+    window.localStorage.setItem(pendingQuoteStorageKey, JSON.stringify(input));
+    void submitQuote(input);
+  }
 
   function toggleOption(optionId: string): void {
     setSelectedOptionIds((current) => {
@@ -673,12 +736,20 @@ export function CommercialKitConfigurator({ initialKit }: Readonly<{ initialKit:
                 </div>
               </div>
 
-              <Link
-                href={"/solicita-oferta" as Route}
-                className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#102720] transition hover:bg-emerald-50"
+              <button
+                type="button"
+                onClick={requestQuote}
+                disabled={isSubmittingQuote}
+                className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-semibold text-[#102720] transition hover:bg-emerald-50 disabled:cursor-wait disabled:opacity-70"
               >
-                Solicită ofertă <ArrowRight className="ml-2 size-4" />
-              </Link>
+                {isSubmittingQuote ? "Se trimite…" : "Solicită ofertă"}{" "}
+                <ArrowRight className="ml-2 size-4" />
+              </button>
+              {quoteError ? (
+                <p role="alert" className="mt-3 rounded-lg bg-red-950/40 p-3 text-xs text-red-100">
+                  {quoteError}
+                </p>
+              ) : null}
               <Link
                 href="/login"
                 className="mt-3 inline-flex w-full items-center justify-center rounded-lg border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"

@@ -2,6 +2,11 @@ import { FileCheck2, FileText, UserRound } from "lucide-react";
 
 import { OfferUpload } from "@/app/(admin)/admin/projects/offer-upload";
 import { prisma } from "@/lib/prisma";
+import { configuratorCategories, kitDefinitions } from "@/modules/commercial-configurator/config";
+import {
+  parseKitQuoteRequest,
+  selectedQuoteOptions,
+} from "@/modules/commercial-configurator/quote-request";
 import {
   buildingLabels,
   functionLabels,
@@ -41,6 +46,8 @@ export default async function AdminProjectsPage({
       <section className="grid gap-5">
         {projects.map((project) => {
           const request = parseProjectRequest(project.description);
+          const kitQuote = parseKitQuoteRequest(project.description);
+          const kitQuoteOptions = kitQuote ? selectedQuoteOptions(kitQuote) : [];
           const plans = project.documents.filter(
             (document) =>
               document.documentType === "PLAN" && document.processingStatus === "UPLOADED",
@@ -61,7 +68,8 @@ export default async function AdminProjectsPage({
                   </p>
                 </div>
                 <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-800">
-                  {plans.length} planuri · {offers.length} oferte
+                  {kitQuote ? "Configurație kit" : `${plans.length} planuri`} · {offers.length}{" "}
+                  oferte
                 </span>
               </div>
               {request && (
@@ -83,6 +91,56 @@ export default async function AdminProjectsPage({
                       <span className="font-semibold">Detalii:</span> {request.notes}
                     </p>
                   )}
+                </div>
+              )}
+              {kitQuote && (
+                <div className="mt-5 space-y-4 rounded-xl bg-cloud p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="font-semibold">{kitDefinitions[kitQuote.kitId].name}</p>
+                    <p className="text-lg font-semibold">
+                      {new Intl.NumberFormat("ro-RO", {
+                        style: "currency",
+                        currency: "EUR",
+                        maximumFractionDigits: 0,
+                      }).format(kitQuote.estimatedPrice)}
+                    </p>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    {configuratorCategories.map((category) => {
+                      const options = kitQuoteOptions.filter(
+                        (option) => option.category === category.id,
+                      );
+                      if (options.length === 0) return null;
+                      return (
+                        <div key={category.id} className="rounded-lg bg-white p-3">
+                          <p className="text-xs font-semibold uppercase tracking-[.12em] text-emerald-700">
+                            {category.label}
+                          </p>
+                          <p className="mt-2 text-sm leading-6">
+                            {options.map(({ label }) => label).join(", ")}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {kitQuote.buildingScale ? (
+                    <p className="text-sm">
+                      <span className="font-semibold">Dimensionare:</span>{" "}
+                      {kitQuote.buildingScale.kind === "block"
+                        ? `${kitQuote.buildingScale.staircases} scări · ${kitQuote.buildingScale.studios + kitQuote.buildingScale.twoRoom + kitQuote.buildingScale.threeRoom + kitQuote.buildingScale.fourPlusRoom} apartamente`
+                        : `${kitQuote.buildingScale.standardRooms + kitQuote.buildingScale.suites + kitQuote.buildingScale.accessibleRooms} camere de cazare`}
+                    </p>
+                  ) : null}
+                  <p className="text-sm">
+                    <span className="font-semibold">Estimare tehnică:</span> {kitQuote.products}{" "}
+                    poziții materiale · {kitQuote.devices} dispozitive
+                  </p>
+                  <p className="text-sm leading-6">
+                    <span className="font-semibold">Echipamente orientative:</span>{" "}
+                    {kitQuote.equipment
+                      .map(({ label, quantity }) => `${quantity} × ${label}`)
+                      .join(", ")}
+                  </p>
                 </div>
               )}
               <div className="mt-5 grid gap-2">
@@ -107,7 +165,7 @@ export default async function AdminProjectsPage({
                   </p>
                 ))}
               </div>
-              {plans.length > 0 && <OfferUpload projectId={project.id} />}
+              {(plans.length > 0 || kitQuote) && <OfferUpload projectId={project.id} />}
             </article>
           );
         })}

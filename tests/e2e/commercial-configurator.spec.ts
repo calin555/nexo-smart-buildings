@@ -14,6 +14,25 @@ test("pagina Kituri afișează cele nouă pachete orientative", async ({ page })
   await expect(page.getByText("25.000 € – 150.000 €", { exact: true })).toBeVisible();
 });
 
+test("CTA-urile configuratorului public deschid fluxurile securizate din portal", async ({
+  page,
+}) => {
+  await page.goto("/configurator-pe-plan");
+  await page.getByRole("link", { name: "Configurează pe plan" }).click();
+  await expect(page).toHaveURL(/\/login\?next=/);
+  await expect(page.locator('input[name="next"]').first()).toHaveValue(
+    "/portal#incarca-planul",
+  );
+
+  await page.goto("/configurator-pe-plan");
+  await page
+    .getByRole("complementary")
+    .getByRole("link", { name: /Solicită ofertă/ })
+    .click();
+  await expect(page).toHaveURL(/\/login\?next=/);
+  await expect(page.locator('input[name="next"]').first()).toHaveValue("/portal");
+});
+
 test("Kit Comfort actualizează live prețul și lista tehnică", async ({ page }) => {
   await page.goto("/configurator-kit?kit=casa-comfort");
   await expect(page.getByTestId("commercial-configurator")).toHaveAttribute("data-ready", "true");
@@ -48,11 +67,33 @@ test("fiecare card deschide kitul ales", async ({ page }) => {
     page.getByRole("heading", { level: 1, name: "Kit Casă Premium KNX", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByTestId("commercial-configurator").getByRole("link", { name: /Solicită ofertă/ }),
+    page.getByTestId("commercial-configurator").getByRole("button", { name: /Solicită ofertă/ }),
   ).toBeVisible();
   await expect(
     page.getByText("Rezervă până la limita orientativă", { exact: false }),
   ).toBeVisible();
+});
+
+test("configurația anonimă este păstrată și continuă prin autentificare", async ({ page }) => {
+  await page.goto("/configurator-kit?kit=securitate");
+  await page.getByRole("button", { name: /Solicită ofertă/ }).click();
+
+  await expect(page).toHaveURL(/\/login\?next=/);
+  const pendingQuote = await page.evaluate(() =>
+    window.localStorage.getItem("n3xo-pending-kit-quote"),
+  );
+  expect(pendingQuote).toBeTruthy();
+  const parsed = JSON.parse(pendingQuote!) as {
+    kitId: string;
+    selectedOptionIds: string[];
+  };
+  expect(parsed.kitId).toBe("securitate");
+  expect(parsed.selectedOptionIds).toEqual(
+    expect.arrayContaining(["security-alarm", "security-smoke"]),
+  );
+  await expect(page.locator('input[name="next"]').first()).toHaveValue(
+    "/configurator-kit?kit=securitate&submit=1",
+  );
 });
 
 test("wizardul rămâne navigabil pe mobil și păstrează rezumatul", async ({ page }) => {

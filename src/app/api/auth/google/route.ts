@@ -3,13 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { env } from "@/lib/env";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { createRouteSupabaseClient } from "@/lib/supabase/route";
+import { safeAuthNext } from "@/modules/auth/onboarding";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     enforceRateLimit(`google-oauth:${request.headers.get("x-forwarded-for") ?? "local"}`);
     const { supabase, applyCookies } = createRouteSupabaseClient(request);
     const redirectTo = new URL("/auth/callback", env.NEXT_PUBLIC_SITE_URL);
-    redirectTo.searchParams.set("next", "/portal");
+    redirectTo.searchParams.set("next", safeAuthNext(new URL(request.url).searchParams.get("next")));
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import type { Route } from "next";
 import { redirect } from "next/navigation";
 
 import { getCurrentUser } from "@/lib/auth";
+import { safeAuthNext } from "@/modules/auth/onboarding";
 
-type LoginPageProps = { searchParams: Promise<{ error?: string }> };
+type LoginPageProps = { searchParams: Promise<{ error?: string; next?: string }> };
 
 export const metadata: Metadata = {
   title: "Autentificare portal client",
@@ -11,9 +13,16 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const { error, next } = await searchParams;
+  const requestedNext = safeAuthNext(next ?? null);
   const currentUser = await getCurrentUser();
-  if (currentUser) redirect(currentUser.memberships.length > 0 ? "/portal" : "/onboarding");
-  const { error } = await searchParams;
+  if (currentUser) {
+    redirect(
+      currentUser.memberships.length > 0
+        ? (requestedNext as Route)
+        : (`/onboarding?next=${encodeURIComponent(requestedNext)}` as Route),
+    );
+  }
 
   const errorMessage =
     error === "google" || error === "oauth-callback"
@@ -36,6 +45,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           </p>
         ) : null}
         <form action="/api/auth/google" method="get" className="mt-6">
+          <input type="hidden" name="next" value={requestedNext} />
           <button
             className="flex w-full items-center justify-center gap-3 rounded-lg border border-[#cfd8d4] bg-white px-4 py-3 font-medium text-ink transition hover:border-[#9fb3aa] hover:bg-cloud focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
             type="submit"
@@ -67,6 +77,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <span className="h-px flex-1 bg-[#dfe7e3]" />
         </div>
         <form action="/api/auth/login" method="post" className="space-y-4">
+          <input type="hidden" name="next" value={requestedNext} />
           <label className="block text-sm font-medium">
             E-mail
             <input

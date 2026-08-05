@@ -8,10 +8,14 @@ import {
   getClientAccess,
   onboardingSchema,
   personalOrganizationName,
+  safeAuthNext,
 } from "@/modules/auth/onboarding";
 
-function onboardingError(request: NextRequest, code: string): NextResponse {
-  return NextResponse.redirect(new URL(`/onboarding?error=${code}`, request.url), 303);
+function onboardingError(request: NextRequest, code: string, next: string): NextResponse {
+  const url = new URL("/onboarding", request.url);
+  url.searchParams.set("error", code);
+  if (next !== "/portal") url.searchParams.set("next", next);
+  return NextResponse.redirect(url, 303);
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -24,9 +28,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return applyCookies(NextResponse.redirect(new URL("/login", request.url), 303));
   }
 
+  let requestedNext = "/portal";
   try {
     enforceRateLimit(`onboarding:${user.id}`, 5, 60_000);
     const formData = await request.formData();
+    requestedNext = safeAuthNext(
+      typeof formData.get("next") === "string" ? String(formData.get("next")) : null,
+    );
     const input = onboardingSchema.parse({
       name: formData.get("name"),
       phone: formData.get("phone"),
@@ -83,14 +91,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       });
     });
 
-    return applyCookies(NextResponse.redirect(new URL("/portal", request.url), 303));
+    return applyCookies(NextResponse.redirect(new URL(requestedNext, request.url), 303));
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
       const membership = await prisma.membership.findFirst({ where: { profileId: user.id } });
       if (membership) {
-        return applyCookies(NextResponse.redirect(new URL("/portal", request.url), 303));
+        return applyCookies(NextResponse.redirect(new URL(requestedNext, request.url), 303));
       }
     }
-    return applyCookies(onboardingError(request, "invalid"));
+    return applyCookies(onboardingError(request, "invalid", requestedNext));
   }
 }
