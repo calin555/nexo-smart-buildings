@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import "@/app/globals.css";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { defaultOgImage, getSiteUrl, siteName } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -70,7 +71,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="ro">
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }

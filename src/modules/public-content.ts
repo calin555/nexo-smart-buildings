@@ -949,7 +949,7 @@ export const legalPages: Record<string, PublicContentPage> = {
       {
         title: "Preferințe și analiză",
         paragraphs: [
-          "Dacă vom introduce cookie-uri opționale pentru preferințe, analiză sau marketing, acestea vor fi documentate și activate numai potrivit opțiunilor disponibile și temeiului aplicabil. În prezent nu descriem cookie-uri publicitare ca fiind active.",
+          "Google Analytics este folosit exclusiv după acordul vizitatorului pentru cookies de analiză. Dacă alegi «Doar necesare», eticheta Google Analytics nu este încărcată. Nu folosim această opțiune pentru activarea automată a cookie-urilor publicitare.",
         ],
       },
       {
