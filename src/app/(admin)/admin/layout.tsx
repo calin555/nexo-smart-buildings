@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { Route } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
@@ -29,6 +30,9 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
           <nav aria-label="Administrare" className="grid gap-1 text-sm">
             <Link className="rounded-md px-3 py-2 hover:bg-white/10" href="/admin">
               Prezentare
+            </Link>
+            <Link className="rounded-md px-3 py-2 hover:bg-white/10" href={"/admin/projects" as Route}>
+              Planuri și oferte
             </Link>
             <Link className="rounded-md px-3 py-2 hover:bg-white/10" href="/admin/products">
               Echipamente interne

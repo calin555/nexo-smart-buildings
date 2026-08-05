@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description:
     "Proiectare și implementare pentru case inteligente: KNX, Matter, Google Home, Apple Home, Alexa și Home Assistant.",
   applicationName: siteName,
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: "/icon.svg",
+  },
   category: "automatizări pentru clădiri",
   keywords: [
     "casă smart",

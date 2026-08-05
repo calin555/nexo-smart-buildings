@@ -7,6 +7,7 @@ import { kitDefinitions, type KitId } from "@/modules/commercial-configurator/co
 import {
   getActiveBrandBySlug,
   getActiveBrands,
+  getBrandCatalogUrl,
   getBrandPresentation,
   levelLabel,
 } from "@/modules/brands/data";
@@ -47,6 +48,7 @@ export default async function BrandPage({
   const [brand, allBrands] = await Promise.all([getActiveBrandBySlug(slug), getActiveBrands()]);
   if (!brand) notFound();
   const presentation = getBrandPresentation(brand.slug);
+  const catalogUrl = getBrandCatalogUrl(brand);
   const kits = brand.kitIds.map((kitId) => kitDefinitions[kitId as KitId]).filter(Boolean);
   const otherBrands = allBrands
     .filter(({ slug: otherSlug }) => otherSlug !== brand.slug)
@@ -55,10 +57,26 @@ export default async function BrandPage({
   return (
     <main className="bg-white">
       <section className="border-b border-[#dfe7e3] bg-[#f6f9f7]">
-        <div className="mx-auto grid min-h-[430px] max-w-[1500px] items-center gap-10 px-5 py-14 lg:grid-cols-[.75fr_1.25fr] lg:px-8">
-          <div className="flex min-h-64 items-center justify-center rounded-2xl border border-[#d8e2dd] bg-white">
-            <BrandMark name={brand.name} logoUrl={brand.logoUrl} />
-          </div>
+        <div className="mx-auto grid min-h-[400px] max-w-[1500px] items-center gap-10 px-5 py-12 lg:grid-cols-[.68fr_1.32fr] lg:px-8">
+          {catalogUrl ? (
+            <a
+              href={catalogUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Deschide catalogul oficial ${brand.name}`}
+              className="group flex min-h-56 flex-col items-center justify-center gap-5 rounded-2xl border border-[#d8e2dd] bg-white px-6 py-8 transition duration-200 hover:-translate-y-0.5 hover:border-emerald-700 hover:shadow-[0_16px_36px_rgba(19,39,31,.09)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-4"
+            >
+              <BrandMark name={brand.name} logoUrl={brand.logoUrl} prominent />
+              <span className="inline-flex items-center text-sm font-semibold text-emerald-800">
+                Deschide catalogul oficial
+                <ArrowRight className="ml-2 size-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </span>
+            </a>
+          ) : (
+            <div className="flex min-h-56 items-center justify-center rounded-2xl border border-[#d8e2dd] bg-white px-6 py-8">
+              <BrandMark name={brand.name} logoUrl={brand.logoUrl} prominent />
+            </div>
+          )}
           <div>
             <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
               Brand integrabil · {levelLabel(brand.level)}

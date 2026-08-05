@@ -17,6 +17,10 @@ test("homepage afișează brandurile ca legături interne", async ({ page }) => 
 test("pagina ABB explică rolul și proiectul demonstrativ", async ({ page }) => {
   await page.goto("/branduri/abb");
   await expect(page.getByRole("heading", { level: 1, name: "ABB" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Deschide catalogul oficial ABB" })).toHaveAttribute(
+    "href",
+    "https://new.abb.com/low-voltage/products/building-automation/product-range/abb-i-bus-knx",
+  );
   await expect(
     page.getByRole("heading", { name: "KNX permite proiecte multi-brand." }),
   ).toBeVisible();
@@ -26,6 +30,13 @@ test("pagina ABB explică rolul și proiectul demonstrativ", async ({ page }) =>
     ),
   ).toBeVisible();
   await expect(page.getByText(/nu existența automată a unui parteneriat oficial/)).toBeVisible();
+});
+
+test("logo-ul Schneider deschide catalogul KNX oficial", async ({ page }) => {
+  await page.goto("/branduri/schneider-electric");
+  await expect(
+    page.getByRole("link", { name: "Deschide catalogul oficial Schneider Electric" }),
+  ).toHaveAttribute("href", "https://www.se.com/ro/ro/download/document/Catalog_KNX2025/");
 });
 
 test("logo-ul dintr-un kit deschide rolul și soluția completă", async ({ page }) => {

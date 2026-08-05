@@ -4,6 +4,37 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { RoleCode } from "@/lib/rbac";
 
 export type AuthenticatedUser = { id: string; email: string; name: string; memberships: { organizationId: string; organizationName: string; role: RoleCode }[] };
+
+export type SessionIdentity = {
+  id: string;
+  email: string;
+  name: string;
+  provider: string | null;
+};
+
+export async function getSessionIdentity(): Promise<SessionIdentity | null> {
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user?.email) return null;
+
+  const metadata = user.user_metadata as Record<string, unknown>;
+  const metadataName =
+    typeof metadata.full_name === "string"
+      ? metadata.full_name
+      : typeof metadata.name === "string"
+        ? metadata.name
+        : (user.email.split("@")[0] ?? user.email);
+
+  return {
+    id: user.id,
+    email: user.email,
+    name: metadataName,
+    provider: typeof user.app_metadata.provider === "string" ? user.app_metadata.provider : null,
+  };
+}
+
 export async function getCurrentUser(): Promise<AuthenticatedUser | null> {
   const supabase = await createServerSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();

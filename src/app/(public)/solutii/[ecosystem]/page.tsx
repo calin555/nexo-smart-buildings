@@ -217,7 +217,7 @@ export default async function SolutionPage({
               Începe cu planul
             </p>
             <h2 className="mt-3 text-3xl font-medium tracking-[-.04em]">
-              Încarcă planul și primești o estimare orientativă.
+              Încarcă planul și primești oferta.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-white/65">
               Confirmăm camerele, funcțiile și condițiile de instalare înainte de oferta tehnică.

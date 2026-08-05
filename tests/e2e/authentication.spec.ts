@@ -48,8 +48,23 @@ test("meniul public mobil se deschide și oferă navigarea principală", async (
   await expect(page.getByRole("navigation", { name: "Navigare mobilă" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Case Smart", exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Portal client" })).toBeVisible();
-  await menuButton.click();
+  await page.getByRole("link", { name: "Case Smart", exact: true }).click();
+  await expect(page).toHaveURL(/\/solutii\/case-smart$/);
   await expect(page.getByRole("navigation", { name: "Navigare mobilă" })).toBeHidden();
+});
+
+test("meniul desktop se închide după alegerea unei tehnologii", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const technologyMenu = page
+    .locator("details")
+    .filter({ has: page.getByText("TEHNOLOGII", { exact: true }) });
+  await technologyMenu.locator("summary").click();
+  const securityLink = technologyMenu.getByRole("link", { name: "Securitate", exact: true });
+  await expect(securityLink).toBeVisible();
+  await securityLink.click();
+  await expect(page).toHaveURL(/\/solutii\/securitate$/);
+  await expect(technologyMenu).not.toHaveAttribute("open", "");
 });
 
 async function login(page: Page, credentials: { email: string; password: string }): Promise<void> {
@@ -89,6 +104,15 @@ test("client A se autentifică, păstrează sesiunea și nu accesează admin", a
   await page.reload();
   await expectSession(page);
   await expect(page.getByText("Persoană Fizică Demo")).toBeVisible();
+  await page.goto("/");
+  const accountMenu = page
+    .locator("details")
+    .filter({ has: page.locator('summary[aria-label^="Meniu cont"]') })
+    .first();
+  await accountMenu.locator("summary").click();
+  await expect(accountMenu.getByRole("link", { name: "Portal client" })).toBeVisible();
+  await expect(accountMenu.getByRole("link", { name: "Profilul meu" })).toBeVisible();
+  await expect(accountMenu.getByRole("button", { name: "Deconectare" })).toBeVisible();
   await page.goto("/auth/callback?next=/portal");
   await expect(page).toHaveURL(/\/portal$/);
   await page.goto("/admin");

@@ -55,7 +55,7 @@ const initialBrands: BrandRecord[] = [
     kitIds: ["casa-comfort", "casa-premium-knx", "bloc-smart", "energie"],
     sortOrder: 20,
     active: true,
-    officialUrl: "https://www.se.com/",
+    officialUrl: "https://www.se.com/ro/ro/download/document/Catalog_KNX2025/",
   },
   {
     id: "initial-mdt",
@@ -142,6 +142,15 @@ const initialBrands: BrandRecord[] = [
     officialUrl: "https://www.theben.de/",
   },
 ];
+
+const catalogUrls: Readonly<Record<string, string>> = {
+  abb: "https://new.abb.com/low-voltage/products/building-automation/product-range/abb-i-bus-knx",
+  "schneider-electric": "https://www.se.com/ro/ro/download/document/Catalog_KNX2025/",
+};
+
+export function getBrandCatalogUrl(brand: BrandRecord): string | null {
+  return catalogUrls[brand.slug] ?? brand.officialUrl;
+}
 
 const presentations: Record<string, BrandPresentation> = {
   abb: {

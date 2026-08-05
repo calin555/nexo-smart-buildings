@@ -1,8 +1,12 @@
-import { ChevronDown, FileUp, Menu, UserRound, X } from "lucide-react";
+"use client";
+
+import { ChevronDown, FileUp, LayoutDashboard, LogOut, Menu, UserRound, X } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
+import { useRef } from "react";
 
 import { Brand } from "@/components/brand";
+import type { SessionIdentity } from "@/lib/auth";
 
 const solutionLinks = [
   ["/solutii/case-smart", "Case Smart"],
@@ -27,15 +31,82 @@ const mobileLinks = [
   ["/ghiduri", "Ghiduri"],
   ["/despre-noi", "Despre noi"],
   ["/solicita-oferta", "Solicită ofertă"],
-  ["/login", "Portal client"],
 ] as const;
+
+function GoogleMark() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 18 18" className="size-4 shrink-0">
+      <path fill="#4285F4" d="M17.64 9.205c0-.638-.057-1.252-.164-1.841H9v3.482h4.844a4.14 4.14 0 0 1-1.797 2.716v2.258h2.909c1.702-1.567 2.684-3.875 2.684-6.615Z" />
+      <path fill="#34A853" d="M9 18c2.43 0 4.468-.806 5.956-2.18l-2.909-2.258c-.806.54-1.836.859-3.047.859-2.344 0-4.328-1.585-5.037-3.714H.956v2.332A9 9 0 0 0 9 18Z" />
+      <path fill="#FBBC05" d="M3.963 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.281-1.707V4.961H.956A9 9 0 0 0 0 9c0 1.452.347 2.827.956 4.039l3.007-2.332Z" />
+      <path fill="#EA4335" d="M9 3.579c1.322 0 2.508.454 3.441 1.346l2.581-2.581C13.464.892 11.426 0 9 0A9 9 0 0 0 .956 4.961l3.007 2.332C4.672 5.164 6.656 3.579 9 3.579Z" />
+    </svg>
+  );
+}
+
+function AccountMenu({ currentUser }: Readonly<{ currentUser: SessionIdentity }>) {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const initial = currentUser.name.trim().charAt(0).toUpperCase() || "U";
+  const isGoogle = currentUser.provider === "google";
+
+  return (
+    <details ref={detailsRef} className="group relative">
+      <summary
+        aria-label={`Meniu cont ${currentUser.name}`}
+        className="relative grid size-10 cursor-pointer list-none place-items-center rounded-full bg-emerald-800 text-sm font-bold text-white ring-1 ring-emerald-900/10 transition hover:bg-emerald-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden"
+      >
+        {initial}
+        {isGoogle ? (
+          <span className="absolute -bottom-1 -right-1 grid size-5 place-items-center rounded-full border-2 border-white bg-white shadow-sm">
+            <GoogleMark />
+          </span>
+        ) : null}
+      </summary>
+      <div className="absolute right-0 top-12 w-72 overflow-hidden rounded-xl border border-[#dce5e0] bg-white shadow-[0_18px_45px_rgba(7,21,29,.16)]">
+        <div className="border-b border-[#e2e9e5] px-4 py-4">
+          <p className="truncate text-sm font-semibold text-ink">{currentUser.name}</p>
+          <p className="mt-0.5 truncate text-xs text-slate">{currentUser.email}</p>
+          <p className="mt-3 flex items-center gap-2 text-xs font-medium text-ink">
+            {isGoogle ? <GoogleMark /> : <UserRound className="size-4 text-emerald-700" />}
+            {isGoogle ? "Conectat cu Google" : "Cont autentificat"}
+          </p>
+        </div>
+        <div className="p-2">
+          <Link
+            href="/portal"
+            onClick={() => detailsRef.current?.removeAttribute("open")}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-cloud"
+          >
+            <LayoutDashboard className="size-4 text-emerald-700" /> Portal client
+          </Link>
+          <Link
+            href="/portal#profil"
+            onClick={() => detailsRef.current?.removeAttribute("open")}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-cloud"
+          >
+            <UserRound className="size-4 text-emerald-700" /> Profilul meu
+          </Link>
+          <form action="/api/auth/logout" method="post">
+            <button
+              type="submit"
+              className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-red-700 transition hover:bg-red-50"
+            >
+              <LogOut className="size-4" /> Deconectare
+            </button>
+          </form>
+        </div>
+      </div>
+    </details>
+  );
+}
 
 function Dropdown({
   label,
   links,
 }: Readonly<{ label: string; links: ReadonlyArray<readonly [string, string]> }>) {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
   return (
-    <details className="group relative">
+    <details ref={detailsRef} className="group relative">
       <summary className="flex cursor-pointer list-none items-center gap-1 py-7 text-xs font-semibold text-ink transition hover:text-emerald-700 [&::-webkit-details-marker]:hidden">
         {label}
         <ChevronDown className="size-3.5 transition group-open:rotate-180" />
@@ -45,6 +116,7 @@ function Dropdown({
           <Link
             key={href}
             href={href as Route}
+            onClick={() => detailsRef.current?.removeAttribute("open")}
             className="block rounded-lg px-3 py-2.5 text-sm text-ink transition hover:bg-cloud hover:text-emerald-700"
           >
             {text}
@@ -55,9 +127,10 @@ function Dropdown({
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ currentUser }: Readonly<{ currentUser: SessionIdentity | null }>) {
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
   return (
-    <header className="sticky top-0 z-40 bg-white shadow-[0_2px_10px_rgba(7,21,29,.10)]">
+    <header className="isolate sticky top-0 z-[100] bg-white shadow-[0_2px_10px_rgba(7,21,29,.10)]">
       <div className="mx-auto flex min-h-[4.5rem] max-w-[1600px] items-center gap-4 px-4 sm:px-5 lg:min-h-[5rem] lg:px-8">
         <Brand />
         <nav
@@ -101,15 +174,19 @@ export function SiteHeader() {
           >
             Solicită ofertă
           </Link>
-          <Link
-            href="/login"
-            aria-label="Portal client"
-            className="grid size-10 place-items-center rounded-lg border border-[#cbd8d2] text-[#0067ae] transition hover:border-emerald-700 hover:text-emerald-700"
-          >
-            <UserRound className="size-4" />
-          </Link>
+          {currentUser ? (
+            <AccountMenu currentUser={currentUser} />
+          ) : (
+            <Link
+              href="/login"
+              aria-label="Portal client"
+              className="grid size-10 place-items-center rounded-lg border border-[#cbd8d2] text-[#0067ae] transition hover:border-emerald-700 hover:text-emerald-700"
+            >
+              <UserRound className="size-4" />
+            </Link>
+          )}
         </div>
-        <details className="group ml-auto lg:hidden">
+        <details ref={mobileMenuRef} className="group ml-auto lg:hidden">
           <summary
             aria-label="Meniu principal"
             className="grid size-11 cursor-pointer list-none place-items-center rounded-lg border border-slate/15 text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 [&::-webkit-details-marker]:hidden"
@@ -126,11 +203,53 @@ export function SiteHeader() {
                 <Link
                   key={`${href}-${label}`}
                   href={href as Route}
+                  onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                   className="rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                 >
                   {label}
                 </Link>
               ))}
+              {currentUser ? (
+                <div className="mt-3 border-t border-slate/10 pt-3">
+                  <div className="mb-2 rounded-lg bg-cloud px-3 py-3">
+                    <p className="truncate text-sm font-semibold text-ink">{currentUser.name}</p>
+                    <p className="mt-1 flex items-center gap-2 text-xs text-slate">
+                      {currentUser.provider === "google" ? <GoogleMark /> : null}
+                      {currentUser.provider === "google" ? "Conectat cu Google" : currentUser.email}
+                    </p>
+                  </div>
+                  <Link
+                    href="/portal"
+                    onClick={() => mobileMenuRef.current?.removeAttribute("open")}
+                    className="block rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
+                  >
+                    Portal client
+                  </Link>
+                  <Link
+                    href="/portal#profil"
+                    onClick={() => mobileMenuRef.current?.removeAttribute("open")}
+                    className="block rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
+                  >
+                    Profilul meu
+                  </Link>
+                  <form action="/api/auth/logout" method="post">
+                    <button
+                      type="submit"
+                      className="w-full rounded-lg px-3 py-3 text-left text-sm font-semibold text-red-700 transition hover:bg-red-50"
+                    >
+                      Deconectare
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => mobileMenuRef.current?.removeAttribute("open")}
+                  className="rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
+                >
+                  Portal client
+                </Link>
+              )}
             </div>
           </nav>
         </details>

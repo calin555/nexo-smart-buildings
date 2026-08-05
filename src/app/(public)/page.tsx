@@ -104,7 +104,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="mt-6 text-sm font-medium text-emerald-800">
-              Încarcă planul și primești o estimare orientativă.
+              Încarcă planul și primești oferta.
             </p>
           </div>
           <Link
