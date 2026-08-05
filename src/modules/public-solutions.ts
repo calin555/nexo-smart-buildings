@@ -10,6 +10,12 @@ export type PublicSolution = {
   technologies: string[];
   deliverables: string[];
   image: string;
+  imageAlt: string;
+  details?: {
+    title: string;
+    paragraphs: string[];
+    bullets?: string[];
+  }[];
 };
 
 export const publicSolutions: PublicSolution[] = [
@@ -39,6 +45,44 @@ export const publicSolutions: PublicSolution[] = [
       "Mentenanță",
     ],
     image: "/images/projects/casa-inteligenta-brasov-interactive.png",
+    imageAlt: "Casă inteligentă cu iluminat, climat și securitate integrate",
+    details: [
+      {
+        title: "Exemple concrete de automatizare",
+        paragraphs: [
+          "În living, o singură scenă poate coordona iluminatul, jaluzelele și temperatura. La plecare, casa poate opri consumatorii selectați, reduce încălzirea și activa securitatea, păstrând circuitele esențiale active.",
+          "În dormitoare folosim comenzi locale simple, senzori discreți și temperatură pe zone. În exterior putem corela iluminatul, accesul, irigațiile și stația de încărcare, dacă echipamentele oferă interfețe documentate.",
+        ],
+      },
+      {
+        title: "Costuri orientative și prioritizare",
+        paragraphs: [
+          "O configurație de început poate porni de la aproximativ 2.500–5.500 €, iar o casă completă, cu KNX, HVAC, securitate și aparataj premium, poate depăși 12.000 €. Intervalele includ ipoteze orientative; oferta depinde de plan, circuite, finisaje și montaj.",
+          "Bugetul se controlează alegând întâi funcțiile cu impact zilnic: iluminat, umbrire și temperatură. Infrastructura poate fi pregătită pentru extinderi ulterioare.",
+        ],
+      },
+      {
+        title: "Construcție nouă versus renovare",
+        paragraphs: [
+          "La o construcție nouă putem coordona cablarea, dozele, tabloul și interfețele HVAC înainte de finisaje. Acest lucru oferă libertate mai mare și reduce improvizațiile.",
+          "În renovare verificăm instalația existentă, nulul în doze, spațiul din tablou și acoperirea rețelei. Soluția poate combina control local, Matter, Zigbee sau Wi-Fi cu intervenții limitate.",
+        ],
+      },
+      {
+        title: "Funcționare locală și fără internet",
+        paragraphs: [
+          "Iluminatul, climatul, jaluzelele și comenzile de bază pot fi proiectate să funcționeze local. O întrerupere a internetului nu trebuie să blocheze folosirea normală a casei.",
+          "Accesul de la distanță, controlul vocal și unele notificări cloud pot deveni temporar indisponibile. Aceste dependențe sunt documentate înainte de ofertare.",
+        ],
+      },
+      {
+        title: "Etapele proiectului, mentenanță și documentație",
+        paragraphs: [
+          "Parcurgem analiza planului, definirea funcțiilor pe camere, proiectarea, ofertarea, instalarea, programarea, testarea și instruirea beneficiarului.",
+          "La predare stabilim documentele și backupurile incluse, descrierea scenariilor și procedura de intervenție. Mentenanța poate acoperi verificări periodice, actualizări controlate și modificări ulterioare.",
+        ],
+      },
+    ],
   },
   {
     slug: "apartamente-smart",
@@ -66,6 +110,7 @@ export const publicSolutions: PublicSolution[] = [
       "Punere în funcțiune",
     ],
     image: "/images/projects/casa-inteligenta-cluj-technical.png",
+    imageAlt: "Apartament inteligent cu automatizări integrate",
   },
   {
     slug: "blocuri-smart",
@@ -92,6 +137,7 @@ export const publicSolutions: PublicSolution[] = [
       "Documentație as-built",
     ],
     image: "/images/projects/bloc-rezidential-cluj-interactive.png",
+    imageAlt: "Bloc rezidențial cu sisteme smart pentru spațiile comune",
   },
   {
     slug: "pensiuni-hoteluri-smart",
@@ -113,6 +159,7 @@ export const publicSolutions: PublicSolution[] = [
     technologies: ["KNX", "GRMS", "BACnet", "Modbus", "PMS API"],
     deliverables: ["Mock-up cameră", "Proiect pe nivel", "Integrare PMS/GRMS", "Training personal"],
     image: "/images/projects/bloc-rezidential-cluj-interactive.png",
+    imageAlt: "Clădire de cazare cu automatizare pentru camere și energie",
   },
   {
     slug: "automatizare-knx",
@@ -140,6 +187,44 @@ export const publicSolutions: PublicSolution[] = [
       "Fișier as-built și backup",
     ],
     image: "/images/projects/casa-inteligenta-cluj-technical.png",
+    imageAlt: "Casă cu infrastructură tehnică KNX și circuite automatizate",
+    details: [
+      {
+        title: "Exemple concrete într-un proiect KNX",
+        paragraphs: [
+          "Un actuator din tablou poate comanda mai multe circuite de iluminat, iar senzorii și butoanele trimit comenzi pe magistrală. Jaluzelele, termostatele și măsurarea energiei pot fi coordonate fără ca o aplicație cloud să devină punct unic de control.",
+          "Pentru o casă cu pompă de căldură putem defini zone, limite și moduri de funcționare. Interfața exactă cu HVAC se verifică în documentația producătorului înainte de proiectare.",
+        ],
+      },
+      {
+        title: "Costuri orientative",
+        paragraphs: [
+          "Pentru o locuință, o implementare KNX pornește frecvent de la câteva mii de euro și poate depăși 12.000 € când include multe circuite, HVAC, aparataj premium și integrare extinsă. Nu folosim un preț fix pe metru pătrat.",
+          "Bugetul include proiectarea, echipamentele, tabloul, aparatajul, instalarea, programarea și documentația în proporții diferite de la un proiect la altul.",
+        ],
+      },
+      {
+        title: "Construcție nouă versus renovare",
+        paragraphs: [
+          "KNX este cel mai eficient când magistrala, circuitele și tablourile sunt planificate înainte de instalația electrică. Astfel, topologia rămâne clară și extensibilă.",
+          "Într-o renovare completă poate fi implementat similar. Într-o locuință finisată analizăm dacă intervențiile sunt justificate sau dacă o arhitectură hibridă oferă un rezultat mai bun.",
+        ],
+      },
+      {
+        title: "Funcționare fără internet",
+        paragraphs: [
+          "Comenzile KNX de bază rulează local și distribuit. Iluminatul, jaluzelele și automatizările programate nu au nevoie de internet pentru funcționarea normală.",
+          "Internetul este necesar doar pentru serviciile externe alese, precum accesul de la distanță sau asistenții vocali. Gateway-urile sunt tratate separat de funcțiile critice.",
+        ],
+      },
+      {
+        title: "Proiect ETS, predare și mentenanță",
+        paragraphs: [
+          "Etapele includ topologia, adresele de grup, tabelele de funcții, coordonarea tablourilor, parametrizarea în ETS, testele pe circuite și scenarii, apoi instruirea utilizatorilor.",
+          "Documentația contractuală poate include proiectul as-built, descrierea funcțiilor și backupul ETS. O mentenanță corectă păstrează istoricul modificărilor și evită intervențiile fără documentare.",
+        ],
+      },
+    ],
   },
   {
     slug: "securitate",
@@ -156,6 +241,7 @@ export const publicSolutions: PublicSolution[] = [
     technologies: ["Alarmă cablată", "IP", "PoE", "KNX"],
     deliverables: ["Analiză de risc", "Plan dispozitive", "Instalare", "Testare și instructaj"],
     image: "/images/projects/casa-inteligenta-brasov-interactive.png",
+    imageAlt: "Casă cu sistem integrat de alarmă, acces și supraveghere",
   },
   {
     slug: "energie-eficienta",
@@ -178,6 +264,7 @@ export const publicSolutions: PublicSolution[] = [
       "Reguli de optimizare",
     ],
     image: "/images/projects/bloc-rezidential-cluj-interactive.png",
+    imageAlt: "Clădire inteligentă cu monitorizare și management energetic",
   },
 ];
 

@@ -1,8 +1,11 @@
 import { ArrowRight, CheckCircle2, FileUp, Layers3 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BrandMark } from "@/components/brand-mark";
+import { buildSeoMetadata, PageSchemas } from "@/lib/seo";
+import type { PublicContentPage } from "@/modules/public-content";
 import { kitDefinitions, type KitId } from "@/modules/commercial-configurator/config";
 import {
   getActiveBrandBySlug,
@@ -13,6 +16,30 @@ import {
 } from "@/modules/brands/data";
 
 export const dynamic = "force-dynamic";
+
+function brandSeoPage(name: string, slug: string, description: string): PublicContentPage {
+  return {
+    slug,
+    eyebrow: "Branduri și tehnologii integrate",
+    title: `${name} în proiecte smart și KNX`,
+    description,
+    seoTitle: `${name}: integrare KNX și smart building | N3XO`,
+    seoDescription: `${description} Vezi rolurile, kiturile și exemplele de integrare ${name} în proiectele N3XO.`,
+    keywords: [`${name} KNX`, `${name} smart home`, `integrare ${name}`],
+    sections: [],
+    faq: faq.map(([question, answer]) => ({ question, answer })),
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: Readonly<{ params: Promise<{ slug: string }> }>): Promise<Metadata> {
+  const { slug } = await params;
+  const brand = await getActiveBrandBySlug(slug);
+  if (!brand) return {};
+
+  return buildSeoMetadata(brandSeoPage(brand.name, brand.slug, brand.description), `/branduri/${slug}`);
+}
 
 const faq = [
   [
@@ -53,9 +80,16 @@ export default async function BrandPage({
   const otherBrands = allBrands
     .filter(({ slug: otherSlug }) => otherSlug !== brand.slug)
     .slice(0, 6);
+  const seoPage = brandSeoPage(brand.name, brand.slug, brand.description);
+  const breadcrumbs = [
+    { label: "Acasă", href: "/" },
+    { label: "Branduri", href: "/branduri" },
+    { label: brand.name, href: `/branduri/${brand.slug}` },
+  ];
 
   return (
     <main className="bg-white">
+      <PageSchemas page={seoPage} path={`/branduri/${brand.slug}`} breadcrumbs={breadcrumbs} />
       <section className="border-b border-[#dfe7e3] bg-[#f6f9f7]">
         <div className="mx-auto grid min-h-[400px] max-w-[1500px] items-center gap-10 px-5 py-12 lg:grid-cols-[.68fr_1.32fr] lg:px-8">
           {catalogUrl ? (
@@ -220,7 +254,7 @@ export default async function BrandPage({
               {presentation.projectConfiguration}
             </p>
             <p className="mt-3 text-xs text-white/45">
-              Configurație orientativă; nu reprezintă un proiect executat.
+              Exemplu demonstrativ; nu reprezintă o afirmație despre un proiect real executat.
             </p>
           </div>
         </div>

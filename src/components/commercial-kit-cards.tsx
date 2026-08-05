@@ -35,7 +35,7 @@ function KitCard({
       <div className="relative aspect-[16/7.5] overflow-hidden rounded-t-2xl bg-[#edf2ef]">
         <Image
           src={imagery[kitId]}
-          alt=""
+          alt={`Exemplu de clădire pentru ${kit.name}`}
           fill
           sizes="(min-width: 1280px) 30vw, 100vw"
           className="object-cover transition duration-500 group-hover:scale-[1.025]"

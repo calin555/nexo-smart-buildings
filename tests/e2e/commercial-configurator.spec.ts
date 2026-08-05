@@ -18,6 +18,7 @@ test("CTA-urile configuratorului public deschid fluxurile securizate din portal"
   page,
 }) => {
   await page.goto("/configurator-pe-plan");
+  await expect(page.locator("html")).toHaveAttribute("data-app-hydrated", "true");
   await page.getByRole("link", { name: "Configurează pe plan" }).click();
   await expect(page).toHaveURL(/\/login\?next=/);
   await expect(page.locator('input[name="next"]').first()).toHaveValue(

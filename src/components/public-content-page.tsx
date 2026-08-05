@@ -96,6 +96,50 @@ export function PublicContentPageView({
             </section>
           ))}
 
+          {page.comparison ? (
+            <section className="overflow-hidden rounded-2xl border border-[#d8e2dd] bg-white">
+              <div className="p-6 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">
+                  Comparație tehnică
+                </p>
+                <h2 className="mt-3 text-3xl font-medium tracking-[-.04em] text-ink">
+                  Wi-Fi, Matter și KNX, criteriu cu criteriu.
+                </h2>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+                  <caption className="sr-only">{page.comparison.caption}</caption>
+                  <thead className="bg-[#102720] text-white">
+                    <tr>
+                      <th scope="col" className="px-6 py-4 font-semibold">
+                        Criteriu
+                      </th>
+                      {page.comparison.columns.map((column) => (
+                        <th key={column} scope="col" className="px-6 py-4 font-semibold">
+                          {column}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#d8e2dd]">
+                    {page.comparison.rows.map((row) => (
+                      <tr key={row.criterion} className="align-top">
+                        <th scope="row" className="bg-[#f4f8f6] px-6 py-4 font-semibold text-ink">
+                          {row.criterion}
+                        </th>
+                        {row.values.map((value, index) => (
+                          <td key={`${row.criterion}-${page.comparison?.columns[index]}`} className="px-6 py-4 leading-6 text-slate">
+                            {value}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ) : null}
+
           {page.faq && page.faq.length > 0 ? (
             <section className="rounded-2xl border border-[#d8e2dd] bg-[#f4f8f6] p-6 sm:p-8">
               <p className="text-xs font-semibold uppercase tracking-[.17em] text-emerald-700">

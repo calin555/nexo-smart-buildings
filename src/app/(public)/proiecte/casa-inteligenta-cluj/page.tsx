@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 
 import { InteractiveProjectPage } from "@/components/interactive-project-page";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Casă inteligentă Cluj — proiect tehnic interactiv | N3XO",
   description:
     "Explorează circuitele, automatizările și echipamentele propuse într-un studiu tehnic pentru o casă inteligentă N3XO.",
-};
+  path: "/proiecte/casa-inteligenta-cluj",
+  image: "/images/projects/casa-inteligenta-cluj-technical.png",
+});
 
 export default function SmartHomeClujProjectPage() {
   return (

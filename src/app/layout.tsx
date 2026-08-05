@@ -3,10 +3,10 @@ import type { ReactNode } from "react";
 
 import "@/app/globals.css";
 import { GoogleAnalytics } from "@/components/google-analytics";
-import { defaultOgImage, getSiteUrl, siteName } from "@/lib/seo";
+import { defaultOgImage, productionSiteUrl, siteName } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(getSiteUrl()),
+  metadataBase: new URL(productionSiteUrl),
   title: {
     default: "Casă smart și automatizări KNX | N3XO Smart Buildings",
     template: `%s | ${siteName}`,

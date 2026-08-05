@@ -682,6 +682,139 @@ export const pillarPages: Record<string, PublicContentPage> = {
       },
     ],
   },
+  "automatizari-case-cluj": {
+    slug: "automatizari-case-cluj",
+    eyebrow: "Automatizări case · Cluj-Napoca",
+    title: "Automatizări pentru case și sisteme KNX în Cluj-Napoca.",
+    description:
+      "Proiectăm iluminatul, climatul, jaluzelele, securitatea și energia ca un sistem coerent, adaptat caselor noi și renovărilor din Cluj.",
+    seoTitle: "Automatizări case și sisteme KNX în Cluj-Napoca | N3XO",
+    seoDescription:
+      "Automatizări pentru case în Cluj-Napoca: proiectare KNX, smart home, iluminat, climat, securitate, instalare, programare și mentenanță.",
+    keywords: [
+      "automatizări case Cluj",
+      "KNX Cluj-Napoca",
+      "casă inteligentă Cluj",
+      "smart home Cluj",
+    ],
+    schemaType: "Service",
+    serviceType: "Automatizări case și sisteme KNX",
+    ogImage: "/images/projects/casa-inteligenta-cluj-technical.png",
+    sections: [
+      {
+        title: "Servicii pentru o casă smart completă",
+        paragraphs: [
+          "Pornim de la planurile de arhitectură, instalația electrică și HVAC. Definim funcțiile pe camere înainte de a selecta echipamentele sau ecosistemul.",
+          "Putem coordona proiectarea, tablourile, cablarea, instalarea, programarea, testarea și documentația finală pentru KNX, Matter sau soluții hibride.",
+        ],
+        bullets: [
+          "Iluminat și scene",
+          "Încălzire și climatizare pe zone",
+          "Jaluzele și protecție solară",
+          "Securitate, acces și alarme tehnice",
+          "Monitorizare și management energetic",
+          "Integrare Apple Home, Google Home sau Home Assistant, unde este justificată",
+        ],
+        subsections: [
+          {
+            title: "Construcție nouă",
+            paragraphs: [
+              "Coordonăm magistralele, circuitele, dozele și tablourile înainte de finisaje.",
+            ],
+          },
+          {
+            title: "Renovare",
+            paragraphs: [
+              "Audităm instalația și alegem intervențiile cu impact controlat asupra finisajelor.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Zone deservite",
+        paragraphs: [
+          "Analizăm proiecte în Cluj-Napoca și localitățile apropiate, inclusiv Florești, Apahida, Baciu, Feleacu, Chinteni și Gilău. Disponibilitatea vizitelor și intervențiilor se confirmă pentru fiecare proiect.",
+          "Proiectarea și reviziile pot fi coordonate online, iar auditul, punerea în funcțiune și instruirea se planifică la locație atunci când sunt necesare.",
+        ],
+      },
+      {
+        title: "Procesul de proiectare",
+        paragraphs: [
+          "Încărcarea planului este primul pas. Confirmăm camerele și instalațiile, stabilim scenariile, comparăm tehnologiile și pregătim o estimare orientativă.",
+          "După validare realizăm proiectul tehnic, oferta detaliată și coordonarea cu electricianul și proiectantul HVAC. La final testăm funcțiile și predăm documentația convenită.",
+        ],
+        bullets: [
+          "Plan și cerințe",
+          "Funcții pe camere",
+          "Arhitectură și buget",
+          "Proiect tehnic și ofertă",
+          "Instalare și programare",
+          "Teste, instruire și mentenanță",
+        ],
+      },
+      {
+        title: "Costuri orientative",
+        paragraphs: [
+          "Un apartament sau o configurație de început poate necesita un buget de câteva mii de euro. O casă cu KNX, HVAC, securitate și aparataj premium poate depăși 12.000 €, în funcție de numărul circuitelor și nivelul de integrare.",
+          "Intervalele nu reprezintă oferte ferme. Montajul, tablourile, cablarea, finisajele și condițiile din șantier sunt verificate înainte de prețul final.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "Când trebuie început proiectul de automatizare?",
+        answer:
+          "Ideal înainte de definitivarea instalației electrice și HVAC. În renovări începem cu un audit al circuitelor, dozelor, tabloului și rețelei.",
+      },
+      {
+        question: "KNX este obligatoriu pentru o casă smart?",
+        answer:
+          "Nu. Îl recomandăm pentru infrastructuri noi și proiecte complexe. Pentru renovări sau funcții limitate, Matter, Zigbee, Wi-Fi ori o soluție hibridă pot fi mai potrivite.",
+      },
+      {
+        question: "Sistemul funcționează fără internet?",
+        answer:
+          "Funcțiile esențiale pot rula local. Accesul la distanță, controlul vocal și anumite servicii cloud pot fi indisponibile pe durata întreruperii internetului.",
+      },
+      {
+        question: "Lucrați și în afara municipiului Cluj-Napoca?",
+        answer:
+          "Da, analizăm proiecte în localitățile apropiate și în județul Cluj. Calendarul, deplasarea și condițiile de service se confirmă înainte de ofertă.",
+      },
+      {
+        question: "Pot primi o estimare doar din plan?",
+        answer:
+          "Planul și selecția funcțiilor permit o estimare orientativă. Oferta finală necesită confirmarea circuitelor, instalațiilor, echipamentelor și condițiilor de montaj.",
+      },
+      {
+        question: "Asigurați mentenanță după punerea în funcțiune?",
+        answer:
+          "Putem include mentenanță, backupuri, verificări și modificări ulterioare, în limitele stabilite prin ofertă și contract.",
+      },
+    ],
+    related: [
+      {
+        label: "Case Smart",
+        description: "Funcții și arhitecturi pentru o locuință inteligentă.",
+        href: "/solutii/case-smart",
+      },
+      {
+        label: "Automatizare KNX",
+        description: "Proiectare, ETS și documentație tehnică.",
+        href: "/solutii/automatizare-knx",
+      },
+      {
+        label: "Configurator pe plan",
+        description: "Selectează funcțiile pe fiecare cameră.",
+        href: "/configurator-pe-plan",
+      },
+      {
+        label: "Solicită ofertă",
+        description: "Trimite planul și cerințele proiectului.",
+        href: "/solicita-oferta",
+      },
+    ],
+  },
 };
 
 export const localPages: Record<string, PublicContentPage> = {
@@ -994,7 +1127,75 @@ export const guidePages: Record<string, PublicContentPage> = {
           "Funcțiile esențiale pot rămâne pe KNX sau controlere locale, în timp ce Matter și platformele vocale oferă interfețe suplimentare.",
         ],
       },
+      {
+        title: "Recomandări după tipul clădirii",
+        paragraphs: [
+          "Pentru un apartament finisat, Matter, Thread, Zigbee sau Wi-Fi pot reduce intervențiile, dacă rețeaua și compatibilitățile sunt controlate. Pentru o casă nouă, KNX sau o arhitectură hibridă oferă o bază stabilă pentru iluminat, HVAC, jaluzele și energie.",
+          "Într-un hotel sau o pensiune, repetabilitatea camerelor, funcționarea locală, monitorizarea și service-ul cântăresc mai mult decât varietatea dispozitivelor consumer. Arhitectura trebuie coordonată cu accesul, PMS/GRMS și instalațiile clădirii.",
+        ],
+      },
+      {
+        title: "Securitate, scalabilitate și mentenanță",
+        paragraphs: [
+          "Separăm rețeaua IoT, limităm permisiunile și păstrăm funcțiile critice locale. Un protocol comun nu garantează singur securitatea sau compatibilitatea fiecărui produs.",
+          "Pe termen lung contează backupul, documentația, disponibilitatea pieselor și persoana responsabilă de actualizări. KNX cere proiect și competență ETS, iar ecosistemele consumer cer administrarea conturilor, huburilor și versiunilor.",
+        ],
+      },
     ],
+    comparison: {
+      caption: "Comparație între automatizările Wi-Fi, Matter cu Thread și KNX",
+      columns: ["Wi-Fi", "Matter / Thread", "KNX"],
+      rows: [
+        {
+          criterion: "Cost inițial",
+          values: [
+            "Redus pentru câteva dispozitive; crește odată cu rețeaua și numărul de produse.",
+            "Mediu, cu huburi sau routere de frontieră în funcție de ecosistem.",
+            "Mai ridicat, deoarece include proiectare, magistrală, tablouri și programare.",
+          ],
+        },
+        {
+          criterion: "Stabilitate",
+          values: [
+            "Depinde de acoperirea și încărcarea rețelei Wi-Fi.",
+            "Bună în rețele Thread corect dimensionate; funcțiile diferă între produse.",
+            "Ridicată, cu magistrală dedicată și funcționare distribuită.",
+          ],
+        },
+        {
+          criterion: "Funcționare locală",
+          values: [
+            "Variază; unele produse depind de cloud.",
+            "Poate fi locală, dar aplicațiile și bridge-urile trebuie verificate.",
+            "Comenzile de bază rulează local, fără internet.",
+          ],
+        },
+        {
+          criterion: "Securitate",
+          values: [
+            "Necesită rețea separată, parole și actualizări gestionate.",
+            "Include cerințe comune de securitate, fără a elimina nevoia actualizărilor.",
+            "Magistrală locală; accesul IP și gateway-urile trebuie securizate separat.",
+          ],
+        },
+        {
+          criterion: "Scalabilitate",
+          values: [
+            "Potrivită pentru puține dispozitive și extinderi controlate.",
+            "Bună pentru ecosisteme rezidențiale compatibile.",
+            "Foarte bună pentru case mari și clădiri cu multe instalații.",
+          ],
+        },
+        {
+          criterion: "Mentenanță",
+          values: [
+            "Conturi, aplicații, firmware și rețea.",
+            "Huburi, fabric Matter, aplicații și actualizări.",
+            "Documentație ETS, backup și intervenții ale unui integrator calificat.",
+          ],
+        },
+      ],
+    },
     faq: [
       {
         question: "Matter înlocuiește KNX?",
@@ -1014,9 +1215,24 @@ export const guidePages: Record<string, PublicContentPage> = {
     ],
     related: [
       {
+        label: "Case Smart",
+        description: "Vezi cum structurăm funcțiile unei locuințe.",
+        href: "/solutii/case-smart",
+      },
+      {
+        label: "Automatizare KNX",
+        description: "Topologie, proiect ETS și funcționare locală.",
+        href: "/solutii/automatizare-knx",
+      },
+      {
         label: "Configurează proiectul",
         description: "Alege funcțiile înainte de tehnologie.",
         href: "/configurator-pe-plan",
+      },
+      {
+        label: "Solicită ofertă",
+        description: "Trimite planul pentru o configurație orientativă.",
+        href: "/solicita-oferta",
       },
     ],
   },
@@ -1732,6 +1948,31 @@ export const solutionSeoEnhancements: Record<string, SeoEnhancement> = {
         answer:
           "Da, dacă rolurile, gateway-urile și comportamentul în caz de întrerupere sunt definite și testate.",
       },
+      {
+        question: "Cât costă o soluție completă pentru casă smart?",
+        answer:
+          "O configurație orientativă poate porni de la câteva mii de euro și crește în funcție de circuite, HVAC, securitate și aparataj. Oferta finală se calculează după plan și condițiile de instalare.",
+      },
+      {
+        question: "Casa smart funcționează fără internet?",
+        answer:
+          "Funcțiile esențiale pot fi proiectate local. Accesul de la distanță și anumite servicii vocale sau cloud pot fi temporar indisponibile.",
+      },
+      {
+        question: "Se poate automatiza o casă deja finisată?",
+        answer:
+          "Da, după auditarea circuitelor, dozelor, tabloului și rețelei. În funcție de situație folosim soluții wireless, locale sau o arhitectură hibridă.",
+      },
+      {
+        question: "Ce documente primesc la predare?",
+        answer:
+          "Livrabilele se stabilesc contractual și pot include scheme, descrierea funcțiilor, lista echipamentelor, configurații și instrucțiuni de utilizare sau service.",
+      },
+      {
+        question: "Cum se face mentenanța sistemului?",
+        answer:
+          "Păstrăm configurațiile și istoricul modificărilor, iar intervențiile se planifică în funcție de tehnologie. Actualizările sunt testate înainte de aplicarea în clădire.",
+      },
     ],
   },
   "apartamente-smart": {
@@ -1811,6 +2052,31 @@ export const solutionSeoEnhancements: Record<string, SeoEnhancement> = {
         question: "KNX permite mai mulți producători?",
         answer:
           "Da. Selecția este multi-brand, dar fiecare aplicație și funcție se verifică în documentația producătorului.",
+      },
+      {
+        question: "KNX funcționează fără internet?",
+        answer:
+          "Da. Comenzile de bază rulează local pe magistrală. Internetul este necesar numai pentru serviciile externe configurate, precum accesul la distanță sau asistenții vocali.",
+      },
+      {
+        question: "Cât costă un sistem KNX pentru o casă?",
+        answer:
+          "Costul depinde de numărul circuitelor, zonele HVAC, aparataj, tablouri și integrări. Intervalul se estimează după plan; prețul final nu se poate stabili corect doar pe metru pătrat.",
+      },
+      {
+        question: "KNX se poate instala într-o casă renovată?",
+        answer:
+          "Da, mai ales într-o renovare completă. Pentru o casă finisată evaluăm intervențiile necesare și comparăm KNX cu o soluție hibridă.",
+      },
+      {
+        question: "Se poate integra KNX cu Apple Home sau Google Home?",
+        answer:
+          "Da, prin gateway-uri potrivite și validate pentru funcțiile cerute. Integrarea consumer rămâne separată de comenzile locale esențiale.",
+      },
+      {
+        question: "Cine poate modifica ulterior programarea?",
+        answer:
+          "Un integrator KNX cu acces la documentația și proiectul ETS poate face modificări controlate. Predarea și păstrarea backupului trebuie stabilite prin contract.",
       },
     ],
   },

@@ -105,7 +105,7 @@ export default async function SolutionPage({
               <div className="relative min-h-64 lg:min-h-full">
                 <Image
                   src={solution.image}
-                  alt=""
+                  alt={solution.imageAlt}
                   fill
                   sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover"
@@ -162,6 +162,29 @@ export default async function SolutionPage({
               </p>
             </div>
           </section>
+
+          {solution.details ? (
+            <section className="space-y-5 py-14" aria-labelledby="detalii-solutie">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[.16em] text-emerald-700">
+                  Ghid de proiectare
+                </p>
+                <h2 id="detalii-solutie" className="mt-3 text-3xl font-medium tracking-[-.04em] text-ink">
+                  De la cerințe la un sistem documentat.
+                </h2>
+              </div>
+              {solution.details.map((detail) => (
+                <article key={detail.title} className="rounded-2xl border border-[#d8e2dd] p-6 sm:p-8">
+                  <h3 className="text-2xl font-medium tracking-[-.03em] text-ink">{detail.title}</h3>
+                  <div className="mt-4 space-y-4">
+                    {detail.paragraphs.map((paragraph) => (
+                      <p key={paragraph} className="text-sm leading-7 text-slate sm:text-base">{paragraph}</p>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </section>
+          ) : null}
 
           {kits.length > 0 ? (
             <section className="py-14">

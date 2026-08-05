@@ -49,6 +49,7 @@ test.afterAll(async () => {
 test("meniul public mobil se deschide și oferă navigarea principală", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-app-hydrated", "true");
   const menuButton = page.locator('summary[aria-label="Meniu principal"]');
   await expect(menuButton).toBeVisible();
   await menuButton.click();

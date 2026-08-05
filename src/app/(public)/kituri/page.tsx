@@ -3,15 +3,27 @@ import type { Route } from "next";
 import Link from "next/link";
 
 import { CommercialKitCards } from "@/components/commercial-kit-cards";
+import { BasicPageSchemas, buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kituri smart orientative | N3XO Smart Buildings",
-  description: "Nouă kituri orientative pentru apartamente, case, blocuri, pensiuni și hoteluri.",
-};
+const title = "Kituri smart orientative | N3XO Smart Buildings";
+const description = "Nouă kituri orientative pentru apartamente, case, blocuri, pensiuni și hoteluri.";
+
+export const metadata: Metadata = buildPageMetadata({
+  title,
+  description,
+  path: "/kituri",
+  keywords: ["kit casă smart", "kit KNX", "kit automatizare casă"],
+});
 
 export default function KitsPage() {
   return (
     <main className="bg-[#f6f9f7]">
+      <BasicPageSchemas
+        title={title}
+        description={description}
+        path="/kituri"
+        breadcrumbs={[{ label: "Acasă", href: "/" }, { label: "Kituri", href: "/kituri" }]}
+      />
       <section className="border-b border-[#dfe7e3] bg-white">
         <div className="mx-auto max-w-[1500px] px-5 py-14 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[.18em] text-emerald-700">

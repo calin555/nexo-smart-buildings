@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { getSiteUrl } from "@/lib/seo";
+
 import { publicSolutions } from "@/modules/public-solutions";
 import { legalPages, resourcePages, rootPages, servicePages } from "@/modules/public-content";
 import { blogPages, guidePages, localPages, pillarPages } from "@/modules/seo-content";
@@ -7,6 +9,7 @@ import { blogPages, guidePages, localPages, pillarPages } from "@/modules/seo-co
 const staticPaths = [
   "",
   "/kituri",
+  "/configurator-kit",
   "/proiecte/bloc-rezidential-cluj",
   "/proiecte/casa-inteligenta-brasov",
   "/proiecte/casa-inteligenta-cluj",
@@ -21,7 +24,7 @@ const staticPaths = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const siteUrl = getSiteUrl();
   const paths = [
     ...staticPaths,
     ...Object.keys(rootPages).map((slug) => `/${slug}`),

@@ -3,7 +3,12 @@ import type { ReactNode } from "react";
 import { PublicFooter } from "@/components/public-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getSessionIdentity } from "@/lib/auth";
-import { OrganizationSchema, StructuredData, getSiteUrl } from "@/lib/seo";
+import {
+  OrganizationSchema,
+  ProfessionalServiceSchema,
+  StructuredData,
+  getSiteUrl,
+} from "@/lib/seo";
 
 export default async function PublicLayout({ children }: Readonly<{ children: ReactNode }>) {
   const currentUser = await getSessionIdentity();
@@ -11,6 +16,7 @@ export default async function PublicLayout({ children }: Readonly<{ children: Re
   return (
     <div className="min-h-screen bg-white">
       <OrganizationSchema />
+      <ProfessionalServiceSchema />
       <StructuredData
         data={{
           "@context": "https://schema.org",

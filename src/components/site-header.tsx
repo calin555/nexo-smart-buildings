@@ -3,10 +3,15 @@
 import { ChevronDown, FileUp, LayoutDashboard, LogOut, Menu, UserRound, X } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
-import { useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 import { Brand } from "@/components/brand";
 import type { SessionIdentity } from "@/lib/auth";
+
+function closeDetailsAfterNavigation(ref: React.RefObject<HTMLDetailsElement | null>): void {
+  window.setTimeout(() => ref.current?.removeAttribute("open"), 0);
+}
 
 const solutionLinks = [
   ["/solutii/case-smart", "Case Smart"],
@@ -76,14 +81,14 @@ function AccountMenu({ currentUser }: Readonly<{ currentUser: SessionIdentity }>
         <div className="p-2">
           <Link
             href={workspaceHref}
-            onClick={() => detailsRef.current?.removeAttribute("open")}
+            onClick={() => closeDetailsAfterNavigation(detailsRef)}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-cloud"
           >
             <LayoutDashboard className="size-4 text-emerald-700" /> {workspaceLabel}
           </Link>
           <Link
             href="/portal#profil"
-            onClick={() => detailsRef.current?.removeAttribute("open")}
+            onClick={() => closeDetailsAfterNavigation(detailsRef)}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-cloud"
           >
             <UserRound className="size-4 text-emerald-700" /> Profilul meu
@@ -118,7 +123,7 @@ function Dropdown({
           <Link
             key={href}
             href={href as Route}
-            onClick={() => detailsRef.current?.removeAttribute("open")}
+            onClick={() => closeDetailsAfterNavigation(detailsRef)}
             className="block rounded-lg px-3 py-2.5 text-sm text-ink transition hover:bg-cloud hover:text-emerald-700"
           >
             {text}
@@ -131,6 +136,17 @@ function Dropdown({
 
 export function SiteHeader({ currentUser }: Readonly<{ currentUser: SessionIdentity | null }>) {
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    document.documentElement.dataset.appHydrated = "true";
+    mobileMenuRef.current?.removeAttribute("open");
+
+    return () => {
+      delete document.documentElement.dataset.appHydrated;
+    };
+  }, [pathname]);
+
   return (
     <header className="isolate sticky top-0 z-[100] bg-white shadow-[0_2px_10px_rgba(7,21,29,.10)]">
       <div className="mx-auto flex min-h-[4.5rem] max-w-[1600px] items-center gap-4 px-4 sm:px-5 lg:min-h-[5rem] lg:px-8">
@@ -205,7 +221,6 @@ export function SiteHeader({ currentUser }: Readonly<{ currentUser: SessionIdent
                 <Link
                   key={`${href}-${label}`}
                   href={href as Route}
-                  onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                   className="rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                 >
                   {label}
@@ -222,14 +237,12 @@ export function SiteHeader({ currentUser }: Readonly<{ currentUser: SessionIdent
                   </div>
                   <Link
                     href={currentUser.isAdmin ? "/admin" : "/portal"}
-                    onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                     className="block rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                   >
                     {currentUser.isAdmin ? "Administrare" : "Portal client"}
                   </Link>
                   <Link
                     href="/portal#profil"
-                    onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                     className="block rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                   >
                     Profilul meu
@@ -246,7 +259,6 @@ export function SiteHeader({ currentUser }: Readonly<{ currentUser: SessionIdent
               ) : (
                 <Link
                   href="/login"
-                  onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                   className="rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                 >
                   Portal client

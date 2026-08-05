@@ -16,30 +16,17 @@ import Link from "next/link";
 
 import { CommercialKitCards } from "@/components/commercial-kit-cards";
 import { BrandGrid } from "@/components/brand-grid";
+import { buildPageMetadata, StructuredData, absoluteUrl, getSiteUrl } from "@/lib/seo";
 import { publicSolutions } from "@/modules/public-solutions";
 
-export const metadata: Metadata = {
-  title: { absolute: "Casă smart și automatizări KNX | N3XO Smart Buildings" },
+export const metadata: Metadata = buildPageMetadata({
+  title: "Casă smart și automatizări KNX | N3XO Smart Buildings",
   description:
     "Configurează o casă inteligentă cu KNX, Matter, Google Home, Apple Home sau Home Assistant. Proiectare și implementare completă.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Casă smart și automatizări KNX | N3XO Smart Buildings",
-    description:
-      "Proiectare, echipamente, instalare, programare și mentenanță într-un singur proiect smart.",
-    url: "/",
-    type: "website",
-    locale: "ro_RO",
-    images: [
-      {
-        url: "/images/projects/casa-inteligenta-cluj-technical.png",
-        width: 1672,
-        height: 941,
-        alt: "Casă inteligentă cu circuite tehnice vizibile",
-      },
-    ],
-  },
-};
+  path: "/",
+  image: "/images/projects/casa-inteligenta-cluj-technical.png",
+  keywords: ["casă smart", "casă inteligentă", "automatizare casă", "KNX"],
+});
 
 const icons = [Home, Layers3, Building2, Hotel, Sparkles, ShieldCheck, Zap];
 const process = [
@@ -77,6 +64,34 @@ const projects = [
 export default function HomePage() {
   return (
     <main className="bg-white">
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": `${absoluteUrl("/")}#webpage`,
+              url: absoluteUrl("/"),
+              name: "Casă smart și automatizări KNX | N3XO Smart Buildings",
+              description:
+                "Configurează o casă inteligentă cu KNX, Matter, Google Home, Apple Home sau Home Assistant.",
+              inLanguage: "ro-RO",
+              isPartOf: { "@id": `${getSiteUrl()}/#website` },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Acasă",
+                  item: absoluteUrl("/"),
+                },
+              ],
+            },
+          ],
+        }}
+      />
       <section className="border-b border-[#dfe7e3] bg-[#f6f9f7]">
         <div className="mx-auto grid min-h-[560px] max-w-[1500px] items-center gap-10 px-5 py-14 lg:grid-cols-[1.05fr_.95fr] lg:px-8">
           <div>
@@ -276,7 +291,7 @@ export default function HomePage() {
               <div className="relative aspect-[16/10]">
                 <Image
                   src={project.image}
-                  alt=""
+                  alt={`Vizualizare tehnică pentru ${project.title}`}
                   fill
                   sizes="(min-width: 1024px) 32vw, 100vw"
                   className="object-cover transition duration-500 group-hover:scale-[1.025]"

@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import type { Route } from "next";
 
 import { InteractiveSmartHome, type ProjectKey } from "@/components/interactive-smart-home";
+import { StructuredData, absoluteUrl, getSiteUrl } from "@/lib/seo";
 
 type InteractiveProjectPageProps = {
   location: string;
@@ -13,6 +14,12 @@ type InteractiveProjectPageProps = {
   ctaTitle: string;
 };
 
+const projectPaths: Record<ProjectKey, string> = {
+  "cluj-house": "/proiecte/casa-inteligenta-cluj",
+  "brasov-house": "/proiecte/casa-inteligenta-brasov",
+  "cluj-block": "/proiecte/bloc-rezidential-cluj",
+};
+
 export function InteractiveProjectPage({
   location,
   title,
@@ -21,8 +28,34 @@ export function InteractiveProjectPage({
   project,
   ctaTitle,
 }: Readonly<InteractiveProjectPageProps>) {
+  const path = projectPaths[project];
+
   return (
     <main className="bg-[#f4f7f5]">
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": `${absoluteUrl(path)}#webpage`,
+              url: absoluteUrl(path),
+              name: title,
+              description,
+              inLanguage: "ro-RO",
+              isPartOf: { "@id": `${getSiteUrl()}/#website` },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Acasă", item: absoluteUrl("/") },
+                { "@type": "ListItem", position: 2, name: "Proiecte", item: absoluteUrl("/proiecte") },
+                { "@type": "ListItem", position: 3, name: title, item: absoluteUrl(path) },
+              ],
+            },
+          ],
+        }}
+      />
       <section className="mx-auto max-w-[1600px] px-5 pb-16 pt-8 lg:px-8 lg:pb-24">
         <Link
           href={"/proiecte" as Route}

@@ -30,6 +30,14 @@ export type PublicContentPage = Readonly<{
   schemaType?: "Service" | "WebPage";
   serviceType?: string;
   sections: readonly ContentSection[];
+  comparison?: Readonly<{
+    caption: string;
+    columns: readonly string[];
+    rows: readonly Readonly<{
+      criterion: string;
+      values: readonly string[];
+    }>[];
+  }>;
   related?: readonly RelatedLink[];
   faq?: readonly Readonly<{ question: string; answer: string }>[];
 }>;
