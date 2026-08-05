@@ -48,6 +48,8 @@ function AccountMenu({ currentUser }: Readonly<{ currentUser: SessionIdentity }>
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const initial = currentUser.name.trim().charAt(0).toUpperCase() || "U";
   const isGoogle = currentUser.provider === "google";
+  const workspaceHref = currentUser.isAdmin ? "/admin" : "/portal";
+  const workspaceLabel = currentUser.isAdmin ? "Administrare" : "Portal client";
 
   return (
     <details ref={detailsRef} className="group relative">
@@ -73,11 +75,11 @@ function AccountMenu({ currentUser }: Readonly<{ currentUser: SessionIdentity }>
         </div>
         <div className="p-2">
           <Link
-            href="/portal"
+            href={workspaceHref}
             onClick={() => detailsRef.current?.removeAttribute("open")}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition hover:bg-cloud"
           >
-            <LayoutDashboard className="size-4 text-emerald-700" /> Portal client
+            <LayoutDashboard className="size-4 text-emerald-700" /> {workspaceLabel}
           </Link>
           <Link
             href="/portal#profil"
@@ -219,11 +221,11 @@ export function SiteHeader({ currentUser }: Readonly<{ currentUser: SessionIdent
                     </p>
                   </div>
                   <Link
-                    href="/portal"
+                    href={currentUser.isAdmin ? "/admin" : "/portal"}
                     onClick={() => mobileMenuRef.current?.removeAttribute("open")}
                     className="block rounded-lg px-3 py-3 text-sm font-semibold text-ink transition hover:bg-cloud"
                   >
-                    Portal client
+                    {currentUser.isAdmin ? "Administrare" : "Portal client"}
                   </Link>
                   <Link
                     href="/portal#profil"

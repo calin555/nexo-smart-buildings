@@ -10,6 +10,7 @@ export type SessionIdentity = {
   email: string;
   name: string;
   provider: string | null;
+  isAdmin: boolean;
 };
 
 export async function getSessionIdentity(): Promise<SessionIdentity | null> {
@@ -26,12 +27,17 @@ export async function getSessionIdentity(): Promise<SessionIdentity | null> {
       : typeof metadata.name === "string"
         ? metadata.name
         : (user.email.split("@")[0] ?? user.email);
+  const adminMembership = await prisma.membership.findFirst({
+    where: { profileId: user.id, roleCode: { in: ["ADMIN", "SUPER_ADMIN"] } },
+    select: { id: true },
+  });
 
   return {
     id: user.id,
     email: user.email,
     name: metadataName,
     provider: typeof user.app_metadata.provider === "string" ? user.app_metadata.provider : null,
+    isAdmin: Boolean(adminMembership),
   };
 }
 

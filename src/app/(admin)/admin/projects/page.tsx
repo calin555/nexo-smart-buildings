@@ -15,8 +15,12 @@ function formatDate(value: Date): string {
   );
 }
 
-export default async function AdminProjectsPage() {
+export default async function AdminProjectsPage({
+  searchParams,
+}: Readonly<{ searchParams: Promise<{ client?: string }> }>) {
+  const { client } = await searchParams;
   const projects = await prisma.project.findMany({
+    where: client ? { createdById: client } : undefined,
     include: {
       organization: true,
       createdBy: true,

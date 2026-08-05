@@ -34,15 +34,23 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
             <Link className="rounded-md px-3 py-2 hover:bg-white/10" href={"/admin/projects" as Route}>
               Planuri și oferte
             </Link>
+            <Link className="rounded-md px-3 py-2 hover:bg-white/10" href={"/admin/clients" as Route}>
+              Clienți
+            </Link>
             <Link className="rounded-md px-3 py-2 hover:bg-white/10" href="/admin/products">
               Echipamente interne
             </Link>
             <Link className="rounded-md px-3 py-2 hover:bg-white/10" href="/admin/brands">
               Branduri
             </Link>
-            <Link className="rounded-md px-3 py-2 hover:bg-white/10" href="/portal">
-              Portal client
-            </Link>
+            <form action="/api/auth/logout" method="post">
+              <button
+                type="submit"
+                className="w-full rounded-md px-3 py-2 text-left hover:bg-white/10"
+              >
+                Deconectare
+              </button>
+            </form>
           </nav>
         </aside>
         {children}

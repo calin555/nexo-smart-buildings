@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 
 import { Brand } from "@/components/brand";
 import { getCurrentUser } from "@/lib/auth";
+import { adminRoles } from "@/lib/rbac";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -13,6 +14,7 @@ export default async function PortalLayout({ children }: Readonly<{ children: Re
   const user = await getCurrentUser();
   if (!user) redirect("/login");
   if (user.memberships.length === 0) redirect("/onboarding");
+  if (user.memberships.some(({ role }) => adminRoles.has(role))) redirect("/admin");
   return (
     <div className="min-h-screen bg-cloud">
       <header className="border-b bg-white">

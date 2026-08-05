@@ -182,13 +182,17 @@ test("admin accesează administrarea echipamentelor și logout revocă sesiunea"
   await expectSession(page);
   await page.goto("/admin");
   await expect(page.getByRole("heading", { name: "Spațiu intern protejat" })).toBeVisible();
+  await page.goto("/portal");
+  await expect(page).toHaveURL(/\/admin$/);
+  await expect(page.getByRole("link", { name: "Clienți" })).toBeVisible();
+  await page.getByRole("link", { name: "Clienți" }).click();
+  await expect(page.getByRole("heading", { name: "Clienți" })).toBeVisible();
   await page.goto("/admin/products");
   await expect(page.getByRole("heading", { name: "Echipamente" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Adaugă echipament" })).toBeVisible();
   await page.goto("/admin/brands");
   await expect(page.getByRole("heading", { name: "Branduri" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Adaugă brand" })).toBeVisible();
-  await page.goto("/portal");
   await page.getByRole("button", { name: "Deconectare" }).click();
   await expect(page).toHaveURL(/\/$/);
   const cookies = await page.context().cookies("http://localhost:3000");
